@@ -1,4 +1,8 @@
 package com.example.brmm;
 
-public class Faculty {
+import java.util.ArrayList;
+
+public class Faculty extends BandMember {
+    private String department;
+    private String role;
 }

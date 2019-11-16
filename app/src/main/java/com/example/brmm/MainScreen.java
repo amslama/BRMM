@@ -13,7 +13,7 @@ public class MainScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.MainScreen);
+        setContentView(R.layout.activity_main_screen);
         Spinner spinner = findViewById(R.id.Menu);
         Button button = findViewById(R.id.Button_Filters);
         ScrollView scrollview = findViewById(R.id.Object_List);

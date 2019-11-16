@@ -1,4 +1,8 @@
 package com.example.brmm;
 
-public class Part {
+import java.util.ArrayList;
+
+public class Part extends Rentable
+{
+    private ArrayList<Category> compWith;
 }

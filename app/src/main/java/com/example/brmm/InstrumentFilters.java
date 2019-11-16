@@ -8,6 +8,6 @@ public class InstrumentFilters extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_InstrumentFilters);
+        setContentView(R.layout.activity_instrument_filters);
     }
 }

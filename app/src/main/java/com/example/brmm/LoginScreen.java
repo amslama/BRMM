@@ -11,7 +11,7 @@ public class LoginScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.LoginScreen);
+        setContentView(R.layout.activity_login_screen);
         final EditText ULID = (EditText)findViewById(R.id.ULID_Textbox);
         final EditText password = (EditText)findViewById(R.id.Password_Textbox);
         Button OK = (Button)findViewById(R.id.Login_OK_Button);
