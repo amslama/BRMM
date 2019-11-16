@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">BRMM</string>
+    <string name="big_red_marching_machine_login">Big Red Marching Machine Login</string>
+    <string name="enter_ulid">Enter ULID:</string>
+    <string name="enter_password">Enter password</string>
+    <string name="title_activity_ui__main">UI_Main</string>
+    <string-array name="Entries">
+        <item>Parts</item>
+        <item>Instruments</item>
+        <item>Band Members</item>
+        <item>Faculty</item>
+    </string-array>
+</resources>
