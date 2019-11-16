@@ -26,18 +26,19 @@ public class CurrentInventory {
     }
 
     public void removeInstrument(Instrument newIns) {
-        //instruments.add(newIns);
+
+        instruments.remove(newIns);
         //update db
     }
 
     public void removePart(Part newPart) {
-       // parts.add(newPart);
+        parts.remove(newPart);
         //update db
     }
 
     public void removeBandMember(BandMember newBM)
     {
-       // bandMembers.add(newBM);
+        bandMembers.remove(newBM);
         //update db
     }
 }

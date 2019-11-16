@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class Rentable
 {
-    private String name;
-    private double cost;
-    private ArrayList<Category> categories;
-
+    protected String name;
+    protected double cost;
 }
