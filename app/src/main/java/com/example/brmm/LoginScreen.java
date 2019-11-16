@@ -6,12 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.LoginScreen);
         final EditText ULID = (EditText)findViewById(R.id.ULID_Textbox);
         final EditText password = (EditText)findViewById(R.id.Password_Textbox);
         Button OK = (Button)findViewById(R.id.Login_OK_Button);

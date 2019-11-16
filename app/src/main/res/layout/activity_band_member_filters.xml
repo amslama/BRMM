@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".UI_Main"
-    tools:showIn="@layout/activity_ui__main">
+    tools:context=".BandMemberFilters">
 
 </android.support.constraint.ConstraintLayout>
