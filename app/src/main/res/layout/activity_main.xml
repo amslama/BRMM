@@ -19,7 +19,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247" />
+        app:layout_constraintVertical_bias="0.185" />
 
     <TextView
         android:id="@+id/ULID_Label"
@@ -36,7 +36,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Login_Label"
-        app:layout_constraintVertical_bias="0.933" />
+        app:layout_constraintVertical_bias="0.404" />
 
     <EditText
         android:id="@+id/ULID_Textbox"
@@ -45,7 +45,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="124dp"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#DFDADA"
+        android:background="@android:drawable/editbox_background"
+        android:backgroundTint="@android:color/background_light"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
@@ -74,6 +75,8 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@android:color/background_light"
+        android:backgroundTint="@android:color/background_light"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="textPassword"
@@ -88,7 +91,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="124dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:width="175dp"
@@ -96,9 +98,19 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Password_Label"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintTop_toBottomOf="@+id/Password_Textbox"
+        app:layout_constraintVertical_bias="0.191" />
+
+    <Button
+        android:id="@+id/Student_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student Login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Login_OK_Button"
+        app:layout_constraintVertical_bias="0.316" />
 
 </android.support.constraint.ConstraintLayout>

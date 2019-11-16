@@ -24,7 +24,7 @@ public class DatabaseConnection
         {
             JSch jsch = new JSch();
             session = jsch.getSession(user, host, portNum);
-            
+
 
         }
         catch(Exception e)
