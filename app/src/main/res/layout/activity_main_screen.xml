@@ -5,35 +5,75 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CE1126"
     tools:context=".MainScreen">
 
 
-    <Button
-        android:id="@+id/Button_Filters"
-        android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:text="Filters"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Menu" />
-
-    <Spinner
-        android:id="@+id/Menu"
-        android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:entries="@array/Entries"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/Object_List"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="411dp"
+        android:layout_height="520dp"
+        android:background="#40FFFFFF"
+        android:verticalScrollbarPosition="right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Button_Filters"
+        tools:layout_editor_absoluteY="81dp" />
+
+    <Button
+        android:id="@+id/Login_Button"
+        android:layout_width="115dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="1dp"
+        android:text="@string/login"
+        app:layout_constraintBottom_toTopOf="@+id/Object_List"
+        tools:layout_editor_absoluteX="276dp" />
+
+    <Button
+        android:id="@+id/Bandmember_Operations_Button"
+        android:layout_width="115dp"
+        android:layout_height="40dp"
+        android:text="@string/bandmembers"
+        app:layout_constraintBottom_toTopOf="@+id/Object_List"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/Instrument_Operations_Butotn"
+        android:layout_width="115dp"
+        android:layout_height="40dp"
+        android:text="@string/instrument"
+        app:layout_constraintBottom_toTopOf="@+id/Object_List"
+        app:layout_constraintStart_toEndOf="@+id/Bandmember_Operations_Button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.512" />
+
+    <Button
+        android:id="@+id/Button_Filters"
+        android:layout_width="115dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/filters"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Checkout_Button"
+        android:layout_width="108dp"
+        android:layout_height="45dp"
+        android:text="@string/checkout"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="601dp" />
+
+    <Button
+        android:id="@+id/Parts_button"
+        android:layout_width="115dp"
+        android:layout_height="40dp"
+        android:text="Parts"
+        app:layout_constraintBottom_toTopOf="@+id/Object_List"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp" />
 
 </android.support.constraint.ConstraintLayout>

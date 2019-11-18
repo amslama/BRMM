@@ -4,6 +4,11 @@
     <string name="enter_ulid">ULID:</string>
     <string name="enter_password">Password</string>
     <string name="title_activity_ui__main">UI_Main</string>
+    <string name="filters">Filters</string>
+    <string name="login">Login</string>
+    <string name="bandmembers">Members</string>
+    <string name="instrument">Instrument</string>
+    <string name="checkout">Checkout</string>
     <string-array name="Entries">
         <item>Parts</item>
         <item>Instruments</item>
