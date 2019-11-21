@@ -59,7 +59,7 @@
         android:layout_width="225dp"
         android:layout_height="45dp"
         android:layout_marginTop="64dp"
-        android:background="@android:drawable/btn_default_material"
+        android:background="@android:drawable/btn_default"
         android:text="@android:string/ok"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,6 +86,6 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/Redbird" />
+        app:srcCompat="@drawable/redbird" />
 
 </android.support.constraint.ConstraintLayout>
