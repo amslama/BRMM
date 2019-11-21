@@ -16,7 +16,7 @@ public class LoginScreen extends AppCompatActivity {
         final EditText password = (EditText)findViewById(R.id.Password_Textbox);
         Button OK = (Button)findViewById(R.id.Login_OK_Button);
         DatabaseConnection connection = new DatabaseConnection();
-        connection.getConnection();
+      
 
         OK.setOnClickListener(
                 new View.OnClickListener()
