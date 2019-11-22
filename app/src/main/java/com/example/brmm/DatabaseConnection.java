@@ -16,49 +16,60 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DatabaseConnection
+public class DatabaseConnection extends Thread
 {
 
     private int portNum;
     private final String SSH_Host = "10.110.21.210";
+    private final String SSH_User = "vmuser";
     private final String SSH_Pass = "brmmproject4!";
     private final String MySQL_Host = "127.0.0.7";
     private final String MySQL_User = "vmuser";
     private final String MySQL_Pass = "brmmproject4!";
 
+    public void run(){
+        getServerConnection();
+    }
 
-
-    public Connection getConnection()
+    public void getServerConnection()
     {
-        Connection conn = null;
-
+        Connection serverConn = null;
 
         try
         {
             java.util.Properties config = new java.util.Properties();
             config.put("StrictHostKeyChecking", "no");
             JSch jsch = new JSch();
-            Session session = jsch.getSession("vmuser", "10.110.21.210", 22);
-            session.setPassword(MySQL_Pass);
-            session.setConfig(config);
+            Session serverSession = jsch.getSession(SSH_User, SSH_Host, 22);
+            serverSession.setPassword(MySQL_Pass);
+            serverSession.setConfig(config);
             System.out.println("Starting SSH Connection");
-            System.out.println(session.getHost()+ "\n" +session.getUserName()+ "\n"+session.getPort());
+            System.out.println(serverSession.getHost()+ "\n" +serverSession.getUserName()+ "\n"+serverSession.getPort());
 
-            session.connect();
+            serverSession.connect();
+            //Port Forwarding stuff
             System.out.println("Connection Established");
-            System.out.println(session.isConnected());
-            System.out.println("Did it hit an exception???????????????????");
-            
+            System.out.println("Connected = "+serverSession.isConnected());
+            int assigned_port = serverSession.setPortForwardingL(5656,MySQL_Host,3306);
+            System.out.println("localhost:"+ assigned_port+"->"+MySQL_Host+":"+3306);
+            System.out.println("Port Forwarded");
 
+            //DB Part
+            System.out.println("Before the Driver");
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            System.out.println("After the Driver.......................");
+            //Getting Stuck Right Here
+            serverConn = DriverManager.getConnection("jdbc:mysql://localhost:"+5656+"/mysql?autoReconnect=true&amp;useSSL=false",MySQL_User,MySQL_Pass);
+            System.out.println("Database connection established");
         }
         catch(Exception e)
         {
             e.printStackTrace();
-            System.out.println("It did not work.... poop..............................................................................................................................................................................................");
         }
         System.out.println();
-        return conn;
+        //return conn;
     }
+
 
     public String getSSH_Host() {
         return SSH_Host;
