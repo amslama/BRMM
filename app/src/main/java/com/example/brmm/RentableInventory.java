@@ -2,11 +2,11 @@ package com.example.brmm;
 
 import java.util.ArrayList;
 
-public class CurrentInventory {
+public class RentableInventory {
 
-    private ArrayList<Instrument> instruments;
-    private ArrayList<Part> parts;
-    private ArrayList<BandMember> bandMembers;
+    private ArrayList<Rentable> instruments;
+    private ArrayList<Rentable> parts;
+
 
 
     public void addInstrument(Instrument newIns) {
@@ -19,11 +19,6 @@ public class CurrentInventory {
         //update db
     }
 
-    public void addBandMember(BandMember newBM)
-    {
-        bandMembers.add(newBM);
-        //update db
-    }
 
     public void removeInstrument(Instrument newIns) {
 
@@ -36,9 +31,4 @@ public class CurrentInventory {
         //update db
     }
 
-    public void removeBandMember(BandMember newBM)
-    {
-        bandMembers.remove(newBM);
-        //update db
-    }
 }
