@@ -17,7 +17,7 @@ public class Section {
     public ArrayList<BandMember> getMembers() {
         return members;
     }
-    
+
 
     public Section(BandMember newLeader) {
         leader = newLeader;
