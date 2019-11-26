@@ -24,12 +24,21 @@
     <string name="section">Section:</string>
     <string name="checkout_status">Checkout Status</string>
     <string name="bandmember_type">Bandmember Type:</string>
-    <string name="section_leader">Section Leader:</string>
+    <string name="section_leader">Section Leaders Only?</string>
     <string name="instrument_filter_label">Instrument:</string>
     <string name="student">Student</string>
     <string name="teacher">Teacher</string>
     <string name="student_login">Student Login</string>
     <string name="todo">TODO</string>
+    <string name="has_instrument">has instrument</string>
+    <string name="has_no_instrument">has no instrument</string>
+    <string name="instrument_filters">Instrument Filters</string>
+    <string name="yes">Yes</string>
+    <string name="apply_filters">Apply Filters</string>
+    <string name="bandmember_filters">Bandmember Filters</string>
+    <string name="part_filters">Part Filters</string>
+    <string name="name">Name:</string>
+    <string name="cost">Cost:</string>
     <string-array name="Entries">
         <item>Parts</item>
         <item>Instruments</item>

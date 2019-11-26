@@ -7,4 +7,113 @@
     android:background="#CE1126"
     tools:context=".PartFilters">
 
+    <TextView
+        android:id="@+id/part_filters_header_text"
+        android:layout_width="287dp"
+        android:layout_height="91dp"
+        android:text="@string/part_filters"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/parts_name_filters_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="135dp" />
+
+    <TextView
+        android:id="@+id/cost_filters_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cost"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="429dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/parts_name_filters_textview"
+        app:layout_constraintTop_toBottomOf="@+id/parts_name_filters_textview" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/cost_filters_textview"
+        app:layout_constraintTop_toBottomOf="@+id/cost_filters_textview" />
+
+    <TextView
+        android:id="@+id/serial_number_filters_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Serial number:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="284dp" />
+
+    <TextView
+        android:id="@+id/compatability_parts_filters_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Compatible with"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="204dp"
+        tools:layout_editor_absoluteY="135dp" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/serial_number_filters_textview"
+        app:layout_constraintTop_toBottomOf="@+id/serial_number_filters_textview" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/compatability_parts_filters_textview"
+        app:layout_constraintTop_toBottomOf="@+id/compatability_parts_filters_textview" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="171dp"
+        android:layout_height="317dp"
+        app:layout_constraintStart_toStartOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <Button
+        android:id="@+id/ok_filters_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/apply_filters"
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="235dp"
+        tools:layout_editor_absoluteY="568dp" />
+
+    <Button
+        android:id="@+id/cancel_parts_filters_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@android:string/cancel"
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="59dp"
+        tools:layout_editor_absoluteY="568dp" />
 </android.support.constraint.ConstraintLayout>

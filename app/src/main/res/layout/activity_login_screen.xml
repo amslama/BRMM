@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:color="#FFFFFF"
+        android:textColor="@android:color/background_dark"
         android:text="@string/big_red_marching_machine"
         android:textSize="30sp"
         android:textStyle="bold"
