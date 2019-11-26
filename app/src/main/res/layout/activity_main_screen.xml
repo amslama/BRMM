@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/Inventory_Dropdown" />
 
     <Button
         android:id="@+id/Logout_Button"
@@ -29,7 +29,7 @@
         android:text="@string/logout"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/Inventory_Dropdown" />
 
     <Button
         android:id="@+id/Button_Filters"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toStartOf="@+id/Logout_Button"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/Inventory_Dropdown" />
 
     <Button
         android:id="@+id/Checkout_Button"
@@ -90,25 +90,15 @@
         android:text="@string/edit_note"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Edit_Condition_Button"
         app:layout_constraintStart_toEndOf="@+id/Checkout_Button"
         app:layout_constraintTop_toBottomOf="@+id/Remove_button"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/Edit_Condition_Button"
-        android:layout_width="136dp"
-        android:layout_height="45dp"
-        android:text="@string/edit_condition"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/Add_Section_Button"
+        android:id="@+id/Add_Section_Lead_Button"
         android:layout_width="137dp"
         android:layout_height="45dp"
-        android:text="@string/new_section"
+        android:text="@string/add_section_lead"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -121,9 +111,9 @@
         android:text="@string/delete_section"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Edit_Condition_Button"
         app:layout_constraintStart_toEndOf="@+id/Checkout_Button"
-        app:layout_constraintTop_toBottomOf="@+id/Remove_button" />
+        app:layout_constraintTop_toBottomOf="@+id/Remove_button"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/Edit_Member_Button"
@@ -135,7 +125,7 @@
         app:layout_constraintTop_toBottomOf="@+id/Object_List" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/Inventory_Dropdown"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:background="@android:drawable/btn_dropdown"

@@ -14,9 +14,9 @@ public class LoginScreen extends AppCompatActivity {
         setContentView(R.layout.activity_login_screen);
         final EditText ULID = (EditText)findViewById(R.id.ULID_Textbox);
         final EditText password = (EditText)findViewById(R.id.Password_Textbox);
-        Button OK = (Button)findViewById(R.id.Login_OK_Button);
+        Button OK_Button = (Button)findViewById(R.id.Login_OK_Button);
 
-        OK.setOnClickListener(
+        OK_Button.setOnClickListener(
                 new View.OnClickListener()
                 {
                     public void onClick(View view)

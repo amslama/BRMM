@@ -11,13 +11,23 @@
     <string name="checkout">Checkout</string>
     <string name="parts">Parts</string>
     <string name="add">Add</string>
-    <string name="edit_rentable">Edit Rentable</string>
+    <string name="edit_rentable">Edit Item</string>
     <string name="delete_section">Delete Section</string>
-    <string name="new_section">New Section</string>
+    <string name="add_section_lead">Add Section</string>
     <string name="remove">Remove</string>
     <string name="edit_note">Edit Note</string>
     <string name="edit_member">Edit Member</string>
     <string name="edit_condition">Edit Condition</string>
+    <string name="last_name">Last Name:</string>
+    <string name="first_name">First Name:</string>
+    <string name="uid">UID:</string>
+    <string name="section">Section:</string>
+    <string name="checkout_status">Checkout Status</string>
+    <string name="bandmember_type">Bandmember Type:</string>
+    <string name="section_leader">Section Leader:</string>
+    <string name="instrument_filter_label">Instrument:</string>
+    <string name="student">Student</string>
+    <string name="teacher">Teacher</string>
     <string-array name="Entries">
         <item>Parts</item>
         <item>Instruments</item>

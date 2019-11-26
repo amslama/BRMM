@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CE1126"
     tools:context=".PartFilters">
 
 </android.support.constraint.ConstraintLayout>

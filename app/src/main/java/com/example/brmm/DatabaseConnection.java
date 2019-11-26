@@ -23,7 +23,7 @@ public class DatabaseConnection
         try
         {
             JSch jsch = new JSch();
-            session = jsch.getSession(user, host, portNum);
+         //   session = jsch.getSession(user, host, portNum);
 
 
         }
