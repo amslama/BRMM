@@ -15,7 +15,7 @@ public abstract class BandMember
     public BandMember() {
     }
 
-    
+
     public String getFname() {
         return fname;
     }
