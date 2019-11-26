@@ -221,7 +221,8 @@
         android:layout_height="wrap_content"
         android:text="@android:string/cancel"
         android:textAllCaps="false"
-        tools:layout_editor_absoluteX="72dp"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="46dp"
         tools:layout_editor_absoluteY="511dp" />
 
     <Button
@@ -230,6 +231,7 @@
         android:layout_height="wrap_content"
         android:text="@string/apply_filters"
         android:textAllCaps="false"
+        android:textSize="18sp"
         tools:layout_editor_absoluteX="250dp"
         tools:layout_editor_absoluteY="511dp" />
 
