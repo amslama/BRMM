@@ -2,11 +2,17 @@ package com.example.brmm;
 
 import java.util.ArrayList;
 
+enum Condition
+{
+    Excellent, Good, Fair, Poor, Broken;
+}
+
 public class Instrument extends Rentable {
 
     private ArrayList<Category> categories;
     private String subtype;
     private String currentOwner;
+    private Condition curCondition;
     private int id;
 
 
