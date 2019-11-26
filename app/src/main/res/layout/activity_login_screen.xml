@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LoginLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CE1126"
@@ -12,10 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:textColor="@android:color/background_dark"
         android:text="@string/big_red_marching_machine"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:color="#FFFFFF"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -61,6 +62,7 @@
         android:layout_marginTop="64dp"
         android:background="@android:drawable/btn_default"
         android:text="@android:string/ok"
+        android:textAllCaps="false"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +73,8 @@
         android:layout_width="225dp"
         android:layout_height="45dp"
         android:layout_marginTop="12dp"
-        android:text="Student Login"
+        android:text="@string/student_login"
+        android:textAllCaps="false"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,6 +89,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/redbird" />
+        app:srcCompat="@drawable/redbird"
+        android:contentDescription="@string/todo" />
 
 </android.support.constraint.ConstraintLayout>

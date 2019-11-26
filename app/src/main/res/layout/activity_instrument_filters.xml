@@ -4,6 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InstrumentFilters">
+    tools:context=".BandMemberFilters">
 
+    <TextView
+        android:id="@+id/instrument_filters_textview"
+        android:layout_width="323dp"
+        android:layout_height="40dp"
+        android:text="@string/instrument_filters"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="42dp" />
+
+    <TextView
+        android:id="@+id/name_instrument_filters_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="110dp" />
+
+    <TextView
+        android:id="@+id/cost_intrument_filters_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cost"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="223dp"
+        tools:layout_editor_absoluteY="110dp" />
+
+    <EditText
+        android:id="@+id/cost_instrument_filters_edittext"
+        android:layout_width="175dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/cost_intrument_filters_textview"
+        app:layout_constraintTop_toBottomOf="@+id/cost_intrument_filters_textview" />
+
+    <EditText
+        android:id="@+id/name_instrument_filters_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="134dp" />
 </android.support.constraint.ConstraintLayout>

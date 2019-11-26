@@ -5,35 +5,136 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CE1126"
     tools:context=".MainScreen">
 
 
-    <Button
-        android:id="@+id/Button_Filters"
-        android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:text="Filters"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Menu" />
-
-    <Spinner
-        android:id="@+id/Menu"
-        android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:entries="@array/Entries"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/Object_List"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="560dp"
+        android:layout_marginTop="40dp"
+        android:background="#40FFFFFF"
+        android:verticalScrollbarPosition="right"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Button_Filters"
+        app:layout_constraintTop_toBottomOf="@+id/Inventory_Dropdown" />
+
+    <Button
+        android:id="@+id/Logout_Button"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="4dp"
+        android:text="@string/logout"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Inventory_Dropdown" />
+
+    <Button
+        android:id="@+id/Button_Filters"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:text="@string/filters"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toStartOf="@+id/Logout_Button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Inventory_Dropdown" />
+
+    <Button
+        android:id="@+id/Checkout_Button"
+        android:layout_width="137dp"
+        android:layout_height="45dp"
+        android:text="@string/checkout"
+        android:textAllCaps="false"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Add_Button"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/Add_Button"
+        android:layout_width="137dp"
+        android:layout_height="45dp"
+        android:text="@string/add"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Object_List" />
+
+    <Button
+        android:id="@+id/Remove_button"
+        android:layout_width="137dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="1dp"
+        android:text="@string/remove"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toStartOf="@+id/Edit_Member_Button"
+        app:layout_constraintStart_toEndOf="@+id/Add_Button"
+        app:layout_constraintTop_toBottomOf="@+id/Object_List" />
+
+    <Button
+        android:id="@+id/Edit_Rentable_Button"
+        android:layout_width="136dp"
+        android:layout_height="45dp"
+        android:text="@string/edit_rentable"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Object_List" />
+
+    <Button
+        android:id="@+id/Edit_Note_Button"
+        android:layout_width="137dp"
+        android:layout_height="45dp"
+        android:text="@string/edit_note"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Checkout_Button"
+        app:layout_constraintTop_toBottomOf="@+id/Remove_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/Add_Section_Lead_Button"
+        android:layout_width="137dp"
+        android:layout_height="45dp"
+        android:text="@string/add_section_lead"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/Delete_Section_Button"
+        android:layout_width="137dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="1dp"
+        android:text="@string/delete_section"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Checkout_Button"
+        app:layout_constraintTop_toBottomOf="@+id/Remove_button"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/Edit_Member_Button"
+        android:layout_width="136dp"
+        android:layout_height="45dp"
+        android:text="@string/edit_member"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Object_List" />
+
+    <Spinner
+        android:id="@+id/Inventory_Dropdown"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:backgroundTintMode="src_in"
+        android:entries="@array/Entries"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

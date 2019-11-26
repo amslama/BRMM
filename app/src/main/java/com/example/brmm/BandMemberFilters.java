@@ -8,6 +8,6 @@ public class BandMemberFilters extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_band_member_filters);
+        setContentView(R.layout.activity_instrument_filters);
     }
 }
