@@ -5,15 +5,17 @@ public abstract class Rentable
 {
     protected String name;
     protected double cost;
-    protected BandMember owner;
+    protected BandMember currentOwner;
     protected String notes;
     protected Category highestCategory;
+    protected int id;
 
-    public Rentable(String name, double cost, BandMember owner, String notes, Category highestCategory) {
-        this.name = name;
-        this.cost = cost;
-        this.owner = owner;
-        this.notes = notes;
-        this.highestCategory = highestCategory;
+    public Rentable() {
+        currentOwner = null;
+        highestCategory = null;
+        name = "no item";
+        cost = 0;
+        id = -1;
     }
+    
 }
