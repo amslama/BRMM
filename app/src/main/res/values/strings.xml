@@ -28,6 +28,8 @@
     <string name="instrument_filter_label">Instrument:</string>
     <string name="student">Student</string>
     <string name="teacher">Teacher</string>
+    <string name="student_login">Student Login</string>
+    <string name="todo">TODO</string>
     <string-array name="Entries">
         <item>Parts</item>
         <item>Instruments</item>
