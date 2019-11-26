@@ -1,7 +1,6 @@
 package com.example.brmm;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,46 +27,71 @@ public class DatabaseConnection extends Thread
     private final String MySQL_Pass = "brmmproject4!";
 
     public void run(){
-        getServerConnection();
+       dbGetConnection();
     }
 
-    public void getServerConnection()
-    {
-        Connection serverConn = null;
-
-        try
-        {
+    public Session getServerConnection() {
+        //Session serverSession = null;
+            Session serverSession = null;
+        try {
             java.util.Properties config = new java.util.Properties();
             config.put("StrictHostKeyChecking", "no");
             JSch jsch = new JSch();
-            Session serverSession = jsch.getSession(SSH_User, SSH_Host, 22);
+            serverSession = jsch.getSession(SSH_User, SSH_Host, 22);
             serverSession.setPassword(MySQL_Pass);
             serverSession.setConfig(config);
             System.out.println("Starting SSH Connection");
-            System.out.println(serverSession.getHost()+ "\n" +serverSession.getUserName()+ "\n"+serverSession.getPort());
-
-            serverSession.connect();
-            //Port Forwarding stuff
+            System.out.println(serverSession.getHost() + "\n" + serverSession.getUserName() + "\n" + serverSession.getPort());
             System.out.println("Connection Established");
-            System.out.println("Connected = "+serverSession.isConnected());
-            int assigned_port = serverSession.setPortForwardingL(5656,MySQL_Host,3306);
-            System.out.println("localhost:"+ assigned_port+"->"+MySQL_Host+":"+3306);
+            serverSession.connect();
+            System.out.println("Connected = " + serverSession.isConnected());
+
+            //Port Forwarding stuff
+            int assigned_port = serverSession.setPortForwardingL(5656, MySQL_Host, 3306);
+            System.out.println("localhost:" + assigned_port + "->" + MySQL_Host + ":" + 3306);
             System.out.println("Port Forwarded");
 
             //DB Part
-            System.out.println("Before the Driver");
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            System.out.println("After the Driver.......................");
+            //System.out.println("Before the Driver");
+            //Class.forName("com.mysql.jdbc.Driver").newInstance();
+            //System.out.println("After the Driver.......................");
             //Getting Stuck Right Here
-            serverConn = DriverManager.getConnection("jdbc:mysql://localhost:"+5656+"/mysql?autoReconnect=true&amp;useSSL=false",MySQL_User,MySQL_Pass);
-            System.out.println("Database connection established");
-        }
-        catch(Exception e)
-        {
+
+            //serverConn = DriverManager.getConnection("jdbc:mysql://localhost:4321/BRMM/  ?autoReconnect=true&amp;useSSL=false",MySQL_User,MySQL_Pass);
+            //System.out.println("Database connection established");
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println();
-        //return conn;
+        return serverSession;
+    }
+
+
+    public void dbGetConnection(){
+        Session ses = null;
+        Connection conn = null;
+        try {
+            ses = getServerConnection();
+        }
+        catch(Exception v){
+            System.out.println("Part 2 fail...................");
+        }
+
+        Connection con = null;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:5656/ ?autoReconnect=true&amp;useSSL=false";
+            conn = DriverManager.getConnection(url,"vmuser","brmmproject4!");
+            System.out.println("Connection Complete");
+
+        }
+        catch(Exception t) {
+            System.out.println("Part 3 fail...............");
+            t.printStackTrace();
+        }
+
+
+
     }
 
 
