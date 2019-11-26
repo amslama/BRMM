@@ -1,8 +1,18 @@
 package com.example.brmm;
 
-import java.util.ArrayList;
 
 public class Faculty extends BandMember {
-    private String department;
-    private String role;
+    private boolean facultyRights;
+    public Faculty() {
+        super();
+        facultyRights = true;
+    }
+
+    public boolean isFacultyRights() {
+        return facultyRights;
+    }
+
+    public void setFacultyRights(boolean facultyRights) {
+        this.facultyRights = facultyRights;
+    }
 }
