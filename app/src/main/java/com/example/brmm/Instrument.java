@@ -9,8 +9,6 @@ enum Condition
 
 public class Instrument extends Rentable {
 
-    private String subtype;
-    private String currentOwner;
     private Condition curCondition;
 
 
