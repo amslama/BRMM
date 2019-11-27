@@ -14,6 +14,7 @@
         import java.sql.PreparedStatement;
         import java.sql.ResultSet;
         import java.sql.SQLException;
+        import java.sql.Statement;
 
         public class DatabaseConnection extends Thread
         {
@@ -25,6 +26,7 @@
         private final String MySQL_Host = "127.0.0.1";
         private final String MySQL_User = "vmuser";
         private final String MySQL_Pass = "brmmproject4!";
+        private Connection conn = null;
 
         public void run(){
         dbGetConnection();
@@ -70,7 +72,6 @@
 
         public void dbGetConnection(){
         Session ses = null;
-        Connection conn = null;
         try {
         ses = getServerConnection();
         }
@@ -78,7 +79,6 @@
         System.out.println("Part 2 fail...................");
         }
 
-        Connection con = null;
         try{
         Class.forName("com.mysql.jdbc.Driver");
         String url = "jdbc:mysql://localhost:5656/BRMM";
@@ -93,6 +93,55 @@
 
 
 
+        }
+
+        //TODO: ADD AND REMOVE RIGHTS
+        public void removeFacultyRights(){
+
+        }
+
+        public void addFacultyRights(){
+                try {
+                        String query = "";
+                }
+                catch(Exception e){
+                        System.out.println("Error on add rights");
+                }
+        }
+
+        public boolean checklogin(String ulid, String password){
+                boolean login = false;
+                try{
+                        String ulidquery = "Select username,passwrd from user where username = '"+ulid+"'";
+                        Statement st = conn.createStatement();
+                        ResultSet rs = st.executeQuery(ulidquery);
+                        if(rs.next()&&password.equals(rs.getString("passwrd"))) {
+                                login = true;
+                        }
+
+                }
+                catch (Exception e){
+                        System.out.println("Error on checking login");
+                }
+                System.out.println(login);
+                return login;
+        }
+
+
+
+
+        public void test(){
+                try {
+                        String query = "SELECT * FROM item";
+                        Statement st = conn.createStatement();
+                        ResultSet rs = st.executeQuery(query);
+                        while (rs.next()){
+                                System.out.println("Name: "+rs.getString("name"));
+                        }
+                }
+                catch (Exception e){
+                        System.out.println("Error on Test");
+                }
         }
 
 
