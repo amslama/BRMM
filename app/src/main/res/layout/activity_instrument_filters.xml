@@ -23,10 +23,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/name"
-        android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteX="28dp"
         tools:layout_editor_absoluteY="110dp" />
 
     <TextView
@@ -42,17 +41,80 @@
     <EditText
         android:id="@+id/cost_instrument_filters_edittext"
         android:layout_width="175dp"
+        android:layout_height="40dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:numeric="decimal"
         app:layout_constraintStart_toStartOf="@+id/cost_intrument_filters_textview"
         app:layout_constraintTop_toBottomOf="@+id/cost_intrument_filters_textview" />
 
     <EditText
         android:id="@+id/name_instrument_filters_edittext"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/name_instrument_filters_textview"
+        app:layout_constraintTop_toBottomOf="@+id/name_instrument_filters_textview" />
+
+    <TextView
+        android:id="@+id/id_number_instrument_filters_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/id_number"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="232dp" />
+
+    <EditText
+        android:id="@+id/editText7"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="256dp"
+        android:importantForAutofill="no" />
+
+    <TextView
+        android:id="@+id/owner_instrument_filters_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/owner"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="223dp"
+        tools:layout_editor_absoluteY="232dp" />
+
+    <EditText
+        android:id="@+id/editText8"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="134dp" />
+        tools:layout_editor_absoluteX="223dp"
+        tools:layout_editor_absoluteY="256dp" />
+
+    <Button
+        android:id="@+id/ok_instrument_filters_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/apply_filters"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="244dp"
+        tools:layout_editor_absoluteY="372dp" />
+
+    <Button
+        android:id="@+id/cancel_instrument_filters_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@android:string/cancel"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="372dp" />
 </android.support.constraint.ConstraintLayout>

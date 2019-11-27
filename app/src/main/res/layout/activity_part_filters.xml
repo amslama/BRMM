@@ -105,6 +105,7 @@
         android:layout_height="wrap_content"
         android:text="@string/apply_filters"
         android:textAllCaps="false"
+        android:textSize="18sp"
         tools:layout_editor_absoluteX="235dp"
         tools:layout_editor_absoluteY="568dp" />
 
@@ -114,6 +115,7 @@
         android:layout_height="wrap_content"
         android:text="@android:string/cancel"
         android:textAllCaps="false"
+        android:textSize="18sp"
         tools:layout_editor_absoluteX="59dp"
         tools:layout_editor_absoluteY="568dp" />
 </android.support.constraint.ConstraintLayout>
