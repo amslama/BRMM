@@ -30,6 +30,7 @@ public class DatabaseConnection extends Thread {
 
     public void run() {
         dbGetConnection();
+
     }
 
     public Session getServerConnection() {
@@ -79,7 +80,7 @@ public class DatabaseConnection extends Thread {
         }
     }
 
-    //TODO: ADD AND REMOVE RIGHTS
+    //Remove user's rights as a faculty member
     public void removeFacultyRights(String ulid) {
         try {
             String query = "update user set faculty = 0 where username = '"+ulid+"'";
@@ -89,7 +90,7 @@ public class DatabaseConnection extends Thread {
             System.out.println("Error on remove Faculty rights");
         }
     }
-
+    //Adds user's rights as a faculty member
     public void addFacultyRights(String ulid) {
         try {
             String query = "update user set faculty = 1 where username = '"+ulid+"'";
@@ -117,6 +118,31 @@ public class DatabaseConnection extends Thread {
         }
         System.out.println(login);
         return login;
+    }
+
+    //Adds a user to the database
+    public void addUser(int ID,String firstName, String lastName, String section, int sectionLeader, int faculty, String note, String ulid, String password){
+        try{
+            String query = "insert into user values ("+ID+",'"+firstName+"','"+lastName+"','"+section+"',";
+            query = query+sectionLeader+","+faculty+",'"+note+"','"+ulid+"','"+password+"')";
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        }
+        catch (Exception e){
+            System.out.println("Add user failed");
+        }
+    }
+
+    //Removes a user from the database
+    public void removeUser(String ulid){
+        try{
+            String query = "delete from user where username = '"+ulid+"'";
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        }
+        catch(Exception e){
+            System.out.println("Removal of User failed");
+        }
     }
 
 
