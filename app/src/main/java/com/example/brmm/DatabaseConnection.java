@@ -30,7 +30,7 @@ public class DatabaseConnection extends Thread {
 
     public void run() {
         dbGetConnection();
-
+        
     }
 
     public Session getServerConnection() {
@@ -80,6 +80,46 @@ public class DatabaseConnection extends Thread {
         }
     }
 
+
+    //Adds user's rights as a section leader
+    public void addSectionLeaderRights(String ulid) {
+        try {
+            String query = "update user set sectionLeader = 1 where username = '"+ulid+"'";
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Error on add Section Leader rights");
+        }
+    }
+
+    //Remove user's rights as a section leader
+    public void removeSectionLeaderRights(String ulid) {
+        try {
+            String query = "update user set sectionLeader = 0 where username = '"+ulid+"'";
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Error on remove Section Leader rights");
+        }
+    }
+
+    //Gets the Section Leader's rights
+    public int getSectionLeaderRights(String ulid){
+        int rights = 0;
+        try{
+            String query = "select sectionLeader from user where username = '"+ulid+"'";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            rs.next();
+            rights = rs.getInt("sectionLeader");
+        }
+        catch(Exception e){
+            System.out.println("Get Section Leader rights Failed or invalid user");
+        }
+        return rights;
+    }
+
     //Remove user's rights as a faculty member
     public void removeFacultyRights(String ulid) {
         try {
@@ -99,6 +139,23 @@ public class DatabaseConnection extends Thread {
         } catch (Exception e) {
             System.out.println("Error on add Faculty rights");
         }
+    }
+
+    //Gets the user's faculty rights
+    public int getFacultyRights(String ulid){
+        int rights = 0;
+        try{
+            String query = "select faculty from user where username = '"+ulid+"'";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            rs.next();
+            rights = rs.getInt("faculty");
+        }
+        catch(Exception e){
+            System.out.println("Get Faculty Rights Failed or invalid user");
+        }
+        return rights;
     }
 
     //Login authentication
@@ -144,6 +201,8 @@ public class DatabaseConnection extends Thread {
             System.out.println("Removal of User failed");
         }
     }
+
+
 
 
     public void test() {
