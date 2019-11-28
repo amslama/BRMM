@@ -2,9 +2,23 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Instrument_filters_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CE1126"
     tools:context=".BandMemberFilters">
+
+    <ImageView
+        android:id="@+id/colorfilter_instrument_filters"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="#40EEE8E8" />
 
     <TextView
         android:id="@+id/instrument_filters_textview"
@@ -23,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/name"
+        android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="28dp"
@@ -33,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cost"
+        android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="223dp"
@@ -42,20 +58,26 @@
         android:id="@+id/cost_instrument_filters_edittext"
         android:layout_width="175dp"
         android:layout_height="40dp"
+        android:background="@drawable/border"
         android:ems="10"
+        android:hint="0.00"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:numeric="decimal"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toStartOf="@+id/cost_intrument_filters_textview"
         app:layout_constraintTop_toBottomOf="@+id/cost_intrument_filters_textview" />
 
     <EditText
         android:id="@+id/name_instrument_filters_edittext"
-        android:layout_width="175dp"
-        android:layout_height="40dp"
+        android:layout_width="176dp"
+        android:layout_height="39dp"
+        android:background="@drawable/border"
         android:ems="10"
+        android:hint="@string/name"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toStartOf="@+id/name_instrument_filters_textview"
         app:layout_constraintTop_toBottomOf="@+id/name_instrument_filters_textview" />
 
@@ -64,6 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/id_number"
+        android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="28dp"
@@ -73,17 +96,21 @@
         android:id="@+id/editText7"
         android:layout_width="175dp"
         android:layout_height="40dp"
+        android:background="@drawable/border"
         android:ems="10"
+        android:hint="123456789"
+        android:importantForAutofill="no"
         android:inputType="number"
+        android:textColor="@android:color/background_dark"
         tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="256dp"
-        android:importantForAutofill="no" />
+        tools:layout_editor_absoluteY="256dp" />
 
     <TextView
         android:id="@+id/owner_instrument_filters_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/owner"
+        android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="223dp"
@@ -93,28 +120,34 @@
         android:id="@+id/editText8"
         android:layout_width="175dp"
         android:layout_height="40dp"
+        android:background="@drawable/border"
         android:ems="10"
+        android:hint="John ISU"
         android:inputType="textPersonName"
+        android:textColor="@android:color/background_dark"
         tools:layout_editor_absoluteX="223dp"
         tools:layout_editor_absoluteY="256dp" />
 
     <Button
         android:id="@+id/ok_instrument_filters_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:background="@drawable/button_border"
         android:text="@string/apply_filters"
         android:textAllCaps="false"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="244dp"
-        tools:layout_editor_absoluteY="372dp" />
+        tools:layout_editor_absoluteX="242dp"
+        tools:layout_editor_absoluteY="354dp" />
 
     <Button
         android:id="@+id/cancel_instrument_filters_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:background="@drawable/button_border"
         android:text="@android:string/cancel"
         android:textAllCaps="false"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="372dp" />
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="354dp" />
+
 </android.support.constraint.ConstraintLayout>
