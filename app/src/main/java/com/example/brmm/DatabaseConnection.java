@@ -30,7 +30,6 @@ public class DatabaseConnection extends Thread {
 
     public void run() {
         dbGetConnection();
-        
     }
 
     public Session getServerConnection() {
@@ -81,6 +80,10 @@ public class DatabaseConnection extends Thread {
     }
 
 
+    /*
+    USER TABLE SECTION
+     */
+
     //Adds user's rights as a section leader
     public void addSectionLeaderRights(String ulid) {
         try {
@@ -110,7 +113,6 @@ public class DatabaseConnection extends Thread {
             String query = "select sectionLeader from user where username = '"+ulid+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
-
             rs.next();
             rights = rs.getInt("sectionLeader");
         }
@@ -148,7 +150,6 @@ public class DatabaseConnection extends Thread {
             String query = "select faculty from user where username = '"+ulid+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
-
             rs.next();
             rights = rs.getInt("faculty");
         }
@@ -202,6 +203,49 @@ public class DatabaseConnection extends Thread {
         }
     }
 
+    public void getUsers(String ascORdesc, String anySection){
+        try{
+            String query = "select ID,firstName,lastName,section,sectionLeader,faculty,note,username from user order by "+ anySection + " " + ascORdesc;
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            int i = 1;
+            while(rs.next()){
+                System.out.println("Round "+i);
+                System.out.println("ID: "+rs.getInt("ID"));
+                System.out.println("First Name: "+rs.getString("firstName"));
+                System.out.println("Last Name: "+rs.getString("lastName"));
+                System.out.println("Section: "+rs.getString("section"));
+                System.out.println("Section Leader: "+rs.getString("sectionLeader"));
+                System.out.println("Faculty: "+rs.getString("faculty"));
+                System.out.println("Note: "+rs.getString("note"));
+                System.out.println("ULID: "+rs.getString("username"));
+                i++;
+            }
+        }
+        catch (Exception e){
+            System.out.println("Get users Failed");
+        }
+    }
+
+
+    /*
+    ITEM TABLE SECTION
+     */
+
+
+
+    //TODO: INSTRUMENT STUFF
+
+    //TODO: FILTER METHODS
+
+    //TODO: ADD BAND SECTION
+
+
+    //TODO: EDIT & RECEIVES NOTES FOR USERS
+
+    //TODO: SORT USERS
+
+    //TODO: SORT INSTRUMENTS
 
 
 
