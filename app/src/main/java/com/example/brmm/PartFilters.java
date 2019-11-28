@@ -3,6 +3,8 @@ package com.example.brmm;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.util.ArrayList;
+
 public class PartFilters extends AppCompatActivity {
 
     @Override
@@ -10,4 +12,7 @@ public class PartFilters extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_part_filters);
     }
+
+
+
 }
