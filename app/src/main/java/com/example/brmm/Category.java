@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Category {
     private String name;
     private Category superCategory;
-    private Category subCategory;
+    private ArrayList<Category> subCategory;
 
     public String getName() {
         return name;
@@ -24,12 +24,12 @@ public class Category {
         this.superCategory = superCategory;
     }
 
-    public Category getSubCategory() {
+    public ArrayList<Category> getSubCategory() {
         return subCategory;
     }
 
     public void setSubCategory(Category subCategory) {
-        this.subCategory = subCategory;
+        this.subCategory.add(subCategory);
     }
 
     public Category(Category superCategory, String name) {
@@ -40,7 +40,7 @@ public class Category {
 
     public void addCategory(Category superCategory, String name) {
         Category newCat = new Category(superCategory, name);
-        newCat.superCategory.subCategory = newCat;
+        newCat.superCategory.subCategory.add(newCat);
     }
 
     public ArrayList<Category> getAllSubCategories(Category aCategory) {
@@ -48,8 +48,11 @@ public class Category {
         ArrayList<Category> catList = new ArrayList<Category>();
         if (aCategory.subCategory == null)
             catList.add(aCategory);
-        else
-            catList.add(aCategory.subCategory);
+        else {
+            for (Category categories : subCategory)
+                catList.addAll(getAllSubCategories(categories));
+
+        }
         return catList;
     }
 }

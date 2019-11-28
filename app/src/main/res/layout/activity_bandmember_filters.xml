@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/instrument_filter_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
+    tools:context=".InstrumentFilters">
+
+    <TextView
+        android:id="@+id/first_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/first_name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bandmember_filters_header_textview" />
+
+    <TextView
+        android:id="@+id/UID_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="162dp"
+        android:text="@string/uid"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/last_name_filter_edittext" />
+
+    <Switch
+        android:id="@+id/section_leader_switch"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:background="@drawable/border"
+        android:backgroundTint="#860000"
+        app:layout_constraintStart_toStartOf="@+id/leads_section_label"
+        app:layout_constraintTop_toBottomOf="@+id/leads_section_label" />
+
+    <EditText
+        android:id="@+id/first_name_filter_edittext"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:background="@drawable/border"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/first_name_label"
+        app:layout_constraintTop_toBottomOf="@+id/first_name_label" />
+
+    <TextView
+        android:id="@+id/leads_section_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/section_leader"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="294dp" />
+
+    <Spinner
+        android:id="@+id/section_filter_dropdown"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        app:layout_constraintStart_toStartOf="@+id/section_label"
+        app:layout_constraintTop_toBottomOf="@+id/section_label" />
+
+    <RadioGroup
+        android:id="@+id/bandmember_type_radiogroup"
+        android:layout_width="153dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bandmember_type_label">
+
+        <RadioButton
+            android:id="@+id/student_RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/student" />
+
+        <RadioButton
+            android:id="@+id/teacher_RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/teacher" />
+
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/instrument_filter_dropdown"
+        android:layout_width="179dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@+id/instrument_filter_label"
+        tools:layout_editor_absoluteY="414dp" />
+
+    <CheckBox
+        android:id="@+id/has_instrument_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/has_instrument"
+        app:layout_constraintStart_toStartOf="@+id/checkout_label"
+        app:layout_constraintTop_toBottomOf="@+id/checkout_label" />
+
+    <TextView
+        android:id="@+id/bandmember_type_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/bandmember_type"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_name_filter_edittext" />
+
+    <TextView
+        android:id="@+id/switch_edittext"
+        android:layout_width="49dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="7dp"
+        android:text="@string/yes"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/section_leader_switch"
+        app:layout_constraintTop_toBottomOf="@+id/leads_section_label" />
+
+    <EditText
+        android:id="@+id/UID_edittext"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:background="@android:drawable/edit_text"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@+id/UID_label"
+        tools:layout_editor_absoluteX="218dp" />
+
+    <TextView
+        android:id="@+id/checkout_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/checkout_status"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/section_leader_switch"
+        tools:layout_editor_absoluteX="218dp" />
+
+    <TextView
+        android:id="@+id/instrument_filter_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/instrument_filter_label"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/section_filter_dropdown"
+        tools:layout_editor_absoluteX="18dp" />
+
+    <EditText
+        android:id="@+id/last_name_filter_edittext"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/last_name_label"
+        app:layout_constraintTop_toBottomOf="@+id/last_name_label" />
+
+    <CheckBox
+        android:id="@+id/doesnt_have_instument_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/has_no_instrument"
+        app:layout_constraintStart_toStartOf="@+id/has_instrument_checkbox"
+        app:layout_constraintTop_toBottomOf="@+id/has_instrument_checkbox" />
+
+    <TextView
+        android:id="@+id/section_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/section"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="294dp" />
+
+    <TextView
+        android:id="@+id/last_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/last_name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/bandmember_filters_header_textview"
+        tools:layout_editor_absoluteX="218dp" />
+
+    <TextView
+        android:id="@+id/bandmember_filters_header_textview"
+        android:layout_width="378dp"
+        android:layout_height="59dp"
+        android:text="@string/bandmember_filters"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <Button
+        android:id="@+id/cancel_filters_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@android:string/cancel"
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="511dp" />
+
+    <Button
+        android:id="@+id/apply_filters_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/apply_filters"
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="250dp"
+        tools:layout_editor_absoluteY="511dp" />
+
+</android.support.constraint.ConstraintLayout>

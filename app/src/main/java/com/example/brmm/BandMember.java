@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public abstract class BandMember
 {
+    public boolean isLeader;
     protected String fname;
     protected String lname;
     protected String ulid;
