@@ -14,8 +14,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="#40EEE8E8" />
 
     <TextView
@@ -31,12 +33,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bandmember_filters_header_textview" />
 
+
+    <TextView
+        android:id="@+id/instrument_filter_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/instrument_filter_label"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/section_filter_dropdown"
+        tools:layout_editor_absoluteX="18dp" />
+
+    <TextView
+        android:id="@+id/section_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/section"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="294dp" />
+
+    <TextView
+        android:id="@+id/bandmember_filters_header_textview"
+        android:layout_width="378dp"
+        android:layout_height="59dp"
+        android:text="@string/bandmember_filters"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="17dp"
+        tools:layout_editor_absoluteY="40dp" />
+
     <TextView
         android:id="@+id/UID_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="162dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="160dp"
         android:text="@string/uid"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
@@ -69,19 +107,19 @@
         android:id="@+id/leads_section_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="12dp"
         android:text="@string/section_leader"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="294dp" />
-
+        tools:layout_editor_absoluteY="318dp" />
 
     <Spinner
         android:id="@+id/section_filter_dropdown"
         android:layout_width="175dp"
         android:layout_height="40dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/spinner_background"
         android:entries="@array/Entries"
         android:textColor="@android:color/background_dark"
@@ -118,8 +156,8 @@
         android:layout_height="40dp"
         android:background="@drawable/spinner_background"
         android:entries="@array/Entries"
-        tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="414dp" />
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="438dp" />
 
     <CheckBox
         android:id="@+id/has_instrument_checkbox"
@@ -135,7 +173,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:text="@string/bandmember_type"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
@@ -147,7 +185,7 @@
         android:id="@+id/switch_edittext"
         android:layout_width="49dp"
         android:layout_height="31dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="4dp"
         android:text="No"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
@@ -166,31 +204,19 @@
         android:inputType="number"
         android:textColor="@android:color/background_dark"
         app:layout_constraintTop_toBottomOf="@+id/UID_label"
-        tools:layout_editor_absoluteX="218dp" />
+        tools:layout_editor_absoluteX="219dp" />
 
     <TextView
         android:id="@+id/checkout_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:text="@string/checkout_status"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/section_leader_switch"
-        tools:layout_editor_absoluteX="218dp" />
-
-    <TextView
-        android:id="@+id/instrument_filter_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/instrument_filter_label"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/section_filter_dropdown"
-        tools:layout_editor_absoluteX="18dp" />
+        tools:layout_editor_absoluteX="219dp" />
 
     <EditText
         android:id="@+id/last_name_filter_edittext"
@@ -214,62 +240,39 @@
         app:layout_constraintTop_toBottomOf="@+id/has_instrument_checkbox" />
 
     <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/section"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="294dp" />
-
-    <TextView
         android:id="@+id/last_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:text="@string/last_name"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/bandmember_filters_header_textview"
-        tools:layout_editor_absoluteX="218dp" />
-
-    <TextView
-        android:id="@+id/bandmember_filters_header_textview"
-        android:layout_width="378dp"
-        android:layout_height="59dp"
-        android:text="@string/bandmember_filters"
-        android:textAlignment="center"
-        android:textColor="@android:color/background_dark"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
-
-    <Button
-        android:id="@+id/cancel_filters_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_border"
-        android:text="@android:string/cancel"
-        android:textAllCaps="false"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="46dp"
-        tools:layout_editor_absoluteY="511dp" />
+        tools:layout_editor_absoluteX="219dp" />
 
     <Button
         android:id="@+id/apply_filters_button"
-        android:layout_width="110dp"
-        android:layout_height="46dp"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
         android:background="@drawable/border"
         android:text="@string/apply_filters"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="236dp"
-        tools:layout_editor_absoluteY="513dp" />
+        tools:layout_editor_absoluteX="237dp"
+        tools:layout_editor_absoluteY="537dp" />
+
+    <Button
+        android:id="@+id/cancel_filters_button"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:background="@drawable/button_border"
+        android:text="@android:string/cancel"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="535dp" />
 
 </android.support.constraint.ConstraintLayout>

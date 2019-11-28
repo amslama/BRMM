@@ -4,6 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CE1126"
     tools:context=".edit_notes">
 
+    <ImageView
+        android:id="@+id/colorfilter_edit_notes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/color_filter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="#40EEE8E8" />
+
+    <TextView
+        android:id="@+id/edit_notes_textview"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:text="@string/edit_note"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="44dp" />
+
+    <EditText
+        android:id="@+id/edit_notes_edittext"
+        android:layout_width="350dp"
+        android:layout_height="430dp"
+        android:background="@drawable/border"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:textColor="@android:color/background_dark"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="94dp"
+        android:importantForAutofill="no" />
+
+    <Button
+        android:id="@+id/ok_edit_notes_button"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:background="@drawable/button_border"
+        android:text="@string/save"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="217dp"
+        tools:layout_editor_absoluteY="572dp" />
+
+    <Button
+        android:id="@+id/cancel_edit_note_button"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:background="@drawable/button_border"
+        android:text="@android:string/cancel"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="572dp" />
 </android.support.constraint.ConstraintLayout>

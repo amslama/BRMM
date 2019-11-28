@@ -29,8 +29,8 @@
         android:textColor="@android:color/background_dark"
         android:textSize="30sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteX="62dp"
+        tools:layout_editor_absoluteY="44dp" />
 
     <TextView
         android:id="@+id/parts_name_filters_textview"

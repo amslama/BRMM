@@ -41,6 +41,9 @@
     <string name="cost">Cost:</string>
     <string name="id_number">ID number:</string>
     <string name="owner">Owner:</string>
+    <string name="add_section">Add Section</string>
+    <string name="save">Save</string>
+    <string name="color_filter">color filter</string>
     <string-array name="Entries">
         <item>Parts</item>
         <item>Instruments</item>

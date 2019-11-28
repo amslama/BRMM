@@ -2,5 +2,7 @@ package com.example.brmm;
 
 public class Student extends BandMember {
     private String Section;
-    private int sectionLeader;
+    private boolean sectionLeader;
+    private int UID;
+
 }

@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CE1126"
-    tools:context=".add_section">
+    tools:context=".add_instrument">
 
     <ImageView
-        android:id="@+id/colorfilter_add_section"
+        android:id="@+id/colorfilter_add_edit_instrument"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,34 +18,14 @@
         app:srcCompat="#40EEE8E8" />
 
     <TextView
-        android:id="@+id/add_section_textview"
+        android:id="@+id/add_edit_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="@string/add_section"
+        android:text="@string/edit_rentable"
+        android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="30sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="123dp"
+        tools:layout_editor_absoluteX="144dp"
         tools:layout_editor_absoluteY="45dp" />
-
-    <TextView
-        android:id="@+id/name_add_section_edittext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/name"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="113dp" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="175dp"
-        android:layout_height="40dp"
-        android:background="@drawable/border"
-        android:ems="10"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="137dp" />
 </android.support.constraint.ConstraintLayout>
