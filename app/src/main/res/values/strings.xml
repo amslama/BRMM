@@ -39,6 +39,8 @@
     <string name="part_filters">Part Filters</string>
     <string name="name">Name:</string>
     <string name="cost">Cost:</string>
+    <string name="id_number">ID number:</string>
+    <string name="owner">Owner:</string>
     <string-array name="Entries">
         <item>Parts</item>
         <item>Instruments</item>
