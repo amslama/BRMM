@@ -5,4 +5,5 @@ import java.util.ArrayList;
 public class Part extends Rentable
 {
     private ArrayList<Category> compWith;
+    private int serialNumber;
 }

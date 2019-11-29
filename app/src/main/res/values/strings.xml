@@ -2,7 +2,7 @@
     <string name="app_name">BRMM</string>
     <string name="big_red_marching_machine">Big Red Marching Machine</string>
     <string name="enter_ulid">ULID:</string>
-    <string name="enter_password">Password</string>
+    <string name="enter_password">Password:</string>
     <string name="title_activity_ui__main">UI_Main</string>
     <string name="filters">Filters</string>
     <string name="logout">Logout</string>
@@ -22,14 +22,13 @@
     <string name="first_name">First Name:</string>
     <string name="uid">UID:</string>
     <string name="section">Section:</string>
-    <string name="checkout_status">Checkout Status</string>
+    <string name="checkout_status">Checkout Status:</string>
     <string name="bandmember_type">Bandmember Type:</string>
     <string name="section_leader">Section Leaders Only?</string>
     <string name="instrument_filter_label">Instrument:</string>
     <string name="student">Student</string>
     <string name="teacher">Teacher</string>
     <string name="student_login">Student Login</string>
-    <string name="todo">TODO</string>
     <string name="has_instrument">has instrument</string>
     <string name="has_no_instrument">has no instrument</string>
     <string name="instrument_filters">Instrument Filters</string>
@@ -46,10 +45,11 @@
     <string name="color_filter">color filter</string>
     <string name="notes">Notes:</string>
     <string name="department">Department:</string>
-    <string name="role">Role</string>
+    <string name="role">Role:</string>
     <string name="serial_number">Serial number:</string>
-    <string name="compatible_with">Compatible with</string>
+    <string name="compatible_with">Compatible with:</string>
     <string name="categories">Categories:</string>
+    <string name="add_existing">Add existing</string>
     <string-array name="Entries">
         <item>Parts</item>
         <item>Instruments</item>

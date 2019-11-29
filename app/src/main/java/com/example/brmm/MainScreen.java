@@ -1,5 +1,6 @@
 package com.example.brmm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 
 public class MainScreen extends AppCompatActivity {
+
+    private boolean facultyRights = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,21 @@ public class MainScreen extends AppCompatActivity {
                    set_Lead_Button.setVisibility(View.INVISIBLE);
                    add_remove_Section_Button.setVisibility(View.INVISIBLE);
                    checkout_Button.setVisibility(View.INVISIBLE);
+                   filter_Button.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                           Intent openFilter = new Intent(getBaseContext(),PartFilters.class);
+                           startActivityForResult(openFilter,0);
+                       }
+                   });
+
+                   add_Button.setOnClickListener(new View.OnClickListener(){
+                       @Override
+                       public void onClick(View v) {
+                           Intent openFilter = new Intent(getBaseContext(),add_p.class);
+                           startActivityForResult(openFilter,0);
+                       }
+                   });
 
                    /*
                    import parts
@@ -58,7 +76,13 @@ public class MainScreen extends AppCompatActivity {
                     set_Lead_Button.setVisibility(View.INVISIBLE);
                     add_remove_Section_Button.setVisibility(View.INVISIBLE);
                     checkout_Button.setVisibility(View.VISIBLE);
-
+                    filter_Button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent openFilter = new Intent(getBaseContext(),InstrumentFilters.class);
+                            startActivityForResult(openFilter,0);
+                        }
+                    });
                     /*
                     import instruments
                      */
@@ -71,6 +95,13 @@ public class MainScreen extends AppCompatActivity {
                     set_Lead_Button.setVisibility(View.VISIBLE);
                     add_remove_Section_Button.setVisibility(View.VISIBLE);
                     checkout_Button.setVisibility(View.INVISIBLE);
+                    filter_Button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent openFilter = new Intent(getBaseContext(),BandMemberFilters.class);
+                            startActivityForResult(openFilter,0);
+                        }
+                    });
                     /*
                     import Band Members
                      */
@@ -85,8 +116,10 @@ public class MainScreen extends AppCompatActivity {
 
         logout_Button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View v)
+            {
+                Intent login = new Intent(getBaseContext(),LoginScreen.class);
+                startActivityForResult(login,7);
             }
         });
 
