@@ -38,13 +38,13 @@
         android:id="@+id/instrument_filter_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="28dp"
         android:text="@string/instrument_filter_label"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/section_filter_dropdown"
-        tools:layout_editor_absoluteX="18dp" />
+        tools:layout_editor_absoluteX="19dp" />
 
     <TextView
         android:id="@+id/section_label"
@@ -54,20 +54,22 @@
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="294dp" />
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="318dp" />
 
     <TextView
         android:id="@+id/bandmember_filters_header_textview"
         android:layout_width="378dp"
         android:layout_height="59dp"
+        android:layout_marginTop="40dp"
         android:text="@string/bandmember_filters"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="30sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="40dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/UID_label"
@@ -119,7 +121,6 @@
         android:id="@+id/section_filter_dropdown"
         android:layout_width="175dp"
         android:layout_height="40dp"
-        android:layout_marginTop="24dp"
         android:background="@drawable/spinner_background"
         android:entries="@array/Entries"
         android:textColor="@android:color/background_dark"
@@ -157,7 +158,7 @@
         android:background="@drawable/spinner_background"
         android:entries="@array/Entries"
         tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="438dp" />
+        tools:layout_editor_absoluteY="434dp" />
 
     <CheckBox
         android:id="@+id/has_instrument_checkbox"
@@ -255,8 +256,8 @@
         android:id="@+id/apply_filters_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:background="@drawable/border"
-        android:text="@string/apply_filters"
+        android:background="@drawable/button_border"
+        android:text="@string/apply"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"

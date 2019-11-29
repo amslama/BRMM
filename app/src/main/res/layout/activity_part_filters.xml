@@ -12,6 +12,7 @@
         android:id="@+id/colorfilter_part_filters"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/color_filter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -22,40 +23,48 @@
 
     <TextView
         android:id="@+id/part_filters_header_text"
-        android:layout_width="287dp"
-        android:layout_height="91dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:text="@string/part_filters"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="30sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="62dp"
-        tools:layout_editor_absoluteY="44dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/parts_name_filters_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
+        android:labelFor="@id/name_part_filters_edittext"
         android:text="@string/name"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="135dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/part_filters_header_text" />
 
     <TextView
         android:id="@+id/cost_filters_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="81dp"
+        android:labelFor="@id/cost_part_filters_edittext"
         android:text="@string/cost"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="429dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SN_part_filters_edittext" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/name_part_filters_edittext"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/border"
@@ -63,49 +72,57 @@
         android:inputType="textPersonName"
         android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toStartOf="@+id/parts_name_filters_textview"
-        app:layout_constraintTop_toBottomOf="@+id/parts_name_filters_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/parts_name_filters_textview"
+        android:importantForAutofill="no" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/cost_part_filters_edittext"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/border"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/cost_filters_textview"
-        app:layout_constraintTop_toBottomOf="@+id/cost_filters_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/cost_filters_textview"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/serial_number_filters_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Serial number:"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="85dp"
+        android:labelFor="@id/SN_part_filters_edittext"
+        android:text="@string/serial_number"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="284dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_part_filters_edittext" />
 
     <TextView
         android:id="@+id/compatability_parts_filters_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Compatible with"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/compatible_with"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="204dp"
-        tools:layout_editor_absoluteY="135dp" />
+        app:layout_constraintStart_toEndOf="@+id/parts_name_filters_textview"
+        app:layout_constraintTop_toBottomOf="@+id/part_filters_header_text" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/SN_part_filters_edittext"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/border"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/serial_number_filters_textview"
-        app:layout_constraintTop_toBottomOf="@+id/serial_number_filters_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/serial_number_filters_textview"
+        android:importantForAutofill="no" />
 
     <Spinner
         android:id="@+id/comp_with_dropdown"
@@ -117,31 +134,50 @@
         app:layout_constraintTop_toBottomOf="@+id/compatability_parts_filters_textview" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/comp_with_rview"
         android:layout_width="171dp"
         android:layout_height="317dp"
-        app:layout_constraintStart_toStartOf="@+id/comp_with_dropdown"
-        app:layout_constraintTop_toBottomOf="@+id/comp_with_dropdown" />
+        app:layout_constraintStart_toStartOf="@+id/add_part_filters_button"
+        app:layout_constraintTop_toBottomOf="@+id/add_part_filters_button" />
 
     <Button
         android:id="@+id/ok_filters_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="60dp"
         android:background="@drawable/button_border"
-        android:text="@string/apply_filters"
+        android:text="@string/apply"
         android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="235dp"
-        tools:layout_editor_absoluteY="568dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comp_with_rview" />
 
     <Button
         android:id="@+id/cancel_parts_filters_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="89dp"
         android:background="@drawable/button_border"
         android:text="@android:string/cancel"
         android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="59dp"
-        tools:layout_editor_absoluteY="568dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cost_part_filters_edittext" />
+
+    <Button
+        android:id="@+id/add_part_filters_button"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:background="@drawable/button_border"
+        android:text="@string/add"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/comp_with_dropdown"
+        app:layout_constraintTop_toBottomOf="@+id/comp_with_dropdown" />
 
 </android.support.constraint.ConstraintLayout>

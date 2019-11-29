@@ -34,7 +34,7 @@
     <string name="has_no_instrument">has no instrument</string>
     <string name="instrument_filters">Instrument Filters</string>
     <string name="yes">Yes</string>
-    <string name="apply_filters">Apply Filters</string>
+    <string name="apply">Apply</string>
     <string name="bandmember_filters">Bandmember Filters</string>
     <string name="part_filters">Part Filters</string>
     <string name="name">Name:</string>
@@ -44,6 +44,11 @@
     <string name="add_section">Add Section</string>
     <string name="save">Save</string>
     <string name="color_filter">color filter</string>
+    <string name="notes">Notes:</string>
+    <string name="department">Department:</string>
+    <string name="role">Role</string>
+    <string name="serial_number">Serial number:</string>
+    <string name="compatible_with">Compatible with</string>
     <string-array name="Entries">
         <item>Parts</item>
         <item>Instruments</item>

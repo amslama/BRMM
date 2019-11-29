@@ -24,46 +24,57 @@
         android:id="@+id/edit_notes_textview"
         android:layout_width="350dp"
         android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:labelFor="@id/edit_notes_edittext"
         android:text="@string/edit_note"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="30sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="44dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edit_notes_edittext"
         android:layout_width="350dp"
         android:layout_height="430dp"
+        android:layout_marginTop="14dp"
         android:background="@drawable/border"
         android:ems="10"
         android:gravity="start|top"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:textColor="@android:color/background_dark"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="94dp"
-        android:importantForAutofill="no" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_notes_textview" />
 
     <Button
         android:id="@+id/ok_edit_notes_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/button_border"
         android:text="@string/save"
         android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="217dp"
-        tools:layout_editor_absoluteY="572dp" />
+        app:layout_constraintStart_toEndOf="@+id/cancel_edit_note_button"
+        app:layout_constraintTop_toBottomOf="@+id/edit_notes_edittext" />
 
     <Button
         android:id="@+id/cancel_edit_note_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/button_border"
         android:text="@android:string/cancel"
         android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="572dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_notes_edittext" />
 </android.support.constraint.ConstraintLayout>
