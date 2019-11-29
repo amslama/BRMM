@@ -140,7 +140,7 @@
         android:id="@+id/ok_instrument_filters_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="58dp"
         android:background="@drawable/button_border"
         android:text="@string/apply"
         android:textAllCaps="false"
@@ -156,7 +156,7 @@
         android:layout_width="125dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="58dp"
         android:background="@drawable/button_border"
         android:text="@android:string/cancel"
         android:textAllCaps="false"
@@ -169,7 +169,7 @@
         android:id="@+id/section_add_edit_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="58dp"
         android:text="@string/section"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
@@ -184,5 +184,25 @@
         android:background="@drawable/spinner_background"
         app:layout_constraintStart_toStartOf="@+id/section_add_edit_instrument_textview"
         app:layout_constraintTop_toBottomOf="@+id/section_add_edit_instrument_textview" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="58dp"
+        android:text="@string/categories"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/owner_instrument_filters_edittext"
+        app:layout_constraintTop_toBottomOf="@+id/owner_instrument_filters_edittext" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:background="@drawable/spinner_background"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </android.support.constraint.ConstraintLayout>
