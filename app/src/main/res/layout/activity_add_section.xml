@@ -11,6 +11,7 @@
         android:id="@+id/colorfilter_add_section"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/color_filter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,10 +32,11 @@
         app:layout_constraintTop_toTopOf="@+id/colorfilter_add_section" />
 
     <TextView
-        android:id="@+id/name_add_section_edittext"
+        android:id="@+id/name_add_section_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:labelFor="@id/name_add_section_edittext"
         android:text="@string/name"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
@@ -44,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/add_section_textview" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/name_add_section_edittext"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/border"
@@ -52,7 +54,8 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_add_section_edittext" />
+        app:layout_constraintTop_toBottomOf="@+id/name_add_section_textview"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/cancel_add-section_button"
@@ -66,7 +69,7 @@
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/name_add_section_edittext" />
 
     <Button
         android:id="@+id/ok_add_section_button"
@@ -80,5 +83,5 @@
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/name_add_section_edittext" />
 </android.support.constraint.ConstraintLayout>

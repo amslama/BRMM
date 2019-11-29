@@ -49,6 +49,7 @@
     <string name="role">Role</string>
     <string name="serial_number">Serial number:</string>
     <string name="compatible_with">Compatible with</string>
+    <string name="categories">Categories:</string>
     <string-array name="Entries">
         <item>Parts</item>
         <item>Instruments</item>
