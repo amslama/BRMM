@@ -18,6 +18,38 @@ public class Instrument extends Rentable {
         id = -1;
     }
 
+    public ArrayList<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ArrayList<Category> categories) {
+        this.categories = categories;
+    }
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
+
+    public String getCurrentOwner() {
+        return currentOwner;
+    }
+
+    public void setCurrentOwner(String currentOwner) {
+        this.currentOwner = currentOwner;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Instrument(String co, String st, String na, double price, int idnum) {
         currentOwner = co;
         section = st;
