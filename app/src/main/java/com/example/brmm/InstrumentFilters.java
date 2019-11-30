@@ -25,7 +25,7 @@ public class InstrumentFilters extends AppCompatActivity {
 
 
         if (!owner.equals(""))
-            filter = filterByName(filter, owner);
+            filter = filterByOwner(filter, owner);
 
 
         if (!name.equals("")) {
