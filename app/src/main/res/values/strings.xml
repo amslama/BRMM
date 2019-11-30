@@ -50,6 +50,7 @@
     <string name="compatible_with">Compatible with:</string>
     <string name="categories">Categories:</string>
     <string name="add_existing">Add existing</string>
+    <string name="isulogo">isuLogo</string>
     <string-array name="Entries">
         <item>Parts</item>
         <item>Instruments</item>

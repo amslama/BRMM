@@ -17,6 +17,7 @@ public class MainScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         final Spinner inv_Dropdown = findViewById(R.id.Inventory_Dropdown);
         final Button filter_Button = findViewById(R.id.Button_Filters);
         final Button logout_Button = findViewById(R.id.Logout_Button);
@@ -59,7 +60,9 @@ public class MainScreen extends AppCompatActivity {
                    add_Button.setOnClickListener(new View.OnClickListener(){
                        @Override
                        public void onClick(View v) {
-                           Intent openFilter = new Intent(getBaseContext(),add_p.class);
+                           Intent openFilter = new Intent(getBaseContext(),add_edit_part.class);
+                           getIntent().putExtra(Intent.EXTRA_TEXT,("Add Part"));
+
                            startActivityForResult(openFilter,0);
                        }
                    });
