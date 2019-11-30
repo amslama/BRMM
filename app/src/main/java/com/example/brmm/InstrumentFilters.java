@@ -15,7 +15,7 @@ public class InstrumentFilters extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bandmember_filters);
-        final EditText IDTxt = (EditText)findViewById(R.id.ID_number_instrument_filters_edittext;
+        final EditText IDTxt = (EditText)findViewById(R.id.ID_number_instrument_filters_edittext);
         final EditText nameTxt = (EditText)findViewById(R.id.name_instrument_filters_edittext);
         final EditText costTxt = (EditText)findViewById(R.id.cost_instrument_filters_edittext);
         final EditText ownerTxt = (EditText)findViewById(R.id.owner_instrument_filters_edittext);
