@@ -1,5 +1,6 @@
 package com.example.brmm;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class DatabaseConnection extends Thread {
 
@@ -30,7 +32,7 @@ public class DatabaseConnection extends Thread {
 
     public void run() {
         dbGetConnection();
-        
+        getFaculty();
     }
 
     public Session getServerConnection() {
@@ -81,6 +83,10 @@ public class DatabaseConnection extends Thread {
     }
 
 
+    /*
+    USER TABLE SECTION
+     */
+
     //Adds user's rights as a section leader
     public void addSectionLeaderRights(String ulid) {
         try {
@@ -110,7 +116,6 @@ public class DatabaseConnection extends Thread {
             String query = "select sectionLeader from user where username = '"+ulid+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
-
             rs.next();
             rights = rs.getInt("sectionLeader");
         }
@@ -148,7 +153,6 @@ public class DatabaseConnection extends Thread {
             String query = "select faculty from user where username = '"+ulid+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
-
             rs.next();
             rights = rs.getInt("faculty");
         }
@@ -202,6 +206,84 @@ public class DatabaseConnection extends Thread {
         }
     }
 
+    public ArrayList<Faculty> getFaculty(){
+        Faculty faculty = new Faculty();
+        ArrayList<Faculty> list = new ArrayList<Faculty>();
+        try{
+            //String query = "select firstName,lastName,section,sectionLeader,faculty,note,username from user where faculty = 1 order by username asc";
+            String query = "select firstName,lastName,username,department,role from user where faculty = 1 order by username asc";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            int i = 1;
+            while(rs.next()){
+                faculty = new Faculty(rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("department"),rs.getString("role"));
+                list.add(faculty);
+            }
+        }
+        catch (Exception e){
+            System.out.println("Get users Failed");
+        }
+        return list;
+    }
+
+
+    /*
+    ITEM TABLE SECTION
+     */
+
+    public ArrayList<Instrument> getInstruments(){
+        ArrayList<Instrument> list = new ArrayList<Instrument>();
+        Instrument instrument;
+        try{
+            String query = "Select ownership,section,name,cost,id from instrument where instrument = 1 order by id asc";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            while(rs.next()){
+                instrument = new Instrument(rs.getString("ownership"),rs.getString("section"),rs.getString("name"),Double.parseDouble(rs.getString("cost")),rs.getInt("id"));
+                list.add(instrument);
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Could not get instruments");
+        }
+            return list;
+    }
+
+    //TODO: INSTRUMENT STUFF
+    public void addInstrument(String currentOwner, String section, String name, double cost){
+        try{
+            String query = "insert into item (ownership, section, name, cost, instrument) values ('"+currentOwner+"','"+section+"','"+name+"','"+cost+"',1)";
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        }
+        catch(Exception e){
+            System.out.println("Add instrument failed");
+        }
+    }
+
+    public void removeInstrument(int id){
+        try{
+            String query = "delete from item where ID="+id;
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        }
+        catch(Exception e){
+            System.out.println("Remove instrument failed");
+        }
+    }
+
+    //TODO: ADD BAND SECTION
+
+
+    //TODO: EDIT & RECEIVES NOTES FOR USERS
+
+    //TODO: SORT USERS
+
+    //TODO: Get and SORT INSTRUMENTS BY ID ASC
+
+    //TODO: WHEN ADDING INSTRUMENT, AUTO INCREMENT ID
 
 
 
