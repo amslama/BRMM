@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 public class Instrument extends Rentable {
 
-    private ArrayList<Category> categories;
+    private Category category;
     private String section;
-    private String currentOwner;
-    private int id;
+
 
 
     public Instrument() {
@@ -18,12 +17,12 @@ public class Instrument extends Rentable {
         id = -1;
     }
 
-    public ArrayList<Category> getCategories() {
-        return categories;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategories(ArrayList<Category> categories) {
-        this.categories = categories;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getSection() {

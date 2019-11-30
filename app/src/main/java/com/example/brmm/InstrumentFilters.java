@@ -77,17 +77,21 @@ public class InstrumentFilters extends AppCompatActivity {
     public ArrayList<Rentable> filterBySection(ArrayList<Rentable> rentables, String section) {
         ArrayList<Rentable> filter = new ArrayList<>();
         for (Rentable rentable : rentables) {
-                if(rentable.getSection().equals(section))
+            if (rentable instanceof Instrument) {
+                if (((Instrument) rentable).getSection().equals(section))
                     filter.add(rentable);
             }
+                 }
         return filter;
     }
 
     public ArrayList<Rentable> filterByCategory(ArrayList<Rentable> rentables, Category category) {
         ArrayList<Rentable> filter = new ArrayList<>();
         for (Rentable rentable : rentables) {
-            if(rentable.getCategory().getSuperCategories().contains(category))
-                filter.add(rentable);
+            if (rentable instanceof Instrument) {
+                if (((Instrument) rentable).getCategory().getSuperCategories().contains(category))
+                    filter.add(rentable);
+            }
         }
         return filter;
     }
@@ -104,7 +108,7 @@ public class InstrumentFilters extends AppCompatActivity {
     public ArrayList<Rentable> filterByID(ArrayList<Rentable> rentables, int id) {
         ArrayList<Rentable> filter = new ArrayList<>();
         for (Rentable rentable : rentables) {
-            if(rentable.getID() == id) {
+            if(rentable.getId() == id) {
                 filter.add(rentable);
                 break;
             }
