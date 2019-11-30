@@ -2,6 +2,10 @@ package com.example.brmm;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -11,6 +15,31 @@ public class InstrumentFilters extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bandmember_filters);
+        final EditText IDTxt = (EditText)findViewById(R.id.ID_number_instrument_filters_edittext;
+        final EditText nameTxt = (EditText)findViewById(R.id.name_instrument_filters_edittext);
+        final EditText costTxt = (EditText)findViewById(R.id.cost_instrument_filters_edittext);
+        final EditText ownerTxt = (EditText)findViewById(R.id.owner_instrument_filters_edittext);
+        final Spinner  sectionSpnnr = findViewById(R.id.spinner);
+
+        final Button applyBttn = findViewById(R.id.ok_instrument_filters_button);
+        final Button cancelBttn = findViewById(R.id.cancel_instrument_filters_button);
+
+        applyBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String owner;
+                String section;
+                String name;
+                Category category;
+                int id;
+
+                owner = ownerTxt.getText().toString();
+                name = nameTxt.getText().toString();
+                id = Integer.parseInt(IDTxt.getText().toString());
+                //filterInstrumentInv();
+            }
+        });
+
     }
 
     public ArrayList<Rentable> filterInstrumentInv(ArrayList<Rentable> rentables, String owner, String section, String name, Category category, int ID) {
