@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Struct;
 import java.util.ArrayList;
 
 public class DatabaseConnection extends Thread {
@@ -110,14 +111,16 @@ public class DatabaseConnection extends Thread {
     }
 
     //Gets the Section Leader's rights
-    public int getSectionLeaderRights(String ulid){
-        int rights = 0;
+    public boolean getSectionLeaderRights(String ulid){
+        boolean rights = false;
         try{
             String query = "select sectionLeader from user where username = '"+ulid+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             rs.next();
-            rights = rs.getInt("sectionLeader");
+            if(rs.getInt("sectionLeader")==1){
+                rights = true;
+            }
         }
         catch(Exception e){
             System.out.println("Get Section Leader rights Failed or invalid user");
@@ -147,14 +150,16 @@ public class DatabaseConnection extends Thread {
     }
 
     //Gets the user's faculty rights
-    public int getFacultyRights(String ulid){
-        int rights = 0;
+    public boolean getFacultyRights(String ulid){
+        boolean rights = false;
         try{
             String query = "select faculty from user where username = '"+ulid+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             rs.next();
-            rights = rs.getInt("faculty");
+            if(rs.getInt("faculty")==1){
+                rights=true;
+            }
         }
         catch(Exception e){
             System.out.println("Get Faculty Rights Failed or invalid user");
@@ -182,10 +187,18 @@ public class DatabaseConnection extends Thread {
     }
 
     //Adds a user to the database
-    public void addUser(int ID,String firstName, String lastName, String section, int sectionLeader, int faculty, String note, String ulid, String password){
+    public void addUser(int ID,String firstName, String lastName, String section, boolean sectionLeader, boolean faculty, String note, String ulid, String password){
         try{
+            int leader = 0;
+            int staff = 0;
+            if(sectionLeader){
+                leader = 1;
+            }
+            if(faculty){
+                staff = 1;
+            }
             String query = "insert into user values ("+ID+",'"+firstName+"','"+lastName+"','"+section+"',";
-            query = query+sectionLeader+","+faculty+",'"+note+"','"+ulid+"','"+password+"')";
+            query = query+leader+","+staff+",'"+note+"','"+ulid+"','"+password+"')";
             Statement st = conn.createStatement();
             st.executeUpdate(query);
         }
@@ -210,18 +223,40 @@ public class DatabaseConnection extends Thread {
         Faculty faculty = new Faculty();
         ArrayList<Faculty> list = new ArrayList<Faculty>();
         try{
-            //String query = "select firstName,lastName,section,sectionLeader,faculty,note,username from user where faculty = 1 order by username asc";
-            String query = "select firstName,lastName,username,department,role from user where faculty = 1 order by username asc";
+            String query = "select firstName,lastName,username,department,role,ID from user where faculty = 1 order by username asc";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             int i = 1;
             while(rs.next()){
-                faculty = new Faculty(rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("department"),rs.getString("role"));
+                faculty = new Faculty(rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("department"),rs.getString("role"),rs.getInt("ID"));
                 list.add(faculty);
             }
         }
         catch (Exception e){
             System.out.println("Get users Failed");
+        }
+        return list;
+    }
+
+    public ArrayList<Student> getStrudents(){
+        Student student = new Student();
+        ArrayList<Student> list = new ArrayList<Student>();
+        try{
+            String query = "select firstName,lastName,section,sectionLeader,note,username,ID from user where faculty = 0 order by username asc";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            boolean leader = false;
+            while(rs.next()){
+                if(rs.getInt("sectionLeader")==1){
+                    leader = true;
+                }
+                student = new Student(rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("section"),leader,rs.getInt("ID"),rs.getString("note"));
+                list.add(student);
+            }
+
+        }
+        catch(Exception e){
+            System.out.println("Get students failed");
         }
         return list;
     }
@@ -248,7 +283,7 @@ public class DatabaseConnection extends Thread {
         {
             System.out.println("Could not get instruments");
         }
-            return list;
+        return list;
     }
 
     //TODO: INSTRUMENT STUFF
