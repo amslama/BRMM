@@ -1,4 +1,6 @@
 package com.example.brmm;
 
-public class DatabaseWrapper {
+public class DatabaseWrapper
+{
 }
+

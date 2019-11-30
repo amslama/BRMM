@@ -2,7 +2,7 @@ package com.example.brmm;
 
 import java.util.ArrayList;
 
-public class CurrentInventory {
+public class RentableInventory {
 
     private ArrayList<Instrument> instruments;
     private ArrayList<Part> parts;

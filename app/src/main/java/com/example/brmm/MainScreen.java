@@ -1,5 +1,6 @@
 package com.example.brmm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -45,6 +46,13 @@ public class MainScreen extends AppCompatActivity {
                    set_Lead_Button.setVisibility(View.INVISIBLE);
                    add_remove_Section_Button.setVisibility(View.INVISIBLE);
                    checkout_Button.setVisibility(View.INVISIBLE);
+                   add_Button.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View view) {
+                           Intent intent = new Intent();
+
+                       }
+                   });
 
                    /*
                    import parts
