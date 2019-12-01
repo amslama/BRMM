@@ -10,10 +10,11 @@ public class Faculty extends BandMember {
 
     }
 
-    public Faculty(String firstname, String lastname, String ulid, String department, String role){
+    public Faculty(String firstname, String lastname, String ulid, String department, String role, int UID){
         setFname(firstname);
         setLname(lastname);
         setUlid(ulid);
+        setUID(UID);
         this.department = department;
         this.role = role;
     }

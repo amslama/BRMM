@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Struct;
 import java.util.ArrayList;
 
 public class DatabaseConnection extends Thread {
@@ -32,7 +33,7 @@ public class DatabaseConnection extends Thread {
 
     public void run() {
         dbGetConnection();
-        getFaculty();
+
     }
 
     public Session getServerConnection() {
@@ -82,198 +83,11 @@ public class DatabaseConnection extends Thread {
         }
     }
 
-
-    /*
-    USER TABLE SECTION
-     */
-
-    //Adds user's rights as a section leader
-    public void addSectionLeaderRights(String ulid) {
-        try {
-            String query = "update user set sectionLeader = 1 where username = '"+ulid+"'";
-            Statement st = conn.createStatement();
-            st.executeUpdate(query);
-        } catch (Exception e) {
-            System.out.println("Error on add Section Leader rights");
-        }
-    }
-
-    //Remove user's rights as a section leader
-    public void removeSectionLeaderRights(String ulid) {
-        try {
-            String query = "update user set sectionLeader = 0 where username = '"+ulid+"'";
-            Statement st = conn.createStatement();
-            st.executeUpdate(query);
-        } catch (Exception e) {
-            System.out.println("Error on remove Section Leader rights");
-        }
-    }
-
-    //Gets the Section Leader's rights
-    public int getSectionLeaderRights(String ulid){
-        int rights = 0;
-        try{
-            String query = "select sectionLeader from user where username = '"+ulid+"'";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            rs.next();
-            rights = rs.getInt("sectionLeader");
-        }
-        catch(Exception e){
-            System.out.println("Get Section Leader rights Failed or invalid user");
-        }
-        return rights;
-    }
-
-    //Remove user's rights as a faculty member
-    public void removeFacultyRights(String ulid) {
-        try {
-            String query = "update user set faculty = 0 where username = '"+ulid+"'";
-            Statement st = conn.createStatement();
-            st.executeUpdate(query);
-        } catch (Exception e) {
-            System.out.println("Error on remove Faculty rights");
-        }
-    }
-    //Adds user's rights as a faculty member
-    public void addFacultyRights(String ulid) {
-        try {
-            String query = "update user set faculty = 1 where username = '"+ulid+"'";
-            Statement st = conn.createStatement();
-            st.executeUpdate(query);
-        } catch (Exception e) {
-            System.out.println("Error on add Faculty rights");
-        }
-    }
-
-    //Gets the user's faculty rights
-    public int getFacultyRights(String ulid){
-        int rights = 0;
-        try{
-            String query = "select faculty from user where username = '"+ulid+"'";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            rs.next();
-            rights = rs.getInt("faculty");
-        }
-        catch(Exception e){
-            System.out.println("Get Faculty Rights Failed or invalid user");
-        }
-        return rights;
-    }
-
-    //Login authentication
-    //TODO: ADD ENCRYPTION
-    public boolean checklogin(String ulid, String password) {
-        boolean login = false;
-        try {
-            String ulidquery = "Select username,passwrd from user where username = '" + ulid + "'";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(ulidquery);
-            if (rs.next() && password.equals(rs.getString("passwrd"))) {
-                login = true;
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error on checking login");
-        }
-        System.out.println(login);
-        return login;
-    }
-
-    //Adds a user to the database
-    public void addUser(int ID,String firstName, String lastName, String section, int sectionLeader, int faculty, String note, String ulid, String password){
-        try{
-            String query = "insert into user values ("+ID+",'"+firstName+"','"+lastName+"','"+section+"',";
-            query = query+sectionLeader+","+faculty+",'"+note+"','"+ulid+"','"+password+"')";
-            Statement st = conn.createStatement();
-            st.executeUpdate(query);
-        }
-        catch (Exception e){
-            System.out.println("Add user failed");
-        }
-    }
-
-    //Removes a user from the database
-    public void removeUser(String ulid){
-        try{
-            String query = "delete from user where username = '"+ulid+"'";
-            Statement st = conn.createStatement();
-            st.executeUpdate(query);
-        }
-        catch(Exception e){
-            System.out.println("Removal of User failed");
-        }
-    }
-
-    public ArrayList<Faculty> getFaculty(){
-        Faculty faculty = new Faculty();
-        ArrayList<Faculty> list = new ArrayList<Faculty>();
-        try{
-            //String query = "select firstName,lastName,section,sectionLeader,faculty,note,username from user where faculty = 1 order by username asc";
-            String query = "select firstName,lastName,username,department,role from user where faculty = 1 order by username asc";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            int i = 1;
-            while(rs.next()){
-                faculty = new Faculty(rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("department"),rs.getString("role"));
-                list.add(faculty);
-            }
-        }
-        catch (Exception e){
-            System.out.println("Get users Failed");
-        }
-        return list;
-    }
-
-
-    /*
-    ITEM TABLE SECTION
-     */
-
-    public ArrayList<Instrument> getInstruments(){
-        ArrayList<Instrument> list = new ArrayList<Instrument>();
-        Instrument instrument;
-        try{
-            String query = "Select ownership,section,name,cost,id from instrument where instrument = 1 order by id asc";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
-
-            while(rs.next()){
-                instrument = new Instrument(rs.getString("ownership"),rs.getString("section"),rs.getString("name"),Double.parseDouble(rs.getString("cost")),rs.getInt("id"));
-                list.add(instrument);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println("Could not get instruments");
-        }
-            return list;
+    public Connection getConnection(){
+        return conn;
     }
 
     //TODO: INSTRUMENT STUFF
-    public void addInstrument(String currentOwner, String section, String name, double cost){
-        try{
-            String query = "insert into item (ownership, section, name, cost, instrument) values ('"+currentOwner+"','"+section+"','"+name+"','"+cost+"',1)";
-            Statement st = conn.createStatement();
-            st.executeUpdate(query);
-        }
-        catch(Exception e){
-            System.out.println("Add instrument failed");
-        }
-    }
-
-    public void removeInstrument(int id){
-        try{
-            String query = "delete from item where ID="+id;
-            Statement st = conn.createStatement();
-            st.executeUpdate(query);
-        }
-        catch(Exception e){
-            System.out.println("Remove instrument failed");
-        }
-    }
-
     //TODO: ADD BAND SECTION
 
 
@@ -284,21 +98,6 @@ public class DatabaseConnection extends Thread {
     //TODO: Get and SORT INSTRUMENTS BY ID ASC
 
     //TODO: WHEN ADDING INSTRUMENT, AUTO INCREMENT ID
-
-
-
-    public void test() {
-        try {
-            String query = "SELECT * FROM item";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()) {
-                System.out.println("Name: " + rs.getString("name"));
-            }
-        } catch (Exception e) {
-            System.out.println("Error on Test");
-        }
-    }
 
 
     public String getSSH_Host() {
