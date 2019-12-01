@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/delete_section_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CE1126"
+    tools:context=".delete_section">
+
+    <ImageView
+        android:id="@+id/add_section_colorfilter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#40EEE8E8"
+        android:contentDescription="@string/color_filter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/delete_section_header_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="@string/delete_section"
+        android:textColor="@android:color/background_dark"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/delete_section_dropdown"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:background="@drawable/spinner_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_section_textview_dropdown" />
+
+    <TextView
+        android:id="@+id/delete_section_textview_dropdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="@string/section"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_section_header_textview" />
+
+    <Button
+        android:id="@+id/cancel_delete_section_button"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="58dp"
+        android:background="@drawable/button_border"
+        android:text="@android:string/cancel"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/apply_delete_section_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_section_dropdown" />
+
+    <Button
+        android:id="@+id/apply_delete_section_button"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/button_border"
+        android:text="@string/apply"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_section_dropdown" />
+</android.support.constraint.ConstraintLayout>

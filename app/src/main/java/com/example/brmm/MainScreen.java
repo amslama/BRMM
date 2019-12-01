@@ -12,6 +12,8 @@ import android.widget.Spinner;
 public class MainScreen extends AppCompatActivity {
 
     private boolean facultyRights = false;
+    private String add = "Add";
+    private String edit = "Edit";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +22,35 @@ public class MainScreen extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         final Spinner inv_Dropdown = findViewById(R.id.Inventory_Dropdown);
         final Button filter_Button = findViewById(R.id.Button_Filters);
+        filter_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFilter = new Intent(getBaseContext(),PartFilters.class);
+                startActivityForResult(openFilter,00);
+            }
+        });
         final Button logout_Button = findViewById(R.id.Logout_Button);
+        logout_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(),LoginScreen.class);
+                startActivityForResult(intent,99);
+            }
+        });
         final ScrollView inv_View = findViewById(R.id.Object_List);
 
         //Buttons for all
         final Button add_Button = findViewById(R.id.Add_Button);
+        add_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFilter = new Intent(getBaseContext(), add_edit_part.class);
+                getIntent().putExtra(Intent.EXTRA_TEXT, add);
+                startActivity(openFilter);
+            }
+        });
         final Button remove_Button = findViewById(R.id.Remove_button);
+        Object o = inv_view.ge  
 
         //Buttons for Band Members and Instruments
         final Button notes_Button = findViewById(R.id.Edit_Note_Button);
@@ -62,7 +87,6 @@ public class MainScreen extends AppCompatActivity {
                        public void onClick(View v) {
                            Intent openFilter = new Intent(getBaseContext(),add_edit_part.class);
                            getIntent().putExtra(Intent.EXTRA_TEXT,("Add Part"));
-
                            startActivityForResult(openFilter,0);
                        }
                    });
