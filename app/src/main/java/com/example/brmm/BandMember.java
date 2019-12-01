@@ -4,6 +4,8 @@ public class BandMember
 {
     private String fname;
     private String lname;
+    private int UID;
+
     public String ulid;
 
     public void setFname(String fname){
@@ -28,6 +30,14 @@ public class BandMember
 
     public String getUlid(){
         return ulid;
+    }
+
+    public int getUID(){
+        return UID;
+    }
+
+    public  void setUID(int UID){
+        this.UID = UID;
     }
 }
 
