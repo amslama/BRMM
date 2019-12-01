@@ -50,7 +50,7 @@ public class MainScreen extends AppCompatActivity {
             }
         });
         final Button remove_Button = findViewById(R.id.Remove_button);
-        Object o = inv_view.ge  
+        Object o = inv_view.ge
 
         //Buttons for Band Members and Instruments
         final Button notes_Button = findViewById(R.id.Edit_Note_Button);
