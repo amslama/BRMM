@@ -3,6 +3,7 @@ package com.example.brmm;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -12,8 +13,8 @@ import android.widget.Spinner;
 public class MainScreen extends AppCompatActivity {
 
     private boolean facultyRights = false;
-    private String add = "Add";
-    private String edit = "Edit";
+    private String add_string = "Add";
+    private String edit_string = "Edit";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class MainScreen extends AppCompatActivity {
                 startActivityForResult(intent,99);
             }
         });
-        final ScrollView inv_View = findViewById(R.id.Object_List);
+        final RecyclerView inv_View = findViewById(R.id.Object_List);
 
         //Buttons for all
         final Button add_Button = findViewById(R.id.Add_Button);
@@ -45,22 +46,27 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), add_edit_part.class);
-                getIntent().putExtra(Intent.EXTRA_TEXT, add);
+                getIntent().putExtra(Intent.EXTRA_TEXT, add_string);
                 startActivity(openFilter);
             }
         });
         final Button remove_Button = findViewById(R.id.Remove_button);
 
         //Buttons for Band Members and Instruments
-        final Button notes_Button = findViewById(R.id.Edit_Note_Button);
+        final Button notes_Button = findViewById(R.id.Edit_Note_Button);\
+        notes_Button.setVisibility(View.INVISIBLE);
 
         //Buttons for Band Members
         final Button edit_Member_Button = findViewById(R.id.Edit_Member_Button);
+        edit_Member_Button.setVisibility(View.INVISIBLE);
         final Button set_Lead_Button = findViewById(R.id.Add_Section_Lead_Button);
+        set_Lead_Button.setVisibility(View.INVISIBLE);
         final Button add_remove_Section_Button = findViewById(R.id.Delete_Section_Button);
+        add_remove_Section_Button.setVisibility(View.INVISIBLE);
 
         //Buttons for Instruments
         final Button checkout_Button = findViewById(R.id.Checkout_Button);
+        checkout_Button.setVisibility(View.INVISIBLE);
 
 
         inv_Dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
