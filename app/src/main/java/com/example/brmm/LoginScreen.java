@@ -34,6 +34,16 @@ public class LoginScreen extends AppCompatActivity {
         Thread thread = new Thread(connection);
         thread.start();
 
+        try{
+            thread.join();
+        }
+        catch (Exception e){
+            System.out.println("Joint failed");
+        }
+
+        System.out.println("Out of loop");
+
+
         //Goes into read-only mode for the app
         stdntLogin.setOnClickListener(new View.OnClickListener() {
             @Override

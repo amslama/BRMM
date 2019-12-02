@@ -2,40 +2,43 @@ package com.example.brmm;
 
 public class BandMember
 {
-    private String fname;
-    private String lname;
-    int id;
-    String ulid;
+    protected String fname;
+    protected String lname;
+    protected int UID;
 
-    public int getId() {
-        return id;
-    }
+    public String ulid;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUlid() {
-        return ulid;
-    }
-
-    public void setUlid(String ulid) {
-        this.ulid = ulid;
-    }
-
-    public String getFname() {
-        return fname;
-    }
-
-    public void setFname(String fname) {
+    public void setFname(String fname){
         this.fname = fname;
     }
 
-    public String getLname() {
+    public String getFname(){
+        return fname;
+    }
+
+    public void setLname(String lname){
+        this.lname = lname;
+    }
+
+    public String getLname(){
         return lname;
     }
 
-    public void setLname(String lname) {
-        this.lname = lname;
+    public void setUlid(String ulid){
+        this.ulid = ulid;
+    }
+
+    public String getUlid(){
+        return ulid;
+    }
+
+    public int getUID(){
+        return UID;
+    }
+
+    public  void setUID(int UID){
+        this.UID = UID;
     }
 }
+
+

@@ -5,14 +5,12 @@ import java.util.ArrayList;
 public class Student extends BandMember {
     private String section;
     private boolean sectionLeader;
-    private int UID;
     private String notes;
     private ArrayList<Rentable> instruments;
 
     public ArrayList<Rentable> getInstruments() {
         return instruments;
     }
-
 
     public String getSection() {
         return section;
@@ -45,4 +43,19 @@ public class Student extends BandMember {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
+    public Student(){
+
+    }
+
+    public Student(String firstname, String lastname, String ulid, String section, boolean sectionLeader, int UID, String notes){
+        setFname(firstname);
+        setLname(lastname);
+        setUlid(ulid);
+        this.section = section;
+        this.sectionLeader = sectionLeader;
+        setUID(UID);
+        this.notes = notes;
+    }
+
 }
