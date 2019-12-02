@@ -53,7 +53,7 @@ public class MainScreen extends AppCompatActivity {
         final Button remove_Button = findViewById(R.id.Remove_button);
 
         //Buttons for Band Members and Instruments
-        final Button notes_Button = findViewById(R.id.Edit_Note_Button);\
+        final Button notes_Button = findViewById(R.id.Edit_Note_Button);
         notes_Button.setVisibility(View.INVISIBLE);
 
         //Buttons for Band Members
