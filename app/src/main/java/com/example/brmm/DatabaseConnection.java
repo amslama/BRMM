@@ -36,7 +36,7 @@ public class DatabaseConnection extends Thread {
 
     }
 
-    public Session getServerConnection() {
+    private Session getServerConnection() {
         //Session serverSession = null;
         Session serverSession = null;
         try {
@@ -86,6 +86,25 @@ public class DatabaseConnection extends Thread {
     public Connection getConnection(){
         return conn;
     }
+
+    /**
+     * Not Done Yet
+     *
+     */
+    public Part getParts(){
+        Part part = new Part();
+        try{
+            String query = "select";
+
+        }
+        catch (Exception e){
+            System.out.println("Failed to get parts");
+        }
+
+        return part;
+    }
+
+
 
     //TODO: INSTRUMENT STUFF
     //TODO: ADD BAND SECTION

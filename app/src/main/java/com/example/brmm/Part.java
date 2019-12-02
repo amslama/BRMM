@@ -6,4 +6,10 @@ public class Part extends Rentable
 {
     private ArrayList<Category> compWith;
     private int serialNumber;
+
+    public Part(){
+
+    }
+
+
 }
