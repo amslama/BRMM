@@ -33,7 +33,16 @@ public class DatabaseConnection extends Thread {
 
     public void run() {
         dbGetConnection();
+    }
 
+    public void removeSectionLeaderRights(String ulid) {
+        try {
+            String query = "update user set sectionLeader = 0 where username = '"+ulid+"'";
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println("Error on remove Section Leader rights");
+        }
     }
 
     private Session getServerConnection() {
