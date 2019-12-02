@@ -10,7 +10,7 @@ public class add_edit_part extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_edit_part);
+        setContentView(R.layout.activity_add_part);
         Intent intent = getIntent();
         String headerValue = intent.getStringExtra(Intent.EXTRA_TEXT);
 

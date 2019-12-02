@@ -52,6 +52,12 @@
     <string name="add_existing">Add existing</string>
     <string name="isulogo">isuLogo</string>
     <string name="no">No</string>
+    <string name="add_instrument">Add Instrument</string>
+    <string name="add_member">Add Member</string>
+    <string name="member_type">Member type:</string>
+    <string name="faculty">Faculty</string>
+    <string name="edit_part">Edit Part</string>
+    <string name="add_part">Add Part</string>
     <string-array name="Entries">
         <item>Parts</item>
         <item>Instruments</item>

@@ -8,6 +8,6 @@ public class add_member_activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_edit_member);
+        setContentView(R.layout.activity_add_member);
     }
 }
