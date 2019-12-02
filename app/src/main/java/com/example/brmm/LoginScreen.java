@@ -33,12 +33,7 @@ public class LoginScreen extends AppCompatActivity {
         DatabaseConnection connection = new DatabaseConnection();
         Thread thread = new Thread(connection);
         thread.start();
-        try{
-           thread.join();
-        }
-        catch (Exception e){
-          System.out.println("Join Fail");
-        }
+
 
 
         //Goes into read-only mode for the app
