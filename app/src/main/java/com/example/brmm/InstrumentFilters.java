@@ -19,7 +19,7 @@ public class InstrumentFilters extends AppCompatActivity {
         final EditText nameTxt = (EditText)findViewById(R.id.name_instrument_filters_edittext);
         final EditText costTxt = (EditText)findViewById(R.id.cost_instrument_filters_edittext);
         final EditText ownerTxt = (EditText)findViewById(R.id.owner_instrument_filters_edittext);
-        final Spinner  sectionSpnnr = findViewById(R.id.spinner);
+        final Spinner  sectionSpnnr = findViewById(R.id.section_instrument_filters_dropdown);
 
         final Button applyBttn = findViewById(R.id.ok_instrument_filters_button);
         final Button cancelBttn = findViewById(R.id.cancel_instrument_filters_button);

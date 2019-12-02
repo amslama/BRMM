@@ -11,12 +11,12 @@
         android:id="@+id/colorfilter_add_section"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#40EEE8E8"
         android:contentDescription="@string/color_filter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="#40EEE8E8" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/add_section_textview"

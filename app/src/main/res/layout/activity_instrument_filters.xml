@@ -12,14 +12,14 @@
         android:id="@+id/colorfilter_instrument_filters"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#40EEE8E8"
         android:contentDescription="@string/color_filter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="#40EEE8E8" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/instrument_filters_textview"
@@ -140,7 +140,7 @@
         android:id="@+id/ok_instrument_filters_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="58dp"
         android:background="@drawable/button_border"
         android:text="@string/apply"
         android:textAllCaps="false"
@@ -149,27 +149,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.623"
         app:layout_constraintStart_toEndOf="@+id/cancel_instrument_filters_button"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/section_instrument_filters_dropdown" />
 
     <Button
         android:id="@+id/cancel_instrument_filters_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="58dp"
         android:background="@drawable/button_border"
         android:text="@android:string/cancel"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/spinner"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintStart_toStartOf="@+id/section_instrument_filters_dropdown"
+        app:layout_constraintTop_toBottomOf="@+id/section_instrument_filters_dropdown" />
 
     <TextView
         android:id="@+id/section_add_edit_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="58dp"
         android:text="@string/section"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
@@ -178,11 +178,31 @@
         app:layout_constraintTop_toBottomOf="@+id/ID_number_instrument_filters_edittext" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/section_instrument_filters_dropdown"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/spinner_background"
         app:layout_constraintStart_toStartOf="@+id/section_add_edit_instrument_textview"
         app:layout_constraintTop_toBottomOf="@+id/section_add_edit_instrument_textview" />
+
+    <TextView
+        android:id="@+id/categories_instrument_filters_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="58dp"
+        android:text="@string/categories"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/owner_instrument_filters_edittext"
+        app:layout_constraintTop_toBottomOf="@+id/owner_instrument_filters_edittext" />
+
+    <Spinner
+        android:id="@+id/categories_intrument_filters_dropdown"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:background="@drawable/spinner_background"
+        app:layout_constraintStart_toStartOf="@+id/categories_instrument_filters_textview"
+        app:layout_constraintTop_toBottomOf="@+id/categories_instrument_filters_textview" />
 
 </android.support.constraint.ConstraintLayout>

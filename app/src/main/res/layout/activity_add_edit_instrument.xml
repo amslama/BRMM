@@ -11,14 +11,14 @@
         android:id="@+id/colorfilter_add_edit_instrument"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#40EEE8E8"
         android:contentDescription="@string/color_filter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="#40EEE8E8" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/add_edit_instrument_textview"
@@ -181,5 +181,25 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/cancel_add_edit_instrument_button"
         app:layout_constraintTop_toBottomOf="@+id/categories_add_edit_instrument_rview" />
+
+    <TextView
+        android:id="@+id/add_existing_add_edit_instrument_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_existing"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="622dp" />
+
+    <Spinner
+        android:id="@+id/add_existing_add_edit_instrument_dropdown"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:background="@drawable/spinner_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_existing_add_edit_instrument_textview" />
 
 </android.support.constraint.ConstraintLayout>
