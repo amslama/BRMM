@@ -1,18 +1,19 @@
 
 package com.example.brmm;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginScreen extends AppCompatActivity {
     private int counter;
+    DatabaseWrapper wrapper;
+    Thread thread2;
 
     public LoginScreen() {
         counter = 0;
@@ -22,23 +23,13 @@ public class LoginScreen extends AppCompatActivity {
     protected void  onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
-
-        //Textviews
-        TextView header = findViewById(R.id.login_screen_header);
-
-        //Edittexts
         final EditText ULID = (EditText)findViewById(R.id.ULID_Textbox);
         final EditText password = (EditText)findViewById(R.id.Password_Textbox);
 
-        //Buttons
         final Button OK = (Button)findViewById(R.id.Login_OK_Button);
         final Button stdntLogin = (Button)findViewById(R.id.Student_Button);
 
-        //Toast and jam
         final Toast toast = Toast.makeText(this, "Too many failed attempts", Toast.LENGTH_SHORT);
-
-        //Image
-        ImageView logo_iview = findViewById(R.id.isu_logo_iview);
 
 
         DatabaseConnection connection = new DatabaseConnection();
@@ -49,35 +40,12 @@ public class LoginScreen extends AppCompatActivity {
             thread.join();
         }
         catch (Exception e){
-            System.out.println("Database connection join failed");
+            System.out.println("Connection join failed");
         }
 
-        //This is an example of how you set up the validate method
-        DatabaseWrapper wrapper = new DatabaseWrapper(connection.getConnection());
-        wrapper.setMethod("checkLogin");
-        wrapper.setUlid("testUser");
-        wrapper.setPassword("testPassword");
-        Thread validateThread = new Thread(wrapper);
-        validateThread.start();
+        wrapper = new DatabaseWrapper(connection.getConnection());
 
-        try{
-            validateThread.join();
-        }
-        catch(Exception f){
-            System.out.println("validate method failed");
-        }
 
-        //Returns true or false
-        wrapper.getValidation();
-        //End of example
-
-        //Goes into read-only mode for the app
-        stdntLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                login(false);
-            }
-        });
 
 
         //Login for faculty
@@ -93,7 +61,7 @@ public class LoginScreen extends AppCompatActivity {
                         String password_retrieved = password.getText().toString();
                         //Authenticate(ULID_retrieved,password_retrieved);
                         if(checkCredentials(ULID_retrieved,password_retrieved))
-                            login(true);
+                            login(ULID_retrieved);
                         else {
                             counter++;
 
@@ -121,23 +89,46 @@ public class LoginScreen extends AppCompatActivity {
     }
 
 
-    private void login(boolean isFaculty){
-        if (isFaculty){
-            Intent mainScreen = new Intent(this, MainScreen.class);
-            startActivity(mainScreen);
+    private void login(String ulid){
+        boolean isFaculty = false;
+        wrapper.setMethod("getFacultyRights");
+        wrapper.setUlid(ulid);
+        thread2 = new Thread(wrapper);
+        thread2.start();
+        try{
+            thread2.join();
+        }
+        catch (Exception e){
+            System.out.println("Validation Failed");
         }
 
-        else {
-            //show read only
+        isFaculty = wrapper.getFacultyRights();
+        if (isFaculty)
+            System.out.println("Is a faculty");
+        else
+            System.out.println("Is NOT a faculty");
             Intent mainScreen = new Intent(this, MainScreen.class);
+            mainScreen.putExtra("ISFACULTY", isFaculty);
             startActivity(mainScreen);
-        }
+
 
     }
 
     private boolean checkCredentials(String ulid, String password) {
-        //if in database return true, else return false
-        return true;
+        wrapper.setMethod("checkLogin");
+        wrapper.setUlid(ulid);
+        wrapper.setPassword(password);
+        thread2 = new Thread(wrapper);
+        thread2.start();
+        try{
+            thread2.join();
+        }
+        catch (Exception e){
+            System.out.println("Login join failed");
+        }
+
+        return wrapper.getValidation();
+
     }
 
 
