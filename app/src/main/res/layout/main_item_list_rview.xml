@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/grid_rv_layout"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:layout_centerInParent="false"
+    android:layout_centerVertical="false"
+    android:columnCount="4"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:rowCount="2"
+    app:layout_insetEdge="bottom">
+
+    <TextView
+        android:id="@+id/fname_bm_rv_textview"
+        android:layout_width="96dp"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_gravity="fill_horizontal"
+        android:text="@string/first_name"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/lname_bm_rv_textview"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:text="@string/last_name"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/type_bm_rv_textview"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="2"
+        android:text="@string/member_type"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/UID_bm_rv_textview"
+        android:layout_width="137dp"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:text="@string/uid"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/section_bm_rv_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="1"
+        android:layout_gravity="fill_horizontal"
+        android:text="@string/section"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/instrument_bm_rv_textview"
+        android:layout_width="148dp"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="2"
+        android:text="@string/instrument"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark" />
+
+</GridLayout>

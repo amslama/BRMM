@@ -101,6 +101,7 @@ public class MainScreen extends AppCompatActivity {
                    set_lead_button.setVisibility(View.INVISIBLE);
                    add_remove_Section_Button.setVisibility(View.INVISIBLE);
                    checkout_button.setVisibility(View.INVISIBLE);
+                   inv_spin.
 
                    filter_button.setOnClickListener(new View.OnClickListener() {
                        @Override
