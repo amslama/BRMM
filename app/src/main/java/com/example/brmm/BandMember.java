@@ -2,9 +2,9 @@ package com.example.brmm;
 
 public class BandMember
 {
-    private String fname;
-    private String lname;
-    private int UID;
+    protected String fname;
+    protected String lname;
+    protected int UID;
 
     public String ulid;
 

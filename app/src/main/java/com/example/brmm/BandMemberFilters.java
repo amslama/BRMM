@@ -3,6 +3,8 @@ package com.example.brmm;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.Switch;
 
 import java.util.ArrayList;
 
@@ -12,10 +14,15 @@ public class BandMemberFilters extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instrument_filters);
+        final Switch secLeadersSwitch = findViewById(R.id.section_leader_switch);
+        final EditText firstNameTxt = findViewById(R.id.first_name_filter_edittext);
+        final EditText lastNameTxt = findViewById(R.id.last_name_filter_edittext);
+        //final EditText idTxt = findViewById(R.id.)
     }
 
     // main filter method, for ints, 0 = dont filter, 1 = filter by Faculty or is true, 2 = filter by false
-    public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument) {
+    public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument, String section) {
+
         ArrayList<BandMember> filter = new ArrayList<>();
 
         if(isFaculty == 1)
@@ -85,9 +92,11 @@ public class BandMemberFilters extends AppCompatActivity {
     public ArrayList<BandMember> filterByHasNoInstrument(ArrayList<BandMember> members) {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
-      //      if (member.getInstruments().isEmpty()) {
-      //          filter.add(member);
-      //      }
+            if( member instanceof Student) {
+                if (((Student) member).getInstruments().isEmpty()) {
+                    filter.add(member);
+                }
+            }
 
         }
         return filter;
@@ -97,11 +106,12 @@ public class BandMemberFilters extends AppCompatActivity {
     public ArrayList<BandMember> filterByHasInstrument(ArrayList<BandMember> members) {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
-        //    if (!member.getInstruments().isEmpty()) {
-         //       filter.add(member);
+            if( member instanceof Student) {
+                if (!((Student) member).getInstruments().isEmpty()) {
+                    filter.add(member);
+                }
             }
-
-     //   }
+        }
         return filter;
     }
 
@@ -123,10 +133,6 @@ public class BandMemberFilters extends AppCompatActivity {
     public ArrayList<BandMember> filterByName(ArrayList<BandMember> members, String fName, String lName) {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
-     //       if (member.getFname().equals(fName) && member.getLname().equals(lName)) {
-     //           filter.add(member);
-     //           break;
-     //       }
 
         }
         return filter;
@@ -136,10 +142,10 @@ public class BandMemberFilters extends AppCompatActivity {
     public ArrayList<BandMember> filterByUID(ArrayList<BandMember> members, int UID) {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
-   //         if (member.getUID() == UID) {
-   //             filter.add(member);
-   //             break;
-    //        }
+            if (member.getId() == UID) {
+                filter.add(member);
+                break;
+            }
 
         }
         return filter;
@@ -149,22 +155,26 @@ public class BandMemberFilters extends AppCompatActivity {
     public ArrayList<BandMember> filterByspecInstrument(ArrayList<BandMember> members, Instrument instrument) {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
-     //       if (member.getInstruments().contains(instrument)) {
-    //            filter.add(member);
-   //             break;
-      //      }
+
+            if ( member instanceof Student) {
+                if (((Student) member).getInstruments().contains(instrument)) {
+                    filter.add(member);
+                    break;
+                }
+            }
 
         }
         return filter;
     }
 
     //Returns a list of members in a specific section
-    public ArrayList<BandMember> filterBySection(ArrayList<BandMember> members) {
+
+    public ArrayList<BandMember> filterBySection(ArrayList<BandMember> members, String section) {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
             if ( member instanceof Student) {
-//                if(((Student) member).getSection() == section)
-   //                 filter.add(member);
+                if(((Student) member).getSection().equals(section))
+                    filter.add(member);
             }
 
         }
