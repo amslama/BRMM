@@ -12,27 +12,36 @@ import android.widget.Spinner;
 public class MainScreen extends AppCompatActivity {
 
     private boolean facultyRights = false;
-    private String add_string = "Add";
-    private String edit_string = "Edit";
+    //Dropdown
+    final Spinner inv_spin = findViewById(R.id.inventory_main_screen_dropdown);
 
+    //Top buttons
+    final Button filter_button = findViewById(R.id.filter_main_screen_button);
+    final Button logout_button = findViewById(R.id.logout_main_screen_button);
+
+    //buttons for all
+    final Button add_button = findViewById(R.id.add_main_screen_button);
+    final Button remove_button = findViewById(R.id.remove_main_screen_button);
+
+    //buttons for rentables
+    final Button edit_rentable = findViewById(R.id.edit_rentable_main_screen_button);
+
+    //buttons for instruments
+    final Button notes_button = findViewById(R.id.edit_note_main_screen_button);
+    final Button checkout_button = findViewById(R.id.checkout_main_screen_button);
+
+    //buttons for bandmember
+    final Button edit_member_button = findViewById(R.id.edit_member_main_screen_button);
+    final Button set_lead_button = findViewById(R.id.add_section_lead_main_screen_button);
+    final Button add_section_button = findViewById(R.id.add_section_main_screen_button);
+    final Button delete_section_button = findViewById(R.id.delete_section_main_screen_button);
+
+    //Recyclerview
+    final RecyclerView inv_View = findViewById(R.id.item_list_main_screen_rview);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-
-        //Dropdown
-        final Spinner inv_spin = findViewById(R.id.inventory_main_screen_dropdown);
-
-        //Top buttons
-        final Button filter_button = findViewById(R.id.filter_main_screen_button);
-        final Button logout_button = findViewById(R.id.logout_main_screen_button);
-        final Button add_button = findViewById(R.id.add_main_screen_button);
-        final Button remove_button = findViewById(R.id.remove_main_screen_button);
-        final Button notes_Button = findViewById(R.id.edit_note_main_screen_button);
-        final Button edit_member_button = findViewById(R.id.edit_member_main_screen_button);
-        final Button set_lead_button = findViewById(R.id.add_section_lead_main_screen_button);
-        final Button add_section_button = findViewById(R.id.add_section_main_screen_button);
-        final Button delete_section_button = findViewById(R.id.delete_section_main_screen_button);
 
 
 
@@ -51,30 +60,35 @@ public class MainScreen extends AppCompatActivity {
                 startActivityForResult(intent,99);
             }
         });
-        final RecyclerView inv_View = findViewById(R.id.item_list_main_screen_rview);
 
         //Buttons for all
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), add_part.class);
-                getIntent().putExtra(Intent.EXTRA_TEXT, add_string);
                 startActivity(openFilter);
             }
         });
 
-        //Buttons for Band Members and Instruments
-        notes_Button.setVisibility(View.INVISIBLE);
+        set_lead_button.setVisibility(View.INVISIBLE);
+        notes_button.setVisibility(View.INVISIBLE);
+
+        edit_rentable.setVisibility(View.VISIBLE);
+        edit_rentable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFilter = new Intent(getBaseContext(), edit_part.class);
+                startActivity(openFilter);
+            }
+        });
 
         //Buttons for Band Members
         edit_member_button.setVisibility(View.INVISIBLE);
         set_lead_button.setVisibility(View.INVISIBLE);
-        final Button add_remove_Section_Button = findViewById(R.id.delete_section_main_screen_button);
         add_remove_Section_Button.setVisibility(View.INVISIBLE);
 
         //Buttons for Instruments
-        final Button checkout_Button = findViewById(R.id.checkout_main_screen_button);
-        checkout_Button.setVisibility(View.INVISIBLE);
+        checkout_button.setVisibility(View.INVISIBLE);
 
 
         inv_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -82,11 +96,11 @@ public class MainScreen extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                if(inv_spin.getSelectedItem() == "Parts")
                {
-                   notes_Button.setVisibility(View.INVISIBLE);
+                   notes_button.setVisibility(View.INVISIBLE);
                    edit_member_button.setVisibility(View.INVISIBLE);
                    set_lead_button.setVisibility(View.INVISIBLE);
                    add_remove_Section_Button.setVisibility(View.INVISIBLE);
-                   checkout_Button.setVisibility(View.INVISIBLE);
+                   checkout_button.setVisibility(View.INVISIBLE);
 
                    filter_button.setOnClickListener(new View.OnClickListener() {
                        @Override
@@ -100,7 +114,6 @@ public class MainScreen extends AppCompatActivity {
                        @Override
                        public void onClick(View v) {
                            Intent openFilter = new Intent(getBaseContext(), add_part.class);
-                           getIntent().putExtra(Intent.EXTRA_TEXT,("Add Part"));
                            startActivityForResult(openFilter,0);
                        }
                    });
@@ -112,11 +125,11 @@ public class MainScreen extends AppCompatActivity {
                }
                 if(inv_spin.getSelectedItem() == "Instruments")
                 {
-                    notes_Button.setVisibility(View.INVISIBLE);
+                    notes_button.setVisibility(View.VISIBLE);
                     edit_member_button.setVisibility(View.INVISIBLE);
                     set_lead_button.setVisibility(View.INVISIBLE);
                     add_remove_Section_Button.setVisibility(View.INVISIBLE);
-                    checkout_Button.setVisibility(View.VISIBLE);
+                    checkout_button.setVisibility(View.VISIBLE);
                     filter_button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -131,11 +144,11 @@ public class MainScreen extends AppCompatActivity {
 
                 if(inv_spin.getSelectedItem() == "Band Members")
                 {
-                    notes_Button.setVisibility(View.VISIBLE);
+                    notes_button.setVisibility(View.INVISIBLE);
                     edit_member_button.setVisibility(View.VISIBLE);
                     set_lead_button.setVisibility(View.VISIBLE);
                     add_remove_Section_Button.setVisibility(View.VISIBLE);
-                    checkout_Button.setVisibility(View.INVISIBLE);
+                    checkout_button.setVisibility(View.INVISIBLE);
                     filter_button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
