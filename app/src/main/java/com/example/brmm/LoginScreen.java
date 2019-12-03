@@ -38,13 +38,23 @@ public class LoginScreen extends AppCompatActivity {
             thread.join();
         }
         catch (Exception e){
-            System.out.println("Joint failed");
+            System.out.println("Connection join failed");
         }
 
         DatabaseWrapper wrapper = new DatabaseWrapper(connection.getConnection());
+        wrapper.setMethod("checkLogin");
+        wrapper.setUlid("testUser");
+        wrapper.setPassword("testPassword");
         Thread thread2 = new Thread(wrapper);
         thread2.start();
+        try{
+            thread2.join();
+        }
+        catch (Exception e){
+            System.out.println("Login join failed");
+        }
 
+        wrapper.getValidation();
 
         //Goes into read-only mode for the app
         stdntLogin.setOnClickListener(new View.OnClickListener() {
