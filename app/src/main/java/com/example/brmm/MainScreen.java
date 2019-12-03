@@ -26,13 +26,13 @@ public class MainScreen extends AppCompatActivity {
         //Top buttons
         final Button filter_button = findViewById(R.id.filter_main_screen_button);
         final Button logout_button = findViewById(R.id.logout_main_screen_button);
-        final Button add_Button = findViewById(R.id.add_main_screen_button);
-        final Button remove_Button = findViewById(R.id.remove_main_screen_button);
+        final Button add_button = findViewById(R.id.add_main_screen_button);
+        final Button remove_button = findViewById(R.id.remove_main_screen_button);
         final Button notes_Button = findViewById(R.id.edit_note_main_screen_button);
-        final Button edit_member_Button = findViewById(R.id.edit_member_main_screen_button);
-        final Button set_lead_Button = findViewById(R.id.add_section_lead_main_screen_button);
+        final Button edit_member_button = findViewById(R.id.edit_member_main_screen_button);
+        final Button set_lead_button = findViewById(R.id.add_section_lead_main_screen_button);
         final Button add_section_button = findViewById(R.id.add_section_main_screen_button);
-        final Button delete_section_Button = findViewById(R.id.delete_section_main_screen_button);
+        final Button delete_section_button = findViewById(R.id.delete_section_main_screen_button);
 
 
 
@@ -54,7 +54,7 @@ public class MainScreen extends AppCompatActivity {
         final RecyclerView inv_View = findViewById(R.id.item_list_main_screen_rview);
 
         //Buttons for all
-        add_Button.setOnClickListener(new View.OnClickListener() {
+        add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), add_part.class);
@@ -67,8 +67,8 @@ public class MainScreen extends AppCompatActivity {
         notes_Button.setVisibility(View.INVISIBLE);
 
         //Buttons for Band Members
-        edit_Member_Button.setVisibility(View.INVISIBLE);
-        set_Lead_Button.setVisibility(View.INVISIBLE);
+        edit_member_button.setVisibility(View.INVISIBLE);
+        set_lead_button.setVisibility(View.INVISIBLE);
         final Button add_remove_Section_Button = findViewById(R.id.delete_section_main_screen_button);
         add_remove_Section_Button.setVisibility(View.INVISIBLE);
 
@@ -83,8 +83,8 @@ public class MainScreen extends AppCompatActivity {
                if(inv_spin.getSelectedItem() == "Parts")
                {
                    notes_Button.setVisibility(View.INVISIBLE);
-                   edit_Member_Button.setVisibility(View.INVISIBLE);
-                   set_Lead_Button.setVisibility(View.INVISIBLE);
+                   edit_member_button.setVisibility(View.INVISIBLE);
+                   set_lead_button.setVisibility(View.INVISIBLE);
                    add_remove_Section_Button.setVisibility(View.INVISIBLE);
                    checkout_Button.setVisibility(View.INVISIBLE);
 
@@ -96,7 +96,7 @@ public class MainScreen extends AppCompatActivity {
                        }
                    });
 
-                   add_Button.setOnClickListener(new View.OnClickListener(){
+                   add_button.setOnClickListener(new View.OnClickListener(){
                        @Override
                        public void onClick(View v) {
                            Intent openFilter = new Intent(getBaseContext(), add_part.class);
@@ -113,8 +113,8 @@ public class MainScreen extends AppCompatActivity {
                 if(inv_spin.getSelectedItem() == "Instruments")
                 {
                     notes_Button.setVisibility(View.INVISIBLE);
-                    edit_Member_Button.setVisibility(View.INVISIBLE);
-                    set_Lead_Button.setVisibility(View.INVISIBLE);
+                    edit_member_button.setVisibility(View.INVISIBLE);
+                    set_lead_button.setVisibility(View.INVISIBLE);
                     add_remove_Section_Button.setVisibility(View.INVISIBLE);
                     checkout_Button.setVisibility(View.VISIBLE);
                     filter_button.setOnClickListener(new View.OnClickListener() {
@@ -132,8 +132,8 @@ public class MainScreen extends AppCompatActivity {
                 if(inv_spin.getSelectedItem() == "Band Members")
                 {
                     notes_Button.setVisibility(View.VISIBLE);
-                    edit_Member_Button.setVisibility(View.VISIBLE);
-                    set_Lead_Button.setVisibility(View.VISIBLE);
+                    edit_member_button.setVisibility(View.VISIBLE);
+                    set_lead_button.setVisibility(View.VISIBLE);
                     add_remove_Section_Button.setVisibility(View.VISIBLE);
                     checkout_Button.setVisibility(View.INVISIBLE);
                     filter_button.setOnClickListener(new View.OnClickListener() {

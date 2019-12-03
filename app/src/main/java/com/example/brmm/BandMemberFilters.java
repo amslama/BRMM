@@ -175,7 +175,7 @@ public class BandMemberFilters extends AppCompatActivity {
     public ArrayList<BandMember> filterByUID(ArrayList<BandMember> members, int UID) {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
-            if (member.getId() == UID) {
+            if (member.getUID() == UID) {
                 filter.add(member);
                 break;
             }
