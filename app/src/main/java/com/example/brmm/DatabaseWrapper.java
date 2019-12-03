@@ -4,11 +4,19 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class DatabaseWrapper {
+public class DatabaseWrapper extends Thread{
 
     DatabaseConnection dbconn = new DatabaseConnection();
-    Connection conn = dbconn.getConnection();
+    Connection conn = null;
 
+    public DatabaseWrapper(Connection connection){
+        conn = connection;
+    }
+
+    public void run(){
+        //addSectionLeaderRights("testUser");
+        //System.out.println("connection: "+ conn);
+    }
 
     /*
     USER TABLE SECTION
