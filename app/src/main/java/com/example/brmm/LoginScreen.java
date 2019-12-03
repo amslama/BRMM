@@ -66,11 +66,6 @@ public class LoginScreen extends AppCompatActivity {
         //System.out.println("Connection: "+connection.getConnection());
 
 
-
-
-
-
-
         //Goes into read-only mode for the app
         stdntLogin.setOnClickListener(new View.OnClickListener() {
             @Override

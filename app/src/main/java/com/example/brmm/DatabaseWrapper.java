@@ -9,13 +9,60 @@ public class DatabaseWrapper extends Thread{
     DatabaseConnection dbconn = new DatabaseConnection();
     Connection conn = null;
 
+    private String method = "";
+    private String argument = "";
+    private String argument2 = "";
+
+
     public DatabaseWrapper(Connection connection){
         conn = connection;
     }
 
+    public void setMethod(String method){
+        this.method = method;
+    }
+
+    public void setArgument(String argument){
+        this.argument = argument;
+    }
+
+    public void setArgument2(String argument2){
+        this.argument2 = argument2;
+    }
+
+
     public void run(){
-        //addSectionLeaderRights("testUser");
-        //System.out.println("connection: "+ conn);
+        switch (method){
+            case "addSectionLeaderRights":
+                addSectionLeaderRights(argument);
+                break;
+            case "removeSectionLeaderRights":
+                removeSectionLeaderRights(argument);
+                break;
+            case "getSectionLeaderRights":
+                getSectionLeaderRights(argument);
+                break;
+            case "removeFacultyRights":
+                removeFacultyRights(argument);
+                break;
+            case "addFacultyRights":
+                addFacultyRights(argument);
+                break;
+            case "getFacultyRights":
+                getFacultyRights(argument);
+                break;
+            case "checklogin":
+                checklogin(argument,argument2);
+                break;
+            case "addUser":
+                //addUser();
+                break;
+            default:
+                //System.out.println("Method not found");
+                addUser(4,"","","",false, false, "", "test2", "1234","");
+                break;
+        }
+
     }
 
     /*
@@ -121,7 +168,7 @@ public class DatabaseWrapper extends Thread{
     }
 
     //Adds a user to the database
-    public void addUser(int ID,String firstName, String lastName, String section, boolean sectionLeader, boolean faculty, String note, String ulid, String password){
+    public void addUser(int ID,String firstName, String lastName, String section, boolean sectionLeader, boolean faculty, String note, String ulid, String password,String department){
         try{
             int leader = 0;
             int staff = 0;
@@ -131,8 +178,8 @@ public class DatabaseWrapper extends Thread{
             if(faculty){
                 staff = 1;
             }
-            String query = "insert into user values ("+ID+",'"+firstName+"','"+lastName+"','"+section+"',";
-            query = query+leader+","+staff+",'"+note+"','"+ulid+"','"+password+"')";
+            String query = "insert into user (ID,firstName,lastName,section,sectionLeader,faculty,note,username,passwrd,department) values ("+ID+",'"+firstName+"','"+lastName+"','"+section+"',";
+            query = query+leader+","+staff+",'"+note+"','"+ulid+"','"+password+"','"+department+"')";
             Statement st = conn.createStatement();
             st.executeUpdate(query);
         }
@@ -242,6 +289,6 @@ public class DatabaseWrapper extends Thread{
             System.out.println("Remove instrument failed");
         }
     }
-    
+
 }
 
