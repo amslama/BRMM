@@ -10,7 +10,7 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/Object_List"
+        android:id="@+id/item_list_main_screen_rview"
         android:layout_width="0dp"
         android:layout_height="560dp"
         android:layout_marginTop="40dp"
@@ -19,123 +19,125 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Inventory_Dropdown" />
+        app:layout_constraintTop_toBottomOf="@+id/inventory_main_screen_dropdown" />
 
     <Button
-        android:id="@+id/Logout_Button"
+        android:id="@+id/logout_main_screen_button"
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_marginEnd="4dp"
         android:background="@drawable/button_border"
         android:text="@string/logout"
         android:textAllCaps="false"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Inventory_Dropdown" />
+        app:layout_constraintTop_toBottomOf="@+id/inventory_main_screen_dropdown" />
 
     <Button
-        android:id="@+id/Button_Filters"
+        android:id="@+id/filter_main_screen_button"
         android:layout_width="200dp"
         android:layout_height="40dp"
+        android:layout_marginStart="4dp"
         android:background="@drawable/button_border"
         android:text="@string/filters"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toStartOf="@+id/Logout_Button"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Inventory_Dropdown" />
+        app:layout_constraintTop_toBottomOf="@+id/inventory_main_screen_dropdown" />
 
     <Button
-        android:id="@+id/Checkout_Button"
+        android:id="@+id/checkout_main_screen_button"
         android:layout_width="137dp"
         android:layout_height="45dp"
         android:background="@drawable/button_border"
         android:text="@string/checkout"
         android:textAllCaps="false"
+        android:textSize="18sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Add_Button"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/add_main_screen_button" />
 
     <Button
-        android:id="@+id/Add_Button"
+        android:id="@+id/add_main_screen_button"
         android:layout_width="137dp"
         android:layout_height="45dp"
         android:background="@drawable/button_border"
         android:text="@string/add"
         android:textAllCaps="false"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Object_List" />
+        app:layout_constraintTop_toBottomOf="@+id/item_list_main_screen_rview" />
 
     <Button
-        android:id="@+id/Remove_button"
+        android:id="@+id/remove_main_screen_button"
         android:layout_width="137dp"
         android:layout_height="45dp"
-        android:layout_marginEnd="1dp"
         android:background="@drawable/button_border"
         android:text="@string/remove"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toStartOf="@+id/Edit_Member_Button"
-        app:layout_constraintStart_toEndOf="@+id/Add_Button"
-        app:layout_constraintTop_toBottomOf="@+id/Object_List" />
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/add_main_screen_button"
+        app:layout_constraintTop_toBottomOf="@+id/item_list_main_screen_rview" />
 
     <Button
-        android:id="@+id/Edit_Rentable_Button"
+        android:id="@+id/edit_rentable_main_screen_button"
         android:layout_width="136dp"
         android:layout_height="45dp"
+        android:layout_marginStart="1dp"
         android:background="@drawable/button_border"
         android:text="@string/edit_rentable"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Object_List" />
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/remove_main_screen_button"
+        app:layout_constraintTop_toBottomOf="@+id/item_list_main_screen_rview" />
 
     <Button
-        android:id="@+id/Edit_Note_Button"
+        android:id="@+id/edit_note_main_screen_button"
         android:layout_width="137dp"
         android:layout_height="45dp"
         android:background="@drawable/button_border"
         android:text="@string/edit_note"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Checkout_Button"
-        app:layout_constraintTop_toBottomOf="@+id/Remove_button"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/checkout_main_screen_button"
+        app:layout_constraintTop_toBottomOf="@+id/remove_main_screen_button" />
 
     <Button
-        android:id="@+id/Add_Section_Lead_Button"
+        android:id="@+id/add_section_lead_main_screen_button"
         android:layout_width="137dp"
         android:layout_height="45dp"
         android:background="@drawable/button_border"
         android:text="@string/add_section_lead"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_main_screen_button" />
 
     <Button
-        android:id="@+id/Delete_Section_Button"
+        android:id="@+id/delete_section_main_screen_button"
         android:layout_width="137dp"
         android:layout_height="45dp"
-        android:layout_marginStart="1dp"
         android:background="@drawable/button_border"
         android:text="@string/delete_section"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Checkout_Button"
-        app:layout_constraintTop_toBottomOf="@+id/Remove_button"
-        app:layout_constraintVertical_bias="1.0" />
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/checkout_main_screen_button"
+        app:layout_constraintTop_toBottomOf="@+id/remove_main_screen_button" />
 
     <Button
-        android:id="@+id/Edit_Member_Button"
+        android:id="@+id/edit_member_main_screen_button"
         android:layout_width="136dp"
         android:layout_height="45dp"
         android:background="@drawable/button_border"
         android:text="@string/edit_member"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Object_List" />
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/remove_main_screen_button"
+        app:layout_constraintTop_toBottomOf="@+id/item_list_main_screen_rview" />
 
     <Spinner
-        android:id="@+id/Inventory_Dropdown"
+        android:id="@+id/inventory_main_screen_dropdown"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:background="@drawable/spinner_background"
@@ -146,5 +148,17 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/add_section_main_screen_button"
+        android:layout_width="136dp"
+        android:layout_height="45dp"
+        android:background="@drawable/button_border"
+        android:text="@string/add_section"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/remove_main_screen_button"
+        app:layout_constraintTop_toBottomOf="@+id/edit_rentable_main_screen_button" />
 
 </android.support.constraint.ConstraintLayout>

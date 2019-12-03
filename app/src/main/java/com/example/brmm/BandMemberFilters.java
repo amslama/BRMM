@@ -3,8 +3,13 @@ package com.example.brmm;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -14,10 +19,38 @@ public class BandMemberFilters extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instrument_filters);
+
+        //Textviews
+        final TextView header = findViewById(R.id.bandmember_filters_header);
+        final TextView fname_textview = findViewById(R.id.fname_bandmember_filters_textview);
+        final TextView lname_textview = findViewById(R.id.lname_bandmember_filters_textview);
+        final TextView bm_type_textview = findViewById(R.id.bm_type_bandmember_filters_textview);
+        final TextView UID_textview = findViewById(R.id.UID_bandmember_filters_textview);
+        final TextView section_textview = findViewById(R.id.section_bandmember_filters_textview);
+        final TextView slo_textview = findViewById(R.id.slo_bandmember_filters_textview);
+        final TextView instrument_textview = findViewById(R.id.instrument_bandmember_filters_textview);
+        final TextView checkout_status_textview = findViewById(R.id.checkout_status_bandmember_filters_textview);
+
+        //Edittexts
+        final EditText firstNameTxt = findViewById(R.id.fname_bandmember_filters_edittext);
+        final EditText lastNameTxt = findViewById(R.id.lname_bandmember_filters_edittext);
+        final EditText UID_edittext = findViewById(R.id.UID_bandmember_filters_edittext);
+
+        //Dropdowns
+        final Spinner section_spin = findViewById(R.id.section_bandmember_filters_dropdown);
+        final Spinner instrument_spin = findViewById(R.id.instrument_bandmember_filters_dropdown);
+
+        //Switch
         final Switch secLeadersSwitch = findViewById(R.id.section_leader_switch);
-        final EditText firstNameTxt = findViewById(R.id.first_name_filter_edittext);
-        final EditText lastNameTxt = findViewById(R.id.last_name_filter_edittext);
-        //final EditText idTxt = findViewById(R.id.)
+
+        //Radio stuffs
+        final RadioGroup rgroup = findViewById(R.id.bm_type_bandmember_filters_rgroup);
+        final RadioButton student_rbutton = findViewById(R.id.student_bandmember_filters_rbutton);
+        final RadioButton faculty_rbutton = findViewById(R.id.faculty_bandmember_filters_rbutton);
+
+        //checkboxes
+        final CheckBox has_cbox = findViewById(R.id.has_bandmember_filters_cbox);
+        final CheckBox no_has_cbox = findViewById(R.id.no_has_bandmember_filters_cbox);
     }
 
     // main filter method, for ints, 0 = dont filter, 1 = filter by Faculty or is true, 2 = filter by false

@@ -1,13 +1,14 @@
 
 package com.example.brmm;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginScreen extends AppCompatActivity {
@@ -21,13 +22,23 @@ public class LoginScreen extends AppCompatActivity {
     protected void  onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+
+        //Textviews
+        TextView header = findViewById(R.id.login_screen_header);
+
+        //Edittexts
         final EditText ULID = (EditText)findViewById(R.id.ULID_Textbox);
         final EditText password = (EditText)findViewById(R.id.Password_Textbox);
 
+        //Buttons
         final Button OK = (Button)findViewById(R.id.Login_OK_Button);
         final Button stdntLogin = (Button)findViewById(R.id.Student_Button);
 
+        //Toast and jam
         final Toast toast = Toast.makeText(this, "Too many failed attempts", Toast.LENGTH_SHORT);
+
+        //Image
+        ImageView logo_iview = findViewById(R.id.isu_logo_iview);
 
 
         DatabaseConnection connection = new DatabaseConnection();

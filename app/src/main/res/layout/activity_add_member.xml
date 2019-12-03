@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CE1126"
-    tools:context=".add_member_activity">
+    tools:context=".add_member">
 
     <ImageView
         android:id="@+id/colorfilter_add_member"
@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/add_member"
+        android:id="@+id/add_member_header"
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_marginTop="40dp"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="@+id/colorfilter_add_member" />
 
     <TextView
-        android:id="@+id/first_name_add_member_textview"
+        android:id="@+id/fname_add_member_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/member_type_textview" />
 
     <TextView
-        android:id="@+id/last_name_add_member_textview"
+        android:id="@+id/lname_add_member_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="104dp"
@@ -58,8 +58,8 @@
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/first_name_add_member_textview"
-        app:layout_constraintTop_toTopOf="@+id/first_name_add_member_textview" />
+        app:layout_constraintStart_toEndOf="@+id/fname_add_member_textview"
+        app:layout_constraintTop_toTopOf="@+id/fname_add_member_textview" />
 
     <TextView
         android:id="@+id/UID_add_member_textview"
@@ -109,8 +109,8 @@
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="@+id/first_name_add_member_textview"
-        app:layout_constraintTop_toBottomOf="@+id/first_name_add_member_textview" />
+        app:layout_constraintStart_toStartOf="@+id/fname_add_member_textview"
+        app:layout_constraintTop_toBottomOf="@+id/fname_add_member_textview" />
 
     <EditText
         android:id="@+id/lname_add_member_edittext"
@@ -121,8 +121,8 @@
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="@+id/last_name_add_member_textview"
-        app:layout_constraintTop_toBottomOf="@+id/last_name_add_member_textview" />
+        app:layout_constraintStart_toStartOf="@+id/lname_add_member_textview"
+        app:layout_constraintTop_toBottomOf="@+id/lname_add_member_textview" />
 
     <EditText
         android:id="@+id/UID_add_member_edittext"
@@ -249,8 +249,8 @@
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/add_member"
-        app:layout_constraintTop_toBottomOf="@+id/add_member" />
+        app:layout_constraintStart_toStartOf="@+id/add_member_header"
+        app:layout_constraintTop_toBottomOf="@+id/add_member_header" />
 
     <RadioGroup
         android:id="@+id/member_type_add_member_radiogroup"
@@ -259,16 +259,16 @@
         android:layout_marginTop="28dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toEndOf="@+id/member_type_textview"
-        app:layout_constraintTop_toBottomOf="@+id/add_member">
+        app:layout_constraintTop_toBottomOf="@+id/add_member_header">
 
         <RadioButton
-            android:id="@+id/student_add_member_button"
+            android:id="@+id/student_add_member_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_member" />
+            android:text="@string/student" />
 
         <RadioButton
-            android:id="@+id/faculty_add_member_radio_button"
+            android:id="@+id/faculty_add_member_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/faculty" />

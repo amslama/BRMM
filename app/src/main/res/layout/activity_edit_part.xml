@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CE1126"
-    tools:context=".add_edit_part">
+    tools:context=".add_part">
 
     <ImageView
         android:id="@+id/edit_part_colorfilter"
@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/edit_parts_header_filter"
+        android:id="@+id/edit_parts_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/comp_with_edit_parts_textview"
+        android:id="@+id/compwith_edit_parts_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
@@ -47,11 +47,11 @@
         app:layout_constraintStart_toEndOf="@+id/name_edit_part_textview" />
 
     <TextView
-        android:id="@+id/serial_number_edit_part_textview"
+        android:id="@+id/sn_edit_part_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:labelFor="@id/SN_edit_part_edittext"
+        android:labelFor="@id/sn_edit_part_edittext"
         android:text="@string/serial_number"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
@@ -71,7 +71,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SN_edit_part_edittext" />
+        app:layout_constraintTop_toBottomOf="@+id/sn_edit_part_edittext" />
 
     <TextView
         android:id="@+id/name_edit_part_textview"
@@ -85,7 +85,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_parts_header_filter" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_parts_header" />
 
     <EditText
         android:id="@+id/name_edit_part_edittext"
@@ -112,15 +112,15 @@
         app:layout_constraintTop_toBottomOf="@+id/cost_edit_part_textview" />
 
     <EditText
-        android:id="@+id/SN_edit_part_edittext"
+        android:id="@+id/sn_edit_part_edittext"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/border"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="@+id/serial_number_edit_part_textview"
-        app:layout_constraintTop_toBottomOf="@+id/serial_number_edit_part_textview"
+        app:layout_constraintStart_toStartOf="@+id/sn_edit_part_textview"
+        app:layout_constraintTop_toBottomOf="@+id/sn_edit_part_textview"
         android:importantForAutofill="no" />
 
     <Button
@@ -150,17 +150,17 @@
         app:layout_constraintTop_toTopOf="@+id/cancel_edit_part_button" />
 
     <Spinner
-        android:id="@+id/comp_with_edit_part_dropdown"
+        android:id="@+id/compwith_edit_part_dropdown"
         android:layout_width="175dp"
         android:layout_height="40dp"
-        app:layout_constraintStart_toStartOf="@+id/comp_with_edit_parts_textview"
-        app:layout_constraintTop_toBottomOf="@+id/comp_with_edit_parts_textview" />
+        app:layout_constraintStart_toStartOf="@+id/compwith_edit_parts_textview"
+        app:layout_constraintTop_toBottomOf="@+id/compwith_edit_parts_textview" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/SN_edit_part_rview"
+        android:id="@+id/compwith_edit_part_rview"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/comp_with_edit_part_dropdown"
-        app:layout_constraintTop_toBottomOf="@+id/comp_with_edit_part_dropdown" />
+        app:layout_constraintStart_toStartOf="@+id/compwith_edit_part_dropdown"
+        app:layout_constraintTop_toBottomOf="@+id/compwith_edit_part_dropdown" />
 
 </android.support.constraint.ConstraintLayout>

@@ -21,11 +21,11 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/edit_instrument_textview"
+        android:id="@+id/edit_instrument_header"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="40dp"
-        android:text="@string/edit_rentable"
+        android:text="@string/edit_instrument"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="30sp"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/name_edit_instrument_editText" />
 
     <TextView
-        android:id="@+id/name_edit_item"
+        android:id="@+id/name_edit_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -60,10 +60,10 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_instrument_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_instrument_header" />
 
     <TextView
-        android:id="@+id/ID_edit_instrument"
+        android:id="@+id/id_edit_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
@@ -72,11 +72,11 @@
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/name_edit_item"
-        app:layout_constraintTop_toBottomOf="@+id/edit_instrument_textview" />
+        app:layout_constraintStart_toEndOf="@+id/name_edit_instrument_textview"
+        app:layout_constraintTop_toBottomOf="@+id/edit_instrument_header" />
 
     <TextView
-        android:id="@+id/categories_edit_instrument"
+        android:id="@+id/cat_edit_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -91,12 +91,12 @@
         android:id="@+id/cost_edit_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:labelFor="@id/cost_add_edit_instrument_edittext"
+        android:labelFor="@id/cost_edit_instrument_edittext"
         android:text="@string/cost"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/ID_edit_instrument_display_textview"
+        app:layout_constraintStart_toStartOf="@+id/id_edit_instrument_display_textview"
         app:layout_constraintTop_toTopOf="@+id/section_edit_instrument_textview" />
 
     <EditText
@@ -108,8 +108,8 @@
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="@+id/name_edit_item"
-        app:layout_constraintTop_toBottomOf="@+id/name_edit_item" />
+        app:layout_constraintStart_toStartOf="@+id/name_edit_instrument_textview"
+        app:layout_constraintTop_toBottomOf="@+id/name_edit_instrument_textview" />
 
     <EditText
         android:id="@+id/cost_edit_instrument_edittext"
@@ -125,14 +125,14 @@
         app:layout_constraintTop_toBottomOf="@+id/cost_edit_instrument_textview" />
 
     <TextView
-        android:id="@+id/ID_edit_instrument_display_textview"
+        android:id="@+id/id_edit_instrument_display_textview"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:textColor="#3D3737"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/ID_edit_instrument"
-        app:layout_constraintTop_toBottomOf="@+id/ID_edit_instrument" />
+        app:layout_constraintStart_toStartOf="@+id/id_edit_instrument_textview"
+        app:layout_constraintTop_toBottomOf="@+id/id_edit_instrument_textview" />
 
     <Spinner
         android:id="@+id/section_edit_instrument_dropdown"
@@ -143,19 +143,19 @@
         app:layout_constraintTop_toBottomOf="@+id/section_edit_instrument_textview" />
 
     <Spinner
-        android:id="@+id/category_edit_instrument_dropdown"
+        android:id="@+id/cat_edit_instrument_dropdown"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/spinner_background"
-        app:layout_constraintStart_toStartOf="@+id/categories_edit_instrument"
-        app:layout_constraintTop_toBottomOf="@+id/categories_edit_instrument" />
+        app:layout_constraintStart_toStartOf="@+id/cat_edit_instrument_textview"
+        app:layout_constraintTop_toBottomOf="@+id/cat_edit_instrument_textview" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/categories_edit_instrument_rview"
+        android:id="@+id/cat_edit_instrument_rview"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@+id/cost_edit_instrument_edittext"
-        app:layout_constraintTop_toTopOf="@+id/categories_edit_instrument" />
+        app:layout_constraintTop_toTopOf="@+id/cat_edit_instrument_textview" />
 
     <Button
         android:id="@+id/cancel_edit_instrument_button"
@@ -166,10 +166,10 @@
         android:background="@drawable/button_border"
         android:text="@android:string/cancel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categories_edit_instrument_rview" />
+        app:layout_constraintTop_toBottomOf="@+id/cat_edit_instrument_rview" />
 
     <Button
-        android:id="@+id/edit_button2"
+        android:id="@+id/ok_edit_instrument_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
         android:layout_marginTop="56dp"
@@ -179,6 +179,20 @@
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categories_edit_instrument_rview" />
+        app:layout_constraintTop_toBottomOf="@+id/cat_edit_instrument_rview" />
+
+    <Button
+        android:id="@+id/add_cat_edit_instrument_button"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_border"
+        android:text="@string/add_category"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/cat_edit_instrument_dropdown"
+        app:layout_constraintStart_toStartOf="@+id/cat_edit_instrument_dropdown"
+        app:layout_constraintTop_toBottomOf="@+id/cat_edit_instrument_dropdown" />
 
 </android.support.constraint.ConstraintLayout>

@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/add_section_textview"
+        android:id="@+id/add_section_header"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="40dp"
@@ -43,7 +43,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_section_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/add_section_header" />
 
     <EditText
         android:id="@+id/name_add_section_edittext"
@@ -58,7 +58,7 @@
         android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/cancel_add-section_button"
+        android:id="@+id/cancel_add_section_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
         android:layout_marginStart="52dp"

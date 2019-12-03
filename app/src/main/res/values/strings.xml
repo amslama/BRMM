@@ -13,7 +13,7 @@
     <string name="add">Add</string>
     <string name="edit_rentable">Edit Item</string>
     <string name="delete_section">Delete Section</string>
-    <string name="add_section_lead">Add Section</string>
+    <string name="add_section_lead">Add Section Lead</string>
     <string name="remove">Remove</string>
     <string name="edit_note">Edit Note</string>
     <string name="edit_member">Edit Member</string>
@@ -58,6 +58,8 @@
     <string name="faculty">Faculty</string>
     <string name="edit_part">Edit Part</string>
     <string name="add_part">Add Part</string>
+    <string name="edit_instrument">Edit Instrument</string>
+    <string name="add_category">Add Category</string>
     <string-array name="Entries">
         <item>Parts</item>
         <item>Instruments</item>

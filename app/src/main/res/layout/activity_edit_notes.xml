@@ -61,11 +61,11 @@
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/cancel_edit_note_button"
+        app:layout_constraintStart_toEndOf="@+id/cancel_edit_notes_button"
         app:layout_constraintTop_toBottomOf="@+id/edit_notes_edittext" />
 
     <Button
-        android:id="@+id/cancel_edit_note_button"
+        android:id="@+id/cancel_edit_notes_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
         android:layout_marginStart="52dp"

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -15,12 +16,27 @@ public class InstrumentFilters extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bandmember_filters);
-        final EditText IDTxt = (EditText)findViewById(R.id.ID_number_instrument_filters_edittext);
-        final EditText nameTxt = (EditText)findViewById(R.id.name_instrument_filters_edittext);
-        final EditText costTxt = (EditText)findViewById(R.id.cost_instrument_filters_edittext);
-        final EditText ownerTxt = (EditText)findViewById(R.id.owner_instrument_filters_edittext);
-        final Spinner  sectionSpnnr = findViewById(R.id.section_instrument_filters_dropdown);
 
+        //Textviews
+        TextView header = findViewById(R.id.instrument_filters_header);
+        TextView name_textview = findViewById(R.id.name_instrument_filters_textview);
+        TextView cost_textview = findViewById(R.id.cost_intrument_filters_textview);
+        TextView id_textview = findViewById(R.id.id_instrument_filters_textview);
+        TextView owner_textview = findViewById(R.id.owner_instrument_filters_textview);
+        TextView section_textview = findViewById(R.id.section_instrument_filters_textview);
+        TextView cat_textview = findViewById(R.id.cat_instrument_filters_textview);
+
+        //Edittexts
+        final EditText id_edittext = (EditText)findViewById(R.id.id_instrument_filters_edittext);
+        final EditText name_edittext = (EditText)findViewById(R.id.name_instrument_filters_edittext);
+        final EditText cost_edittext = (EditText)findViewById(R.id.cost_instrument_filters_edittext);
+        final EditText owner_edittext = (EditText)findViewById(R.id.owner_instrument_filters_edittext);
+
+        //Dropdowns
+        final Spinner section_spin = findViewById(R.id.section_instrument_filters_dropdown);
+        final Spinner cat_spin = findViewById(R.id.cat_instrument_filters_dropdown);
+
+        //Buttons
         final Button applyBttn = findViewById(R.id.ok_instrument_filters_button);
         final Button cancelBttn = findViewById(R.id.cancel_instrument_filters_button);
 
@@ -33,9 +49,9 @@ public class InstrumentFilters extends AppCompatActivity {
                 Category category;
                 int id;
 
-                owner = ownerTxt.getText().toString();
-                name = nameTxt.getText().toString();
-                id = Integer.parseInt(IDTxt.getText().toString());
+                owner = owner_edittext.getText().toString();
+                name = name_edittext.getText().toString();
+                id = Integer.parseInt(id_edittext.getText().toString());
                 //filterInstrumentInv();
             }
         });
