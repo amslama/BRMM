@@ -41,7 +41,9 @@ public class LoginScreen extends AppCompatActivity {
             System.out.println("Joint failed");
         }
 
-        System.out.println("Out of loop");
+        DatabaseWrapper wrapper = new DatabaseWrapper(connection.getConnection());
+        Thread thread2 = new Thread(wrapper);
+        thread2.start();
 
 
         //Goes into read-only mode for the app
