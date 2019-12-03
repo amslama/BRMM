@@ -38,10 +38,26 @@ public class LoginScreen extends AppCompatActivity {
             thread.join();
         }
         catch (Exception e){
-            System.out.println("Joint failed");
+            System.out.println("Database connection join failed");
         }
 
-        System.out.println("Out of loop");
+        DatabaseWrapper wrapperThread = new DatabaseWrapper(connection.getConnection());
+        Thread thread2 = new Thread(wrapperThread);
+        thread2.start();
+
+        try{
+            thread2.join();
+        }
+        catch(Exception f){
+            System.out.println("Wrapper method failed");
+        }
+
+        //System.out.println("Connection: "+connection.getConnection());
+
+
+
+
+
 
 
         //Goes into read-only mode for the app
