@@ -10,8 +10,25 @@ public class DatabaseWrapper extends Thread{
     Connection conn = null;
 
     private String method = "";
-    private String argument = "";
-    private String argument2 = "";
+    private int ID = 0;
+    private String firstName = "";
+    private String lastName = "";
+    private String section = "";
+    private boolean sectionLeader = false;
+    private boolean faculty = false;
+    private String note = "";
+    private String ulid = "";
+    private String password = "";
+    private String department = "";
+    private ArrayList<Instrument> instrumentList = null;
+    private ArrayList<Student> studentList = null;
+    private ArrayList<Faculty> facultyList = null;
+    private ArrayList<Part> partList = null;
+    private boolean valid = false;
+    private String currentOwner = "";
+    private String name = "";
+    private double cost = 0;
+
 
 
     public DatabaseWrapper(Connection connection){
@@ -22,44 +39,129 @@ public class DatabaseWrapper extends Thread{
         this.method = method;
     }
 
-    public void setArgument(String argument){
-        this.argument = argument;
+    public void setUlid(String ulid){
+        this.ulid = ulid;
     }
 
-    public void setArgument2(String argument2){
-        this.argument2 = argument2;
+    public void setPassword(String password){
+        this.password = password;
     }
 
+    public ArrayList<Student> getStudentList(){
+        return studentList;
+    }
 
+    public ArrayList<Faculty> getFacultyList(){
+        return facultyList;
+    }
+
+    public ArrayList<Instrument> getInstrumentList(){
+        return instrumentList;
+    }
+
+    public  ArrayList<Part> getPartList(){
+        return partList;
+    }
+
+    public boolean getValidation(){
+        return valid;
+    }
+
+    public void setUserArguments(int ID,String firstName, String lastName, String section, boolean sectionLeader, boolean faculty, String note, String ulid, String password,String department){
+            this.ID = ID;
+            this.firstName=firstName;
+            this.lastName = lastName;
+            this.section = section;
+            this.sectionLeader=sectionLeader;
+            this.faculty=faculty;
+            this.note=note;
+            this.ulid=ulid;
+            this.password=password;
+            this.department=department;
+    }
+
+    public boolean getSectionLeaderRights(){
+        return sectionLeader;
+    }
+
+    public boolean getFacultyRights(){
+        return faculty;
+    }
+
+    public void setInstrumentVariables(String currentOwner, String section, String name, double cost){
+        this.currentOwner = currentOwner;
+        this.section = section;
+        this.name = name;
+        this.cost = cost;
+    }
+
+    public void setID(int ID){
+        this.ID = ID;
+    }
+
+    /**
+     * Read the comments in each method on how to use it
+     * there then just call setMethod() with one of the options below then if it takes an argument like
+     * ulid/ID then call setUlid() with the ulid in the argument
+     * (These methods will be listed above)
+     */
     public void run(){
         switch (method){
             case "addSectionLeaderRights":
-                addSectionLeaderRights(argument);
+                addSectionLeaderRights(ulid);
                 break;
             case "removeSectionLeaderRights":
-                removeSectionLeaderRights(argument);
+                removeSectionLeaderRights(ulid);
                 break;
             case "getSectionLeaderRights":
-                getSectionLeaderRights(argument);
+                sectionLeader = getSectionLeaderRights(ulid);
                 break;
             case "removeFacultyRights":
-                removeFacultyRights(argument);
+                removeFacultyRights(ulid);
                 break;
             case "addFacultyRights":
-                addFacultyRights(argument);
+                addFacultyRights(ulid);
                 break;
             case "getFacultyRights":
-                getFacultyRights(argument);
+                //Call getFaculty after you call run to get true or false
+                faculty = getFacultyRights(ulid);
                 break;
-            case "checklogin":
-                checklogin(argument,argument2);
+            case "checkLogin":
+                //call setPassword() and setUlid() before you run this thread
+                //call getValidation() after you call the run method.
+                valid = checklogin(ulid,password);
+                password = "";
                 break;
             case "addUser":
-                //addUser();
+                //call set user arguments then the run() method (no need for setUlid() method)
+                addUser(ID, firstName, lastName, section, sectionLeader, faculty, note, ulid, password, department);
+                password = "";
+                break;
+            case "removeUser":
+                removeUser(ulid);
+                break;
+            case "getFaculty":
+                //call the getFacultyList() method after the run() method (No need for setUlid() method)
+                getFaculty();
+                break;
+            case "getStudents":
+                //call the getStudentList() method after the run() method (No need for setUlid() method)
+                getStudents();
+                break;
+            case "getInstruments":
+                //call the getInstrumentList() method after the run() method (No need for setUlid() method)
+                getInstruments();
+                break;
+            case "addInstrument":
+                //call the setInstrumentVariables() method first then call the run method (No need for setUlid() method)
+                addInstrument(currentOwner, section, name, cost);
+                break;
+            case "removeInstrument":
+                //Call the setID() method for this one instead of the setUlid() method
+                removeInstrument(ID);
                 break;
             default:
-                //System.out.println("Method not found");
-                addUser(4,"","","",false, false, "", "test2", "1234","");
+                System.out.println("Method not found");
                 break;
         }
 
@@ -70,7 +172,7 @@ public class DatabaseWrapper extends Thread{
      */
 
     //Adds user's rights as a section leader
-    public void addSectionLeaderRights(String ulid) {
+    private void addSectionLeaderRights(String ulid) {
         try {
             String query = "update user set sectionLeader = 1 where username = '"+ulid+"'";
             Statement st = conn.createStatement();
@@ -81,7 +183,7 @@ public class DatabaseWrapper extends Thread{
     }
 
     //Remove user's rights as a section leader
-    public void removeSectionLeaderRights(String ulid) {
+    private void removeSectionLeaderRights(String ulid) {
         try {
             String query = "update user set sectionLeader = 0 where username = '"+ulid+"'";
             Statement st = conn.createStatement();
@@ -92,7 +194,7 @@ public class DatabaseWrapper extends Thread{
     }
 
     //Gets the Section Leader's rights
-    public boolean getSectionLeaderRights(String ulid){
+    private boolean getSectionLeaderRights(String ulid){
         boolean rights = false;
         try{
             String query = "select sectionLeader from user where username = '"+ulid+"'";
@@ -110,7 +212,7 @@ public class DatabaseWrapper extends Thread{
     }
 
     //Remove user's rights as a faculty member
-    public void removeFacultyRights(String ulid) {
+    private void removeFacultyRights(String ulid) {
         try {
             String query = "update user set faculty = 0 where username = '"+ulid+"'";
             Statement st = conn.createStatement();
@@ -120,7 +222,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
     //Adds user's rights as a faculty member
-    public void addFacultyRights(String ulid) {
+    private void addFacultyRights(String ulid) {
         try {
             String query = "update user set faculty = 1 where username = '"+ulid+"'";
             Statement st = conn.createStatement();
@@ -131,7 +233,7 @@ public class DatabaseWrapper extends Thread{
     }
 
     //Gets the user's faculty rights
-    public boolean getFacultyRights(String ulid){
+    private boolean getFacultyRights(String ulid){
         boolean rights = false;
         try{
             String query = "select faculty from user where username = '"+ulid+"'";
@@ -150,7 +252,7 @@ public class DatabaseWrapper extends Thread{
 
     //Login authentication
     //TODO: ADD ENCRYPTION
-    public boolean checklogin(String ulid, String password) {
+    private boolean checklogin(String ulid, String password) {
         boolean login = false;
         try {
             String ulidquery = "Select username,passwrd from user where username = '" + ulid + "'";
@@ -168,7 +270,7 @@ public class DatabaseWrapper extends Thread{
     }
 
     //Adds a user to the database
-    public void addUser(int ID,String firstName, String lastName, String section, boolean sectionLeader, boolean faculty, String note, String ulid, String password,String department){
+    private void addUser(int ID,String firstName, String lastName, String section, boolean sectionLeader, boolean faculty, String note, String ulid, String password,String department){
         try{
             int leader = 0;
             int staff = 0;
@@ -189,7 +291,7 @@ public class DatabaseWrapper extends Thread{
     }
 
     //Removes a user from the database
-    public void removeUser(String ulid){
+    private void removeUser(String ulid){
         try{
             String query = "delete from user where username = '"+ulid+"'";
             Statement st = conn.createStatement();
@@ -200,8 +302,8 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
-    public ArrayList<Faculty> getFaculty(){
-        Faculty faculty = new Faculty();
+    private ArrayList<Faculty> getFaculty(){
+        Faculty faculty;
         ArrayList<Faculty> list = new ArrayList<Faculty>();
         try{
             String query = "select firstName,lastName,username,department,role,ID from user where faculty = 1 order by username asc";
@@ -219,8 +321,8 @@ public class DatabaseWrapper extends Thread{
         return list;
     }
 
-    public ArrayList<Student> getStudents(){
-        Student student = new Student();
+    private ArrayList<Student> getStudents(){
+        Student student;
         ArrayList<Student> list = new ArrayList<Student>();
         try{
             String query = "select firstName,lastName,section,sectionLeader,note,username,ID from user where faculty = 0 order by username asc";
@@ -247,7 +349,7 @@ public class DatabaseWrapper extends Thread{
     ITEM TABLE SECTION
      */
 
-    public ArrayList<Instrument> getInstruments(){
+    private ArrayList<Instrument> getInstruments(){
         ArrayList<Instrument> list = new ArrayList<Instrument>();
         Instrument instrument;
         try{
@@ -268,7 +370,7 @@ public class DatabaseWrapper extends Thread{
     }
 
     //TODO: INSTRUMENT STUFF
-    public void addInstrument(String currentOwner, String section, String name, double cost){
+    private void addInstrument(String currentOwner, String section, String name, double cost){
         try{
             String query = "insert into item (ownership, section, name, cost, instrument) values ('"+currentOwner+"','"+section+"','"+name+"','"+cost+"',1)";
             Statement st = conn.createStatement();
@@ -279,7 +381,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
-    public void removeInstrument(int id){
+    private void removeInstrument(int id){
         try{
             String query = "delete from item where ID="+id;
             Statement st = conn.createStatement();

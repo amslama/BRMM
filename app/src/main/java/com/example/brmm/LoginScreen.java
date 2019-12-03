@@ -52,19 +52,24 @@ public class LoginScreen extends AppCompatActivity {
             System.out.println("Database connection join failed");
         }
 
-        DatabaseWrapper wrapperThread = new DatabaseWrapper(connection.getConnection());
-        Thread thread2 = new Thread(wrapperThread);
-        thread2.start();
+        //This is an example of how you set up the validate method
+        DatabaseWrapper wrapper = new DatabaseWrapper(connection.getConnection());
+        wrapper.setMethod("checkLogin");
+        wrapper.setUlid("testUser");
+        wrapper.setPassword("testPassword");
+        Thread validateThread = new Thread(wrapper);
+        validateThread.start();
 
         try{
-            thread2.join();
+            validateThread.join();
         }
         catch(Exception f){
-            System.out.println("Wrapper method failed");
+            System.out.println("validate method failed");
         }
 
-        //System.out.println("Connection: "+connection.getConnection());
-
+        //Returns true or false
+        wrapper.getValidation();
+        //End of example
 
         //Goes into read-only mode for the app
         stdntLogin.setOnClickListener(new View.OnClickListener() {
