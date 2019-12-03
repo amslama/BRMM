@@ -24,7 +24,7 @@ public class MainScreen extends AppCompatActivity {
     final Button remove_button = findViewById(R.id.remove_main_screen_button);
 
     //buttons for rentables
-    final Button edit_rentable = findViewById(R.id.edit_rentable_main_screen_button);
+    final Button edit_rentable_button = findViewById(R.id.edit_rentable_main_screen_button);
 
     //buttons for instruments
     final Button notes_button = findViewById(R.id.edit_note_main_screen_button);
@@ -38,30 +38,35 @@ public class MainScreen extends AppCompatActivity {
 
     //Recyclerview
     final RecyclerView inv_View = findViewById(R.id.item_list_main_screen_rview);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
-
-
-
-        filter_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent openFilter = new Intent(getBaseContext(),PartFilters.class);
-                startActivityForResult(openFilter,00);
-            }
-        });
+        //instantiates logout button
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(),LoginScreen.class);
-                startActivityForResult(intent,99);
+                Intent intent = new Intent(getBaseContext(), LoginScreen.class);
+                startActivityForResult(intent, 99);
             }
         });
 
-        //Buttons for all
+        setPartsButtons();
+        oneTimeListeners();
+
+
+    }
+
+    private void setPartsButtons() {
+        filter_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFilter = new Intent(getBaseContext(), PartFilters.class);
+                startActivityForResult(openFilter, 00);
+            }
+        });
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,12 +74,7 @@ public class MainScreen extends AppCompatActivity {
                 startActivity(openFilter);
             }
         });
-
-        set_lead_button.setVisibility(View.INVISIBLE);
-        notes_button.setVisibility(View.INVISIBLE);
-
-        edit_rentable.setVisibility(View.VISIBLE);
-        edit_rentable.setOnClickListener(new View.OnClickListener() {
+        edit_rentable_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), edit_part.class);
@@ -82,84 +82,137 @@ public class MainScreen extends AppCompatActivity {
             }
         });
 
-        //Buttons for Band Members
+
+        edit_rentable_button.setVisibility(View.VISIBLE);
         edit_member_button.setVisibility(View.INVISIBLE);
         set_lead_button.setVisibility(View.INVISIBLE);
-        add_remove_Section_Button.setVisibility(View.INVISIBLE);
-
-        //Buttons for Instruments
         checkout_button.setVisibility(View.INVISIBLE);
+        notes_button.setVisibility(View.INVISIBLE);
+        delete_section_button.setVisibility(View.INVISIBLE);
+        add_section_button.setVisibility(View.INVISIBLE);
 
+
+    }
+
+    private void setInstrumentButtons() {
+        filter_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFilter = new Intent(getBaseContext(), InstrumentFilters.class);
+                startActivityForResult(openFilter, 00);
+            }
+        });
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFilter = new Intent(getBaseContext(), add_instrument.class);
+                startActivity(openFilter);
+            }
+        });
+
+        edit_rentable_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFilter = new Intent(getBaseContext(), edit_instrument.class);
+                startActivity(openFilter);
+            }
+        });
+
+        edit_rentable_button.setVisibility(View.VISIBLE);
+        edit_member_button.setVisibility(View.INVISIBLE);
+        set_lead_button.setVisibility(View.INVISIBLE);
+        checkout_button.setVisibility(View.VISIBLE);
+        notes_button.setVisibility(View.VISIBLE);
+        delete_section_button.setVisibility(View.INVISIBLE);
+        add_section_button.setVisibility(View.INVISIBLE);
+
+    }
+
+    private void setBandmemberButtons() {
+        filter_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFilter = new Intent(getBaseContext(), BandMemberFilters.class);
+                startActivityForResult(openFilter, 00);
+            }
+        });
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFilter = new Intent(getBaseContext(), add_member.class);
+                startActivity(openFilter);
+            }
+        });
+
+        edit_rentable_button.setVisibility(View.INVISIBLE);
+        edit_member_button.setVisibility(View.VISIBLE);
+        set_lead_button.setVisibility(View.VISIBLE);
+        checkout_button.setVisibility(View.INVISIBLE);
+        notes_button.setVisibility(View.INVISIBLE);
+        delete_section_button.setVisibility(View.VISIBLE);
+        add_section_button.setVisibility(View.VISIBLE);
+
+
+    }
+
+    private void oneTimeListeners() {
+        set_lead_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /***
+                 *
+                 * DO CHECK
+                 *
+                 */
+            }
+        });
+        checkout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /***
+                 *
+                 * DO CHECK
+                 *
+                 */
+            }
+        });
+        notes_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFilter = new Intent(getBaseContext(), edit_notes.class);
+                startActivity(openFilter);
+            }
+        });
+        delete_section_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFilter = new Intent(getBaseContext(), delete_section.class);
+                startActivity(openFilter);
+            }
+        });
+        add_section_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFilter = new Intent(getBaseContext(), delete_section.class);
+                startActivity(openFilter);
+            }
+        });
 
         inv_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               if(inv_spin.getSelectedItem() == "Parts")
-               {
-                   notes_button.setVisibility(View.INVISIBLE);
-                   edit_member_button.setVisibility(View.INVISIBLE);
-                   set_lead_button.setVisibility(View.INVISIBLE);
-                   add_remove_Section_Button.setVisibility(View.INVISIBLE);
-                   checkout_button.setVisibility(View.INVISIBLE);
-                   inv_spin.
-
-                   filter_button.setOnClickListener(new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
-                           Intent openFilter = new Intent(getBaseContext(),PartFilters.class);
-                           startActivityForResult(openFilter,0);
-                       }
-                   });
-
-                   add_button.setOnClickListener(new View.OnClickListener(){
-                       @Override
-                       public void onClick(View v) {
-                           Intent openFilter = new Intent(getBaseContext(), add_part.class);
-                           startActivityForResult(openFilter,0);
-                       }
-                   });
-
-                   /*
-                   import parts
-                    */
-
-               }
-                if(inv_spin.getSelectedItem() == "Instruments")
+                if (inv_spin.getSelectedItem() == "Parts")
                 {
-                    notes_button.setVisibility(View.VISIBLE);
-                    edit_member_button.setVisibility(View.INVISIBLE);
-                    set_lead_button.setVisibility(View.INVISIBLE);
-                    add_remove_Section_Button.setVisibility(View.INVISIBLE);
-                    checkout_button.setVisibility(View.VISIBLE);
-                    filter_button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent openFilter = new Intent(getBaseContext(),InstrumentFilters.class);
-                            startActivityForResult(openFilter,0);
-                        }
-                    });
-                    /*
-                    import instruments
-                     */
+                    setPartsButtons();
+                }
+                if (inv_spin.getSelectedItem() == "Instruments")
+                {
+                    setInstrumentButtons();
                 }
 
-                if(inv_spin.getSelectedItem() == "Band Members")
+                if (inv_spin.getSelectedItem() == "Band Members")
                 {
-                    notes_button.setVisibility(View.INVISIBLE);
-                    edit_member_button.setVisibility(View.VISIBLE);
-                    set_lead_button.setVisibility(View.VISIBLE);
-                    add_remove_Section_Button.setVisibility(View.VISIBLE);
-                    checkout_button.setVisibility(View.INVISIBLE);
-                    filter_button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent openFilter = new Intent(getBaseContext(),BandMemberFilters.class);
-                            startActivityForResult(openFilter,0);
-                        }
-                    });
-                    /*
-                    import Band Members
-                     */
+                    setBandmemberButtons();
                 }
             }
 
@@ -168,18 +221,6 @@ public class MainScreen extends AppCompatActivity {
 
             }
         });
-
-        logout_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent login = new Intent(getBaseContext(),LoginScreen.class);
-                startActivityForResult(login,7);
-            }
-        });
-
-
-
     }
 
 }
