@@ -16,7 +16,7 @@ public class add_member extends AppCompatActivity {
     private String lastName;
     private String department;
     private int UID;
-    String role;
+    private String role;
     private String notes;
     private String section;
     private boolean isFaculty;

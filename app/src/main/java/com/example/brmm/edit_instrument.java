@@ -96,5 +96,18 @@ public class edit_instrument extends AppCompatActivity {
                 cost = Double.parseDouble(cost_edittext.getText().toString());
             }
         });
+
+        //section spinner logic
+        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                section = section_spin.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                section = "";
+            }
+        });
     }
 }
