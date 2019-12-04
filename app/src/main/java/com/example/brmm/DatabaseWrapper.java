@@ -160,6 +160,8 @@ public class DatabaseWrapper extends Thread{
                 //Call the setID() method for this one instead of the setUlid() method
                 removeInstrument(ID);
                 break;
+            case "getParts":
+
             default:
                 System.out.println("Method not found");
                 break;
@@ -350,7 +352,7 @@ public class DatabaseWrapper extends Thread{
      */
 
     private ArrayList<Instrument> getInstruments(){
-        ArrayList<Instrument> list = new ArrayList<Instrument>();
+        instrumentList = new ArrayList<Instrument>();
         Instrument instrument;
         try{
             String query = "Select ownership,section,name,cost,id from instrument where instrument = 1 order by id asc";
@@ -359,14 +361,14 @@ public class DatabaseWrapper extends Thread{
 
             while(rs.next()){
                 instrument = new Instrument(rs.getString("ownership"),rs.getString("section"),rs.getString("name"),Double.parseDouble(rs.getString("cost")),rs.getInt("id"));
-                list.add(instrument);
+                instrumentList.add(instrument);
             }
         }
         catch(Exception e)
         {
             System.out.println("Could not get instruments");
         }
-        return list;
+        return instrumentList;
     }
 
     //TODO: INSTRUMENT STUFF
@@ -390,6 +392,19 @@ public class DatabaseWrapper extends Thread{
         catch(Exception e){
             System.out.println("Remove instrument failed");
         }
+    }
+
+    public Part getParts(){
+        Part part = new Part();
+        try{
+            String query = "select";
+
+        }
+        catch (Exception e){
+            System.out.println("Failed to get parts");
+        }
+
+        return part;
     }
 
 }
