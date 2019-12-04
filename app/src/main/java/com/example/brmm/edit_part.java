@@ -59,7 +59,9 @@ public class edit_part extends AppCompatActivity {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cost = Double.parseDouble(cost_edittext.getText().toString());
+                try {
+                    cost = Double.parseDouble(cost_edittext.getText().toString());
+                }  catch (NumberFormatException ex){cost = 0;}
                 name = name_edittext.getText().toString();
                 sn = sn_edittext.getText().toString();
 

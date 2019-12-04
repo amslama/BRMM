@@ -112,7 +112,8 @@ public class add_instrument extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 name = name_edittext.getText().toString();
-                cost = Double.parseDouble(cost_edittext.getText().toString());
+               try { cost = Double.parseDouble(cost_edittext.getText().toString());}
+               catch (NumberFormatException ex){cost = 0;}
                 RentableFactory factory = new RentableFactory();
                 Rentable instrument = factory.buildRentable("Instrument", "", section,name, cost, id);
 

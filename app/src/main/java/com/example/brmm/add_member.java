@@ -64,7 +64,8 @@ public class add_member extends AppCompatActivity {
                 firstName = fname_edittext.getText().toString();
                 lastName = lname_edittext.getText().toString();
                 ulid = dept_edittext.getText().toString();
-                UID = Integer.parseInt(UID_edittext.getText().toString());
+                try {UID = Integer.parseInt(UID_edittext.getText().toString());}
+                catch (NumberFormatException ex){UID = 0;}
                 role = role_edittext.getText().toString();
                 notes = notes_edittext.getText().toString();
                 if (student_rb.isChecked())

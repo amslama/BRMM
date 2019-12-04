@@ -93,7 +93,9 @@ public class edit_instrument extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 name = name_edittext.getText().toString();
-                cost = Double.parseDouble(cost_edittext.getText().toString());
+
+             try   {cost = Double.parseDouble(cost_edittext.getText().toString());}
+                 catch (NumberFormatException ex){cost = 0;}
             }
         });
 

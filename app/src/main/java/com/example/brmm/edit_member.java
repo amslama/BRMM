@@ -90,7 +90,10 @@ public class edit_member extends AppCompatActivity {
                 lastName = lname_edittext.getText().toString();
                 ulid = dept_edittext.getText().toString();
                 role = role_edittext.getText().toString();
-                UID = Integer.parseInt(UID_edittext.getText().toString());
+                try {
+                    UID = Integer.parseInt(UID_edittext.getText().toString());
+                }
+                catch (NumberFormatException ex){UID = 0;}
                 notes = notes_edittext.getText().toString();
                 if (student_rb.isChecked())
                     isFaculty = false;
