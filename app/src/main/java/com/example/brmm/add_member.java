@@ -71,6 +71,16 @@ public class add_member extends AppCompatActivity {
                     isFaculty = false;
                 if (faculty_rb.isChecked())
                     isFaculty = true;
+                BandMemberFactory factory = new BandMemberFactory();
+                BandMember member;
+              String ulid = "";
+              boolean sectionLeader = false;
+
+                if (isFaculty)
+                    member = factory.buildBandMember("Faculty",firstName,lastName, "",section,sectionLeader, UID, notes, department, role);
+                else
+                    member = member = factory.buildBandMember("Student",firstName,lastName, "",section,sectionLeader, UID, notes, department, role);
+
             }
         });
 

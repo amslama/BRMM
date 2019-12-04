@@ -113,6 +113,7 @@ public class add_instrument extends AppCompatActivity {
             public void onClick(View view) {
                 name = name_edittext.getText().toString();
                 cost = Double.parseDouble(cost_edittext.getText().toString());
+
             }
         });
     }
