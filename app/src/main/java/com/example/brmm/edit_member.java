@@ -2,6 +2,9 @@ package com.example.brmm;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -9,6 +12,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class edit_member extends AppCompatActivity {
+    private String firstName;
+    private String lastName;
+    private String department;
+    private int UID;
+    private String role;
+    private String notes;
+    private String section;
+    private boolean isFaculty;
 
     //Textviews
     private TextView header_textview;
@@ -66,6 +77,57 @@ public class edit_member extends AppCompatActivity {
         rgroup = findViewById(R.id.member_type_edit_member_radiogroup);
         student_rb = findViewById(R.id.student_edit_member_radiobutton);
         faculty_rb = findViewById(R.id.faculty_edit_member_radiobutton);
+
+        //Buttons
+        Button cancel_member = findViewById(R.id.cancel_add_instrument_button);
+        Button ok_button = findViewById(R.id.ok_add_instrument_button);
+
+        ok_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firstName = fname_edittext.getText().toString();
+                lastName = lname_edittext.getText().toString();
+                department = dept_edittext.getText().toString();
+                role = role_edittext.getText().toString();
+                UID = Integer.parseInt(UID_edittext.getText().toString());
+                notes = notes_edittext.getText().toString();
+                if (student_rb.isChecked())
+                    isFaculty = false;
+                if (faculty_rb.isChecked())
+                    isFaculty = true;
+
+            }
+        });
+
+        //cancels all fields
+        cancel_member.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fname_edittext.setText("");
+                lname_edittext.setText("");
+                dept_edittext.setText("");
+                UID_edittext.setText("");
+                role_edittext.setText("");
+                notes_edittext.setText("");
+                student_rb.setChecked(false);
+                faculty_rb.setChecked(false);
+                section_spin.setSelection(0);
+            }
+        });
+
+        //section spinner logic
+        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                section = section_spin.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                section = "";
+            }
+        });
+
 
     }
 }

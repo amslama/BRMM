@@ -3,6 +3,9 @@ package com.example.brmm;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -14,6 +17,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class bandmember_filters extends AppCompatActivity {
+    private int isFaculty;
+    private int hasInstrument = 0;
+    private boolean sectionLeaders;
+    private String firstName;
+    private String lastName;
+    private int UID;
+    private Instrument instrument;
+    private String section;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +62,91 @@ public class bandmember_filters extends AppCompatActivity {
         //checkboxes
         final CheckBox has_cbox = findViewById(R.id.has_bandmember_filters_cbox);
         final CheckBox no_has_cbox = findViewById(R.id.no_has_bandmember_filters_cbox);
+
+
+        //buttons
+        final Button apply_button = findViewById(R.id.apply_filters_button);
+        final Button cancel_button = findViewById(R.id.cancel_filters_button);
+
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firstNameTxt.setText("");
+                lastNameTxt.setText("");
+                UID_edittext.setText("");
+                rgroup.clearCheck();
+                has_cbox.setChecked(false);
+                no_has_cbox.setChecked(false);
+                section_spin.setSelection(0);
+                instrument_spin.setSelection(0);
+            }
+        });
+
+
+        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                section = section_spin.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                section = "";
+            }
+        });
+
+        instrument_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                instrument = (Instrument)instrument_spin.getSelectedItem();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                instrument = null;
+            }
+        });
+
+        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                section = section_spin.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                section = "";
+            }
+        });
+
+
+        apply_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                isFaculty = rgroup.getCheckedRadioButtonId();
+
+                if (has_cbox.isChecked())
+                    hasInstrument = 1;
+                if (no_has_cbox.isChecked())
+                    hasInstrument = 2;
+
+                sectionLeaders = secLeadersSwitch.isChecked();
+                firstName = firstNameTxt.getText().toString();
+                lastName = lastNameTxt.getText().toString();
+                UID = Integer.parseInt(UID_edittext.getText().toString());
+
+
+                filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
+            }
+        });
     }
-/*
+
+
+
     // main filter method, for ints, 0 = dont filter, 1 = filter by Faculty or is true, 2 = filter by false
-    public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument, String section) {
+    public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument) {
 
         ArrayList<BandMember> filter = new ArrayList<>();
 
@@ -73,24 +165,24 @@ public class bandmember_filters extends AppCompatActivity {
 
 
         if (sectionLeaders)
-       //     filter = filterBySectionLeaders(filter);
+            filter = filterBySectionLeaders(filter);
 
 
         if (!firstName.equals("") && !lastName.equals("")) {
-      //      filter = filterByName(filter, firstName, lastName);
+            filter = filterByName(filter, firstName, lastName);
         }
 
 
         if (UID != 0)
-   //         filter = filterByUID(filter, UID);
+            filter = filterByUID(filter, UID);
 
 
         if (instrument != null){}
-      //      filter = filterByspecInstrument(filter, instrument);
+            filter = filterByspecInstrument(filter, instrument);
 
 
-      //  if (section != null)
-      //      filter = filterBySection(filter, section);
+        if (section != null)
+           filter = filterBySection(filter, section);
 
 
         return filter;
@@ -126,7 +218,7 @@ public class bandmember_filters extends AppCompatActivity {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
             if( member instanceof Student) {
-                if (((Student) member).getInstruments().isEmpty()) {
+                if (((Student) member).getInstruments() == null) {
                     filter.add(member);
                 }
             }
@@ -140,7 +232,7 @@ public class bandmember_filters extends AppCompatActivity {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
             if( member instanceof Student) {
-                if (!((Student) member).getInstruments().isEmpty()) {
+                if (((Student) member).getInstruments() != null) {
                     filter.add(member);
                 }
             }
@@ -190,7 +282,7 @@ public class bandmember_filters extends AppCompatActivity {
         for (BandMember member : members) {
 
             if ( member instanceof Student) {
-                if (((Student) member).getInstruments().contains(instrument)) {
+                if (((Student) member).getInstruments() == instrument) {
                     filter.add(member);
                     break;
                 }
@@ -213,5 +305,5 @@ public class bandmember_filters extends AppCompatActivity {
         }
         return filter;
     }
-*/
+
 }

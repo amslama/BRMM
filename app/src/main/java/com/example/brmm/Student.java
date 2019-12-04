@@ -6,9 +6,13 @@ public class Student extends BandMember {
     private String section;
     private boolean sectionLeader;
     private String notes;
-    private ArrayList<Rentable> instruments;
+    private Rentable instruments;
 
-    public ArrayList<Rentable> getInstruments() {
+    public void setInstruments(Rentable instruments) {
+        this.instruments = instruments;
+    }
+
+    public Rentable getInstruments() {
         return instruments;
     }
 
