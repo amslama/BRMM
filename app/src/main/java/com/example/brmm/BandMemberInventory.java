@@ -3,14 +3,18 @@ package com.example.brmm;
 import java.util.ArrayList;
 
 public class BandMemberInventory {
-
     private ArrayList<BandMember> bandMembers;
 
+
+    public ArrayList<BandMember> getBandMembers() {
+        return bandMembers;
+    }
 
     public void clearInventory()
     {
         bandMembers.clear();
     }
+
     public void removeBandMember(BandMember newBM)
     {
         bandMembers.remove(newBM);

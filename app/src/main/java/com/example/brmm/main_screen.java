@@ -3,14 +3,20 @@ package com.example.brmm;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+
 public class main_screen extends AppCompatActivity {
 
     private boolean facultyRights = false;
+    private RentableInventory rent_inv;
+    private BandMemberInventory member_inv;
 
     //Dropdown
     private Spinner inv_spin;
@@ -37,7 +43,7 @@ public class main_screen extends AppCompatActivity {
     private Button delete_section_button;
 
     //Recyclerview
-//    final RecyclerView inv_View = findViewById(R.id.item_list_main_screen_rview);
+    private RecyclerView inv_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +71,7 @@ public class main_screen extends AppCompatActivity {
         set_lead_button = findViewById(R.id.add_section_lead_main_screen_button);
         add_section_button = findViewById(R.id.add_section_main_screen_button);
         delete_section_button = findViewById(R.id.delete_section_main_screen_button);
-
+        inv_view = findViewById(R.id.item_list_main_screen_rview);
     }
 
     private void setPartsButtons() {
@@ -165,16 +171,9 @@ public class main_screen extends AppCompatActivity {
     }
 
     private void oneTimeListeners() {
-        set_lead_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /***
-                 *
-                 * DO CHECK
-                 *
-                 */
-            }
-        });
+        RecyclerAdapter adapter = new RecyclerAdapter((member_inv.getBandMembers()));
+        inv_view.setLayoutManager(new LinearLayoutManager(this));
+        inv_view.setAdapter(adapter);
         checkout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -210,6 +209,13 @@ public class main_screen extends AppCompatActivity {
                 startActivity(openFilter);
             }
         });
+        set_lead_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFilter = new Intent(getBaseContext(), set_lead.class);
+                startActivity(openFilter);
+            }
+        });
 
         inv_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -242,6 +248,11 @@ public class main_screen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), login_screen.class);
                 startActivityForResult(intent, 99);
+            }
+        });
+        remove_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
             }
         });
     }

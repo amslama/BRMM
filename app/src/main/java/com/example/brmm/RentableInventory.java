@@ -18,6 +18,15 @@ public class RentableInventory {
         //update db
     }
 
+    public ArrayList<Instrument> getInstrumentList()
+    {
+        return instruments;
+    }
+
+    public ArrayList<Part> getPartList()
+    {
+        return parts;
+    }
 
     public void removeInstrument(Instrument newIns) {
 

@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".checkout_instrument"></activity>
+        <activity android:name=".set_lead" />
+        <activity android:name=".checkout_instrument" />
         <activity android:name=".delete_section" />
         <activity android:name=".add_section" />
         <activity android:name=".add_instrument" />
