@@ -3,6 +3,8 @@ package com.example.brmm;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -51,8 +53,45 @@ public class bandmember_filters extends AppCompatActivity {
         //checkboxes
         final CheckBox has_cbox = findViewById(R.id.has_bandmember_filters_cbox);
         final CheckBox no_has_cbox = findViewById(R.id.no_has_bandmember_filters_cbox);
+
+
+        //buttons
+        final Button apply_button = findViewById(R.id.apply_filters_button);
+        final Button cancel_button = findViewById(R.id.cancel_filters_button);
+
+
+        apply_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int isFaculty;
+                int hasInstrument = 0;
+                boolean sectionLeaders;
+                String firstName;
+                String lastName;
+                int UID;
+                Instrument instrument;
+                String section;
+
+                isFaculty = rgroup.getCheckedRadioButtonId();
+                if (has_cbox.isChecked())
+                    hasInstrument = 1;
+                if (no_has_cbox.isChecked())
+                    hasInstrument = 2;
+
+                sectionLeaders = secLeadersSwitch.isChecked();
+                firstName = firstNameTxt.getText().toString();
+                lastName = lastNameTxt.getText().toString();
+                UID = Integer.parseInt(UID_edittext.getText().toString());
+               // instrument = instrument_spin.getSelectedItem();
+               // section = section_spin.getSelectedItem();
+
+                //filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
+            }
+        });
     }
-/*
+
+
+
     // main filter method, for ints, 0 = dont filter, 1 = filter by Faculty or is true, 2 = filter by false
     public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument, String section) {
 
@@ -73,24 +112,24 @@ public class bandmember_filters extends AppCompatActivity {
 
 
         if (sectionLeaders)
-       //     filter = filterBySectionLeaders(filter);
+            filter = filterBySectionLeaders(filter);
 
 
         if (!firstName.equals("") && !lastName.equals("")) {
-      //      filter = filterByName(filter, firstName, lastName);
+            filter = filterByName(filter, firstName, lastName);
         }
 
 
         if (UID != 0)
-   //         filter = filterByUID(filter, UID);
+            filter = filterByUID(filter, UID);
 
 
         if (instrument != null){}
-      //      filter = filterByspecInstrument(filter, instrument);
+            filter = filterByspecInstrument(filter, instrument);
 
 
-      //  if (section != null)
-      //      filter = filterBySection(filter, section);
+        if (section != null)
+           filter = filterBySection(filter, section);
 
 
         return filter;
@@ -213,5 +252,5 @@ public class bandmember_filters extends AppCompatActivity {
         }
         return filter;
     }
-*/
+
 }
