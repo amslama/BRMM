@@ -50,6 +50,10 @@ public class main_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
+        instantiateButtons();
+        setBandmemberButtons();
+        oneTimeListeners();
+
         Intent intent = getIntent();
         if((ArrayList<Instrument>)intent.getSerializableExtra("INSTRUMENT")!=null) {
             for (Instrument instrument : (ArrayList<Instrument>) intent.getSerializableExtra("INSTRUMENT")) {
@@ -71,11 +75,7 @@ public class main_screen extends AppCompatActivity {
                 member_inv.addBandMember(faculty);
             }
         }
-
-
-        instantiateButtons();
-        setBandmemberButtons();
-        oneTimeListeners();
+      //  add_button.setText(member_inv.size());
 
 
     }

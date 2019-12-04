@@ -44,6 +44,7 @@ public class login_screen extends AppCompatActivity {
         Thread thread = new Thread(connection);
         thread.start();
 
+
         try{
             thread.join();
         }

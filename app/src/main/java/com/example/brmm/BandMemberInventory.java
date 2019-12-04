@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class BandMemberInventory {
     private ArrayList<BandMember> bandMembers;
 
+    public BandMemberInventory()
+    {
+        bandMembers = new ArrayList<BandMember>();
+    }
 
     public ArrayList<BandMember> getBandMembers() {
         return bandMembers;
@@ -24,6 +28,10 @@ public class BandMemberInventory {
     {
         bandMembers.add(newBM);
         //update db
+    }
+    public int size()
+    {
+        return bandMembers.size();
     }
 
 }
