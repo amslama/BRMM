@@ -11,9 +11,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class edit_part extends AppCompatActivity {
-    private String name;
-    private String sn;
-    private double cost;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +57,9 @@ public class edit_part extends AppCompatActivity {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                 String name;
+                 String sn;
+                 double cost;
                 try {
                     cost = Double.parseDouble(cost_edittext.getText().toString());
                 }  catch (NumberFormatException ex){cost = 0;}

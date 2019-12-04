@@ -10,7 +10,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 public class add_section extends AppCompatActivity {
-    String name;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class add_section extends AppCompatActivity {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name;
                 name = name_edittext.getText().toString();
             }
         });

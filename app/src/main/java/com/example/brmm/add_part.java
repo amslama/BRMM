@@ -12,9 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class add_part extends AppCompatActivity {
-    private String name;
-    private String sn;
-    private double cost;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +62,15 @@ public class add_part extends AppCompatActivity {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name;
+                 String sn;
+                 double cost;
                 try{cost = Double.parseDouble(cost_edittext.getText().toString());}
                 catch (NumberFormatException ex){cost = 0;}
                 name = name_edittext.getText().toString();
                 sn = sn_edittext.getText().toString();
                 RentableFactory factory = new RentableFactory();
-                Rentable rentable = factory.buildRentable("Part", "", "","", 0, 0);
+                Rentable rentable = factory.buildRentable("Part", "", sn,"", cost, 0);
                 rentable.setName(name);
                 rentable.setCost(cost);
 

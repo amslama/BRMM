@@ -12,15 +12,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class edit_member extends AppCompatActivity {
-    private String firstName;
-    private String lastName;
-    private String ulid;
-    private int UID;
-    private String role;
-    private String notes;
+
     private String section;
-    private boolean isFaculty;
-    private BandMember member;
+
 
     //Textviews
     private TextView header_textview;
@@ -86,6 +80,16 @@ public class edit_member extends AppCompatActivity {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String firstName;
+                String lastName;
+                String ulid;
+                int UID;
+                String role;
+                String notes;
+                Boolean isFaculty = false;
+                //temp logic to prevent error
+                BandMember member = new BandMember();
+
                 firstName = fname_edittext.getText().toString();
                 lastName = lname_edittext.getText().toString();
                 ulid = dept_edittext.getText().toString();

@@ -12,14 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class add_member extends AppCompatActivity {
-    private String firstName;
-    private String lastName;
-    private String ulid;
-    private int UID;
-    private String role;
-    private String notes;
-    private String section;
-    private boolean isFaculty;
+    String section;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +54,15 @@ public class add_member extends AppCompatActivity {
         add_member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                 String firstName;
+                 String lastName;
+                 String ulid;
+                 int UID;
+                 String role;
+                 String notes;
+
+                 boolean isFaculty = false;
                 firstName = fname_edittext.getText().toString();
                 lastName = lname_edittext.getText().toString();
                 ulid = dept_edittext.getText().toString();
@@ -74,7 +76,7 @@ public class add_member extends AppCompatActivity {
                     isFaculty = true;
                 BandMemberFactory factory = new BandMemberFactory();
                 BandMember member;
-              String ulid = "";
+
               boolean sectionLeader = false;
 
                 if (isFaculty)

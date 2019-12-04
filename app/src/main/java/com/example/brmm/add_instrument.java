@@ -11,12 +11,9 @@ import android.widget.Spinner;
 
 public class add_instrument extends AppCompatActivity {
    private RentableFactory factory = new RentableFactory();
-   private String name;
-   private double cost;
    private String section;
    private Category category;
    private Instrument instrument;
-   private int id;
 
 
 
@@ -111,6 +108,9 @@ public class add_instrument extends AppCompatActivity {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name;
+                double cost;
+                int id = -1;
                 name = name_edittext.getText().toString();
                try { cost = Double.parseDouble(cost_edittext.getText().toString());}
                catch (NumberFormatException ex){cost = 0;}
