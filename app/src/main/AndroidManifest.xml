@@ -6,29 +6,25 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar"
-        android:fullBackupContent="@xml/backup_descriptor">
-
-        <activity android:name=".delete_section"/>
-
-        <activity android:name=".add_section"/>
-        <activity android:name=".add_instrument"/>
-        <activity android:name=".add_member"/>
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".checkout_instrument"></activity>
+        <activity android:name=".delete_section" />
+        <activity android:name=".add_section" />
+        <activity android:name=".add_instrument" />
+        <activity android:name=".add_member" />
         <activity android:name=".add_part" />
-        <activity android:name=".bandmember_filters"/>
+        <activity android:name=".bandmember_filters" />
         <activity android:name=".part_filters" />
         <activity android:name=".instrument_filters" />
-        <activity android:name=".edit_instrument"/>
-        <activity android:name=".edit_member"/>
-        <activity android:name=".edit_part"/>
-        <activity android:name=".edit_notes"/>
-
-
-
+        <activity android:name=".edit_instrument" />
+        <activity android:name=".edit_member" />
+        <activity android:name=".edit_part" />
+        <activity android:name=".edit_notes" />
         <activity
             android:name=".main_screen"
             android:label="@string/title_activity_ui__main" />
