@@ -117,6 +117,7 @@ public class login_screen extends AppCompatActivity {
             System.out.println("Is NOT a faculty");
             Intent mainScreen = new Intent(this, main_screen.class);
             mainScreen.putExtra("ISFACULTY", isFaculty);
+            startActivity(mainScreen);
 
 
 
