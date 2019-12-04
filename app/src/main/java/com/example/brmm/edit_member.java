@@ -3,6 +3,7 @@ package com.example.brmm;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -111,6 +112,19 @@ public class edit_member extends AppCompatActivity {
                 student_rb.setChecked(false);
                 faculty_rb.setChecked(false);
                 section_spin.setSelection(0);
+            }
+        });
+
+        //section spinner logic
+        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                section = section_spin.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                section = "";
             }
         });
 
