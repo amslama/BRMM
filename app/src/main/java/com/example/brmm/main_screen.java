@@ -178,11 +178,8 @@ public class main_screen extends AppCompatActivity {
         checkout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /***
-                 *
-                 * DO CHECK
-                 *
-                 */
+                Intent openFilter = new Intent(getBaseContext(), checkout_instrument.class);
+                startActivity(openFilter);
             }
         });
         notes_button.setOnClickListener(new View.OnClickListener() {

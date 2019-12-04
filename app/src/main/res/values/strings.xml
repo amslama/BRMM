@@ -56,6 +56,7 @@
     <string name="edit_instrument">Edit Instrument</string>
     <string name="add_category">Add Category</string>
     <string name="instrument">Instrument</string>
+    <string name="instrumentcolon">Instrument:</string>
 
     <string-array name="Entries">
         <item>Parts</item>
