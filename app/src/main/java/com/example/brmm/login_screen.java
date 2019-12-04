@@ -139,7 +139,6 @@ public class login_screen extends AppCompatActivity {
         return wrapper.getValidation();
 
     }
-
-
+  
 
 }
