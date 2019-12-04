@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class add_member extends AppCompatActivity {
     private String firstName;
     private String lastName;
-    private String department;
+    private String ulid;
     private int UID;
     private String role;
     private String notes;
@@ -63,7 +63,7 @@ public class add_member extends AppCompatActivity {
             public void onClick(View view) {
                 firstName = fname_edittext.getText().toString();
                 lastName = lname_edittext.getText().toString();
-                department = dept_edittext.getText().toString();
+                ulid = dept_edittext.getText().toString();
                 UID = Integer.parseInt(UID_edittext.getText().toString());
                 role = role_edittext.getText().toString();
                 notes = notes_edittext.getText().toString();
@@ -77,9 +77,9 @@ public class add_member extends AppCompatActivity {
               boolean sectionLeader = false;
 
                 if (isFaculty)
-                    member = factory.buildBandMember("Faculty",firstName,lastName, "",section,sectionLeader, UID, notes, department, role);
+                    member = factory.buildBandMember("Faculty",firstName,lastName, ulid,section,sectionLeader, UID, notes, "Music", role);
                 else
-                    member = member = factory.buildBandMember("Student",firstName,lastName, "",section,sectionLeader, UID, notes, department, role);
+                    member = member = factory.buildBandMember("Student",firstName,lastName, "",section,sectionLeader, UID, notes, "Music", role);
 
             }
         });
