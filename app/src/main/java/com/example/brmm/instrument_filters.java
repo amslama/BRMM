@@ -3,6 +3,7 @@ package com.example.brmm;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -11,11 +12,19 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class instrument_filters extends AppCompatActivity {
+    private String owner;
+    private String section;
+    private String name;
+    private Category category;
+    private double cost;
+    private int id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instrument_filters);
+
 
         //Textviews
         TextView header = findViewById(R.id.instrument_filters_header);
@@ -40,38 +49,70 @@ public class instrument_filters extends AppCompatActivity {
         final Button apply_button = findViewById(R.id.ok_instrument_filters_button);
         final Button cancel_button = findViewById(R.id.cancel_instrument_filters_button);
 
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                id_edittext.setText("");
+                cost_edittext.setText("");
+                owner_edittext.setText("");
+                name_edittext.setText("");
+                section_spin.setSelection(0);
+                cat_spin.setSelection(0);
+            }
+        });
+
+
+        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                section = section_spin.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                section = "";
+            }
+        });
+
+        cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                category = (Category) cat_spin.getSelectedItem();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                category = null;
+            }
+        });
+
         apply_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String owner;
-                String section;
-                String name;
-                Category category;
-                double cost;
-                int id;
+
 
                 owner = owner_edittext.getText().toString();
                 name = name_edittext.getText().toString();
                 id = Integer.parseInt(id_edittext.getText().toString());
-                section = section_spin.getSelectedItem().toString();
-                cost = Double.parseDouble(cost_edittext.getText().toString());
-              //  category = cat_spin.getSelectedItem();
 
-              //  filterInstrumentInv(null, owner, section, name, category, id);
+                cost = Double.parseDouble(cost_edittext.getText().toString());
+
+
+                filterInstrumentInv(null, owner, section, name, category, id, cost);
             }
         });
 
     }
 
-    public ArrayList<Rentable> filterInstrumentInv(ArrayList<Rentable> rentables, String owner, String section, String name, Category category, double cost, int ID) {
+    public ArrayList<Rentable> filterInstrumentInv(ArrayList<Rentable> rentables, String owner, String section, String name, Category category, int id, double cost) {
         ArrayList<Rentable> filter = new ArrayList<>();
 
         if(category != null)
             filter = filterByCategory(filter, category);
 
 
-        if (ID != 0)
-            filter = filterByID(filter, ID);
+        if (id != 0)
+            filter = filterByID(filter, id);
 
 
         if (!owner.equals(""))
@@ -82,6 +123,8 @@ public class instrument_filters extends AppCompatActivity {
             filter = filterByName(filter, name);
         }
 
+        if (category != null)
+            filter =filterByCategory(filter, category);
 
         if (!section.equals(""))
             filter = filterBySection(filter, section);

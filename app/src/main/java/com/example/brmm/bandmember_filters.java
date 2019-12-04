@@ -68,6 +68,20 @@ public class bandmember_filters extends AppCompatActivity {
         final Button apply_button = findViewById(R.id.apply_filters_button);
         final Button cancel_button = findViewById(R.id.cancel_filters_button);
 
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firstNameTxt.setText("");
+                lastNameTxt.setText("");
+                UID_edittext.setText("");
+                rgroup.clearCheck();
+                has_cbox.setChecked(false);
+                no_has_cbox.setChecked(false);
+                section_spin.setSelection(0);
+                instrument_spin.setSelection(0);
+            }
+        });
+
 
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -112,7 +126,7 @@ public class bandmember_filters extends AppCompatActivity {
 
 
                 isFaculty = rgroup.getCheckedRadioButtonId();
-                
+
                 if (has_cbox.isChecked())
                     hasInstrument = 1;
                 if (no_has_cbox.isChecked())
