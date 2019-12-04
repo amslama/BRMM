@@ -73,6 +73,10 @@ public class add_part extends AppCompatActivity {
                 Rentable rentable = factory.buildRentable("Part", "", sn,"", cost, 0);
                 rentable.setName(name);
                 rentable.setCost(cost);
+                Intent intent = new Intent();
+                intent.putExtra("part", intent);
+                setResult(RESULT_OK,intent);
+                finish();
 
             }
         });

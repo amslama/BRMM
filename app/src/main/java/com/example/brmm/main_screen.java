@@ -113,7 +113,6 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), add_part.class);
-                startActivity(openFilter);
                 startActivityForResult(openFilter,0);
             }
         });
@@ -218,7 +217,7 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), checkout_instrument.class);
-                startActivity(openFilter);
+                startActivityForResult(openFilter, 3);
             }
         });
         notes_button.setOnClickListener(new View.OnClickListener() {
@@ -327,6 +326,83 @@ public class main_screen extends AppCompatActivity {
                 BandMember member = (BandMember)data.getSerializableExtra("member");
                 member_inv.addBandMember(member);
 
+            }
+        }
+        if (requestCode == 3) {
+            if (resultCode == RESULT_OK) {
+                /*
+                CHECKOUT LOGIC************************************
+                 */
+            }
+        }
+        if (requestCode == 4) {
+            if (resultCode == RESULT_OK) {
+                /*
+                Add section LOGIC************************************
+                 */
+            }
+        }
+        if (requestCode == 5) {
+            if (resultCode == RESULT_OK) {
+                /*
+                Delete section LOGIC************************************
+                 */
+            }
+        }
+        if (requestCode == 6) {
+            if (resultCode == RESULT_OK) {
+                /*
+                edit instrument LOGIC************************************
+                 */
+            }
+        }
+        if (requestCode == 7) {
+            if (resultCode == RESULT_OK) {
+                /*
+                edit member LOGIC************************************
+                 */
+            }
+        }
+        if (requestCode == 8) {
+            if (resultCode == RESULT_OK) {
+                /*
+                edit notes LOGIC************************************
+                 */
+            }
+        }
+        if (requestCode == 9) {
+            if (resultCode == RESULT_OK) {
+                /*
+                edit part LOGIC************************************
+                 */
+            }
+        }
+        if (requestCode == 10) {
+            if (resultCode == RESULT_OK) {
+                /*
+                part filters LOGIC************************************
+                 */
+            }
+        }
+        if (requestCode == 11) {
+            if (resultCode == RESULT_OK) {
+                /*
+                instrument filters section LOGIC************************************
+                 */
+            }
+        }
+        if (requestCode == 12) {
+            if (resultCode == RESULT_OK) {
+                /*
+                member filters LOGIC************************************
+                 */
+            }
+        }
+        if (requestCode == 13) {
+            if (resultCode == RESULT_OK) {
+                /*
+                set lead LOGIC************************************
+                 */
             }
         }
     }

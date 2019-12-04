@@ -1,8 +1,9 @@
 package com.example.brmm;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Rentable
+public class Rentable implements Serializable
 {
     protected String name;
     protected double cost;

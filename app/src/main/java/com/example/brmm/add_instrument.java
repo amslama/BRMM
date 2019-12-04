@@ -1,5 +1,6 @@
 package com.example.brmm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -116,7 +117,10 @@ public class add_instrument extends AppCompatActivity {
                catch (NumberFormatException ex){cost = 0;}
                 RentableFactory factory = new RentableFactory();
                 Rentable instrument = factory.buildRentable("Instrument", "", section,name, cost, id);
-
+                Intent intent = new Intent();
+                intent.putExtra("instrument", instrument);
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
     }
