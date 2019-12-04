@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class InstrumentFilters extends AppCompatActivity {
+public class instrument_filters extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bandmember_filters);
+        setContentView(R.layout.activity_instrument_filters);
 
         //Textviews
         TextView header = findViewById(R.id.instrument_filters_header);
@@ -27,20 +27,20 @@ public class InstrumentFilters extends AppCompatActivity {
         TextView cat_textview = findViewById(R.id.cat_instrument_filters_textview);
 
         //Edittexts
-        final EditText id_edittext = (EditText)findViewById(R.id.id_instrument_filters_edittext);
-        final EditText name_edittext = (EditText)findViewById(R.id.name_instrument_filters_edittext);
-        final EditText cost_edittext = (EditText)findViewById(R.id.cost_instrument_filters_edittext);
-        final EditText owner_edittext = (EditText)findViewById(R.id.owner_instrument_filters_edittext);
+        final EditText id_edittext = findViewById(R.id.id_instrument_filters_edittext);
+        final EditText name_edittext = findViewById(R.id.name_instrument_filters_edittext);
+        final EditText cost_edittext = findViewById(R.id.cost_instrument_filters_edittext);
+        final EditText owner_edittext = findViewById(R.id.owner_instrument_filters_edittext);
 
         //Dropdowns
         final Spinner section_spin = findViewById(R.id.section_instrument_filters_dropdown);
         final Spinner cat_spin = findViewById(R.id.cat_instrument_filters_dropdown);
 
         //Buttons
-        final Button applyBttn = findViewById(R.id.ok_instrument_filters_button);
-        final Button cancelBttn = findViewById(R.id.cancel_instrument_filters_button);
+        final Button apply_button = findViewById(R.id.ok_instrument_filters_button);
+        final Button cancel_button = findViewById(R.id.cancel_instrument_filters_button);
 
-        applyBttn.setOnClickListener(new View.OnClickListener() {
+        apply_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String owner;

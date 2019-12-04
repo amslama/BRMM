@@ -13,12 +13,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class BandMemberFilters extends AppCompatActivity {
+public class bandmember_filters extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instrument_filters);
+        setContentView(R.layout.activity_bandmember_filters);
 
         //Textviews
         final TextView header = findViewById(R.id.bandmember_filters_header);
@@ -52,7 +52,7 @@ public class BandMemberFilters extends AppCompatActivity {
         final CheckBox has_cbox = findViewById(R.id.has_bandmember_filters_cbox);
         final CheckBox no_has_cbox = findViewById(R.id.no_has_bandmember_filters_cbox);
     }
-
+/*
     // main filter method, for ints, 0 = dont filter, 1 = filter by Faculty or is true, 2 = filter by false
     public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument, String section) {
 
@@ -213,5 +213,5 @@ public class BandMemberFilters extends AppCompatActivity {
         }
         return filter;
     }
-
+*/
 }

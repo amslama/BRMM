@@ -8,14 +8,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class LoginScreen extends AppCompatActivity {
+public class login_screen extends AppCompatActivity {
     private int counter;
     DatabaseWrapper wrapper;
     Thread thread2;
 
-    public LoginScreen() {
+    public login_screen() {
         counter = 0;
     }
 
@@ -23,11 +24,18 @@ public class LoginScreen extends AppCompatActivity {
     protected void  onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
-        final EditText ULID = (EditText)findViewById(R.id.ULID_Textbox);
-        final EditText password = (EditText)findViewById(R.id.Password_Textbox);
 
-        final Button OK = (Button)findViewById(R.id.Login_OK_Button);
-        final Button stdntLogin = (Button)findViewById(R.id.Student_Button);
+
+        //Textviews
+        TextView header = findViewById(R.id.login_screen_header);
+
+        //Edittexts
+        final EditText ULID = findViewById(R.id.ULID_Textbox);
+        final EditText password = findViewById(R.id.Password_Textbox);
+
+        //Buttons
+        final Button OK = findViewById(R.id.Login_OK_Button);
+        final Button stdntLogin = findViewById(R.id.Student_Button);
 
         final Toast toast = Toast.makeText(this, "Too many failed attempts", Toast.LENGTH_SHORT);
 
@@ -107,9 +115,9 @@ public class LoginScreen extends AppCompatActivity {
             System.out.println("Is a faculty");
         else
             System.out.println("Is NOT a faculty");
-            Intent mainScreen = new Intent(this, MainScreen.class);
+            Intent mainScreen = new Intent(this, main_screen.class);
             mainScreen.putExtra("ISFACULTY", isFaculty);
-            startActivity(mainScreen);
+
 
 
     }

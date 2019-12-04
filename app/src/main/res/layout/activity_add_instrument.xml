@@ -51,7 +51,7 @@
         android:id="@+id/name_add_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="76dp"
         android:layout_marginTop="32dp"
         android:labelFor="@id/name_add_instrument_editText"
         android:text="@string/name"
@@ -66,7 +66,7 @@
         android:id="@+id/id_add_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
+        android:layout_marginStart="204dp"
         android:text="@string/id_number"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
@@ -152,7 +152,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cat_add_instrument_rview"
         android:layout_width="175dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="@+id/cost_add_instrument_edittext"
         app:layout_constraintTop_toBottomOf="@+id/cost_add_instrument_edittext" />
@@ -161,12 +161,12 @@
         android:id="@+id/cancel_add_instrument_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/button_border"
         android:text="@android:string/cancel"
         android:textAllCaps="false"
         android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/cat_add_instrument_rview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cat_add_instrument_rview" />
 
@@ -174,14 +174,14 @@
         android:id="@+id/ok_add_instrument_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/button_border"
         android:text="@string/add"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/cancel_add_instrument_button"
+        app:layout_constraintEnd_toEndOf="@+id/cat_add_instrument_rview"
+        app:layout_constraintStart_toStartOf="@+id/cat_add_instrument_rview"
         app:layout_constraintTop_toBottomOf="@+id/cat_add_instrument_rview" />
 
     <TextView

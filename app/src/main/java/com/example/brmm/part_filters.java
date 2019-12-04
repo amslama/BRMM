@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class PartFilters extends AppCompatActivity {
+public class part_filters extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
