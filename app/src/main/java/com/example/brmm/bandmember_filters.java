@@ -4,6 +4,7 @@ package com.example.brmm;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -16,6 +17,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class bandmember_filters extends AppCompatActivity {
+    private int isFaculty;
+    private int hasInstrument = 0;
+    private boolean sectionLeaders;
+    private String firstName;
+    private String lastName;
+    private int UID;
+    private Instrument instrument;
+    private String section;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,19 +69,50 @@ public class bandmember_filters extends AppCompatActivity {
         final Button cancel_button = findViewById(R.id.cancel_filters_button);
 
 
+        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                section = section_spin.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                section = "";
+            }
+        });
+
+        instrument_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                instrument = (Instrument)instrument_spin.getSelectedItem();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                instrument = null;
+            }
+        });
+
+        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                section = section_spin.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                section = "";
+            }
+        });
+
+
         apply_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int isFaculty;
-                int hasInstrument = 0;
-                boolean sectionLeaders;
-                String firstName;
-                String lastName;
-                int UID;
-                Instrument instrument;
-                String section;
+
 
                 isFaculty = rgroup.getCheckedRadioButtonId();
+                
                 if (has_cbox.isChecked())
                     hasInstrument = 1;
                 if (no_has_cbox.isChecked())
@@ -82,10 +122,9 @@ public class bandmember_filters extends AppCompatActivity {
                 firstName = firstNameTxt.getText().toString();
                 lastName = lastNameTxt.getText().toString();
                 UID = Integer.parseInt(UID_edittext.getText().toString());
-               // instrument = instrument_spin.getSelectedItem();
-               // section = section_spin.getSelectedItem();
 
-                //filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
+
+                filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
             }
         });
     }
@@ -93,7 +132,7 @@ public class bandmember_filters extends AppCompatActivity {
 
 
     // main filter method, for ints, 0 = dont filter, 1 = filter by Faculty or is true, 2 = filter by false
-    public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument, String section) {
+    public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument) {
 
         ArrayList<BandMember> filter = new ArrayList<>();
 

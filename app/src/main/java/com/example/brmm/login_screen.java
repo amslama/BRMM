@@ -135,8 +135,8 @@ public class login_screen extends AppCompatActivity {
         catch (Exception e){
             System.out.println("Login join failed");
         }
-        return true;
-        //return wrapper.getValidation();
+
+        return wrapper.getValidation();
 
     }
 
