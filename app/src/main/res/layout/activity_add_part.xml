@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/add_parts_header"
@@ -38,7 +38,7 @@
         android:id="@+id/compwith_add_parts_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
+        android:layout_marginStart="196dp"
         android:text="@string/compatible_with"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
@@ -63,22 +63,21 @@
         android:id="@+id/cost_add_part_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="60dp"
         android:labelFor="@id/cost_add_part_edittext"
         android:text="@string/cost"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/sn_add_part_edittext"
         app:layout_constraintTop_toBottomOf="@+id/sn_add_part_edittext" />
 
     <TextView
         android:id="@+id/name_add_part_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="36dp"
         android:labelFor="@id/name_add_part_edittext"
         android:text="@string/name"
         android:textColor="@android:color/background_dark"
@@ -127,14 +126,14 @@
         android:id="@+id/cancel_add_part_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="120dp"
         android:background="@drawable/button_border"
         android:text="@android:string/cancel"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cost_add_part_edittext"
+        app:layout_constraintStart_toStartOf="@+id/cost_add_part_edittext"
         app:layout_constraintTop_toBottomOf="@+id/cost_add_part_edittext" />
 
     <Button
@@ -146,8 +145,8 @@
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cancel_add_part_button"
+        app:layout_constraintEnd_toEndOf="@+id/compwith_add_part_rview"
+        app:layout_constraintStart_toStartOf="@+id/compwith_add_part_rview"
         app:layout_constraintTop_toTopOf="@+id/cancel_add_part_button" />
 
     <Spinner

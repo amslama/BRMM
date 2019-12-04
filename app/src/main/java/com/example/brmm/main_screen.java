@@ -3,59 +3,68 @@ package com.example.brmm;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
-public class MainScreen extends AppCompatActivity {
+public class main_screen extends AppCompatActivity {
 
     private boolean facultyRights = false;
+
     //Dropdown
-    final Spinner inv_spin = findViewById(R.id.inventory_main_screen_dropdown);
+    private Spinner inv_spin;
 
     //Top buttons
-    final Button filter_button = findViewById(R.id.filter_main_screen_button);
-    final Button logout_button = findViewById(R.id.logout_main_screen_button);
+    private Button filter_button;
+    private Button logout_button;
 
     //buttons for all
-    final Button add_button = findViewById(R.id.add_main_screen_button);
-    final Button remove_button = findViewById(R.id.remove_main_screen_button);
+    private Button add_button;
+    private Button remove_button;
 
     //buttons for rentables
-    final Button edit_rentable_button = findViewById(R.id.edit_rentable_main_screen_button);
+    private Button edit_rentable_button;
 
     //buttons for instruments
-    final Button notes_button = findViewById(R.id.edit_note_main_screen_button);
-    final Button checkout_button = findViewById(R.id.checkout_main_screen_button);
+    private Button notes_button;
+    private Button checkout_button;
 
     //buttons for bandmember
-    final Button edit_member_button = findViewById(R.id.edit_member_main_screen_button);
-    final Button set_lead_button = findViewById(R.id.add_section_lead_main_screen_button);
-    final Button add_section_button = findViewById(R.id.add_section_main_screen_button);
-    final Button delete_section_button = findViewById(R.id.delete_section_main_screen_button);
+    private Button edit_member_button;
+    private Button set_lead_button;
+    private Button add_section_button;
+    private Button delete_section_button;
 
     //Recyclerview
-    final RecyclerView inv_View = findViewById(R.id.item_list_main_screen_rview);
+//    final RecyclerView inv_View = findViewById(R.id.item_list_main_screen_rview);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
-        //instantiates logout button
-        logout_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), LoginScreen.class);
-                startActivityForResult(intent, 99);
-            }
-        });
-
-        setPartsButtons();
+        instantiateButtons();
+        setBandmemberButtons();
         oneTimeListeners();
 
+
+    }
+
+    private void instantiateButtons()
+    {
+        inv_spin = findViewById(R.id.inventory_main_screen_dropdown);
+        filter_button = findViewById(R.id.filter_main_screen_button);
+        logout_button = findViewById(R.id.logout_main_screen_button);
+        add_button = findViewById(R.id.add_main_screen_button);
+        remove_button = findViewById(R.id.remove_main_screen_button);
+        edit_rentable_button = findViewById(R.id.edit_rentable_main_screen_button);
+        notes_button = findViewById(R.id.edit_note_main_screen_button);
+        checkout_button = findViewById(R.id.checkout_main_screen_button);
+        edit_member_button = findViewById(R.id.edit_member_main_screen_button);
+        set_lead_button = findViewById(R.id.add_section_lead_main_screen_button);
+        add_section_button = findViewById(R.id.add_section_main_screen_button);
+        delete_section_button = findViewById(R.id.delete_section_main_screen_button);
 
     }
 
@@ -63,8 +72,8 @@ public class MainScreen extends AppCompatActivity {
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openFilter = new Intent(getBaseContext(), PartFilters.class);
-                startActivityForResult(openFilter, 00);
+                Intent openFilter = new Intent(getBaseContext(), part_filters.class);
+                startActivity(openFilter);
             }
         });
         add_button.setOnClickListener(new View.OnClickListener() {
@@ -98,8 +107,8 @@ public class MainScreen extends AppCompatActivity {
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openFilter = new Intent(getBaseContext(), InstrumentFilters.class);
-                startActivityForResult(openFilter, 00);
+                Intent openFilter = new Intent(getBaseContext(), instrument_filters.class);
+                startActivity(openFilter);
             }
         });
         add_button.setOnClickListener(new View.OnClickListener() {
@@ -132,8 +141,8 @@ public class MainScreen extends AppCompatActivity {
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openFilter = new Intent(getBaseContext(), BandMemberFilters.class);
-                startActivityForResult(openFilter, 00);
+                Intent openFilter = new Intent(getBaseContext(), bandmember_filters.class);
+                startActivity(openFilter);
             }
         });
         add_button.setOnClickListener(new View.OnClickListener() {
@@ -193,7 +202,14 @@ public class MainScreen extends AppCompatActivity {
         add_section_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openFilter = new Intent(getBaseContext(), delete_section.class);
+                Intent openFilter = new Intent(getBaseContext(), add_section.class);
+                startActivity(openFilter);
+            }
+        });
+        edit_member_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openFilter = new Intent(getBaseContext(), edit_member.class);
                 startActivity(openFilter);
             }
         });
@@ -201,24 +217,34 @@ public class MainScreen extends AppCompatActivity {
         inv_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (inv_spin.getSelectedItem() == "Parts")
+                if (inv_spin.getSelectedItem().toString().equals("Parts"))
                 {
                     setPartsButtons();
                 }
-                if (inv_spin.getSelectedItem() == "Instruments")
+                if (inv_spin.getSelectedItem().toString().equals("Instruments"))
                 {
                     setInstrumentButtons();
                 }
 
-                if (inv_spin.getSelectedItem() == "Band Members")
+                if (inv_spin.getSelectedItem().toString().equals("Band Members"))
                 {
                     setBandmemberButtons();
                 }
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        //instantiates logout button
+        logout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), login_screen.class);
+                startActivityForResult(intent, 99);
             }
         });
     }

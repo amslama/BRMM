@@ -58,10 +58,7 @@ public class Instrument extends Rentable {
     }
 
     public boolean equals(Instrument ins) {
-        if (ins.id == id) {
-            return true;
-        }
-        return false;
+        return ins.id == id;
     }
 
 }

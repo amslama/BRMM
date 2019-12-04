@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CE1126"
-    tools:context=".MainScreen">
+    tools:context=".main_screen">
 
 
     <android.support.v7.widget.RecyclerView

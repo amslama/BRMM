@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CE1126"
-    tools:context=".PartFilters">
+    tools:context=".part_filters">
 
     <ImageView
         android:id="@+id/colorfilter_part_filters"

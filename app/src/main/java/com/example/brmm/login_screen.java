@@ -11,10 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LoginScreen extends AppCompatActivity {
+public class login_screen extends AppCompatActivity {
     private int counter;
 
-    public LoginScreen() {
+    public login_screen() {
         counter = 0;
     }
 
@@ -27,12 +27,12 @@ public class LoginScreen extends AppCompatActivity {
         TextView header = findViewById(R.id.login_screen_header);
 
         //Edittexts
-        final EditText ULID = (EditText)findViewById(R.id.ULID_Textbox);
-        final EditText password = (EditText)findViewById(R.id.Password_Textbox);
+        final EditText ULID = findViewById(R.id.ULID_Textbox);
+        final EditText password = findViewById(R.id.Password_Textbox);
 
         //Buttons
-        final Button OK = (Button)findViewById(R.id.Login_OK_Button);
-        final Button stdntLogin = (Button)findViewById(R.id.Student_Button);
+        final Button OK = findViewById(R.id.Login_OK_Button);
+        final Button stdntLogin = findViewById(R.id.Student_Button);
 
         //Toast and jam
         final Toast toast = Toast.makeText(this, "Too many failed attempts", Toast.LENGTH_SHORT);
@@ -123,13 +123,13 @@ public class LoginScreen extends AppCompatActivity {
 
     private void login(boolean isFaculty){
         if (isFaculty){
-            Intent mainScreen = new Intent(this, MainScreen.class);
+            Intent mainScreen = new Intent(this, main_screen.class);
             startActivity(mainScreen);
         }
 
         else {
             //show read only
-            Intent mainScreen = new Intent(this, MainScreen.class);
+            Intent mainScreen = new Intent(this, main_screen.class);
             startActivity(mainScreen);
         }
 

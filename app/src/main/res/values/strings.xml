@@ -6,10 +6,7 @@
     <string name="title_activity_ui__main">UI_Main</string>
     <string name="filters">Filters</string>
     <string name="logout">Logout</string>
-    <string name="bandmembers">Members</string>
-    <string name="instrument">Instruments</string>
     <string name="checkout">Checkout</string>
-    <string name="parts">Parts</string>
     <string name="add">Add</string>
     <string name="edit_rentable">Edit Item</string>
     <string name="delete_section">Delete Section</string>
@@ -17,7 +14,6 @@
     <string name="remove">Remove</string>
     <string name="edit_note">Edit Note</string>
     <string name="edit_member">Edit Member</string>
-    <string name="edit_condition">Edit Condition</string>
     <string name="last_name">Last Name:</string>
     <string name="first_name">First Name:</string>
     <string name="uid">UID:</string>
@@ -32,7 +28,6 @@
     <string name="has_instrument">has instrument</string>
     <string name="has_no_instrument">has no instrument</string>
     <string name="instrument_filters">Instrument Filters</string>
-    <string name="yes">Yes</string>
     <string name="apply">Apply</string>
     <string name="bandmember_filters">Bandmember Filters</string>
     <string name="part_filters">Part Filters</string>
@@ -60,6 +55,8 @@
     <string name="add_part">Add Part</string>
     <string name="edit_instrument">Edit Instrument</string>
     <string name="add_category">Add Category</string>
+    <string name="instrument">Instrument</string>
+
     <string-array name="Entries">
         <item>Parts</item>
         <item>Instruments</item>
