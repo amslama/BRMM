@@ -117,6 +117,51 @@ public class login_screen extends AppCompatActivity {
             System.out.println("Is NOT a faculty");
             Intent mainScreen = new Intent(this, main_screen.class);
             mainScreen.putExtra("ISFACULTY", isFaculty);
+
+        wrapper.setMethod("getFaculty");
+        Thread getFacultyThread = new Thread(wrapper);
+        getFacultyThread.start();
+        try{
+            getFacultyThread.join();
+        }
+        catch (Exception e){
+            System.out.println("get faculty join failed");
+        }
+        mainScreen.putExtra("FACULTY", wrapper.getFacultyList());
+
+        wrapper.setMethod("getStudents");
+        Thread getStudentThread = new Thread(wrapper);
+        getStudentThread.start();
+        try{
+            getStudentThread.join();
+        }
+        catch (Exception e){
+            System.out.println("get students join failed");
+        }
+        mainScreen.putExtra("STUDENT", wrapper.getStudentList());
+
+        wrapper.setMethod("getParts");
+        Thread getPartThread = new Thread(wrapper);
+        getPartThread.start();
+        try{
+            getPartThread.join();
+        }
+        catch (Exception e){
+            System.out.println("get part join failed");
+        }
+        mainScreen.putExtra("PART", wrapper.getPartList());
+
+
+        wrapper.setMethod("getInstruments");
+        Thread getInstrumentThread = new Thread(wrapper);
+        getInstrumentThread.start();
+        try{
+            getInstrumentThread.join();
+        }
+        catch (Exception e){
+            System.out.println("get instuments join failed");
+        }
+            mainScreen.putExtra("INSTRUMENT", wrapper.getInstrumentList());
             startActivity(mainScreen);
 
 
@@ -135,8 +180,8 @@ public class login_screen extends AppCompatActivity {
         catch (Exception e){
             System.out.println("Login join failed");
         }
-
-        return wrapper.getValidation();
+        return true;
+        //return wrapper.getValidation();
 
     }
 

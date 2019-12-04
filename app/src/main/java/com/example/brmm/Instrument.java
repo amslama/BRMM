@@ -1,15 +1,16 @@
 package com.example.brmm;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Instrument extends Rentable {
+public class Instrument extends Rentable implements Serializable {
 
     private Category category;
     private String section;
+    private boolean isSelected;
 
 
-
-    public Instrument() {
+    public Instrument (){
         currentOwner = "School";
         section = "no type";
         name = "no item";
@@ -55,10 +56,20 @@ public class Instrument extends Rentable {
         name = na;
         cost = price;
         id = idnum;
+        isSelected= false;
     }
 
     public boolean equals(Instrument ins) {
         return ins.id == id;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+
+    public boolean isSelected() {
+        return isSelected;
     }
 
 }

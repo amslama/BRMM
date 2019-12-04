@@ -1,10 +1,13 @@
 package com.example.brmm;
 
-public class BandMember
+import java.io.Serializable;
+
+public class BandMember implements Serializable
 {
     protected String fname;
     protected String lname;
     protected int UID;
+    private boolean isSelected;
 
     public String ulid;
 
@@ -38,6 +41,14 @@ public class BandMember
 
     public  void setUID(int UID){
         this.UID = UID;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
     }
 }
 

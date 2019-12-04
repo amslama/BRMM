@@ -1,8 +1,9 @@
 package com.example.brmm;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Faculty extends BandMember {
+public class Faculty extends BandMember implements Serializable {
     private String department;
     private String role;
 

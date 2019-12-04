@@ -50,6 +50,29 @@ public class main_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
+        Intent intent = getIntent();
+        if((ArrayList<Instrument>)intent.getSerializableExtra("INSTRUMENT")!=null) {
+            for (Instrument instrument : (ArrayList<Instrument>) intent.getSerializableExtra("INSTRUMENT")) {
+                rent_inv.addInstrument(instrument);
+            }
+        }
+        if((ArrayList<Part>)intent.getSerializableExtra("PART")!=null) {
+            for (Part part : (ArrayList<Part>) intent.getSerializableExtra("PART")) {
+                rent_inv.addPart(part);
+            }
+        }
+        if((ArrayList<Student>)intent.getSerializableExtra("STUDENT")!=null) {
+            for (Student student : (ArrayList<Student>) intent.getSerializableExtra("STUDENT")) {
+                member_inv.addBandMember(student);
+            }
+        }
+        if( (ArrayList<Faculty>)intent.getSerializableExtra("INSTRUMENT")!=null) {
+            for (Faculty faculty : (ArrayList<Faculty>) intent.getSerializableExtra("INSTRUMENT")) {
+                member_inv.addBandMember(faculty);
+            }
+        }
+
+
         instantiateButtons();
         setBandmemberButtons();
         oneTimeListeners();
@@ -59,6 +82,8 @@ public class main_screen extends AppCompatActivity {
 
     private void instantiateButtons()
     {
+        member_inv = new BandMemberInventory();
+        rent_inv = new RentableInventory();
         inv_spin = findViewById(R.id.inventory_main_screen_dropdown);
         filter_button = findViewById(R.id.filter_main_screen_button);
         logout_button = findViewById(R.id.logout_main_screen_button);
@@ -97,6 +122,9 @@ public class main_screen extends AppCompatActivity {
             }
         });
 
+        PartRecyclerAdapter adapter = new PartRecyclerAdapter((rent_inv.getPartList()));
+        inv_view.setLayoutManager(new LinearLayoutManager(this));
+        inv_view.setAdapter(adapter);
 
         edit_rentable_button.setVisibility(View.VISIBLE);
         edit_member_button.setVisibility(View.INVISIBLE);
@@ -133,6 +161,11 @@ public class main_screen extends AppCompatActivity {
             }
         });
 
+
+        InstrumentRecyclerAdapter adapter = new InstrumentRecyclerAdapter(rent_inv.getInstrumentList());
+        inv_view.setLayoutManager(new LinearLayoutManager(this));
+        inv_view.setAdapter(adapter);
+
         edit_rentable_button.setVisibility(View.VISIBLE);
         edit_member_button.setVisibility(View.INVISIBLE);
         set_lead_button.setVisibility(View.INVISIBLE);
@@ -159,6 +192,10 @@ public class main_screen extends AppCompatActivity {
             }
         });
 
+        MemberRecyclerAdapter adapter = new MemberRecyclerAdapter((member_inv.getBandMembers()));
+        inv_view.setLayoutManager(new LinearLayoutManager(this));
+        inv_view.setAdapter(adapter);
+
         edit_rentable_button.setVisibility(View.INVISIBLE);
         edit_member_button.setVisibility(View.VISIBLE);
         set_lead_button.setVisibility(View.VISIBLE);
@@ -171,7 +208,7 @@ public class main_screen extends AppCompatActivity {
     }
 
     private void oneTimeListeners() {
-        RecyclerAdapter adapter = new RecyclerAdapter((member_inv.getBandMembers()));
+        MemberRecyclerAdapter adapter = new MemberRecyclerAdapter((member_inv.getBandMembers()));
         inv_view.setLayoutManager(new LinearLayoutManager(this));
         inv_view.setAdapter(adapter);
         checkout_button.setOnClickListener(new View.OnClickListener() {

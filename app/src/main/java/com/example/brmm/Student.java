@@ -1,14 +1,14 @@
 package com.example.brmm;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Student extends BandMember {
+public class Student extends BandMember implements Serializable {
     private String section;
     private boolean sectionLeader;
     private String notes;
-    private Rentable instruments;
+    private Instrument instruments;
 
-    public void setInstruments(Rentable instruments) {
+    public void setInstruments(Instrument instruments) {
         this.instruments = instruments;
     }
 
