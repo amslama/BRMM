@@ -117,6 +117,7 @@ public class login_screen extends AppCompatActivity {
             System.out.println("Is NOT a faculty");
             Intent mainScreen = new Intent(this, main_screen.class);
             mainScreen.putExtra("ISFACULTY", isFaculty);
+            startActivity(mainScreen);
 
 
 
@@ -134,8 +135,8 @@ public class login_screen extends AppCompatActivity {
         catch (Exception e){
             System.out.println("Login join failed");
         }
-
-        return wrapper.getValidation();
+        return true;
+        //return wrapper.getValidation();
 
     }
 

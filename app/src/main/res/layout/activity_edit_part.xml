@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/edit_parts_header"
@@ -38,7 +38,7 @@
         android:id="@+id/compwith_edit_parts_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
+        android:layout_marginStart="200dp"
         android:text="@string/compatible_with"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
@@ -63,22 +63,21 @@
         android:id="@+id/cost_edit_part_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="60dp"
         android:labelFor="@id/cost_edit_part_edittext"
         android:text="@string/cost"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/sn_edit_part_edittext"
         app:layout_constraintTop_toBottomOf="@+id/sn_edit_part_edittext" />
 
     <TextView
         android:id="@+id/name_edit_part_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="60dp"
         android:labelFor="@id/name_edit_part_edittext"
         android:text="@string/name"
         android:textColor="@android:color/background_dark"
@@ -127,14 +126,14 @@
         android:id="@+id/cancel_edit_part_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginStart="44dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/button_border"
         android:text="@android:string/cancel"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cost_edit_part_edittext"
+        app:layout_constraintStart_toStartOf="@+id/cost_edit_part_edittext"
         app:layout_constraintTop_toBottomOf="@+id/cost_edit_part_edittext" />
 
     <Button
@@ -145,8 +144,9 @@
         android:text="@android:string/ok"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cancel_edit_part_button"
+        app:layout_constraintEnd_toEndOf="@+id/compwith_edit_part_rview"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="@+id/compwith_edit_part_rview"
         app:layout_constraintTop_toTopOf="@+id/cancel_edit_part_button" />
 
     <Spinner
@@ -159,7 +159,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/compwith_edit_part_rview"
         android:layout_width="175dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         app:layout_constraintStart_toStartOf="@+id/compwith_edit_part_dropdown"
         app:layout_constraintTop_toBottomOf="@+id/compwith_edit_part_dropdown" />
 

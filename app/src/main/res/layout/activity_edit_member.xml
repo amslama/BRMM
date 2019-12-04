@@ -15,10 +15,10 @@
         android:contentDescription="@string/color_filter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/edit_member_header"
@@ -38,8 +38,8 @@
         android:id="@+id/fname_edit_member_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="40dp"
         android:labelFor="@id/fname_edit_member_edittext"
         android:text="@string/first_name"
         android:textColor="@android:color/background_dark"
@@ -52,7 +52,7 @@
         android:id="@+id/lname_edit_member_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
+        android:layout_marginStart="144dp"
         android:labelFor="@id/lname_edit_member_edittext"
         android:text="@string/last_name"
         android:textColor="@android:color/background_dark"
@@ -88,7 +88,7 @@
     <EditText
         android:id="@+id/notes_edit_member_edittext"
         android:layout_width="350dp"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:background="@drawable/border"
         android:ems="10"
         android:gravity="start|top"
@@ -148,7 +148,7 @@
         android:id="@+id/notes_edit_member_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:labelFor="@id/notes_edit_member_edittext"
         android:text="@string/notes"
         android:textColor="@android:color/background_dark"
@@ -161,34 +161,29 @@
         android:id="@+id/cancel_edit_member_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/button_border"
         android:text="@android:string/cancel"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/UID_edit_member_edittext"
+        app:layout_constraintStart_toStartOf="@+id/UID_edit_member_edittext"
         app:layout_constraintTop_toBottomOf="@+id/notes_edit_member_edittext" />
 
     <Button
         android:id="@+id/ok_add_member_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="68dp"
         android:background="@drawable/button_border"
         android:text="@string/apply"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cancel_edit_member_button"
-        app:layout_constraintTop_toBottomOf="@+id/notes_edit_member_edittext" />
+        app:layout_constraintEnd_toEndOf="@+id/section_edit_member_dropdown"
+        app:layout_constraintStart_toStartOf="@+id/section_edit_member_dropdown"
+        app:layout_constraintTop_toTopOf="@+id/cancel_edit_member_button" />
 
     <TextView
         android:id="@+id/dept_edit_member_textview"
