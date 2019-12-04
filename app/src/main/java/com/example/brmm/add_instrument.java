@@ -104,8 +104,6 @@ public class add_instrument extends AppCompatActivity {
                 section_spin.setSelection(0);
                 name_edittext.setText("");
                 cost_edittext.setText("");
-
-
             }
         });
 
