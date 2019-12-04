@@ -20,9 +20,6 @@ public class bandmember_filters extends AppCompatActivity {
     private int isFaculty;
     private int hasInstrument = 0;
     private boolean sectionLeaders;
-    private String firstName;
-    private String lastName;
-    private int UID;
     private Instrument instrument;
     private String section;
 
@@ -123,7 +120,9 @@ public class bandmember_filters extends AppCompatActivity {
         apply_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String firstName;
+                 String lastName;
+                 int UID;
 
                 isFaculty = rgroup.getCheckedRadioButtonId();
 
@@ -135,7 +134,9 @@ public class bandmember_filters extends AppCompatActivity {
                 sectionLeaders = secLeadersSwitch.isChecked();
                 firstName = firstNameTxt.getText().toString();
                 lastName = lastNameTxt.getText().toString();
-                UID = Integer.parseInt(UID_edittext.getText().toString());
+                try {
+                    UID = Integer.parseInt(UID_edittext.getText().toString());
+                } catch (NumberFormatException ex){UID = 0;}
 
 
                 filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);

@@ -12,14 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class add_member extends AppCompatActivity {
-    private String firstName;
-    private String lastName;
-    private String department;
-    private int UID;
-    private String role;
-    private String notes;
-    private String section;
-    private boolean isFaculty;
+    String section;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,16 +54,36 @@ public class add_member extends AppCompatActivity {
         add_member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                 String firstName;
+                 String lastName;
+                 String ulid;
+                 int UID;
+                 String role;
+                 String notes;
+
+                 boolean isFaculty = false;
                 firstName = fname_edittext.getText().toString();
                 lastName = lname_edittext.getText().toString();
-                department = dept_edittext.getText().toString();
-                UID = Integer.parseInt(UID_edittext.getText().toString());
+                ulid = dept_edittext.getText().toString();
+                try {UID = Integer.parseInt(UID_edittext.getText().toString());}
+                catch (NumberFormatException ex){UID = 0;}
                 role = role_edittext.getText().toString();
                 notes = notes_edittext.getText().toString();
                 if (student_rb.isChecked())
                     isFaculty = false;
                 if (faculty_rb.isChecked())
                     isFaculty = true;
+                BandMemberFactory factory = new BandMemberFactory();
+                BandMember member;
+
+              boolean sectionLeader = false;
+
+                if (isFaculty)
+                    member = factory.buildBandMember("Faculty",firstName,lastName, ulid,section,sectionLeader, UID, notes, "Music", role);
+                else
+                    member = member = factory.buildBandMember("Student",firstName,lastName, "",section,sectionLeader, UID, notes, "Music", role);
+
             }
         });
 
