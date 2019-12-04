@@ -11,5 +11,19 @@ public class Part extends Rentable
 
     }
 
+    public ArrayList<Category> getCompWith() {
+        return compWith;
+    }
 
+    public void setCompWith(Category compWith) {
+        this.compWith.add(compWith);
+    }
+
+    public int getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(int serialNumber) {
+        this.serialNumber = serialNumber;
+    }
 }
