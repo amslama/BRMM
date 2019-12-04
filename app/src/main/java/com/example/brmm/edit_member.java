@@ -12,14 +12,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class edit_member extends AppCompatActivity {
-    private String firstName;
-    private String lastName;
-    private String department;
-    private int UID;
-    private String role;
-    private String notes;
+
     private String section;
-    private boolean isFaculty;
+
 
     //Textviews
     private TextView header_textview;
@@ -85,17 +80,46 @@ public class edit_member extends AppCompatActivity {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String firstName;
+                String lastName;
+                String ulid;
+                int UID;
+                String role;
+                String notes;
+                Boolean isFaculty = false;
+                //temp logic to prevent error
+                BandMember member = new BandMember();
+
                 firstName = fname_edittext.getText().toString();
                 lastName = lname_edittext.getText().toString();
-                department = dept_edittext.getText().toString();
+                ulid = dept_edittext.getText().toString();
                 role = role_edittext.getText().toString();
-                UID = Integer.parseInt(UID_edittext.getText().toString());
+                try {
+                    UID = Integer.parseInt(UID_edittext.getText().toString());
+                }
+                catch (NumberFormatException ex){UID = 0;}
                 notes = notes_edittext.getText().toString();
                 if (student_rb.isChecked())
                     isFaculty = false;
                 if (faculty_rb.isChecked())
                     isFaculty = true;
 
+                if(!firstName.equals(""))
+                    member.setFname(firstName);
+                if(!lastName.equals(""))
+                    member.setFname(lastName);
+                if(!ulid.equals(""))
+                    member.setUlid(ulid);
+                if(!role.equals("")) {
+                    if (member instanceof Faculty)
+                    ((Faculty) member).setRole(role);
+                }
+                if (UID != 0)
+                    member.setUID(UID);
+                if (!notes.equals("")) {
+                    if (member instanceof Student)
+                    ((Student) member).setNotes(notes);
+                }
             }
         });
 
