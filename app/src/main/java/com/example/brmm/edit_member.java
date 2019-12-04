@@ -14,12 +14,13 @@ import android.widget.TextView;
 public class edit_member extends AppCompatActivity {
     private String firstName;
     private String lastName;
-    private String department;
+    private String ulid;
     private int UID;
     private String role;
     private String notes;
     private String section;
     private boolean isFaculty;
+    private BandMember member;
 
     //Textviews
     private TextView header_textview;
@@ -87,7 +88,7 @@ public class edit_member extends AppCompatActivity {
             public void onClick(View view) {
                 firstName = fname_edittext.getText().toString();
                 lastName = lname_edittext.getText().toString();
-                department = dept_edittext.getText().toString();
+                ulid = dept_edittext.getText().toString();
                 role = role_edittext.getText().toString();
                 UID = Integer.parseInt(UID_edittext.getText().toString());
                 notes = notes_edittext.getText().toString();
@@ -96,6 +97,22 @@ public class edit_member extends AppCompatActivity {
                 if (faculty_rb.isChecked())
                     isFaculty = true;
 
+                if(!firstName.equals(""))
+                    member.setFname(firstName);
+                if(!lastName.equals(""))
+                    member.setFname(lastName);
+                if(!ulid.equals(""))
+                    member.setUlid(ulid);
+                if(!role.equals("")) {
+                    if (member instanceof Faculty)
+                    ((Faculty) member).setRole(role);
+                }
+                if (UID != 0)
+                    member.setUID(UID);
+                if (!notes.equals("")) {
+                    if (member instanceof Student)
+                    ((Student) member).setNotes(notes);
+                }
             }
         });
 
