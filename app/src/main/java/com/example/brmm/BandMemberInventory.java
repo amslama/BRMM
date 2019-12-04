@@ -1,8 +1,9 @@
 package com.example.brmm;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BandMemberInventory {
+public class BandMemberInventory implements Serializable {
     private ArrayList<BandMember> bandMembers;
 
     public BandMemberInventory()

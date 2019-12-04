@@ -1,5 +1,6 @@
 package com.example.brmm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -49,25 +50,28 @@ public class add_member extends AppCompatActivity {
 
         //Buttons
         Button add_member = findViewById(R.id.ok_add_member_button);
-        Button cancel_member =findViewById(R.id.cancel_add_member_button);
+        Button cancel_member = findViewById(R.id.cancel_add_member_button);
 
         add_member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                 String firstName;
-                 String lastName;
-                 String ulid;
-                 int UID;
-                 String role;
-                 String notes;
+                String firstName;
+                String lastName;
+                String ulid;
+                int UID;
+                String role;
+                String notes;
 
-                 boolean isFaculty = false;
+                boolean isFaculty = false;
                 firstName = fname_edittext.getText().toString();
                 lastName = lname_edittext.getText().toString();
                 ulid = dept_edittext.getText().toString();
-                try {UID = Integer.parseInt(UID_edittext.getText().toString());}
-                catch (NumberFormatException ex){UID = 0;}
+                try {
+                    UID = Integer.parseInt(UID_edittext.getText().toString());
+                } catch (NumberFormatException ex) {
+                    UID = 0;
+                }
                 role = role_edittext.getText().toString();
                 notes = notes_edittext.getText().toString();
                 if (student_rb.isChecked())
@@ -77,13 +81,17 @@ public class add_member extends AppCompatActivity {
                 BandMemberFactory factory = new BandMemberFactory();
                 BandMember member;
 
-              boolean sectionLeader = false;
+                boolean sectionLeader = false;
 
                 if (isFaculty)
-                    member = factory.buildBandMember("Faculty",firstName,lastName, ulid,section,sectionLeader, UID, notes, "Music", role);
+                    member = factory.buildBandMember("Faculty", firstName, lastName, ulid, section, sectionLeader, UID, notes, "Music", role);
                 else
-                    member = member = factory.buildBandMember("Student",firstName,lastName, "",section,sectionLeader, UID, notes, "Music", role);
+                    member = member = factory.buildBandMember("Student", firstName, lastName, "", section, sectionLeader, UID, notes, "Music", role);
 
+                Intent intent = new Intent();
+                intent.putExtra("member", member);
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
 
@@ -91,15 +99,8 @@ public class add_member extends AppCompatActivity {
         cancel_member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fname_edittext.setText("");
-                lname_edittext.setText("");
-                dept_edittext.setText("");
-                UID_edittext.setText("");
-                role_edittext.setText("");
-                notes_edittext.setText("");
-                student_rb.setChecked(false);
-                faculty_rb.setChecked(false);
-                section_spin.setSelection(0);
+                setResult(RESULT_CANCELED);
+                finish();
             }
         });
 
@@ -115,7 +116,6 @@ public class add_member extends AppCompatActivity {
                 section = "";
             }
         });
-
 
 
     }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -67,6 +68,7 @@ public class main_screen extends AppCompatActivity {
         }
         if((ArrayList<Student>)intent.getSerializableExtra("STUDENT")!=null) {
             for (Student student : (ArrayList<Student>) intent.getSerializableExtra("STUDENT")) {
+                System.out.println("----------------------------------------------------------------------------------");
                 member_inv.addBandMember(student);
             }
         }
@@ -112,6 +114,7 @@ public class main_screen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), add_part.class);
                 startActivity(openFilter);
+                startActivityForResult(openFilter,0);
             }
         });
         edit_rentable_button.setOnClickListener(new View.OnClickListener() {
@@ -150,6 +153,7 @@ public class main_screen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), add_instrument.class);
                 startActivity(openFilter);
+                startActivityForResult(openFilter,1);
             }
         });
 
@@ -160,7 +164,6 @@ public class main_screen extends AppCompatActivity {
                 startActivity(openFilter);
             }
         });
-
 
         InstrumentRecyclerAdapter adapter = new InstrumentRecyclerAdapter(rent_inv.getInstrumentList());
         inv_view.setLayoutManager(new LinearLayoutManager(this));
@@ -188,7 +191,7 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), add_member.class);
-                startActivity(openFilter);
+                startActivityForResult(openFilter,2);
             }
         });
 
@@ -283,15 +286,48 @@ public class main_screen extends AppCompatActivity {
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), login_screen.class);
-                startActivityForResult(intent, 99);
+                Intent intent = new Intent();
+                intent.putExtra("member",member_inv);
+                intent.putExtra("rentable",rent_inv);
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
         remove_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
             }
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+
+                Part part = (Part)data.getSerializableExtra("part");
+                rent_inv.addPart(part);
+
+            }
+        }
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+
+                Instrument instrument = (Instrument)data.getSerializableExtra("instrument");
+                rent_inv.addInstrument(instrument);
+
+            }
+        }
+        if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+
+                BandMember member = (BandMember)data.getSerializableExtra("member");
+                member_inv.addBandMember(member);
+
+            }
+        }
+    }
 }

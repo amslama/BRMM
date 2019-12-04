@@ -1,8 +1,9 @@
 package com.example.brmm;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RentableInventory {
+public class RentableInventory implements Serializable {
 
     private ArrayList<Instrument> instruments;
     private ArrayList<Part> parts;
