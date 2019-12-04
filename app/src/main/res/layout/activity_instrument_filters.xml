@@ -144,9 +144,8 @@
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/cat_instrument_filters_dropdown"
-        app:layout_constraintHorizontal_bias="0.623"
-        app:layout_constraintStart_toStartOf="@+id/cat_instrument_filters_dropdown"
+        app:layout_constraintEnd_toEndOf="@+id/owner_instrument_filters_edittext"
+        app:layout_constraintStart_toStartOf="@+id/owner_instrument_filters_edittext"
         app:layout_constraintTop_toTopOf="@+id/cancel_instrument_filters_button" />
 
     <Button
@@ -159,8 +158,8 @@
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/section_instrument_filters_dropdown"
-        app:layout_constraintStart_toStartOf="@+id/section_instrument_filters_dropdown"
+        app:layout_constraintEnd_toEndOf="@+id/id_instrument_filters_edittext"
+        app:layout_constraintStart_toStartOf="@+id/id_instrument_filters_edittext"
         app:layout_constraintTop_toBottomOf="@+id/section_instrument_filters_dropdown" />
 
     <TextView

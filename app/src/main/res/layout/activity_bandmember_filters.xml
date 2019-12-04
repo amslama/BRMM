@@ -8,6 +8,7 @@
     android:background="#CE1126"
     tools:context=".instrument_filters">
 
+
     <ImageView
         android:id="@+id/colorfilter_bandmember_filter"
         android:layout_width="0dp"
@@ -19,15 +20,14 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/fname_bandmember_filters_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="52dp"
         android:labelFor="@id/fname_bandmember_filters_edittext"
         android:text="@string/first_name"
         android:textColor="@android:color/background_dark"
@@ -40,7 +40,7 @@
         android:id="@+id/instrument_bandmember_filters_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
         android:text="@string/instrument_filter_label"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
@@ -52,7 +52,7 @@
         android:id="@+id/section_bandmember_filters_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
         android:text="@string/section"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
@@ -78,14 +78,13 @@
         android:id="@+id/UID_bandmember_filters_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:labelFor="@id/UID_bandmember_filters_edittext"
         android:text="@string/uid"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/lname_bandmember_filters_edittext"
-        app:layout_constraintTop_toBottomOf="@+id/lname_bandmember_filters_edittext" />
+        app:layout_constraintTop_toTopOf="@+id/bm_type_bandmember_filters_textview" />
 
     <Switch
         android:id="@+id/section_leader_switch"
@@ -118,6 +117,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/UID_bandmember_filters_textview"
         app:layout_constraintTop_toTopOf="@+id/section_bandmember_filters_textview" />
 
     <Spinner
@@ -134,8 +135,7 @@
         android:id="@+id/bm_type_bandmember_filters_rgroup"
         android:layout_width="153dp"
         android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/bm_type_bandmember_filters_textview"
         app:layout_constraintTop_toBottomOf="@+id/bm_type_bandmember_filters_textview">
 
         <RadioButton
@@ -176,14 +176,13 @@
         android:id="@+id/bm_type_bandmember_filters_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         android:labelFor="@id/bm_type_bandmember_filters_rgroup"
         android:text="@string/bandmember_type"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/fname_bandmember_filters_edittext"
         app:layout_constraintTop_toBottomOf="@+id/fname_bandmember_filters_edittext" />
 
     <TextView
@@ -215,14 +214,12 @@
         android:id="@+id/checkout_status_bandmember_filters_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="109dp"
-        android:layout_marginTop="28dp"
         android:text="@string/checkout_status"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/instrument_bandmember_filters_textview"
-        app:layout_constraintTop_toBottomOf="@+id/section_leader_switch" />
+        app:layout_constraintStart_toStartOf="@+id/slo_bandmember_filters_textview"
+        app:layout_constraintTop_toTopOf="@+id/instrument_bandmember_filters_textview" />
 
     <EditText
         android:id="@+id/lname_bandmember_filters_edittext"
@@ -249,42 +246,40 @@
         android:id="@+id/lname_bandmember_filters_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="165dp"
         android:labelFor="@id/lname_bandmember_filters_edittext"
         android:text="@string/last_name"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/fname_bandmember_filters_textview"
-        app:layout_constraintTop_toBottomOf="@+id/bandmember_filters_header" />
+        app:layout_constraintTop_toTopOf="@+id/fname_bandmember_filters_textview" />
 
     <Button
         android:id="@+id/apply_filters_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="58dp"
         android:background="@drawable/button_border"
         android:text="@string/apply"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/no_has_bandmember_filters_cbox" />
+        app:layout_constraintEnd_toEndOf="@+id/UID_bandmember_filters_edittext"
+        app:layout_constraintStart_toStartOf="@+id/UID_bandmember_filters_edittext"
+        app:layout_constraintTop_toTopOf="@+id/cancel_filters_button" />
 
     <Button
         android:id="@+id/cancel_filters_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/button_border"
         android:text="@android:string/cancel"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/fname_bandmember_filters_edittext"
+        app:layout_constraintStart_toStartOf="@+id/fname_bandmember_filters_edittext"
         app:layout_constraintTop_toBottomOf="@+id/no_has_bandmember_filters_cbox" />
 
 </android.support.constraint.ConstraintLayout>
