@@ -47,18 +47,23 @@ public class instrument_filters extends AppCompatActivity {
                 String section;
                 String name;
                 Category category;
+                double cost;
                 int id;
 
                 owner = owner_edittext.getText().toString();
                 name = name_edittext.getText().toString();
                 id = Integer.parseInt(id_edittext.getText().toString());
-                //filterInstrumentInv();
+                section = section_spin.getSelectedItem().toString();
+                cost = Double.parseDouble(cost_edittext.getText().toString());
+              //  category = cat_spin.getSelectedItem();
+
+              //  filterInstrumentInv(null, owner, section, name, category, id);
             }
         });
 
     }
 
-    public ArrayList<Rentable> filterInstrumentInv(ArrayList<Rentable> rentables, String owner, String section, String name, Category category, int ID) {
+    public ArrayList<Rentable> filterInstrumentInv(ArrayList<Rentable> rentables, String owner, String section, String name, Category category, double cost, int ID) {
         ArrayList<Rentable> filter = new ArrayList<>();
 
         if(category != null)
@@ -80,6 +85,9 @@ public class instrument_filters extends AppCompatActivity {
 
         if (!section.equals(""))
             filter = filterBySection(filter, section);
+
+        if (cost != 0)
+            filter = filterByCost(filter, cost);
 
 
 
