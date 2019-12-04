@@ -67,6 +67,10 @@ public class add_part extends AppCompatActivity {
                 cost = Double.parseDouble(cost_edittext.getText().toString());
                 name = name_edittext.getText().toString();
                 sn = sn_edittext.getText().toString();
+                RentableFactory factory = new RentableFactory();
+                Rentable rentable = factory.buildRentable("Part", "", "","", 0, 0);
+                rentable.setName(name);
+                rentable.setCost(cost);
 
             }
         });
