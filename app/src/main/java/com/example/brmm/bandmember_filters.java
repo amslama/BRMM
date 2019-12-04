@@ -218,7 +218,7 @@ public class bandmember_filters extends AppCompatActivity {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
             if( member instanceof Student) {
-                if (((Student) member).getInstruments().isEmpty()) {
+                if (((Student) member).getInstruments() == null) {
                     filter.add(member);
                 }
             }
@@ -232,7 +232,7 @@ public class bandmember_filters extends AppCompatActivity {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
             if( member instanceof Student) {
-                if (!((Student) member).getInstruments().isEmpty()) {
+                if (((Student) member).getInstruments() != null) {
                     filter.add(member);
                 }
             }
@@ -282,7 +282,7 @@ public class bandmember_filters extends AppCompatActivity {
         for (BandMember member : members) {
 
             if ( member instanceof Student) {
-                if (((Student) member).getInstruments().contains(instrument)) {
+                if (((Student) member).getInstruments() == instrument) {
                     filter.add(member);
                     break;
                 }
