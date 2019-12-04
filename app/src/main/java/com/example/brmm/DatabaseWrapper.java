@@ -112,6 +112,7 @@ public class DatabaseWrapper extends Thread{
                 removeSectionLeaderRights(ulid);
                 break;
             case "getSectionLeaderRights":
+                //Call getSectionLeaderRights after you call run to get true or false
                 sectionLeader = getSectionLeaderRights(ulid);
                 break;
             case "removeFacultyRights":
@@ -121,7 +122,7 @@ public class DatabaseWrapper extends Thread{
                 addFacultyRights(ulid);
                 break;
             case "getFacultyRights":
-                //Call getFaculty after you call run to get true or false
+                //Call getFacultyRights after you call run to get true or false
                 faculty = getFacultyRights(ulid);
                 break;
             case "checkLogin":
@@ -369,7 +370,7 @@ public class DatabaseWrapper extends Thread{
     //TODO: INSTRUMENT STUFF
     private void addInstrument(String currentOwner, String section, String name, double cost){
         try{
-            String query = "insert into item (ownership, section, name, cost, instrument) values ('"+currentOwner+"','"+section+"','"+name+"','"+cost+"',1)";
+            String query = "insert into item (ownership, section, name, cost, instrument,category) values ('"+currentOwner+"','"+section+"','"+name+"','"+cost+"',1)";
             Statement st = conn.createStatement();
             st.executeUpdate(query);
         }
