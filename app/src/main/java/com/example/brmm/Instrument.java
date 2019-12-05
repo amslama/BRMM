@@ -8,6 +8,15 @@ public class Instrument extends Rentable implements Serializable {
     private Category category;
     private String section;
     private boolean isSelected;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     private String note;
 
 

@@ -49,7 +49,7 @@ public class add_member extends AppCompatActivity {
         final RadioButton faculty_rb = findViewById(R.id.faculty_add_member_radiobutton);
 
         //Buttons
-        Button add_member = findViewById(R.id.ok_add_member_button);
+        Button add_member = findViewById(R.id.ok_edit_member_button);
         Button cancel_member = findViewById(R.id.cancel_add_member_button);
 
         add_member.setOnClickListener(new View.OnClickListener() {

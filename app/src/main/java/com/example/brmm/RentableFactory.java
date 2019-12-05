@@ -5,7 +5,7 @@ public class RentableFactory {
         Rentable rentable = null;
         switch (type) {
             case "Instrument":
-                rentable = new Instrument(co, st, na, price, idnum);
+                rentable = new Instrument(co, st, na, price, idnum,null);
                 break;
 
             case "Part":

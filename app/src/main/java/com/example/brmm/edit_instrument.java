@@ -1,33 +1,38 @@
 package com.example.brmm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class edit_instrument extends AppCompatActivity {
     private String section;
     private Category category;
-    private Instrument instrument;
-    private int id;
+    private Instrument ins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_instrument);
 
+
         //Textviews
-        TextView header_textview = findViewById(R.id.edit_instrument_header);
+        final TextView header_textview = findViewById(R.id.edit_instrument_header);
         TextView name_textview = findViewById(R.id.name_edit_instrument_textview);
         TextView id_textview = findViewById(R.id.id_edit_instrument_textview);
-        TextView id_display_textview = findViewById(R.id.id_edit_instrument_display_textview);
+        final TextView id_display_textview = findViewById(R.id.id_edit_instrument_display_textview);
         TextView section_textview = findViewById(R.id.section_edit_instrument_textview);
-        TextView cost_textview = findViewById(R.id.cost_edit_part_textview);
+        final TextView cost_textview = findViewById(R.id.cost_edit_part_textview);
         TextView cat_textview = findViewById(R.id.cat_edit_instrument_textview);
 
 
@@ -48,6 +53,52 @@ public class edit_instrument extends AppCompatActivity {
         //Recyclerview
         RecyclerView cat_rview = findViewById(R.id.cat_edit_instrument_rview);
 
+        final ArrayList<String> inslist = new ArrayList<>();
+        final ArrayList<String> sections = getIntent().getStringArrayListExtra("sectionlist");
+        if (sections != null) {
+            ArrayAdapter<String> sectionAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, sections);
+            section_spin.setAdapter(sectionAdapter);
+        }
+
+        final ArrayList<Instrument> temp = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
+        if (temp != null) {
+            for (Instrument ins : temp) {
+                inslist.add(ins.getName());
+            }
+            if (inslist != null) {
+                ArrayAdapter<String> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, inslist);
+                pick_spin.setAdapter(memberAdapter);
+            }
+        }
+        //pick spin logic
+        pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(inslist!=null)
+                {
+                    for(String str : inslist)
+                    {
+                        int count = 0;
+                        if (str == pick_spin.getSelectedItem().toString())
+                        {
+                            name_edittext.setText(temp.get(count).getName());
+                            id_display_textview.setText(temp.get(count).getId());
+                            int pos = sections.indexOf(ins.getSection());
+                            section_spin.setSelection(pos);
+                            cost_edittext.setText(Double.toString(temp.get(count).getCost()));
+
+
+
+                        }
+                        count++;
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         //section spinner logic
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -84,6 +135,7 @@ public class edit_instrument extends AppCompatActivity {
                 section_spin.setSelection(0);
                 name_edittext.setText("");
                 cost_edittext.setText("");
+                finish();
             }
         });
 
@@ -94,11 +146,21 @@ public class edit_instrument extends AppCompatActivity {
                 String name;
                 double cost;
                 name = name_edittext.getText().toString();
-                //id =
 
              try   {cost = Double.parseDouble(cost_edittext.getText().toString());}
                  catch (NumberFormatException ex){cost = 0;}
+
+                ins.setName(name);
+                ins.setId(Integer.parseInt(id_display_textview.getText().toString()));
+                ins.setSection(section);
+                ins.setCost(Double.parseDouble(cost_edittext.getText().toString()));
+
+                Intent intent = new Intent();
+                intent.putExtra("instrument", ins);
+                setResult(RESULT_OK, intent);
+                finish();
             }
+
         });
 
         //section spinner logic

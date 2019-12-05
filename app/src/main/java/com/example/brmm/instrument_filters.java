@@ -59,6 +59,7 @@ public class instrument_filters extends AppCompatActivity {
                 name_edittext.setText("");
                 section_spin.setSelection(0);
                 cat_spin.setSelection(0);
+                finish();
             }
         });
 

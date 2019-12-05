@@ -1,5 +1,6 @@
 package com.example.brmm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -80,19 +81,26 @@ public class edit_member extends AppCompatActivity {
         faculty_rb = findViewById(R.id.faculty_edit_member_radiobutton);
 
         //Buttons
-        Button cancel_member = findViewById(R.id.cancel_add_instrument_button);
-        Button ok_button = findViewById(R.id.ok_add_instrument_button);
+        Button cancel_member = findViewById(R.id.cancel_edit_member_button);
+        Button ok_button = findViewById(R.id.ok_edit_member_button);
 
         sections = getIntent().getStringArrayListExtra("sectionlist");
-        ArrayAdapter<String> sectionAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, sections);
-        pick_spin.setAdapter(sectionAdapter);
+        if (sections != null) {
+            ArrayAdapter<String> sectionAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, sections);
+            section_spin.setAdapter(sectionAdapter);
+        }
 
         final ArrayList<BandMember> temp = (ArrayList<BandMember>) getIntent().getSerializableExtra("memberlist");
-        for (BandMember bm : temp) {
-            members.add(bm.getUID());
+        if (temp != null) {
+            for (BandMember bm : temp) {
+                members.add(bm.getUID());
+            }
+            if (members != null) {
+                ArrayAdapter<Integer> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, members);
+                pick_spin.setAdapter(memberAdapter);
+            }
         }
-        ArrayAdapter<Integer> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, members);
-        pick_spin.setAdapter(memberAdapter);
+
 
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,6 +146,11 @@ public class edit_member extends AppCompatActivity {
                     if (member instanceof Student)
                         ((Student) member).setNotes(notes);
                 }
+
+                Intent intent = new Intent();
+                intent.putExtra("member", member);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 
@@ -164,20 +177,27 @@ public class edit_member extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 for (BandMember bm : temp) {
 
-                    if (Integer.parseInt(pick_spin.getSelectedItem().toString())==bm.getUID()){
+                    if (Integer.parseInt(pick_spin.getSelectedItem().toString()) == bm.getUID()) {
                         fname_edittext.setText(bm.getFname());
                         lname_edittext.setText(bm.getLname());
                         ULID_edittext.setText(bm.getUlid());
                         UID_edittext.setText(bm.getUID());
-                        if(bm instanceof Faculty) {
+                        if (bm instanceof Faculty) {
                             role_edittext.setText("");
                         }
                         notes_edittext.setText("");
                         student_rb.setChecked(false);
                         faculty_rb.setChecked(false);
                         int pos = sections.indexOf(bm.getSection());
-                        if(bm instanceof Student) {
+                        if (bm instanceof Student) {
                             section_spin.setSelection(pos);
+                            role_edittext.setVisibility(View.INVISIBLE);
+                            section_spin.setVisibility(View.VISIBLE);
+
+
+                        } else {
+                            section_spin.setVisibility(View.INVISIBLE);
+                            role_edittext.setVisibility(View.VISIBLE);
                         }
                     }
                 }
@@ -192,7 +212,8 @@ public class edit_member extends AppCompatActivity {
         //section spinner logic
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                       long id) {
                 section = section_spin.getSelectedItem().toString();
             }
 

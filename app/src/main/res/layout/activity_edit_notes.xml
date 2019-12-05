@@ -81,11 +81,14 @@
         app:layout_constraintTop_toBottomOf="@+id/edit_notes_edittext" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/pick_edit_note_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="TextView"
+        android:text="@string/pick_one"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/edit_notes_textview"
         app:layout_constraintStart_toStartOf="@+id/edit_notes_textview"
         app:layout_constraintTop_toBottomOf="@+id/edit_notes_textview" />
@@ -95,7 +98,7 @@
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/spinner_background"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintEnd_toEndOf="@+id/pick_edit_note_textview"
+        app:layout_constraintStart_toStartOf="@+id/pick_edit_note_textview"
+        app:layout_constraintTop_toBottomOf="@+id/pick_edit_note_textview" />
 </android.support.constraint.ConstraintLayout>

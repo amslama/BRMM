@@ -106,19 +106,18 @@ public class main_screen extends AppCompatActivity  {
         delete_section_button = findViewById(R.id.delete_section_main_screen_button);
         inv_view = findViewById(R.id.item_list_main_screen_rview);
 
-        for(Instrument ins : rent_inv.getInstrumentList())
-        {
-            if(!ins_concepts.contains(ins.getName()))
-            {
-                ins_concepts.add(ins.getName());
+        if(rent_inv.getInstrumentList()!=null) {
+            for (Instrument ins : rent_inv.getInstrumentList()) {
+                if (!ins_concepts.contains(ins.getName())) {
+                    ins_concepts.add(ins.getName());
+                }
             }
         }
-
-        for(Part part : rent_inv.getPartList())
-        {
-            if(!part_concepts.contains(part.getName()))
-            {
-                part_concepts.add(part.getName());
+        if(rent_inv.getPartList()!=null) {
+            for (Part part : rent_inv.getPartList()) {
+                if (!part_concepts.contains(part.getName())) {
+                    part_concepts.add(part.getName());
+                }
             }
         }
     }

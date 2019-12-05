@@ -173,7 +173,7 @@
         app:layout_constraintTop_toBottomOf="@+id/notes_edit_member_edittext" />
 
     <Button
-        android:id="@+id/ok_add_member_button"
+        android:id="@+id/ok_edit_member_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
         android:background="@drawable/button_border"
@@ -259,7 +259,7 @@
             android:id="@+id/student_edit_member_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_member" />
+            android:text="@string/student" />
 
         <RadioButton
             android:id="@+id/faculty_edit_member_radiobutton"

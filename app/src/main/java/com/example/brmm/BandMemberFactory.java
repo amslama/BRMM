@@ -9,7 +9,7 @@ public class BandMemberFactory {
                 break;
 
             case "Faculty":
-                member = new Faculty(firstname,lastname,ulid,department,role,UID);
+                member = new Faculty(firstname,lastname,ulid,role,UID);
                 break;
 
             default:

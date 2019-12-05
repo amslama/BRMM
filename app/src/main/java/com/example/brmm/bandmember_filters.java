@@ -77,6 +77,7 @@ public class bandmember_filters extends AppCompatActivity {
                 no_has_cbox.setChecked(false);
                 section_spin.setSelection(0);
                 instrument_spin.setSelection(0);
+                finish();
             }
         });
 
@@ -140,10 +141,8 @@ public class bandmember_filters extends AppCompatActivity {
                 } catch (NumberFormatException ex){UID = 0;}
 
                 Intent intent = getIntent();
-              //  ArrayList<BandMember> memberlist = (ArrayList<BandMember>)data.getSerializableExtra("memberlist");
-            //     memberlist = filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
-                Intent thisIntent = new Intent();
-              //  intent.putExtra("memberList", memberlist);
+                ArrayList<BandMember> memberlist = filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
+                intent.putExtra("memberList", memberlist);
                 setResult(RESULT_OK,intent);
                 finish();
             }
