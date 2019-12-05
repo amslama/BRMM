@@ -1,6 +1,7 @@
 
 package com.example.brmm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -147,7 +148,7 @@ public class bandmember_filters extends AppCompatActivity {
 
 
     // main filter method, for ints, 0 = dont filter, 1 = filter by Faculty or is true, 2 = filter by false
-    public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument) {
+    public void filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument) {
 
         ArrayList<BandMember> filter = new ArrayList<>();
 
@@ -186,7 +187,7 @@ public class bandmember_filters extends AppCompatActivity {
            filter = filterBySection(filter, section);
 
 
-        return filter;
+        passFilteredMembers(filter);
 
     }
 
@@ -305,6 +306,13 @@ public class bandmember_filters extends AppCompatActivity {
 
         }
         return filter;
+
+    }
+
+    public void passFilteredMembers(ArrayList<BandMember> filteredMembers) {
+        Intent mainScreen = new Intent(this,main_screen.class);
+        mainScreen.putExtra("FILTEREDMEMBERS", filteredMembers);
+        startActivity(mainScreen);
     }
 
 }

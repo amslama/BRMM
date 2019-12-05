@@ -18,12 +18,9 @@ import java.util.ArrayList;
 public class main_screen extends AppCompatActivity {
 
     public static final long DISCONNECT_TIMEOUT = 5*60*1000; // 5 min = 5 * 60 * 1000 ms
-
-
     private Handler disconnectHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            // todo
             return true;
         }
     });
@@ -31,7 +28,6 @@ public class main_screen extends AppCompatActivity {
     private Runnable disconnectCallback = new Runnable() {
         @Override
         public void run() {
-
             goBackToLogin();
         }
     };
