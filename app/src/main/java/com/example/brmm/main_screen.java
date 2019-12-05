@@ -2,6 +2,8 @@ package com.example.brmm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,52 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class main_screen extends AppCompatActivity {
+
+    public static final long DISCONNECT_TIMEOUT = 5*60*1000; // 5 min = 5 * 60 * 1000 ms
+
+
+    private Handler disconnectHandler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            // todo
+            return true;
+        }
+    });
+
+    private Runnable disconnectCallback = new Runnable() {
+        @Override
+        public void run() {
+
+            goBackToLogin();
+        }
+    };
+
+    public void resetDisconnectTimer(){
+        disconnectHandler.removeCallbacks(disconnectCallback);
+        disconnectHandler.postDelayed(disconnectCallback, DISCONNECT_TIMEOUT);
+    }
+
+    public void stopDisconnectTimer(){
+        disconnectHandler.removeCallbacks(disconnectCallback);
+    }
+
+    @Override
+    public void onUserInteraction(){
+        resetDisconnectTimer();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        resetDisconnectTimer();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        stopDisconnectTimer();
+    }
+
 
     private boolean facultyRights = false;
     private RentableInventory rent_inv;
@@ -405,5 +453,10 @@ public class main_screen extends AppCompatActivity {
                  */
             }
         }
+    }
+
+    public void goBackToLogin() {
+        Intent loginScreen = new Intent(this, login_screen.class);
+        startActivity(loginScreen);
     }
 }
