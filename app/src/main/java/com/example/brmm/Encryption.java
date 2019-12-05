@@ -3,8 +3,7 @@ package com.example.brmm;
 import android.util.Base64;
 
 public class Encryption {
-    private String seed = "";
-    private String message = "I like pie";
+    private String seed = "brmm project";
     private String stringEncoded = "";
     private String decoded = "";
 
