@@ -147,7 +147,7 @@ public class DatabaseWrapper extends Thread{
                 break;
             case "addUser":
                 //call set user arguments then the run() method (no need for setUlid() method)
-                addUser(ID, firstName, lastName, section, sectionLeader, faculty, note, ulid, password, department);
+                addUser(ID, firstName, lastName, section, sectionLeader, faculty, note, ulid, password);
                 password = "";
                 break;
             case "removeUser":
@@ -294,7 +294,7 @@ public class DatabaseWrapper extends Thread{
     }
 
     //Adds a user to the database
-    private void addUser(int ID,String firstName, String lastName, String section, boolean sectionLeader, boolean faculty, String note, String ulid, String password,String department){
+    private void addUser(int ID,String firstName, String lastName, String section, boolean sectionLeader, boolean faculty, String note, String ulid, String password){
         try{
             int leader = 0;
             int staff = 0;
@@ -304,8 +304,8 @@ public class DatabaseWrapper extends Thread{
             if(faculty){
                 staff = 1;
             }
-            String query = "insert into user (ID,firstName,lastName,section,sectionLeader,faculty,note,username,passwrd,department) values ("+ID+",'"+firstName+"','"+lastName+"','"+section+"',";
-            query = query+leader+","+staff+",'"+note+"','"+ulid+"','"+password+"','"+department+"')";
+            String query = "insert into user (ID,firstName,lastName,section,sectionLeader,faculty,note,username,passwrd) values ("+ID+",'"+firstName+"','"+lastName+"','"+section+"',";
+            query = query+leader+","+staff+",'"+note+"','"+ulid+"','"+password+"')";
             Statement st = conn.createStatement();
             st.executeUpdate(query);
         }
@@ -330,12 +330,12 @@ public class DatabaseWrapper extends Thread{
         Faculty faculty;
         ArrayList<Faculty> list = new ArrayList<Faculty>();
         try{
-            String query = "select firstName,lastName,username,department,role,ID from user where faculty = 1 order by username asc";
+            String query = "select firstName,lastName,username,role,ID from user where faculty = 1 order by username asc";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             int i = 1;
             while(rs.next()){
-                faculty = new Faculty(rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("department"),rs.getString("role"),rs.getInt("ID"));
+                faculty = new Faculty(rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("role"),rs.getInt("ID"));
                 list.add(faculty);
             }
         }
