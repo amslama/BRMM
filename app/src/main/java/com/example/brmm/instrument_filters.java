@@ -99,14 +99,18 @@ public class instrument_filters extends AppCompatActivity {
                 cost = Double.parseDouble(cost_edittext.getText().toString());
 
 
-                filterInstrumentInv(null, owner, section, name, category, id, cost);
+               ArrayList rentables = filterInstrumentInv(null, owner, section, name, category, id, cost);
+                Intent intent = new Intent();
+                intent.putExtra("InstrumentList", intent);
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
 
     }
 
     public ArrayList<Rentable> filterInstrumentInv(ArrayList<Rentable> rentables, String owner, String section, String name, Category category, int id, double cost) {
-        ArrayList<Rentable> filter = new ArrayList<>();
+        ArrayList<Rentable> filter = rentables;
 
         if(category != null)
             filter = filterByCategory(filter, category);
@@ -133,10 +137,7 @@ public class instrument_filters extends AppCompatActivity {
         if (cost != 0)
             filter = filterByCost(filter, cost);
 
-
-
-
-        passFilteredInstruments(filter);
+        
 
         return filter;
     }
@@ -206,9 +207,5 @@ public class instrument_filters extends AppCompatActivity {
         return filter;
     }
 
-    public void passFilteredInstruments(ArrayList<Rentable> filteredInstruments) {
-        Intent inventory = new Intent(this,RentableInventory.class);
-        inventory.putExtra("FILTEREDINSTRUMENTS", filteredInstruments);
-        startActivity(inventory);
-    }
+
 }
