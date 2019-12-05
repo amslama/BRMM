@@ -22,7 +22,7 @@ public class DatabaseWrapper extends Thread{
     private String password = "";
     private String department = "";
     private ArrayList<Instrument> instrumentList = null;
-    private ArrayList<Student> studentList = null;
+    private ArrayList<Student> studentList;
     private ArrayList<Faculty> facultyList = null;
     private ArrayList<Part> partList = null;
     private boolean valid = false;
@@ -155,7 +155,7 @@ public class DatabaseWrapper extends Thread{
                 break;
             case "getFaculty":
                 //call the getFacultyList() method after the run() method (No need for setUlid() method)
-                getFaculty();
+                facultyList = getFaculty();
                 break;
             case "getStudents":
                 //call the getStudentList() method after the run() method (No need for setUlid() method)
@@ -163,7 +163,7 @@ public class DatabaseWrapper extends Thread{
                 break;
             case "getInstruments":
                 //call the getInstrumentList() method after the run() method (No need for setUlid() method)
-                getInstruments();
+                instrumentList = getInstruments();
                 break;
             case "addInstrument":
                 //call the setInstrumentVariables() method first then call the run method (No need for setUlid() method)
@@ -334,7 +334,6 @@ public class DatabaseWrapper extends Thread{
             String query = "select firstName,lastName,username,role,ID from user where faculty = 1 order by username asc";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
-            int i = 1;
             while(rs.next()){
                 faculty = new Faculty(rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("role"),rs.getInt("ID"));
                 list.add(faculty);
@@ -346,28 +345,7 @@ public class DatabaseWrapper extends Thread{
         return list;
     }
 
-    private ArrayList<Student> getStudents(){
-        Student student;
-        ArrayList<Student> list = new ArrayList<Student>();
-        try{
-            String query = "select firstName,lastName,section,sectionLeader,note,username,ID from user where faculty = 0 order by username asc";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            boolean leader = false;
-            while(rs.next()){
-                if(rs.getInt("sectionLeader")==1){
-                    leader = true;
-                }
-                student = new Student(rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("section"),leader,rs.getInt("ID"),rs.getString("note"));
-                list.add(student);
-            }
 
-        }
-        catch(Exception e){
-            System.out.println("Get students failed");
-        }
-        return list;
-    }
 
 
     /*
@@ -392,6 +370,30 @@ public class DatabaseWrapper extends Thread{
             System.out.println("Could not get instruments");
         }
         return instrumentList;
+    }
+
+    private ArrayList<Student> getStudents(){
+        Student student;
+        ArrayList<Student> list = new ArrayList<Student>();
+        try{
+            String query = "select firstName,lastName,section,sectionLeader,note,username,ID from user where faculty = 0 order by username asc";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            boolean leader = false;
+            while(rs.next()){
+                if(rs.getInt("sectionLeader")==1){
+                    leader = true;
+                }
+                student = new Student(rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("section"),leader,rs.getInt("ID"),rs.getString("note"));
+                list.add(student);
+                System.out.println(rs.getString("firstName")+"\n"+rs.getString("lastName")+"\n"+rs.getString("username")+"\n"+rs.getString("section")+"\n"+leader+rs.getInt("ID")+"\n"+rs.getString("note")+"\n");
+            }
+
+        }
+        catch(Exception e) {
+            System.out.println("Get students failed");
+        }
+        return list;
     }
 
     //TODO: INSTRUMENT STUFF

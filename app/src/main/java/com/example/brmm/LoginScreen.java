@@ -62,10 +62,10 @@ public class LoginScreen extends AppCompatActivity {
         threadTest.start();
         try {
             threadTest.join();
-            System.out.println("Worked");
+            System.out.println("Worked.............................");
         }
         catch (Exception e){
-            System.out.println("Test did not work");
+            System.out.println("Test did not work...........................");
         }
         System.out.println("TEST STUFF: "+wrapper.getStudentList());
 
