@@ -9,6 +9,14 @@ public class BandMember implements Serializable
     protected int UID;
     public String ulid;
 
+    BandMember()
+    {
+        fname = "";
+        lname = "";
+        UID = -1;
+        ulid = "";
+    }
+
     public String getSection() {
         return section;
     }

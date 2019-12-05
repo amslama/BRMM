@@ -98,12 +98,12 @@ public class instrument_filters extends AppCompatActivity {
                 id = Integer.parseInt(id_edittext.getText().toString());
 
                 cost = Double.parseDouble(cost_edittext.getText().toString());
-
-                //  ArrayList<Instrument> instruments = (ArrayList<Instrument>)data.getSerializableExtra("Instrumentlist");
-                filterInstrumentInv(null, owner, section, name, category, id, cost);
                 Intent thisIntent = new Intent();
-                //  intent.putExtra(instrumentList", instruments);
-                //setResult(RESULT_OK,intent);
+                ArrayList<Instrument> instruments = (ArrayList<Instrument>)thisIntent.getSerializableExtra("instrumentlist");
+                filterInstrumentInv(null, owner, section, name, category, id, cost);
+                thisIntent = new Intent();
+                thisIntent.putExtra("instrumentList", instruments);
+                setResult(RESULT_OK,thisIntent);
                 finish();
             }
         });
