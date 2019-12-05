@@ -174,6 +174,7 @@ public class main_screen extends AppCompatActivity  {
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), instrument_filters.class);
                 openFilter.putExtra("sectionlist",sections);
+                openFilter.putExtra("instruments",rent_inv);
                 startActivityForResult(openFilter, 10);
             }
         });
@@ -223,6 +224,7 @@ public class main_screen extends AppCompatActivity  {
                 Intent openFilter = new Intent(getBaseContext(), bandmember_filters.class);
                 openFilter.putExtra("sectionlist",sections);
                 openFilter.putExtra("instrumentlist",ins_concepts);
+                openFilter.putExtra("members",member_inv);
                 startActivityForResult(openFilter,11);
             }
         });
