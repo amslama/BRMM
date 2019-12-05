@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class login_screen extends AppCompatActivity {
     private int counter;
     DatabaseWrapper wrapper;
@@ -128,6 +130,19 @@ public class login_screen extends AppCompatActivity {
         catch (Exception e){
             System.out.println("get faculty join failed");
         }
+        ArrayList<Faculty> faculty = new ArrayList<Faculty>();
+        faculty = wrapper.getFacultyList();
+        if(faculty!=null) {
+            String answer = "faculty occupied:" + faculty.isEmpty();
+            System.out.println(faculty.size());
+
+        }
+        else
+        {
+            System.out.println("faculty empty");
+        }
+
+
         mainScreen.putExtra("FACULTY", wrapper.getFacultyList());
 
         wrapper.setMethod("getStudents");

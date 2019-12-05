@@ -77,7 +77,7 @@ public class main_screen extends AppCompatActivity  {
                 member_inv.addBandMember(student);
             }
         }
-        if( (ArrayList<Faculty>)intent.getSerializableExtra("INSTRUMENT")!=null) {
+        if( (ArrayList<Faculty>)intent.getSerializableExtra("MEMBER")!=null) {
             for (Faculty faculty : (ArrayList<Faculty>) intent.getSerializableExtra("INSTRUMENT")) {
                 member_inv.addBandMember(faculty);
             }
