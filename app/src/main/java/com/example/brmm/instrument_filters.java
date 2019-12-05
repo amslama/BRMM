@@ -1,5 +1,6 @@
 package com.example.brmm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -97,8 +98,12 @@ public class instrument_filters extends AppCompatActivity {
 
                 cost = Double.parseDouble(cost_edittext.getText().toString());
 
-
+                //  ArrayList<Instrument> instruments = (ArrayList<Instrument>)data.getSerializableExtra("Instrumentlist");
                 filterInstrumentInv(null, owner, section, name, category, id, cost);
+                Intent thisIntent = new Intent();
+                //  intent.putExtra(instrumentList", instruments);
+                //setResult(RESULT_OK,intent);
+                finish();
             }
         });
 

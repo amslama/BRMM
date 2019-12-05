@@ -71,6 +71,7 @@ public class part_filters extends AppCompatActivity {
                     cost = Double.parseDouble(cost_edittext.getText().toString());
                 } catch (NumberFormatException ex) {cost = -1;}
 
+                //  ArrayList<Part> parts = (ArrayList<Part>)data.getSerializableExtra("partlist");
                 ArrayList<Part> parts = filterParts(null, name, sn, cost);
                 Intent intent = new Intent();
                 intent.putExtra("partList", parts);
