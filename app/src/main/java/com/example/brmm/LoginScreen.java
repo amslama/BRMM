@@ -57,6 +57,18 @@ public class LoginScreen extends AppCompatActivity {
 
         wrapper.getValidation();
 
+        wrapper.setMethod("getStudents");
+        Thread threadTest = new Thread(wrapper);
+        threadTest.start();
+        try {
+            threadTest.join();
+            System.out.println("Worked");
+        }
+        catch (Exception e){
+            System.out.println("Test did not work");
+        }
+        System.out.println("TEST STUFF: "+wrapper.getStudentList());
+
         //Goes into read-only mode for the app
         stdntLogin.setOnClickListener(new View.OnClickListener() {
             @Override

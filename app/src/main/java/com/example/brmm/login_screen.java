@@ -3,6 +3,7 @@ package com.example.brmm;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,8 @@ import android.widget.Toast;
 
 public class login_screen extends AppCompatActivity {
     private int counter;
-    DatabaseWrapper wrapper;
+    DatabaseConnection connection = null;
+    DatabaseWrapper wrapper = null;
     Thread thread2;
 
     public login_screen() {
@@ -39,12 +41,9 @@ public class login_screen extends AppCompatActivity {
 
         final Toast toast = Toast.makeText(this, "Too many failed attempts", Toast.LENGTH_SHORT);
 
-
         DatabaseConnection connection = new DatabaseConnection();
         Thread thread = new Thread(connection);
         thread.start();
-
-
         try{
             thread.join();
         }
@@ -52,9 +51,8 @@ public class login_screen extends AppCompatActivity {
             System.out.println("Connection join failed");
         }
 
-        wrapper = new DatabaseWrapper(connection.getConnection());
-
-
+       wrapper = new DatabaseWrapper(connection.getConnection());
+        
 
 
         //Login for faculty
