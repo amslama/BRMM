@@ -182,6 +182,7 @@ public class DatabaseWrapper extends Thread{
             case "removePart":
                 //Call setID before the run method
                 removePart(ID);
+                break;
             default:
                 System.out.println("Method not found");
                 break;
