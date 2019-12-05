@@ -142,6 +142,7 @@ public class main_screen extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), edit_part.class);
+                openFilter.putExtra("partlist",rent_inv.getPartList());
                 startActivityForResult(openFilter, 8);
             }
         });
@@ -189,6 +190,7 @@ public class main_screen extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), edit_instrument.class);
+                openFilter.putExtra("instrumentlist",rent_inv.getInstrumentList());
                 startActivityForResult(openFilter, 6);
             }
         });
@@ -196,6 +198,7 @@ public class main_screen extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 Intent openFilter = new Intent(getBaseContext(), delete_instrument.class);
+                openFilter.putExtra("instrumentlist",rent_inv.getInstrumentList());
                 startActivityForResult(openFilter,12);
             }
         });
@@ -235,6 +238,7 @@ public class main_screen extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 Intent openFilter = new Intent(getBaseContext(), delete_member.class);
+                openFilter.putExtra("memberlist",member_inv.getBandMembers());
                 startActivityForResult(openFilter,13);
             }
         });
@@ -260,6 +264,8 @@ public class main_screen extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), checkout_instrument.class);
+                openFilter.putExtra("instrumentlist",rent_inv.getInstrumentList());
+                openFilter.putExtra("memberlist",member_inv.getBandMembers());
                 startActivityForResult(openFilter, 3);
             }
         });
@@ -267,6 +273,7 @@ public class main_screen extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), edit_notes.class);
+                openFilter.putExtra("instrumentlist",rent_inv.getInstrumentList());
                 startActivityForResult(openFilter, 6);
             }
         });
@@ -290,6 +297,7 @@ public class main_screen extends AppCompatActivity  {
             public void onClick(View v) {
 
                 Intent openFilter = new Intent(getBaseContext(), edit_member.class);
+                openFilter.putExtra("memberlist",member_inv.getBandMembers());
                 startActivityForResult(openFilter, 7);
             }
         });
@@ -297,6 +305,7 @@ public class main_screen extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), set_lead.class);
+                openFilter.putExtra("memberlist",member_inv.getBandMembers());
                 startActivityForResult(openFilter,7);
             }
         });
@@ -348,30 +357,24 @@ public class main_screen extends AppCompatActivity  {
         //add part
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
-
                 Part part = (Part)data.getSerializableExtra("part");
                 rent_inv.addPart(part);
-
             }
         }
 
         //add instrument
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-
                 Instrument instrument = (Instrument)data.getSerializableExtra("instrument");
                 rent_inv.addInstrument(instrument);
-
             }
         }
 
         //add Member
         if (requestCode == 2) {
             if (resultCode == RESULT_OK) {
-
                 BandMember member = (BandMember)data.getSerializableExtra("member");
                 member_inv.addBandMember(member);
-
             }
         }
 
