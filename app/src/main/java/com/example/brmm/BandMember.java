@@ -9,6 +9,16 @@ public class BandMember implements Serializable
     protected int UID;
     public String ulid;
 
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
+
+    protected String section;
+
     public void setFname(String fname){
         this.fname = fname;
     }
