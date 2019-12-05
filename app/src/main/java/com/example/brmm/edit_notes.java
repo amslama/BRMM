@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class edit_notes extends AppCompatActivity {
@@ -20,6 +21,10 @@ public class edit_notes extends AppCompatActivity {
 
         //Edittext
         final EditText notes_edittext = findViewById(R.id.edit_notes_edittext);
+
+        //Dropdowns
+        final Spinner pick_spin = findViewById(R.id.pick_edit_note_dropdown);
+
 
         //Buttons
         Button ok_button = findViewById(R.id.ok_edit_notes_button);

@@ -61,6 +61,7 @@
     <string name="member">Member:</string>
     <string name="set_lead">Set Lead</string>
     <string name="done">Done</string>
+    <string name="pick_one">Pick one</string>
 
     <string-array name="Entries">
         <item>Parts</item>

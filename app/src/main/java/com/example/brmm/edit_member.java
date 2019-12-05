@@ -67,6 +67,8 @@ public class edit_member extends AppCompatActivity {
 
         //Dropdowns
         section_spin = findViewById(R.id.section_edit_member_dropdown);
+        final Spinner pick_spin = findViewById(R.id.pick_edit_member_dropdown);
+
 
         //Radio
         rgroup = findViewById(R.id.member_type_edit_member_radiogroup);
@@ -136,6 +138,7 @@ public class edit_member extends AppCompatActivity {
                 student_rb.setChecked(false);
                 faculty_rb.setChecked(false);
                 section_spin.setSelection(0);
+                finish();
             }
         });
 

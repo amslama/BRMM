@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class main_screen extends AppCompatActivity {
+public class main_screen extends AppCompatActivity  {
 
     public static final long DISCONNECT_TIMEOUT = 5*60*1000; // 5 min = 5 * 60 * 1000 ms
     private Handler disconnectHandler = new Handler(new Handler.Callback() {
@@ -62,6 +62,8 @@ public class main_screen extends AppCompatActivity {
     private boolean facultyRights = false;
     private RentableInventory rent_inv;
     private BandMemberInventory member_inv;
+    private ArrayList<String> sections;
+    private BandMember temp_bm;
 
     //Dropdown
     private Spinner inv_spin;
@@ -130,6 +132,7 @@ public class main_screen extends AppCompatActivity {
     {
         member_inv = new BandMemberInventory();
         rent_inv = new RentableInventory();
+        ArrayList<String> sections = new ArrayList<String>(/*IMPORT SECTIONS*/);
         inv_spin = findViewById(R.id.inventory_main_screen_dropdown);
         filter_button = findViewById(R.id.filter_main_screen_button);
         logout_button = findViewById(R.id.logout_main_screen_button);
@@ -204,7 +207,7 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), edit_instrument.class);
-                startActivity(openFilter);
+                startActivityForResult(openFilter, 6);
             }
         });
 
@@ -254,9 +257,7 @@ public class main_screen extends AppCompatActivity {
     }
 
     private void oneTimeListeners() {
-        MemberRecyclerAdapter adapter = new MemberRecyclerAdapter((member_inv.getBandMembers()));
-        inv_view.setLayoutManager(new LinearLayoutManager(this));
-        inv_view.setAdapter(adapter);
+
         checkout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -268,7 +269,7 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), edit_notes.class);
-                startActivity(openFilter);
+                startActivityForResult(openFilter, 6);
             }
         });
         delete_section_button.setOnClickListener(new View.OnClickListener() {
@@ -288,8 +289,9 @@ public class main_screen extends AppCompatActivity {
         edit_member_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent openFilter = new Intent(getBaseContext(), edit_member.class);
-                startActivity(openFilter);
+                startActivityForResult(openFilter, 7);
             }
         });
         set_lead_button.setOnClickListener(new View.OnClickListener() {
@@ -332,6 +334,7 @@ public class main_screen extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putExtra("member",member_inv);
                 intent.putExtra("rentable",rent_inv);
+                intent.putExtra("sections",sections);
                 setResult(RESULT_OK,intent);
                 finish();
             }
@@ -381,68 +384,56 @@ public class main_screen extends AppCompatActivity {
         }
         if (requestCode == 4) {
             if (resultCode == RESULT_OK) {
-                /*
-                Add section LOGIC************************************
-                 */
+                String section = data.getStringExtra("section");
+                sections.add(section);
             }
         }
         if (requestCode == 5) {
             if (resultCode == RESULT_OK) {
-                /*
-                Delete section LOGIC************************************
-                 */
+                String section = data.getStringExtra("section");
+                sections.remove(section);
             }
         }
         if (requestCode == 6) {
             if (resultCode == RESULT_OK) {
-                /*
-                edit instrument LOGIC************************************
-                 */
+                Instrument instrument = (Instrument)data.getSerializableExtra("instrument");
+                rent_inv.removeInstrument(instrument.getId());
+                rent_inv.addInstrument(instrument);
             }
         }
         if (requestCode == 7) {
             if (resultCode == RESULT_OK) {
-                /*
-                edit member LOGIC************************************
-                 */
+                BandMember bandmember = (BandMember)data.getSerializableExtra("member");
+                member_inv.removeBandMember(bandmember.getUID());
+                member_inv.addBandMember(bandmember);
             }
         }
+
         if (requestCode == 8) {
             if (resultCode == RESULT_OK) {
-                /*
-                edit notes LOGIC************************************
-                 */
+                BandMember bandmember = (BandMember)data.getSerializableExtra("member");
             }
         }
         if (requestCode == 9) {
-            if (resultCode == RESULT_OK) {
-                /*
-                edit part LOGIC************************************
-                 */
-            }
-        }
-        if (requestCode == 10) {
             if (resultCode == RESULT_OK) {
                 /*
                 part filters LOGIC************************************
                  */
             }
         }
-        if (requestCode == 11) {
+        if (requestCode == 10) {
             if (resultCode == RESULT_OK) {
                 /*
                 instrument filters section LOGIC************************************
                  */
             }
         }
-        if (requestCode == 12) {
+        if (requestCode == 11) {
             if (resultCode == RESULT_OK) {
-                /*
-                member filters LOGIC************************************
-                 */
+                ArrayList<BandMember> memberList = data.get
             }
         }
-        if (requestCode == 13) {
+        if (requestCode == 12) {
             if (resultCode == RESULT_OK) {
                 /*
                 set lead LOGIC************************************

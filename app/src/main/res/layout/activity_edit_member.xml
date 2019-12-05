@@ -15,10 +15,10 @@
         android:contentDescription="@string/color_filter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/edit_member_header"
@@ -245,16 +245,15 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/edit_member_header"
-        app:layout_constraintTop_toBottomOf="@+id/edit_member_header" />
+        app:layout_constraintTop_toBottomOf="@+id/pick_edit_member_dropdown" />
 
     <RadioGroup
         android:id="@+id/member_type_edit_member_radiogroup"
         android:layout_width="199dp"
         android:layout_height="32dp"
-        android:layout_marginTop="28dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toEndOf="@+id/edit_member_type_textview"
-        app:layout_constraintTop_toBottomOf="@+id/edit_member_header">
+        app:layout_constraintTop_toTopOf="@+id/edit_member_type_textview">
 
         <RadioButton
             android:id="@+id/student_edit_member_radiobutton"
@@ -268,4 +267,26 @@
             android:layout_height="wrap_content"
             android:text="@string/faculty" />
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/pick_edit_member_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/pick_one"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/edit_member_header"
+        app:layout_constraintStart_toStartOf="@+id/edit_member_header"
+        app:layout_constraintTop_toBottomOf="@+id/edit_member_header" />
+
+    <Spinner
+        android:id="@+id/pick_edit_member_dropdown"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:background="@drawable/spinner_background"
+        app:layout_constraintEnd_toEndOf="@+id/pick_edit_member_textview"
+        app:layout_constraintStart_toStartOf="@+id/pick_edit_member_textview"
+        app:layout_constraintTop_toBottomOf="@+id/pick_edit_member_textview" />
 </android.support.constraint.ConstraintLayout>

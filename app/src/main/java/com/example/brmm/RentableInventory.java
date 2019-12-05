@@ -29,9 +29,9 @@ public class RentableInventory implements Serializable {
         return parts;
     }
 
-    public void removeInstrument(Instrument newIns) {
+    public void removeInstrument(int pos) {
 
-        instruments.remove(newIns);
+        instruments.remove(pos);
         //update db
     }
 

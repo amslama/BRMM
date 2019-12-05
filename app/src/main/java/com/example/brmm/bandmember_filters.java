@@ -140,7 +140,11 @@ public class bandmember_filters extends AppCompatActivity {
                 } catch (NumberFormatException ex){UID = 0;}
 
 
-                filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
+                ArrayList<BandMember>  memberList = filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
+                Intent intent = new Intent();
+                intent.putExtra("memberList", intent);
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
     }
