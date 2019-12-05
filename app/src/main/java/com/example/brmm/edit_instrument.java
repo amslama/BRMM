@@ -38,6 +38,7 @@ public class edit_instrument extends AppCompatActivity {
         //Dropdowns
         final Spinner section_spin = findViewById(R.id.section_edit_instrument_dropdown);
         final Spinner cat_spin = findViewById(R.id.cat_edit_instrument_dropdown);
+        final Spinner pick_spin = findViewById(R.id.pick_edit_instrument_dropdown);
 
         //Buttons
         Button add_cat_button = findViewById(R.id.add_cat_edit_instrument_button);

@@ -150,7 +150,7 @@ public class login_screen extends AppCompatActivity {
         catch (Exception e){
             System.out.println("get part join failed");
         }
-        mainScreen.putExtra("PART", wrapper.getPartList());
+//        mainScreen.putExtra("PART", wrapper.getParts());
 
 
         wrapper.setMethod("getInstruments");

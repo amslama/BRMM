@@ -1,5 +1,6 @@
 package com.example.brmm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -97,15 +98,19 @@ public class instrument_filters extends AppCompatActivity {
 
                 cost = Double.parseDouble(cost_edittext.getText().toString());
 
-
+                //  ArrayList<Instrument> instruments = (ArrayList<Instrument>)data.getSerializableExtra("Instrumentlist");
                 filterInstrumentInv(null, owner, section, name, category, id, cost);
+                Intent thisIntent = new Intent();
+                //  intent.putExtra(instrumentList", instruments);
+                //setResult(RESULT_OK,intent);
+                finish();
             }
         });
 
     }
 
-    public ArrayList<Rentable> filterInstrumentInv(ArrayList<Rentable> rentables, String owner, String section, String name, Category category, int id, double cost) {
-        ArrayList<Rentable> filter = new ArrayList<>();
+    public ArrayList<Instrument> filterInstrumentInv(ArrayList<Instrument> Instruments, String owner, String section, String name, Category category, int id, double cost) {
+        ArrayList<Instrument> filter = new ArrayList<>();
 
         if(category != null)
             filter = filterByCategory(filter, category);
@@ -141,53 +146,53 @@ public class instrument_filters extends AppCompatActivity {
 
 
 
-    public ArrayList<Rentable> filterBySection(ArrayList<Rentable> rentables, String section) {
-        ArrayList<Rentable> filter = new ArrayList<>();
-        for (Rentable rentable : rentables) {
-            if (rentable instanceof Instrument) {
-                if (((Instrument) rentable).getSection().equals(section))
-                    filter.add(rentable);
-            }
-                 }
-        return filter;
-    }
-
-    public ArrayList<Rentable> filterByCategory(ArrayList<Rentable> rentables, Category category) {
-        ArrayList<Rentable> filter = new ArrayList<>();
-        for (Rentable rentable : rentables) {
-            if (rentable instanceof Instrument) {
-                if (((Instrument) rentable).getCategory().getSuperCategories().contains(category))
-                    filter.add(rentable);
+    public ArrayList<Instrument> filterBySection(ArrayList<Instrument> Instruments, String section) {
+        ArrayList<Instrument> filter = new ArrayList<>();
+        for (Instrument Instrument : Instruments) {
+            if (Instrument instanceof Instrument) {
+                if (((Instrument) Instrument).getSection().equals(section))
+                    filter.add(Instrument);
             }
         }
         return filter;
     }
 
-    public ArrayList<Rentable> filterByCost(ArrayList<Rentable> rentables, double cost) {
-        ArrayList<Rentable> filter = new ArrayList<>();
-        for (Rentable rentable : rentables) {
-            if(rentable.getCost() == cost)
-                filter.add(rentable);
+    public ArrayList<Instrument> filterByCategory(ArrayList<Instrument> Instruments, Category category) {
+        ArrayList<Instrument> filter = new ArrayList<>();
+        for (Instrument Instrument : Instruments) {
+            if (Instrument instanceof Instrument) {
+                if (((Instrument) Instrument).getCategory().getSuperCategories().contains(category))
+                    filter.add(Instrument);
+            }
         }
         return filter;
     }
 
-    public ArrayList<Rentable> filterByID(ArrayList<Rentable> rentables, int id) {
-        ArrayList<Rentable> filter = new ArrayList<>();
-        for (Rentable rentable : rentables) {
-            if(rentable.getId() == id) {
-                filter.add(rentable);
+    public ArrayList<Instrument> filterByCost(ArrayList<Instrument> Instruments, double cost) {
+        ArrayList<Instrument> filter = new ArrayList<>();
+        for (Instrument Instrument : Instruments) {
+            if(Instrument.getCost() == cost)
+                filter.add(Instrument);
+        }
+        return filter;
+    }
+
+    public ArrayList<Instrument> filterByID(ArrayList<Instrument> Instruments, int id) {
+        ArrayList<Instrument> filter = new ArrayList<>();
+        for (Instrument Instrument : Instruments) {
+            if(Instrument.getId() == id) {
+                filter.add(Instrument);
                 break;
             }
         }
         return filter;
     }
 
-    public ArrayList<Rentable> filterByName(ArrayList<Rentable> rentables, String name) {
-        ArrayList<Rentable> filter = new ArrayList<>();
-        for (Rentable rentable : rentables) {
-            if(rentable.getName().equals(name)) {
-                filter.add(rentable);
+    public ArrayList<Instrument> filterByName(ArrayList<Instrument> Instruments, String name) {
+        ArrayList<Instrument> filter = new ArrayList<>();
+        for (Instrument Instrument : Instruments) {
+            if(Instrument.getName().equals(name)) {
+                filter.add(Instrument);
                 break;
             }
         }
@@ -195,11 +200,11 @@ public class instrument_filters extends AppCompatActivity {
     }
 
 
-    public ArrayList<Rentable> filterByOwner(ArrayList<Rentable> rentables, String owner) {
-        ArrayList<Rentable> filter = new ArrayList<>();
-        for (Rentable rentable : rentables) {
-            if(rentable.getCurrentOwner().equals(owner))
-                filter.add(rentable);
+    public ArrayList<Instrument> filterByOwner(ArrayList<Instrument> Instruments, String owner) {
+        ArrayList<Instrument> filter = new ArrayList<>();
+        for (Instrument Instrument : Instruments) {
+            if(Instrument.getCurrentOwner().equals(owner))
+                filter.add(Instrument);
         }
         return filter;
     }

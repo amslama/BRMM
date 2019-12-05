@@ -1,5 +1,6 @@
 package com.example.brmm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -10,12 +11,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 public class add_instrument extends AppCompatActivity {
-   private RentableFactory factory = new RentableFactory();
-   private String section;
-   private Category category;
-   private Instrument instrument;
-
-
+    private RentableFactory factory = new RentableFactory();
+    private String section;
+    private Category category;
+    private Instrument instrument;
 
 
     @Override
@@ -52,6 +51,8 @@ public class add_instrument extends AppCompatActivity {
         //Recyclerview
         RecyclerView cat_rview = findViewById(R.id.cat_add_instrument_rview);
 
+
+
         //add existing spinner logic
         ae_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -69,7 +70,7 @@ public class add_instrument extends AppCompatActivity {
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                section =section_spin.getSelectedItem().toString();
+                section = section_spin.getSelectedItem().toString();
             }
 
             @Override
@@ -82,7 +83,7 @@ public class add_instrument extends AppCompatActivity {
         cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                category = (Category)section_spin.getSelectedItem();
+                category = (Category) section_spin.getSelectedItem();
             }
 
             @Override
@@ -101,6 +102,7 @@ public class add_instrument extends AppCompatActivity {
                 section_spin.setSelection(0);
                 name_edittext.setText("");
                 cost_edittext.setText("");
+                finish();
             }
         });
 
@@ -112,11 +114,17 @@ public class add_instrument extends AppCompatActivity {
                 double cost;
                 int id = -1;
                 name = name_edittext.getText().toString();
-               try { cost = Double.parseDouble(cost_edittext.getText().toString());}
-               catch (NumberFormatException ex){cost = 0;}
+                try {
+                    cost = Double.parseDouble(cost_edittext.getText().toString());
+                } catch (NumberFormatException ex) {
+                    cost = 0;
+                }
                 RentableFactory factory = new RentableFactory();
-                Rentable instrument = factory.buildRentable("Instrument", "", section,name, cost, id);
-
+                Rentable instrument = factory.buildRentable("Instrument", "", section, name, cost, id);
+                Intent intent = new Intent();
+                intent.putExtra("instrument", instrument);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }

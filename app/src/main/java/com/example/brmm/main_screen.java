@@ -11,13 +11,18 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 
-public class main_screen extends AppCompatActivity {
+public class main_screen extends AppCompatActivity  {
 
     private boolean facultyRights = false;
     private RentableInventory rent_inv;
     private BandMemberInventory member_inv;
+    private ArrayList<String> sections;
+    private ArrayList<String> ins_concepts;
+    private ArrayList<String> part_concepts;
+    private BandMember temp_bm;
 
     //Dropdown
     private Spinner inv_spin;
@@ -77,8 +82,6 @@ public class main_screen extends AppCompatActivity {
                 member_inv.addBandMember(faculty);
             }
         }
-      //  add_button.setText(member_inv.size());
-
 
     }
 
@@ -86,6 +89,9 @@ public class main_screen extends AppCompatActivity {
     {
         member_inv = new BandMemberInventory();
         rent_inv = new RentableInventory();
+        ins_concepts = new ArrayList<String>();
+        part_concepts = new ArrayList<String>();
+        ArrayList<String> sections = new ArrayList<String>(/*IMPORT SECTIONS*/);
         inv_spin = findViewById(R.id.inventory_main_screen_dropdown);
         filter_button = findViewById(R.id.filter_main_screen_button);
         logout_button = findViewById(R.id.logout_main_screen_button);
@@ -99,6 +105,22 @@ public class main_screen extends AppCompatActivity {
         add_section_button = findViewById(R.id.add_section_main_screen_button);
         delete_section_button = findViewById(R.id.delete_section_main_screen_button);
         inv_view = findViewById(R.id.item_list_main_screen_rview);
+
+        for(Instrument ins : rent_inv.getInstrumentList())
+        {
+            if(!ins_concepts.contains(ins.getName()))
+            {
+                ins_concepts.add(ins.getName());
+            }
+        }
+
+        for(Part part : rent_inv.getPartList())
+        {
+            if(!part_concepts.contains(part.getName()))
+            {
+                part_concepts.add(part.getName());
+            }
+        }
     }
 
     private void setPartsButtons() {
@@ -106,14 +128,13 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), part_filters.class);
-                startActivity(openFilter);
+                startActivityForResult(openFilter,9);
             }
         });
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), add_part.class);
-                startActivity(openFilter);
                 startActivityForResult(openFilter,0);
             }
         });
@@ -121,7 +142,15 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), edit_part.class);
-                startActivity(openFilter);
+                openFilter.putExtra("partlist",rent_inv.getPartList());
+                startActivityForResult(openFilter, 8);
+            }
+        });
+        remove_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openFilter = new Intent(getBaseContext(), delete_part.class);
+                startActivityForResult(openFilter,14);
             }
         });
 
@@ -145,14 +174,14 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), instrument_filters.class);
-                startActivity(openFilter);
+                openFilter.putExtra("sectionlist",sections);
+                startActivityForResult(openFilter, 10);
             }
         });
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), add_instrument.class);
-                startActivity(openFilter);
                 startActivityForResult(openFilter,1);
             }
         });
@@ -161,7 +190,16 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), edit_instrument.class);
-                startActivity(openFilter);
+                openFilter.putExtra("instrumentlist",rent_inv.getInstrumentList());
+                startActivityForResult(openFilter, 6);
+            }
+        });
+        remove_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openFilter = new Intent(getBaseContext(), delete_instrument.class);
+                openFilter.putExtra("instrumentlist",rent_inv.getInstrumentList());
+                startActivityForResult(openFilter,12);
             }
         });
 
@@ -184,7 +222,9 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), bandmember_filters.class);
-                startActivity(openFilter);
+                openFilter.putExtra("sectionlist",sections);
+                openFilter.putExtra("instrumentlist",ins_concepts);
+                startActivityForResult(openFilter,11);
             }
         });
         add_button.setOnClickListener(new View.OnClickListener() {
@@ -192,6 +232,14 @@ public class main_screen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), add_member.class);
                 startActivityForResult(openFilter,2);
+            }
+        });
+        remove_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openFilter = new Intent(getBaseContext(), delete_member.class);
+                openFilter.putExtra("memberlist",member_inv.getBandMembers());
+                startActivityForResult(openFilter,13);
             }
         });
 
@@ -211,49 +259,54 @@ public class main_screen extends AppCompatActivity {
     }
 
     private void oneTimeListeners() {
-        MemberRecyclerAdapter adapter = new MemberRecyclerAdapter((member_inv.getBandMembers()));
-        inv_view.setLayoutManager(new LinearLayoutManager(this));
-        inv_view.setAdapter(adapter);
+
         checkout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), checkout_instrument.class);
-                startActivity(openFilter);
+                openFilter.putExtra("instrumentlist",rent_inv.getInstrumentList());
+                openFilter.putExtra("memberlist",member_inv.getBandMembers());
+                startActivityForResult(openFilter, 3);
             }
         });
         notes_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), edit_notes.class);
-                startActivity(openFilter);
+                openFilter.putExtra("instrumentlist",rent_inv.getInstrumentList());
+                startActivityForResult(openFilter, 6);
             }
         });
         delete_section_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), delete_section.class);
-                startActivity(openFilter);
+                openFilter.putExtra("sectionlist",sections);
+                startActivityForResult(openFilter, 5);
             }
         });
         add_section_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), add_section.class);
-                startActivity(openFilter);
+                startActivityForResult(openFilter, 4);
             }
         });
         edit_member_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent openFilter = new Intent(getBaseContext(), edit_member.class);
-                startActivity(openFilter);
+                openFilter.putExtra("memberlist",member_inv.getBandMembers());
+                startActivityForResult(openFilter, 7);
             }
         });
         set_lead_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), set_lead.class);
-                startActivity(openFilter);
+                openFilter.putExtra("memberlist",member_inv.getBandMembers());
+                startActivityForResult(openFilter,7);
             }
         });
 
@@ -289,45 +342,152 @@ public class main_screen extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putExtra("member",member_inv);
                 intent.putExtra("rentable",rent_inv);
+                intent.putExtra("sections",sections);
                 setResult(RESULT_OK,intent);
                 finish();
             }
         });
-        remove_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //add part
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
-
                 Part part = (Part)data.getSerializableExtra("part");
                 rent_inv.addPart(part);
-
             }
         }
+
+        //add instrument
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-
                 Instrument instrument = (Instrument)data.getSerializableExtra("instrument");
                 rent_inv.addInstrument(instrument);
-
             }
         }
+
+        //add Member
         if (requestCode == 2) {
             if (resultCode == RESULT_OK) {
-
                 BandMember member = (BandMember)data.getSerializableExtra("member");
                 member_inv.addBandMember(member);
-
             }
         }
+
+        //checkout
+        if (requestCode == 3) {
+            if (resultCode == RESULT_OK) {
+                Instrument instrument = (Instrument)data.getSerializableExtra("instrument");
+                rent_inv.removeInstrument(instrument.getId());
+                rent_inv.addInstrument(instrument);
+                BandMember bandmember = (BandMember)data.getSerializableExtra("bandmember");
+                member_inv.removeBandMember(bandmember.getUID());
+                member_inv.addBandMember(bandmember);
+            }
+        }
+
+        //add section
+        if (requestCode == 4) {
+            if (resultCode == RESULT_OK) {
+                String section = data.getStringExtra("section");
+                sections.add(section);
+            }
+        }
+
+        //delete section
+        if (requestCode == 5) {
+            if (resultCode == RESULT_OK) {
+                String section = data.getStringExtra("section");
+                sections.remove(section);
+            }
+        }
+
+        //edit Instrument
+        if (requestCode == 6) {
+            if (resultCode == RESULT_OK) {
+                Instrument instrument = (Instrument)data.getSerializableExtra("instrument");
+                rent_inv.removeInstrument(instrument.getId());
+                rent_inv.addInstrument(instrument);
+            }
+        }
+
+        //edit member and set lead
+        if (requestCode == 7) {
+            if (resultCode == RESULT_OK) {
+                BandMember bandmember = (BandMember)data.getSerializableExtra("member");
+                member_inv.removeBandMember(bandmember.getUID());
+                member_inv.addBandMember(bandmember);
+            }
+        }
+
+        //edit part
+        if (requestCode == 8) {
+            if (resultCode == RESULT_OK) {
+                Part part = (Part)data.getSerializableExtra("part");
+                rent_inv.removePart(part.getSerialNumber());
+                rent_inv.addPart(part);
+            }
+        }
+
+        //part filters
+        if (requestCode == 9) {
+            if (resultCode == RESULT_OK) {
+                ArrayList<Part> partlist = (ArrayList<Part>)data.getSerializableExtra("partlist");
+                PartRecyclerAdapter adapter = new PartRecyclerAdapter(partlist);
+                inv_view.setLayoutManager(new LinearLayoutManager(this));
+                inv_view.setAdapter(adapter);
+            }
+        }
+
+        //instrument filters
+        if (requestCode == 10) {
+            if (resultCode == RESULT_OK) {
+                ArrayList<Instrument> inslist = (ArrayList<Instrument>)data.getSerializableExtra("inslist");
+                InstrumentRecyclerAdapter adapter = new InstrumentRecyclerAdapter(inslist);
+                inv_view.setLayoutManager(new LinearLayoutManager(this));
+                inv_view.setAdapter(adapter);
+            }
+        }
+
+        //Bandmember filters
+        if (requestCode == 11) {
+            if (resultCode == RESULT_OK) {
+                ArrayList<BandMember> memberlist = (ArrayList<BandMember>)data.getSerializableExtra("memberlist");
+                MemberRecyclerAdapter adapter = new MemberRecyclerAdapter(memberlist);
+                inv_view.setLayoutManager(new LinearLayoutManager(this));
+                inv_view.setAdapter(adapter);
+            }
+        }
+
+        //delete Instrument
+        if (requestCode == 12) {
+            if (resultCode == RESULT_OK) {
+                Instrument instrument = (Instrument)data.getSerializableExtra("instrument");
+                rent_inv.removeInstrument(instrument.getId());
+            }
+        }
+
+        //delete member
+        if (requestCode == 13) {
+            if (resultCode == RESULT_OK) {
+                BandMember bandmember = (BandMember)data.getSerializableExtra("member");
+                member_inv.removeBandMember(bandmember.getUID());
+            }
+        }
+
+        //delete part
+        if (requestCode == 14) {
+            if (resultCode == RESULT_OK) {
+                Part part = (Part)data.getSerializableExtra("part");
+                rent_inv.removePart(part.getSerialNumber());
+            }
+        }
+
+
+
     }
 }

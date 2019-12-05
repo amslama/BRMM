@@ -63,16 +63,23 @@ public class add_part extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name;
-                 String sn;
-                 double cost;
-                try{cost = Double.parseDouble(cost_edittext.getText().toString());}
-                catch (NumberFormatException ex){cost = 0;}
+                String sn;
+                double cost;
+                try {
+                    cost = Double.parseDouble(cost_edittext.getText().toString());
+                } catch (NumberFormatException ex) {
+                    cost = 0;
+                }
                 name = name_edittext.getText().toString();
                 sn = sn_edittext.getText().toString();
                 RentableFactory factory = new RentableFactory();
-                Rentable rentable = factory.buildRentable("Part", "", sn,"", cost, 0);
+                Rentable rentable = factory.buildRentable("Part", "", sn, "", cost, 0);
                 rentable.setName(name);
                 rentable.setCost(cost);
+                Intent intent = new Intent();
+                intent.putExtra("part", intent);
+                setResult(RESULT_OK, intent);
+                finish();
 
             }
         });
@@ -83,6 +90,7 @@ public class add_part extends AppCompatActivity {
                 cost_edittext.setText("");
                 name_edittext.setText("");
                 sn_edittext.setText("");
+                finish();
             }
         });
     }

@@ -33,15 +33,17 @@ public class edit_part extends AppCompatActivity {
         final EditText cost_edittext = findViewById(R.id.cost_edit_part_edittext);
 
         //compwith objects
-        Spinner compwith_spin = findViewById(R.id.compwith_edit_part_dropdown);
-        RecyclerView compwith_rview = findViewById(R.id.compwith_edit_part_rview);
+        //Spinner compwith_spin = findViewById(R.id.compwith_edit_part_dropdown);
+        //RecyclerView compwith_rview = findViewById(R.id.compwith_edit_part_rview);
+        final Spinner pick_spin = findViewById(R.id.pick_edit_part_dropdown);
+
 
         //buttons
         Button ok_button = findViewById(R.id.ok_edit_part_button);
         Button cancel_button = findViewById(R.id.cancel_edit_part_button);
 
 
-        //wasnt sure exactly what this does
+        /*wasnt sure exactly what this does
         compwith_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -52,7 +54,7 @@ public class edit_part extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override

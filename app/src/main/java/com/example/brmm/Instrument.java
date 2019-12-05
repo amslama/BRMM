@@ -8,6 +8,7 @@ public class Instrument extends Rentable implements Serializable {
     private Category category;
     private String section;
     private boolean isSelected;
+    private String note;
 
 
     public Instrument (){

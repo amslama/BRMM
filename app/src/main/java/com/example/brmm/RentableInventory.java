@@ -19,24 +19,28 @@ public class RentableInventory implements Serializable {
         //update db
     }
 
-    public ArrayList<Instrument> getInstrumentList()
-    {
+    public ArrayList<Instrument> getInstrumentList() {
         return instruments;
     }
 
-    public ArrayList<Part> getPartList()
-    {
+    public ArrayList<Part> getPartList() {
         return parts;
     }
 
-    public void removeInstrument(Instrument newIns) {
+    public void removeInstrument(int pos) {
 
-        instruments.remove(newIns);
+        instruments.remove(pos);
         //update db
     }
 
-    public void removePart(Part newPart) {
-        parts.remove(newPart);
+    public void removePart(int sn) {
+
+        for (Part part : parts) {
+            if (sn == part.getSerialNumber()) {
+                parts.remove(part);
+                break;
+            }
+        }
         //update db
     }
 
