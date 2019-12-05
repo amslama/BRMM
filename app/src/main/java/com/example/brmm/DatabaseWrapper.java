@@ -7,6 +7,14 @@ import java.util.ArrayList;
 
 public class DatabaseWrapper extends Thread{
 
+    /**
+     *
+     *
+     * ADD A SECTION METHOD (EDIT A USER)
+     *
+     */
+
+
     DatabaseConnection dbconn = new DatabaseConnection();
     Connection conn = null;
 
