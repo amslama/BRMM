@@ -310,9 +310,9 @@ public class bandmember_filters extends AppCompatActivity {
     }
 
     public void passFilteredMembers(ArrayList<BandMember> filteredMembers) {
-        Intent mainScreen = new Intent(this,main_screen.class);
-        mainScreen.putExtra("FILTEREDMEMBERS", filteredMembers);
-        startActivity(mainScreen);
+        Intent inventory = new Intent(this,BandMemberInventory.class);
+        inventory.putExtra("FILTEREDMEMBERS", filteredMembers);
+        startActivity(inventory);
     }
 
 }
