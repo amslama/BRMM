@@ -1,5 +1,6 @@
 package com.example.brmm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -93,19 +94,28 @@ public class instrument_filters extends AppCompatActivity {
 
                 owner = owner_edittext.getText().toString();
                 name = name_edittext.getText().toString();
-                id = Integer.parseInt(id_edittext.getText().toString());
+                try {
+                    id = Integer.parseInt(id_edittext.getText().toString());
+                } catch (NumberFormatException ex){id = 0;}
 
-                cost = Double.parseDouble(cost_edittext.getText().toString());
+                try {
+                    cost = Double.parseDouble(cost_edittext.getText().toString());
+                } catch (NumberFormatException ex){cost = 0;}
 
 
-                filterInstrumentInv(null, owner, section, name, category, id, cost);
+
+               ArrayList rentables = filterInstrumentInv(null, owner, section, name, category, id, cost);
+                Intent intent = new Intent();
+                intent.putExtra("instrumentList", rentables);
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
 
     }
 
     public ArrayList<Rentable> filterInstrumentInv(ArrayList<Rentable> rentables, String owner, String section, String name, Category category, int id, double cost) {
-        ArrayList<Rentable> filter = new ArrayList<>();
+        ArrayList<Rentable> filter = rentables;
 
         if(category != null)
             filter = filterByCategory(filter, category);
@@ -134,9 +144,7 @@ public class instrument_filters extends AppCompatActivity {
 
 
 
-
         return filter;
-
     }
 
 
@@ -203,5 +211,6 @@ public class instrument_filters extends AppCompatActivity {
         }
         return filter;
     }
+
 
 }

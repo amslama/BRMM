@@ -142,7 +142,7 @@ public class bandmember_filters extends AppCompatActivity {
 
                 ArrayList<BandMember>  memberList = filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
                 Intent intent = new Intent();
-                intent.putExtra("memberList", intent);
+                intent.putExtra("memberList", memberList);
                 setResult(RESULT_OK,intent);
                 finish();
             }
@@ -154,7 +154,7 @@ public class bandmember_filters extends AppCompatActivity {
     // main filter method, for ints, 0 = dont filter, 1 = filter by Faculty or is true, 2 = filter by false
     public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument) {
 
-        ArrayList<BandMember> filter = new ArrayList<>();
+        ArrayList<BandMember> filter = members;
 
         if(isFaculty == 1)
             filter = filterByFaculty(filter);
@@ -191,7 +191,7 @@ public class bandmember_filters extends AppCompatActivity {
            filter = filterBySection(filter, section);
 
 
-        return filter;
+       return filter;
 
     }
 
@@ -310,6 +310,9 @@ public class bandmember_filters extends AppCompatActivity {
 
         }
         return filter;
+
     }
+
+
 
 }

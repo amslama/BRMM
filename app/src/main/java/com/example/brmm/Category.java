@@ -7,6 +7,10 @@ public class Category {
     private String name;
     private Category superCategory;
 
+    public Category() {
+
+    }
+
     public String getName() {
         return name;
     }

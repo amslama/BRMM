@@ -12,9 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+
+        <activity android:name=".add_category"></activity>
+
         <activity android:name=".delete_part"></activity>
         <activity android:name=".delete_instrument" />
         <activity android:name=".delete_member" />
+
         <activity android:name=".set_lead" />
         <activity android:name=".checkout_instrument" />
         <activity android:name=".delete_section" />
