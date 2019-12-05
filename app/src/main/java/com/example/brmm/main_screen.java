@@ -355,7 +355,11 @@ public class main_screen extends AppCompatActivity  {
         if (requestCode == 3) {
             if (resultCode == RESULT_OK) {
                 Instrument instrument = (Instrument)data.getSerializableExtra("instrument");
-                BandMember bandMember = (BandMember)data.getSerializableExtra("bandmember");
+                rent_inv.removeInstrument(instrument.getId());
+                rent_inv.addInstrument(instrument);
+                BandMember bandmember = (BandMember)data.getSerializableExtra("bandmember");
+                member_inv.removeBandMember(bandmember.getUID());
+                member_inv.addBandMember(bandmember);
             }
         }
 
