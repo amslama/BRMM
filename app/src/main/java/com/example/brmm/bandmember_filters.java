@@ -139,10 +139,11 @@ public class bandmember_filters extends AppCompatActivity {
                     UID = Integer.parseInt(UID_edittext.getText().toString());
                 } catch (NumberFormatException ex){UID = 0;}
 
-
-                ArrayList<BandMember>  memberList = filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
-                Intent intent = new Intent();
-                intent.putExtra("memberList", intent);
+                Intent intent = getIntent();
+              //  ArrayList<BandMember> memberlist = (ArrayList<BandMember>)data.getSerializableExtra("memberlist");
+            //     memberlist = filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
+                Intent thisIntent = new Intent();
+              //  intent.putExtra("memberList", memberlist);
                 setResult(RESULT_OK,intent);
                 finish();
             }
