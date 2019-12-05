@@ -51,6 +51,8 @@ public class add_instrument extends AppCompatActivity {
         //Recyclerview
         RecyclerView cat_rview = findViewById(R.id.cat_add_instrument_rview);
 
+
+
         //add existing spinner logic
         ae_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

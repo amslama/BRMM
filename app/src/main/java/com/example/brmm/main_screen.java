@@ -20,6 +20,8 @@ public class main_screen extends AppCompatActivity  {
     private RentableInventory rent_inv;
     private BandMemberInventory member_inv;
     private ArrayList<String> sections;
+    private ArrayList<String> ins_concepts;
+    private ArrayList<String> part_concepts;
     private BandMember temp_bm;
 
     //Dropdown
@@ -87,6 +89,8 @@ public class main_screen extends AppCompatActivity  {
     {
         member_inv = new BandMemberInventory();
         rent_inv = new RentableInventory();
+        ins_concepts = new ArrayList<String>();
+        part_concepts = new ArrayList<String>();
         ArrayList<String> sections = new ArrayList<String>(/*IMPORT SECTIONS*/);
         inv_spin = findViewById(R.id.inventory_main_screen_dropdown);
         filter_button = findViewById(R.id.filter_main_screen_button);
@@ -101,6 +105,22 @@ public class main_screen extends AppCompatActivity  {
         add_section_button = findViewById(R.id.add_section_main_screen_button);
         delete_section_button = findViewById(R.id.delete_section_main_screen_button);
         inv_view = findViewById(R.id.item_list_main_screen_rview);
+
+        for(Instrument ins : rent_inv.getInstrumentList())
+        {
+            if(!ins_concepts.contains(ins.getName()))
+            {
+                ins_concepts.add(ins.getName());
+            }
+        }
+
+        for(Part part : rent_inv.getPartList())
+        {
+            if(!part_concepts.contains(part.getName()))
+            {
+                part_concepts.add(part.getName());
+            }
+        }
     }
 
     private void setPartsButtons() {
@@ -153,6 +173,7 @@ public class main_screen extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), instrument_filters.class);
+                openFilter.putExtra("sectionlist",sections);
                 startActivityForResult(openFilter, 10);
             }
         });
@@ -198,6 +219,8 @@ public class main_screen extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), bandmember_filters.class);
+                openFilter.putExtra("sectionlist",sections);
+                openFilter.putExtra("instrumentlist",ins_concepts);
                 startActivityForResult(openFilter,11);
             }
         });
@@ -251,6 +274,7 @@ public class main_screen extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), delete_section.class);
+                openFilter.putExtra("sectionlist",sections);
                 startActivityForResult(openFilter, 5);
             }
         });
