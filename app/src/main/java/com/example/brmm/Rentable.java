@@ -6,6 +6,7 @@ public class Rentable
 {
     protected String name;
     protected double cost;
+    protected String category;
     protected String currentOwner;
     protected int id;
 
@@ -40,4 +41,5 @@ public class Rentable
     public void setCost(double cost) {
         this.cost = cost;
     }
+
 }

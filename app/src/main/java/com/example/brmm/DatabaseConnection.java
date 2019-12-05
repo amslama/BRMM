@@ -88,14 +88,6 @@ public class DatabaseConnection extends Thread {
         return conn;
     }
 
-    /**
-     * Not Done Yet
-     *
-     */
-
-
-
-
     //TODO: INSTRUMENT STUFF
     //TODO: ADD BAND SECTION
 

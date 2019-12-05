@@ -1,12 +1,16 @@
 package com.example.brmm;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Part extends Rentable implements Serializable
 {
-    private ArrayList<Category> compWith;
+    //private String category;
     private int serialNumber;
+    private ArrayList<Category> compWith;
+
+
 
     boolean isSelected;
 
@@ -24,6 +28,14 @@ public class Part extends Rentable implements Serializable
 
     public int getSerialNumber() {
         return serialNumber;
+    }
+
+    public Part(double cost, String name, String category, int serialNumber){
+        this.cost = cost;
+        this.name = name;
+        this.category = category;
+        this.serialNumber = serialNumber;
+
     }
 
     public void setSerialNumber(int serialNumber) {
