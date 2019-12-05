@@ -94,14 +94,19 @@ public class instrument_filters extends AppCompatActivity {
 
                 owner = owner_edittext.getText().toString();
                 name = name_edittext.getText().toString();
-                id = Integer.parseInt(id_edittext.getText().toString());
+                try {
+                    id = Integer.parseInt(id_edittext.getText().toString());
+                } catch (NumberFormatException ex){id = 0;}
 
-                cost = Double.parseDouble(cost_edittext.getText().toString());
+                try {
+                    cost = Double.parseDouble(cost_edittext.getText().toString());
+                } catch (NumberFormatException ex){cost = 0;}
+
 
 
                ArrayList rentables = filterInstrumentInv(null, owner, section, name, category, id, cost);
                 Intent intent = new Intent();
-                intent.putExtra("InstrumentList", intent);
+                intent.putExtra("instrumentList", rentables);
                 setResult(RESULT_OK,intent);
                 finish();
             }
@@ -137,7 +142,7 @@ public class instrument_filters extends AppCompatActivity {
         if (cost != 0)
             filter = filterByCost(filter, cost);
 
-        
+
 
         return filter;
     }

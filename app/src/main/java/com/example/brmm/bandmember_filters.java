@@ -142,7 +142,7 @@ public class bandmember_filters extends AppCompatActivity {
 
                 ArrayList<BandMember>  memberList = filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
                 Intent intent = new Intent();
-                intent.putExtra("memberList", intent);
+                intent.putExtra("memberList", memberList);
                 setResult(RESULT_OK,intent);
                 finish();
             }
