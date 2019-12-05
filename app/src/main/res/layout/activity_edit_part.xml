@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CE1126"
-    tools:context=".add_edit_part">
+    tools:context=".add_part">
 
     <ImageView
-        android:id="@+id/add_edit_part_colorfilter"
+        android:id="@+id/edit_part_colorfilter"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#40EEE8E8"
@@ -18,14 +18,14 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/parts_header_filter"
+        android:id="@+id/edit_parts_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="@string/parts"
+        android:text="@string/edit_part"
         android:textColor="@android:color/background_dark"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -35,72 +35,71 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/comp_with_add_edit_parts_textview"
+        android:id="@+id/compwith_edit_parts_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
+        android:layout_marginStart="200dp"
         android:text="@string/compatible_with"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/name_add_edit_part_textview"
-        app:layout_constraintStart_toEndOf="@+id/name_add_edit_part_textview" />
+        app:layout_constraintBottom_toBottomOf="@+id/name_edit_part_textview"
+        app:layout_constraintStart_toEndOf="@+id/name_edit_part_textview" />
 
     <TextView
-        android:id="@+id/serial_number_add_edit_part_textview"
+        android:id="@+id/sn_edit_part_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:labelFor="@id/SN_add_edit_part_edittext"
+        android:labelFor="@id/sn_edit_part_edittext"
         android:text="@string/serial_number"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/name_add_edit_part_edittext"
-        app:layout_constraintTop_toBottomOf="@+id/name_add_edit_part_edittext" />
+        app:layout_constraintStart_toStartOf="@+id/name_edit_part_edittext"
+        app:layout_constraintTop_toBottomOf="@+id/name_edit_part_edittext" />
 
     <TextView
-        android:id="@+id/cost_add_edit_part_textview"
+        android:id="@+id/cost_edit_part_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="60dp"
-        android:labelFor="@id/cost_add_edit_part_edittext"
+        android:labelFor="@id/cost_edit_part_edittext"
         android:text="@string/cost"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SN_add_edit_part_edittext" />
+        app:layout_constraintStart_toStartOf="@+id/sn_edit_part_edittext"
+        app:layout_constraintTop_toBottomOf="@+id/sn_edit_part_edittext" />
 
     <TextView
-        android:id="@+id/name_add_edit_part_textview"
+        android:id="@+id/name_edit_part_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="58dp"
-        android:labelFor="@id/name_add_edit_part_edittext"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="32dp"
+        android:labelFor="@id/name_edit_part_edittext"
         android:text="@string/name"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parts_header_filter" />
+        app:layout_constraintTop_toBottomOf="@+id/pick_edit_part_dropdown" />
 
     <EditText
-        android:id="@+id/name_add_edit_part_edittext"
+        android:id="@+id/name_edit_part_edittext"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/border"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="@+id/name_add_edit_part_textview"
-        app:layout_constraintTop_toBottomOf="@+id/name_add_edit_part_textview"
+        app:layout_constraintStart_toStartOf="@+id/name_edit_part_textview"
+        app:layout_constraintTop_toBottomOf="@+id/name_edit_part_textview"
         android:importantForAutofill="no" />
 
     <EditText
-        android:id="@+id/cost_add_edit_part_edittext"
+        android:id="@+id/cost_edit_part_edittext"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/border"
@@ -108,81 +107,83 @@
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="@+id/cost_add_edit_part_textview"
-        app:layout_constraintTop_toBottomOf="@+id/cost_add_edit_part_textview" />
+        app:layout_constraintStart_toStartOf="@+id/cost_edit_part_textview"
+        app:layout_constraintTop_toBottomOf="@+id/cost_edit_part_textview" />
 
     <EditText
-        android:id="@+id/SN_add_edit_part_edittext"
+        android:id="@+id/sn_edit_part_edittext"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/border"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="@+id/serial_number_add_edit_part_textview"
-        app:layout_constraintTop_toBottomOf="@+id/serial_number_add_edit_part_textview"
+        app:layout_constraintStart_toStartOf="@+id/sn_edit_part_textview"
+        app:layout_constraintTop_toBottomOf="@+id/sn_edit_part_textview"
         android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/cancel_add_edit_part_button"
+        android:id="@+id/cancel_edit_part_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginStart="44dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/button_border"
         android:text="@android:string/cancel"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cost_add_edit_part_edittext" />
+        app:layout_constraintEnd_toEndOf="@+id/cost_edit_part_edittext"
+        app:layout_constraintStart_toStartOf="@+id/cost_edit_part_edittext"
+        app:layout_constraintTop_toBottomOf="@+id/cost_edit_part_edittext" />
 
     <Button
-        android:id="@+id/ok_add_edit_part_button"
+        android:id="@+id/ok_edit_part_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
         android:background="@drawable/button_border"
         android:text="@android:string/ok"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cancel_add_edit_part_button"
-        app:layout_constraintTop_toTopOf="@+id/cancel_add_edit_part_button" />
+        app:layout_constraintEnd_toEndOf="@+id/compwith_edit_part_rview"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="@+id/compwith_edit_part_rview"
+        app:layout_constraintTop_toTopOf="@+id/cancel_edit_part_button" />
 
     <Spinner
-        android:id="@+id/comp_with_add_edit_part_dropdown"
+        android:id="@+id/compwith_edit_part_dropdown"
         android:layout_width="175dp"
         android:layout_height="40dp"
-        app:layout_constraintStart_toStartOf="@+id/comp_with_add_edit_parts_textview"
-        app:layout_constraintTop_toBottomOf="@+id/comp_with_add_edit_parts_textview" />
+        app:layout_constraintStart_toStartOf="@+id/compwith_edit_parts_textview"
+        app:layout_constraintTop_toBottomOf="@+id/compwith_edit_parts_textview" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/SN_add_edit_part_rview"
+        android:id="@+id/compwith_edit_part_rview"
         android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/comp_with_add_edit_part_dropdown"
-        app:layout_constraintTop_toBottomOf="@+id/comp_with_add_edit_part_dropdown" />
+        android:layout_height="200dp"
+        app:layout_constraintStart_toStartOf="@+id/compwith_edit_part_dropdown"
+        app:layout_constraintTop_toBottomOf="@+id/compwith_edit_part_dropdown" />
 
     <TextView
-        android:id="@+id/add_existing_add_edit_part_textview"
+        android:id="@+id/pick_edit_part_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:labelFor="@id/add_existing_add_edit_part_dropdown"
-        android:text="@string/add_existing"
+        android:layout_marginTop="32dp"
+        android:text="@string/pick_one"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ok_add_edit_part_button" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/edit_parts_header"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/edit_parts_header"
+        app:layout_constraintTop_toBottomOf="@+id/edit_parts_header" />
 
     <Spinner
-        android:id="@+id/add_existing_add_edit_part_dropdown"
+        android:id="@+id/pick_edit_part_dropdown"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/spinner_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_existing_add_edit_part_textview" />
+        app:layout_constraintEnd_toEndOf="@+id/pick_edit_part_textview"
+        app:layout_constraintStart_toStartOf="@+id/pick_edit_part_textview"
+        app:layout_constraintTop_toBottomOf="@+id/pick_edit_part_textview" />
 
 </android.support.constraint.ConstraintLayout>

@@ -32,17 +32,8 @@ public class DatabaseConnection extends Thread {
     private Connection conn = null;
 
     public void run() {
-        dbGetConnection();
-    }
+        conn = dbGetConnection();
 
-    public void removeSectionLeaderRights(String ulid) {
-        try {
-            String query = "update user set sectionLeader = 0 where username = '"+ulid+"'";
-            Statement st = conn.createStatement();
-            st.executeUpdate(query);
-        } catch (Exception e) {
-            System.out.println("Error on remove Section Leader rights");
-        }
     }
 
     private Session getServerConnection() {
@@ -72,7 +63,7 @@ public class DatabaseConnection extends Thread {
     }
 
 
-    public void dbGetConnection() {
+    public Connection dbGetConnection() {
         Session ses = null;
         try {
             ses = getServerConnection();
@@ -90,15 +81,12 @@ public class DatabaseConnection extends Thread {
             System.out.println("Part 3 fail...............");
             t.printStackTrace();
         }
+        return conn;
     }
 
     public Connection getConnection(){
         return conn;
     }
-
-
-
-
 
     //TODO: INSTRUMENT STUFF
     //TODO: ADD BAND SECTION

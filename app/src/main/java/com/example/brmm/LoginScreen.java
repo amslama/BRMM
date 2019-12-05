@@ -109,13 +109,13 @@ public class LoginScreen extends AppCompatActivity {
 
     private void login(boolean isFaculty){
         if (isFaculty){
-            Intent mainScreen = new Intent(this, MainScreen.class);
+            Intent mainScreen = new Intent(this, main_screen.class);
             startActivity(mainScreen);
         }
 
         else {
             //show read only
-            Intent mainScreen = new Intent(this, MainScreen.class);
+            Intent mainScreen = new Intent(this, main_screen.class);
             startActivity(mainScreen);
         }
 

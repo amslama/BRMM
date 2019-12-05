@@ -1,12 +1,23 @@
 package com.example.brmm;
 
-public class BandMember
-{
-    private String fname;
-    private String lname;
-    private int UID;
+import java.io.Serializable;
 
+public class BandMember implements Serializable
+{
+    protected String fname;
+    protected String lname;
+    protected int UID;
     public String ulid;
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
+
+    protected String section;
 
     public void setFname(String fname){
         this.fname = fname;
@@ -36,9 +47,8 @@ public class BandMember
         return UID;
     }
 
-    public  void setUID(int UID){
-        this.UID = UID;
-    }
+    public  void setUID(int UID){this.UID = UID; }
+
 }
 
 

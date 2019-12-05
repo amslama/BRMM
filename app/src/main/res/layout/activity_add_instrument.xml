@@ -8,7 +8,7 @@
     tools:context=".add_instrument">
 
     <ImageView
-        android:id="@+id/colorfilter_add_edit_instrument"
+        android:id="@+id/colorfilter_add_instrument"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#40EEE8E8"
@@ -18,25 +18,24 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/add_edit_instrument_textview"
+        android:id="@+id/add_instrument_header"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="40dp"
-        android:text="@string/edit_rentable"
+        android:text="@string/add_instrument"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/section_add_edit_instrument_textview"
+        android:id="@+id/section_add_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -44,39 +43,38 @@
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/name_add_edit_instrument_editText"
-        app:layout_constraintTop_toBottomOf="@+id/name_add_edit_instrument_editText" />
+        app:layout_constraintStart_toStartOf="@+id/name_add_instrument_editText"
+        app:layout_constraintTop_toBottomOf="@+id/name_add_instrument_editText" />
 
     <TextView
-        android:id="@+id/name_add_edit_item"
+        android:id="@+id/name_add_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="76dp"
         android:layout_marginTop="32dp"
-        android:labelFor="@id/name_add_edit_instrument_editText"
+        android:labelFor="@id/name_add_instrument_editText"
         android:text="@string/name"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_edit_instrument_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/add_existing_add_instrument_dropdown" />
 
     <TextView
-        android:id="@+id/ID_add_edit_instrument"
+        android:id="@+id/id_add_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="204dp"
         android:text="@string/id_number"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/name_add_edit_item"
-        app:layout_constraintTop_toBottomOf="@+id/add_edit_instrument_textview" />
+        app:layout_constraintStart_toEndOf="@+id/name_add_instrument_textview"
+        app:layout_constraintTop_toTopOf="@+id/name_add_instrument_textview" />
 
     <TextView
-        android:id="@+id/categories_add_edit_instrument"
+        android:id="@+id/cat_add_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -84,122 +82,141 @@
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/section_add_edit_instrument_dropdown"
-        app:layout_constraintTop_toBottomOf="@+id/section_add_edit_instrument_dropdown" />
+        app:layout_constraintStart_toStartOf="@+id/section_add_instrument_dropdown"
+        app:layout_constraintTop_toBottomOf="@+id/section_add_instrument_dropdown" />
 
     <TextView
-        android:id="@+id/cost_add_edit_instrument_textview"
+        android:id="@+id/cost_add_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:labelFor="@id/cost_add_edit_instrument_edittext"
+        android:labelFor="@id/cost_add_instrument_edittext"
         android:text="@string/cost"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/ID_add_edit_instrument_display_textview"
-        app:layout_constraintTop_toBottomOf="@+id/ID_add_edit_instrument_display_textview" />
+        app:layout_constraintStart_toStartOf="@+id/id_add_instrument_display_textview"
+        app:layout_constraintTop_toBottomOf="@+id/id_add_instrument_display_textview" />
 
     <EditText
-        android:id="@+id/name_add_edit_instrument_editText"
+        android:id="@+id/name_add_instrument_editText"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/border"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="@+id/name_add_edit_item"
-        app:layout_constraintTop_toBottomOf="@+id/name_add_edit_item"
+        app:layout_constraintStart_toStartOf="@+id/name_add_instrument_textview"
+        app:layout_constraintTop_toBottomOf="@+id/name_add_instrument_textview"
         android:importantForAutofill="no" />
 
     <EditText
-        android:id="@+id/cost_add_edit_instrument_edittext"
+        android:id="@+id/cost_add_instrument_edittext"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/border"
         android:ems="10"
         android:inputType="number"
         android:textColor="@android:color/background_dark"
-        app:layout_constraintStart_toStartOf="@+id/cost_add_edit_instrument_textview"
-        app:layout_constraintTop_toBottomOf="@+id/cost_add_edit_instrument_textview"
+        app:layout_constraintStart_toStartOf="@+id/cost_add_instrument_textview"
+        app:layout_constraintTop_toBottomOf="@+id/cost_add_instrument_textview"
         android:importantForAutofill="no" />
 
     <TextView
-        android:id="@+id/ID_add_edit_instrument_display_textview"
+        android:id="@+id/id_add_instrument_display_textview"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:textColor="#3D3737"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/ID_add_edit_instrument"
-        app:layout_constraintTop_toBottomOf="@+id/ID_add_edit_instrument" />
+        app:layout_constraintStart_toStartOf="@+id/id_add_instrument_textview"
+        app:layout_constraintTop_toBottomOf="@+id/id_add_instrument_textview" />
 
     <Spinner
-        android:id="@+id/section_add_edit_instrument_dropdown"
+        android:id="@+id/section_add_instrument_dropdown"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/spinner_background"
-        app:layout_constraintStart_toStartOf="@+id/section_add_edit_instrument_textview"
-        app:layout_constraintTop_toBottomOf="@+id/section_add_edit_instrument_textview" />
+        app:layout_constraintStart_toStartOf="@+id/section_add_instrument_textview"
+        app:layout_constraintTop_toBottomOf="@+id/section_add_instrument_textview" />
 
     <Spinner
-        android:id="@+id/category_add_edit_instrument_dropdown"
+        android:id="@+id/cat_add_instrument_dropdown"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/spinner_background"
-        app:layout_constraintStart_toStartOf="@+id/categories_add_edit_instrument"
-        app:layout_constraintTop_toBottomOf="@+id/categories_add_edit_instrument" />
+        app:layout_constraintStart_toStartOf="@+id/cat_add_instrument_textview"
+        app:layout_constraintTop_toBottomOf="@+id/cat_add_instrument_textview" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/categories_add_edit_instrument_rview"
+        android:id="@+id/cat_add_instrument_rview"
         android:layout_width="175dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintStart_toStartOf="@+id/cost_add_edit_instrument_edittext"
-        app:layout_constraintTop_toBottomOf="@+id/cost_add_edit_instrument_edittext" />
+        app:layout_constraintStart_toStartOf="@+id/cost_add_instrument_edittext"
+        app:layout_constraintTop_toBottomOf="@+id/cost_add_instrument_edittext" />
 
     <Button
-        android:id="@+id/cancel_add_edit_instrument_button"
+        android:id="@+id/cancel_add_instrument_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/button_border"
         android:text="@android:string/cancel"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/cat_add_instrument_rview"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categories_add_edit_instrument_rview" />
+        app:layout_constraintTop_toBottomOf="@+id/cat_add_instrument_rview" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/ok_add_instrument_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/button_border"
-        android:text="@android:string/ok"
+        android:text="@string/add"
+        android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/cancel_add_edit_instrument_button"
-        app:layout_constraintTop_toBottomOf="@+id/categories_add_edit_instrument_rview" />
+        app:layout_constraintEnd_toEndOf="@+id/cat_add_instrument_rview"
+        app:layout_constraintStart_toStartOf="@+id/cat_add_instrument_rview"
+        app:layout_constraintTop_toBottomOf="@+id/cat_add_instrument_rview" />
 
     <TextView
-        android:id="@+id/add_existing_add_edit_instrument_textview"
+        android:id="@+id/add_existing_add_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="32dp"
         android:text="@string/add_existing"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="622dp" />
+        app:layout_constraintStart_toStartOf="@+id/add_instrument_header"
+        app:layout_constraintTop_toBottomOf="@+id/add_instrument_header" />
 
     <Spinner
-        android:id="@+id/add_existing_add_edit_instrument_dropdown"
+        android:id="@+id/add_existing_add_instrument_dropdown"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/spinner_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_existing_add_edit_instrument_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/add_existing_add_instrument_textview" />
+
+    <Button
+        android:id="@+id/add_cat_add_instrument_button"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_border"
+        android:text="@string/add_category"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/cat_add_instrument_dropdown"
+        app:layout_constraintStart_toStartOf="@+id/cat_add_instrument_dropdown"
+        app:layout_constraintTop_toBottomOf="@+id/cat_add_instrument_dropdown" />
 
 </android.support.constraint.ConstraintLayout>

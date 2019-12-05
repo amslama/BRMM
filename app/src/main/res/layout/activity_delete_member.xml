@@ -2,63 +2,62 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/delete_section_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CE1126"
-    tools:context=".add_section">
+    tools:context=".delete_member">
 
     <ImageView
-        android:id="@+id/colorfilter_add_section"
+        android:id="@+id/delete_member_colorfilter"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#40EEE8E8"
         android:contentDescription="@string/color_filter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/add_section_header"
+        android:id="@+id/delete_member_header"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:text="@string/add_section"
+        android:text="@string/delete_member"
         android:textColor="@android:color/background_dark"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/colorfilter_add_section" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/member_delete_member_dropdown"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:background="@drawable/spinner_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/member_delete_member_textview" />
 
     <TextView
-        android:id="@+id/name_add_section_textview"
+        android:id="@+id/member_delete_member_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:labelFor="@id/name_add_section_edittext"
-        android:text="@string/name"
+        android:text="@string/member"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_section_header" />
-
-    <EditText
-        android:id="@+id/name_add_section_edittext"
-        android:layout_width="175dp"
-        android:layout_height="40dp"
-        android:background="@drawable/border"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_add_section_textview"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/delete_member_header" />
 
     <Button
-        android:id="@+id/cancel_add_section_button"
+        android:id="@+id/cancel_delete_member_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
         android:layout_marginStart="120dp"
@@ -69,19 +68,18 @@
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_add_section_edittext" />
+        app:layout_constraintTop_toBottomOf="@+id/member_delete_member_dropdown" />
 
     <Button
-        android:id="@+id/ok_add_section_button"
+        android:id="@+id/ok_delete_member_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginTop="88dp"
         android:layout_marginEnd="120dp"
         android:background="@drawable/button_border"
-        android:text="@string/add"
+        android:text="@android:string/ok"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_add_section_edittext" />
+        app:layout_constraintTop_toTopOf="@+id/cancel_delete_member_button" />
 </android.support.constraint.ConstraintLayout>

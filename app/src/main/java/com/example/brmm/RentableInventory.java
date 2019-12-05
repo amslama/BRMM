@@ -1,8 +1,9 @@
 package com.example.brmm;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RentableInventory {
+public class RentableInventory implements Serializable {
 
     private ArrayList<Instrument> instruments;
     private ArrayList<Part> parts;
@@ -18,15 +19,28 @@ public class RentableInventory {
         //update db
     }
 
+    public ArrayList<Instrument> getInstrumentList() {
+        return instruments;
+    }
 
-    public void removeInstrument(Instrument newIns) {
+    public ArrayList<Part> getPartList() {
+        return parts;
+    }
 
-        instruments.remove(newIns);
+    public void removeInstrument(int pos) {
+
+        instruments.remove(pos);
         //update db
     }
 
-    public void removePart(Part newPart) {
-        parts.remove(newPart);
+    public void removePart(int sn) {
+
+        for (Part part : parts) {
+            if (sn == part.getSerialNumber()) {
+                parts.remove(part);
+                break;
+            }
+        }
         //update db
     }
 

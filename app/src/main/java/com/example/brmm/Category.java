@@ -32,10 +32,10 @@ public class Category {
 
     }
 
-    public ArrayList<Category> getSuperCategories(Category aCategory) {
+    public ArrayList<Category> getSuperCategories() {
         ArrayList<Category> superCats = new ArrayList<>();
         Category cat = this;
-        while (aCategory.superCategory!= null) {
+        while (cat.superCategory!= null) {
             superCats.add(cat);
             cat = cat.superCategory;
         }
