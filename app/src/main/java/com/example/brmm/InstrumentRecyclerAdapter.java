@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class InstrumentRecyclerAdapter extends RecyclerView.Adapter<InstrumentRecyclerAdapter.ViewHolder> {
 
     private ArrayList<Instrument> ins_List;
-    private Instrument selected;
 
     public InstrumentRecyclerAdapter(ArrayList<Instrument> modelList) {
         ins_List = modelList;
@@ -47,19 +46,6 @@ public class InstrumentRecyclerAdapter extends RecyclerView.Adapter<InstrumentRe
         cost_textview.setText(Double.toString(ins.getCost()));
         section_textview.setText(ins.getSection());
         owner_textview.setText(ins.getCurrentOwner());
-
-        holder.view.setBackgroundColor(ins.isSelected() ? Color.CYAN : Color.WHITE);
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ins.setSelected(!ins.isSelected());
-                if(ins.isSelected())
-                {
-                    selected = ins;
-                }
-                holder.view.setBackgroundColor(ins.isSelected() ? Color.CYAN : Color.WHITE);
-            }
-        });
     }
 
     @Override

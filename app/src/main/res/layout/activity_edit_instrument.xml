@@ -51,8 +51,8 @@
         android:id="@+id/name_edit_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="32dp"
         android:labelFor="@id/name_edit_instrument_editText"
         android:text="@string/name"
         android:textAlignment="center"
@@ -60,20 +60,19 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_instrument_header" />
+        app:layout_constraintTop_toBottomOf="@+id/pick_edit_instrument_dropdown" />
 
     <TextView
         android:id="@+id/id_edit_instrument_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="212dp"
-        android:layout_marginTop="56dp"
         android:text="@string/id_number"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/name_edit_instrument_textview"
-        app:layout_constraintTop_toBottomOf="@+id/edit_instrument_header" />
+        app:layout_constraintTop_toTopOf="@+id/name_edit_instrument_textview" />
 
     <TextView
         android:id="@+id/cat_edit_instrument_textview"
@@ -197,5 +196,27 @@
         app:layout_constraintEnd_toEndOf="@+id/cat_edit_instrument_dropdown"
         app:layout_constraintStart_toStartOf="@+id/cat_edit_instrument_dropdown"
         app:layout_constraintTop_toBottomOf="@+id/cat_edit_instrument_dropdown" />
+
+    <TextView
+        android:id="@+id/pick_edit_instrument_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/pick_one"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/edit_instrument_header"
+        app:layout_constraintStart_toStartOf="@+id/edit_instrument_header"
+        app:layout_constraintTop_toBottomOf="@+id/edit_instrument_header" />
+
+    <Spinner
+        android:id="@+id/pick_edit_instrument_dropdown"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:background="@drawable/spinner_background"
+        app:layout_constraintEnd_toEndOf="@+id/edit_instrument_header"
+        app:layout_constraintStart_toStartOf="@+id/edit_instrument_header"
+        app:layout_constraintTop_toBottomOf="@+id/pick_edit_instrument_textview" />
 
 </android.support.constraint.ConstraintLayout>

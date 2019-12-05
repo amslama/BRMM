@@ -1,5 +1,6 @@
 package com.example.brmm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +34,10 @@ public class add_section extends AppCompatActivity {
             public void onClick(View view) {
                 String name;
                 name = name_edittext.getText().toString();
+                Intent intent = new Intent();
+                intent.putExtra("section", intent);
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
 
@@ -40,6 +45,7 @@ public class add_section extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 name_edittext.setText("");
+                finish();
             }
         });
 

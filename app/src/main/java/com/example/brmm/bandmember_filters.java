@@ -1,6 +1,7 @@
 
 package com.example.brmm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -139,7 +140,11 @@ public class bandmember_filters extends AppCompatActivity {
                 } catch (NumberFormatException ex){UID = 0;}
 
 
-                filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
+                ArrayList<BandMember>  memberList = filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
+                Intent intent = new Intent();
+                intent.putExtra("memberList", intent);
+                setResult(RESULT_OK,intent);
+                finish();
             }
         });
     }

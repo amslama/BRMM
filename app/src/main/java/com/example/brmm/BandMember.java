@@ -7,8 +7,6 @@ public class BandMember implements Serializable
     protected String fname;
     protected String lname;
     protected int UID;
-    private boolean isSelected;
-
     public String ulid;
 
     public void setFname(String fname){
@@ -39,17 +37,8 @@ public class BandMember implements Serializable
         return UID;
     }
 
-    public  void setUID(int UID){
-        this.UID = UID;
-    }
+    public  void setUID(int UID){this.UID = UID; }
 
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
-
-    public boolean isSelected() {
-        return isSelected;
-    }
 }
 
 

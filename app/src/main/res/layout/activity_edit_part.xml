@@ -76,15 +76,15 @@
         android:id="@+id/name_edit_part_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="32dp"
         android:labelFor="@id/name_edit_part_edittext"
         android:text="@string/name"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_parts_header" />
+        app:layout_constraintTop_toBottomOf="@+id/pick_edit_part_dropdown" />
 
     <EditText
         android:id="@+id/name_edit_part_edittext"
@@ -162,5 +162,28 @@
         android:layout_height="200dp"
         app:layout_constraintStart_toStartOf="@+id/compwith_edit_part_dropdown"
         app:layout_constraintTop_toBottomOf="@+id/compwith_edit_part_dropdown" />
+
+    <TextView
+        android:id="@+id/pick_edit_part_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/pick_one"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/edit_parts_header"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/edit_parts_header"
+        app:layout_constraintTop_toBottomOf="@+id/edit_parts_header" />
+
+    <Spinner
+        android:id="@+id/pick_edit_part_dropdown"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:background="@drawable/spinner_background"
+        app:layout_constraintEnd_toEndOf="@+id/pick_edit_part_textview"
+        app:layout_constraintStart_toStartOf="@+id/pick_edit_part_textview"
+        app:layout_constraintTop_toBottomOf="@+id/pick_edit_part_textview" />
 
 </android.support.constraint.ConstraintLayout>

@@ -43,14 +43,6 @@ public class PartRecyclerAdapter extends RecyclerView.Adapter<PartRecyclerAdapte
         sn_textview.setText(part.getSerialNumber());
 
 
-        holder.view.setBackgroundColor(part.isSelected() ? Color.CYAN : Color.WHITE);
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                part.setSelected(!part.isSelected());
-                holder.view.setBackgroundColor(part.isSelected() ? Color.CYAN : Color.WHITE);
-            }
-        });
     }
 
     @Override

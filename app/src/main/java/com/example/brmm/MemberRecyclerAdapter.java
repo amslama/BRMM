@@ -34,7 +34,7 @@ public class MemberRecyclerAdapter extends RecyclerView.Adapter<MemberRecyclerAd
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final BandMember member = memberList.get(position);
-        if(member instanceof Student) {
+        if (member instanceof Student) {
             TextView fname_textview = holder.fname_textview;
             TextView lname_textview = holder.lname_textview;
             TextView type_textview = holder.type_textview;
@@ -47,12 +47,10 @@ public class MemberRecyclerAdapter extends RecyclerView.Adapter<MemberRecyclerAd
             lname_textview.setText(member.getLname());
             type_textview.setText("Student");
             UID_textview.setText(member.getUID());
-            section_textview.setText(((Student)member).getSection());
-            instrument_textview.setText(((Student)member).getInstruments().getName());
+            section_textview.setText(((Student) member).getSection());
+            instrument_textview.setText(((Student) member).getInstruments().getName());
 
-        }
-        else
-        {
+        } else {
             TextView fname_textview = holder.fname_textview;
             TextView lname_textview = holder.lname_textview;
             TextView type_textview = holder.type_textview;
@@ -63,19 +61,13 @@ public class MemberRecyclerAdapter extends RecyclerView.Adapter<MemberRecyclerAd
             type_textview.setText("Faculty");
             UID_textview.setText(member.getUID());
         }
-        holder.view.setBackgroundColor(member.isSelected() ? Color.CYAN : Color.WHITE);
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.view.setBackgroundColor(member.isSelected() ? Color.CYAN : Color.WHITE);
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
         return memberList == null ? 0 : memberList.size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -98,5 +90,7 @@ public class MemberRecyclerAdapter extends RecyclerView.Adapter<MemberRecyclerAd
             fname_textview = (TextView) itemView.findViewById(R.id.section_bm_rv_textview);
             fname_textview = (TextView) itemView.findViewById(R.id.instrument_bm_rv_textview);
         }
+
+
     }
 }
