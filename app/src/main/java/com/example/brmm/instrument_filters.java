@@ -1,5 +1,6 @@
 package com.example.brmm;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -135,8 +136,9 @@ public class instrument_filters extends AppCompatActivity {
 
 
 
-        return filter;
+        passFilteredInstruments(filter);
 
+        return filter;
     }
 
 
@@ -204,4 +206,9 @@ public class instrument_filters extends AppCompatActivity {
         return filter;
     }
 
+    public void passFilteredInstruments(ArrayList<Rentable> filteredInstruments) {
+        Intent inventory = new Intent(this,RentableInventory.class);
+        inventory.putExtra("FILTEREDINSTRUMENTS", filteredInstruments);
+        startActivity(inventory);
+    }
 }
