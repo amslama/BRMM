@@ -50,12 +50,13 @@ public class Instrument extends Rentable {
         this.id = id;
     }
 
-    public Instrument(String co, String st, String na, double price, int idnum) {
+    public Instrument(String co, String st, String na, double price, int idnum, String catagory) {
         currentOwner = co;
         section = st;
         name = na;
         cost = price;
         id = idnum;
+        this.category = catagory;
     }
 
     public boolean equals(Instrument ins) {

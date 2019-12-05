@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 public class Part extends Rentable
 {
-    private ArrayList<Category> compWith;
+    //private String category;
     private int serialNumber;
 
-    public Part(){
-
+    public Part(double cost, String name, String category, int serialNumber){
+        this.cost = cost;
+        this.name = name;
+        this.category = category;
+        this.serialNumber = serialNumber;
     }
 
 

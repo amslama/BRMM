@@ -1,4 +1,5 @@
 package com.example.brmm;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -27,6 +28,8 @@ public class DatabaseWrapper extends Thread{
     private String currentOwner = "";
     private String name = "";
     private double cost = 0;
+    private String category = "";
+    private int serialNumber = 0;
 
 
     public DatabaseWrapper(Connection connection){
@@ -57,10 +60,6 @@ public class DatabaseWrapper extends Thread{
         return instrumentList;
     }
 
-    public  ArrayList<Part> getPartList(){
-        return partList;
-    }
-
     public boolean getValidation(){
         return valid;
     }
@@ -86,16 +85,29 @@ public class DatabaseWrapper extends Thread{
         return faculty;
     }
 
-    public void setInstrumentVariables(String currentOwner, String section, String name, double cost){
+    public void setInstrumentVariables(String currentOwner, String section, String name, double cost, String catagory){
         this.currentOwner = currentOwner;
         this.section = section;
         this.name = name;
         this.cost = cost;
+        this.category = catagory;
     }
 
     public void setID(int ID){
         this.ID = ID;
     }
+
+    public ArrayList<Part> getPartList(){
+        return partList;
+    }
+
+    public void setPart(double cost, String name, String category, int serialNumber){
+        this.cost = cost;
+        this.name = name;
+        this.category = category;
+        this.serialNumber = serialNumber;
+    }
+
 
     /**
      * Read the comments in each method on how to use it
@@ -153,12 +165,23 @@ public class DatabaseWrapper extends Thread{
                 break;
             case "addInstrument":
                 //call the setInstrumentVariables() method first then call the run method (No need for setUlid() method)
-                addInstrument(currentOwner, section, name, cost);
+                addInstrument(currentOwner, section, name, cost, category);
                 break;
             case "removeInstrument":
                 //Call the setID() method for this one instead of the setUlid() method
                 removeInstrument(ID);
                 break;
+            case "getParts":
+                //Call getPartList after the run method
+                partList = getParts();
+                break;
+            case "addPart":
+                //Call the setPart method first then call run() method
+                addPart(cost, name, category, serialNumber);
+                break;
+            case "removePart":
+                //Call setID before the run method
+                removePart(ID);
             default:
                 System.out.println("Method not found");
                 break;
@@ -351,12 +374,12 @@ public class DatabaseWrapper extends Thread{
         ArrayList<Instrument> list = new ArrayList<Instrument>();
         Instrument instrument;
         try{
-            String query = "Select ownership,section,name,cost,id from instrument where instrument = 1 order by id asc";
+            String query = "Select ownership,section,name,cost,id,category from instrument where instrument = 1 order by id asc";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
 
             while(rs.next()){
-                instrument = new Instrument(rs.getString("ownership"),rs.getString("section"),rs.getString("name"),Double.parseDouble(rs.getString("cost")),rs.getInt("id"));
+                instrument = new Instrument(rs.getString("ownership"),rs.getString("section"),rs.getString("name"),Double.parseDouble(rs.getString("cost")),rs.getInt("id"),rs.getString("category"));
                 list.add(instrument);
             }
         }
@@ -368,9 +391,9 @@ public class DatabaseWrapper extends Thread{
     }
 
     //TODO: INSTRUMENT STUFF
-    private void addInstrument(String currentOwner, String section, String name, double cost){
+    private void addInstrument(String currentOwner, String section, String name, double cost, String catagory){
         try{
-            String query = "insert into item (ownership, section, name, cost, instrument,category) values ('"+currentOwner+"','"+section+"','"+name+"','"+cost+"',1)";
+            String query = "insert into item (ownership, section, name, cost, instrument,category) values ('"+currentOwner+"','"+section+"','"+name+"','"+cost+"',1,'"+catagory+"')";
             Statement st = conn.createStatement();
             st.executeUpdate(query);
         }
@@ -387,6 +410,52 @@ public class DatabaseWrapper extends Thread{
         }
         catch(Exception e){
             System.out.println("Remove instrument failed");
+        }
+    }
+
+    private ArrayList<Part> getParts(){
+        Part part;
+        ArrayList<Part> partList = new ArrayList<Part>();
+
+        try{
+            String query = "select (cost, name, category, serialNumber) from item where instrument = 0";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            double realCost = 0;
+
+            while(rs.next()){
+                    realCost = Double.parseDouble(rs.getString("cost"));
+                part = new Part(realCost, rs.getString("name"), rs.getString("category"), rs.getInt("serialNumber"));
+                partList.add(part);
+            }
+        }
+        catch (Exception e){
+            System.out.println("Failed to get parts");
+        }
+
+        return partList;
+    }
+
+    private void addPart(double cost, String name, String category, int serialNumber){
+        try{
+            String stringCost = cost + "";
+            String query = "insert into item (cost, name, category, serialNumber) values ('"+stringCost+"','"+name+"','"+category+"',"+serialNumber+")";
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        }
+        catch (Exception e){
+            System.out.println("Failed to add part");
+        }
+    }
+
+    private void removePart(int ID){
+        try{
+            String query = "remove item where ID = "+ID;
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        }
+        catch (Exception e){
+            System.out.println("Failed to remove part");
         }
     }
 
