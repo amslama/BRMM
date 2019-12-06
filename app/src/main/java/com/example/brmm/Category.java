@@ -4,16 +4,14 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Category {
-    private String name;
+
     private Category superCategory;
+    private ArrayList<Category> subCategories;
 
-    public String getName() {
-        return name;
+    public  Category() {
+        superCategory = null;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Category getSuperCategory() {
         return superCategory;
@@ -25,13 +23,6 @@ public class Category {
 
 
 
-
-    public Category(Category superCategory, String name) {
-        this.superCategory = superCategory;
-        this.name = name;
-
-    }
-
     public ArrayList<Category> getSuperCategories() {
         ArrayList<Category> superCats = new ArrayList<>();
         Category cat = this;
@@ -39,6 +30,18 @@ public class Category {
             superCats.add(cat);
             cat = cat.superCategory;
         }
+        superCats.add(cat);
         return superCats;
+    }
+
+    public void addSubCategory(Category cat) {
+        subCategories.add(cat);
+    }
+
+    public void removeSubCategory(Category cat) {
+        for (Category subCat: subCategories) {
+            if (subCat == cat)
+                subCategories.remove(cat);
+        }
     }
 }
