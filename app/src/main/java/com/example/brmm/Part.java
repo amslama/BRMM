@@ -1,19 +1,20 @@
 package com.example.brmm;
 
+import android.support.annotation.Nullable;
+
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Part extends Rentable implements Serializable
 {
-    //private String category;
     private String serialNumber;
 
     public Part ()
     {
         cost = 0;
         name = "invalid";
-        category = null;
+     //   category = null;
         serialNumber = "notreal";
 
     }
@@ -21,10 +22,11 @@ public class Part extends Rentable implements Serializable
     public Part(double cost, String name, String category, String serialNumber){
         this.cost = cost;
         this.name = name;
-        this.category = category;
+     //   this.category = category;
         this.serialNumber = serialNumber;
 
     }
+
 
     public String getSerialNumber() {
         return serialNumber;

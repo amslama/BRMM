@@ -2,6 +2,7 @@ package com.example.brmm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -182,6 +183,7 @@ public class main_screen extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent openFilter = new Intent(getBaseContext(), delete_part.class);
+                    openFilter.putExtra("partlist", rent_inv.getPartList());
                     startActivityForResult(openFilter, 14);
                 }
             });
@@ -219,6 +221,7 @@ public class main_screen extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent openFilter = new Intent(getBaseContext(), add_instrument.class);
+                    openFilter.putExtra("instrumentlist", rent_inv.getInstrumentList());
                     startActivityForResult(openFilter, 1);
                 }
             });
@@ -397,9 +400,7 @@ public class main_screen extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Part part = (Part) data.getSerializableExtra("part");
                 rent_inv.addPart(part);
-                PartRecyclerAdapter adapter = new PartRecyclerAdapter(rent_inv.getPartList());
-                inv_view.setLayoutManager(new LinearLayoutManager(this));
-                inv_view.setAdapter(adapter);
+                inv_view.getAdapter().notifyDataSetChanged();
             }
         }
 
@@ -483,13 +484,11 @@ public class main_screen extends AppCompatActivity {
         //edit part
         if (requestCode == 8) {
             if (resultCode == RESULT_OK) {
-                Part part = (Part) data.getSerializableExtra("part");
-                rent_inv.removePart(part.getSerialNumber());
-                rent_inv.addPart(part);
+
+                rent_inv.setParts((ArrayList<Part>)data.getSerializableExtra("part"));
                 PartRecyclerAdapter adapter = new PartRecyclerAdapter(rent_inv.getPartList());
                 inv_view.setLayoutManager(new LinearLayoutManager(this));
-                inv_view.setAdapter(adapter);
-            }
+                inv_view.setAdapter(adapter);            }
         }
 
         //part filters
@@ -547,9 +546,8 @@ public class main_screen extends AppCompatActivity {
         //delete part
         if (requestCode == 14) {
             if (resultCode == RESULT_OK) {
-                Part part = (Part) data.getSerializableExtra("part");
-                rent_inv.removePart(part.getSerialNumber());
-                InstrumentRecyclerAdapter adapter = new InstrumentRecyclerAdapter(rent_inv.getInstrumentList());
+                rent_inv.setParts((ArrayList<Part>)data.getSerializableExtra("part"));
+                PartRecyclerAdapter adapter = new PartRecyclerAdapter(rent_inv.getPartList());
                 inv_view.setLayoutManager(new LinearLayoutManager(this));
                 inv_view.setAdapter(adapter);
             }

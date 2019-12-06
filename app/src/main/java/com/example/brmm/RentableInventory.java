@@ -39,21 +39,32 @@ public class RentableInventory implements Serializable {
         return parts;
     }
 
+    public void setParts(ArrayList<Part> parts) {
+        System.out.println("parts if of size " + parts.size());
+        this.parts = parts;
+    }
+
     public void removeInstrument(int pos) {
 
         instruments.remove(pos);
         //update db
     }
 
-    public void removePart(String sn) {
-
-        for (Part part : parts) {
-            if (sn == part.getSerialNumber()) {
-                parts.remove(part);
-                break;
+    public void removePart(Part part) {
+        for(int i = 0;i < parts.size();i++) {
+            Part temp = parts.get(i);
+            if (part != null) {
+                if (part.getSerialNumber().equals(temp.getSerialNumber())) {
+                    if (part.getCost() == temp.getCost()) {
+                        if (part.getName().equals(temp.getName()))
+                            parts.remove(i);
+                        System.out.println("Removal successful");
+                        return;
+                    }
+                }
             }
         }
-        //update db
+        System.out.println("REMOVAL FAILEDDDD-------------------------------------------------------------------------------------------------------------------------------------------");
     }
 
 

@@ -114,7 +114,7 @@ public class instrument_filters extends AppCompatActivity {
         ArrayList<Instrument> filter = new ArrayList<>();
 
         if(category != null)
-            filter = filterByCategory(filter, category);
+        //   filter = filterByCategory(filter, category);
 
 
         if (id != 0)
@@ -130,7 +130,7 @@ public class instrument_filters extends AppCompatActivity {
         }
 
         if (category != null)
-            filter =filterByCategory(filter, category);
+         //   filter =filterByCategory(filter, category);
 
         if (!section.equals(""))
             filter = filterBySection(filter, section);
@@ -157,7 +157,7 @@ public class instrument_filters extends AppCompatActivity {
         }
         return filter;
     }
-
+/*
     public ArrayList<Instrument> filterByCategory(ArrayList<Instrument> Instruments, Category category) {
         ArrayList<Instrument> filter = new ArrayList<>();
         for (Instrument Instrument : Instruments) {
@@ -168,7 +168,7 @@ public class instrument_filters extends AppCompatActivity {
         }
         return filter;
     }
-
+*/
     public ArrayList<Instrument> filterByCost(ArrayList<Instrument> Instruments, double cost) {
         ArrayList<Instrument> filter = new ArrayList<>();
         for (Instrument Instrument : Instruments) {

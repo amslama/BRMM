@@ -11,26 +11,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class edit_part extends AppCompatActivity {
 
 
-    private Part return_part;
+    private int count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_part);
 
-        //textviews
-        /*
-        TextView header = findViewById(R.id.edit_parts_header);
-        TextView name_textview = findViewById(R.id.name_edit_part_textview);
-        TextView sn_textview = findViewById(R.id.sn_edit_part_textview);
-        TextView cost_textview = findViewById(R.id.cost_edit_part_textview)
-        TextView compwith_textview = findViewById(R.id.compwith_edit_parts_textview);
-        */
 
         //edittexts
         final EditText name_edittext = findViewById(R.id.name_edit_part_edittext);
@@ -51,6 +45,9 @@ public class edit_part extends AppCompatActivity {
             }
         }
 
+
+        Part temp_part = new Part();
+
         //buttons
         Button ok_button = findViewById(R.id.ok_edit_part_button);
         Button cancel_button = findViewById(R.id.cancel_edit_part_button);
@@ -59,18 +56,15 @@ public class edit_part extends AppCompatActivity {
         pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(partlist!=null)
-                {
-                    for(String str : partlist)
-                    {
-                        int count = 0;
-                        if (str == pick_spin.getSelectedItem().toString())
-                        {
+                if (partlist != null) {
+                    count = 0;
+                    for (String str : partlist) {
+                        if (str == pick_spin.getSelectedItem().toString()) {
                             name_edittext.setText(temp.get(count).getName());
                             sn_edittext.setText(temp.get(count).getSerialNumber());
                             cost_edittext.setText(Double.toString(temp.get(count).getCost()));
-
-                        }
+                            break;
+                         }
                         count++;
                     }
                 }
@@ -78,25 +72,51 @@ public class edit_part extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                return;
             }
         });
 
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 String name;
-                 String sn;
-                 double cost;
-                try {
-                    cost = Double.parseDouble(cost_edittext.getText().toString());
-                }  catch (NumberFormatException ex){cost = 0;}
-                return_part.setName(name_edittext.getText().toString());
-                return_part.setSerialNumber(sn_edittext.getText().toString());
-                return_part.setCost(Double.parseDouble(cost_edittext.getText().toString()));
-                Intent intent = new Intent();
-                intent.putExtra("part", return_part);
-                setResult(RESULT_OK, intent);
-                finish();
+
+
+                if (!name_edittext.getText().toString().isEmpty() && !sn_edittext.getText().toString().isEmpty()
+                        && !cost_edittext.getText().toString().isEmpty()) {
+
+                    try {
+                        double cost = Double.parseDouble(cost_edittext.getText().toString());
+
+                        if (cost >= 0) {
+
+                            String name = name_edittext.getText().toString();
+                            String sn = sn_edittext.getText().toString();
+                            cost = Double.parseDouble(cost_edittext.getText().toString());
+                            RentableFactory factory = new RentableFactory();
+                            Part part = (Part) factory.buildRentable("Part");
+                            part.setSerialNumber(sn);
+                            part.setCost(cost);
+                            part.setName(name);
+                            temp.remove(count);
+                            temp.add(part);
+                            Intent intent = new Intent();
+                            intent.putExtra("part", temp);
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        }
+
+
+                    } catch (NumberFormatException ex) {
+                        String invalid = "Please enter a real number";
+                        Toast incomplete_toast = Toast.makeText(getApplicationContext(), invalid, Toast.LENGTH_LONG);
+                        incomplete_toast.show();
+                    }
+
+                } else {
+                    String incomplete = "Please fill out ALL forms";
+                    Toast incomplete_toast = Toast.makeText(getApplicationContext(), incomplete, Toast.LENGTH_LONG);
+                    incomplete_toast.show();
+                }
             }
         });
 

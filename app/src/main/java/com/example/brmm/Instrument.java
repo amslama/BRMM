@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Instrument extends Rentable implements Serializable {
 
-    private Category category;
+   // private Category category;
     private String section;
     private boolean isSelected;
 
@@ -28,13 +28,13 @@ public class Instrument extends Rentable implements Serializable {
         id = -1;
     }
 
-    public Category getCategory() {
+    /*public Category getCategory() {
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
-    }
+    }*/
 
     public String getSection() {
         return section;
@@ -60,13 +60,13 @@ public class Instrument extends Rentable implements Serializable {
         this.id = id;
     }
 
-    public Instrument(String co, String st, String na, double price, int idnum, String catagory) {
+    public Instrument(String co, String st, String na, double price, int idnum, String category) {
         currentOwner = co;
         section = st;
         name = na;
         cost = price;
         id = idnum;
-        this.category = category;
+       // this.category = category;
     }
 
     public boolean equals(Instrument ins) {
