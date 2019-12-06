@@ -100,7 +100,7 @@ public class instrument_filters extends AppCompatActivity {
                 cost = Double.parseDouble(cost_edittext.getText().toString());
                 Intent thisIntent = new Intent();
                 ArrayList<Instrument> instruments = (ArrayList<Instrument>)thisIntent.getSerializableExtra("instrumentlist");
-                instruments = filterInstrumentInv(instruments, owner, section, name, category, id, cost);
+                instruments = filterInstrumentInv(null, owner, section, name, category, id, cost);
                 thisIntent = new Intent();
                 thisIntent.putExtra("instrumentList", instruments);
                 setResult(RESULT_OK,thisIntent);
