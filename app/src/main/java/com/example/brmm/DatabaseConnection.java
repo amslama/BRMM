@@ -29,6 +29,7 @@ public class DatabaseConnection extends Thread {
     private final String MySQL_Host = "127.0.0.1";
     private final String MySQL_User = "vmuser";
     private final String MySQL_Pass = "brmmproject4!";
+    private Session session = null;
     private Connection conn = null;
 
     public void run() {
@@ -59,6 +60,7 @@ public class DatabaseConnection extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        session = serverSession;
         return serverSession;
     }
 
