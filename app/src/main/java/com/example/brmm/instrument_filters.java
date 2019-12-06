@@ -27,8 +27,6 @@ public class instrument_filters extends AppCompatActivity {
         setContentView(R.layout.activity_instrument_filters);
 
 
-
-
         //Textviews
         TextView header = findViewById(R.id.instrument_filters_header);
         TextView name_textview = findViewById(R.id.name_instrument_filters_textview);
@@ -100,20 +98,20 @@ public class instrument_filters extends AppCompatActivity {
                 id = Integer.parseInt(id_edittext.getText().toString());
 
                 cost = Double.parseDouble(cost_edittext.getText().toString());
-
-              //  ArrayList<Rentable> instruments = (ArrayList<Instrument>)data.getSerializableExtra("instruments");
-               // filterInstrumentInv(null, owner, section, name, category, id, cost);
-               // Intent thisIntet = new Intent();
-                //  intent.putExtra(instrumentList", instruments);
-                //setResult(RESULT_OK,intent);
-                //finish();
+                Intent thisIntent = new Intent();
+                ArrayList<Instrument> instruments = (ArrayList<Instrument>)thisIntent.getSerializableExtra("instrumentlist");
+                filterInstrumentInv(null, owner, section, name, category, id, cost);
+                thisIntent = new Intent();
+                thisIntent.putExtra("instrumentList", instruments);
+                setResult(RESULT_OK,thisIntent);
+                finish();
             }
         });
 
     }
 
-    public ArrayList<Instrument> filterInstrumentInv(ArrayList<Instrument> instruments, String owner, String section, String name, Category category, int id, double cost) {
-        ArrayList<Instrument> filter = instruments;
+    public ArrayList<Instrument> filterInstrumentInv(ArrayList<Instrument> Instruments, String owner, String section, String name, Category category, int id, double cost) {
+        ArrayList<Instrument> filter = new ArrayList<>();
 
         if(category != null)
             filter = filterByCategory(filter, category);
