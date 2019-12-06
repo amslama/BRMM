@@ -120,7 +120,7 @@ public class add_instrument extends AppCompatActivity {
                     cost = 0;
                 }
                 RentableFactory factory = new RentableFactory();
-                Rentable instrument = factory.buildRentable("Instrument", "", section, name, cost, id);
+                Rentable instrument = factory.buildRentable("Instrument");
                 Intent intent = new Intent();
                 intent.putExtra("instrument", instrument);
                 setResult(RESULT_OK, intent);

@@ -35,27 +35,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/compwith_add_parts_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="196dp"
-        android:text="@string/compatible_with"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/name_add_part_textview"
-        app:layout_constraintStart_toEndOf="@+id/name_add_part_textview" />
-
-    <TextView
         android:id="@+id/sn_add_part_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="36dp"
         android:labelFor="@id/sn_add_part_edittext"
         android:text="@string/serial_number"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/name_add_part_edittext"
         app:layout_constraintStart_toStartOf="@+id/name_add_part_edittext"
         app:layout_constraintTop_toBottomOf="@+id/name_add_part_edittext" />
 
@@ -63,12 +52,13 @@
         android:id="@+id/cost_add_part_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="36dp"
         android:labelFor="@id/cost_add_part_edittext"
         android:text="@string/cost"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/sn_add_part_edittext"
         app:layout_constraintStart_toStartOf="@+id/sn_add_part_edittext"
         app:layout_constraintTop_toBottomOf="@+id/sn_add_part_edittext" />
 
@@ -76,14 +66,14 @@
         android:id="@+id/name_add_part_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
         android:layout_marginTop="36dp"
         android:labelFor="@id/name_add_part_edittext"
         android:text="@string/name"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/add_existing_add_part_textview"
+        app:layout_constraintStart_toStartOf="@+id/add_existing_add_part_textview"
         app:layout_constraintTop_toBottomOf="@+id/add_existing_add_part_dropdown" />
 
     <EditText
@@ -92,11 +82,13 @@
         android:layout_height="40dp"
         android:background="@drawable/border"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="@android:color/background_dark"
+        app:layout_constraintEnd_toEndOf="@+id/name_add_part_textview"
         app:layout_constraintStart_toStartOf="@+id/name_add_part_textview"
-        app:layout_constraintTop_toBottomOf="@+id/name_add_part_textview"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/name_add_part_textview" />
 
     <EditText
         android:id="@+id/cost_add_part_edittext"
@@ -106,7 +98,9 @@
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="@android:color/background_dark"
+        app:layout_constraintEnd_toEndOf="@+id/cost_add_part_textview"
         app:layout_constraintStart_toStartOf="@+id/cost_add_part_textview"
         app:layout_constraintTop_toBottomOf="@+id/cost_add_part_textview" />
 
@@ -116,11 +110,13 @@
         android:layout_height="40dp"
         android:background="@drawable/border"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="@android:color/background_dark"
+        app:layout_constraintEnd_toEndOf="@+id/sn_add_part_textview"
         app:layout_constraintStart_toStartOf="@+id/sn_add_part_textview"
-        app:layout_constraintTop_toBottomOf="@+id/sn_add_part_textview"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/sn_add_part_textview" />
 
     <Button
         android:id="@+id/cancel_add_part_button"
@@ -132,8 +128,7 @@
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/cost_add_part_edittext"
-        app:layout_constraintStart_toStartOf="@+id/cost_add_part_edittext"
+        app:layout_constraintEnd_toStartOf="@+id/add_parts_header"
         app:layout_constraintTop_toBottomOf="@+id/cost_add_part_edittext" />
 
     <Button
@@ -145,23 +140,8 @@
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/compwith_add_part_rview"
-        app:layout_constraintStart_toStartOf="@+id/compwith_add_part_rview"
+        app:layout_constraintStart_toEndOf="@+id/add_parts_header"
         app:layout_constraintTop_toTopOf="@+id/cancel_add_part_button" />
-
-    <Spinner
-        android:id="@+id/compwith_add_part_dropdown"
-        android:layout_width="175dp"
-        android:layout_height="40dp"
-        app:layout_constraintStart_toStartOf="@+id/compwith_add_parts_textview"
-        app:layout_constraintTop_toBottomOf="@+id/compwith_add_parts_textview" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/compwith_add_part_rview"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/compwith_add_part_dropdown"
-        app:layout_constraintTop_toBottomOf="@+id/add_cat_add_part_button" />
 
     <TextView
         android:id="@+id/add_existing_add_part_textview"
@@ -186,18 +166,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_existing_add_part_textview" />
-
-    <Button
-        android:id="@+id/add_cat_add_part_button"
-        android:layout_width="125dp"
-        android:layout_height="40dp"
-        android:background="@drawable/button_border"
-        android:text="@string/add_category"
-        android:textAllCaps="false"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/compwith_add_part_dropdown"
-        app:layout_constraintStart_toStartOf="@+id/compwith_add_part_dropdown"
-        app:layout_constraintTop_toBottomOf="@+id/compwith_add_part_dropdown" />
 
 </android.support.constraint.ConstraintLayout>

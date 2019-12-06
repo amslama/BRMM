@@ -39,8 +39,6 @@ public class login_screen extends AppCompatActivity {
 
         //Buttons
         final Button OK = findViewById(R.id.Login_OK_Button);
-        final Button stdntLogin = findViewById(R.id.Student_Button);
-
         final Toast toast = Toast.makeText(this, "Too many failed attempts", Toast.LENGTH_SHORT);
 
         DatabaseConnection connection = new DatabaseConnection();

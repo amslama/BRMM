@@ -431,7 +431,7 @@ public class DatabaseWrapper extends Thread{
 
             while(rs.next()){
                     realCost = Double.parseDouble(rs.getString("cost"));
-                part = new Part(realCost, rs.getString("name"), rs.getString("category"), rs.getInt("serialNumber"));
+                part = new Part(realCost, rs.getString("name"), rs.getString("category"), rs.getString("serialNumber"));
                 partList.add(part);
             }
         }

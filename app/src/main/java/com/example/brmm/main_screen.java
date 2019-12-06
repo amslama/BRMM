@@ -88,7 +88,8 @@ public class main_screen extends AppCompatActivity {
         }
 
         instantiateButtons();
-        setBandmemberButtons();
+        oneTimeListeners();
+        setPartsButtons();
 
         if(facultyRights == false)
         {
@@ -164,6 +165,7 @@ public class main_screen extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent openFilter = new Intent(getBaseContext(), add_part.class);
+                    openFilter.putExtra("partlist", rent_inv.getPartList());
                     startActivityForResult(openFilter, 0);
                 }
             });

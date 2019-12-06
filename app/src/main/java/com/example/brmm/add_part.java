@@ -1,15 +1,20 @@
 package com.example.brmm;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class add_part extends AppCompatActivity {
 
@@ -19,68 +24,73 @@ public class add_part extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_part);
 
-        //textviews
-        /*
-        TextView header = findViewById(R.id.add_parts_header);
-        TextView name_textview = findViewById(R.id.name_add_part_textview);
-        TextView sn_textview = findViewById(R.id.sn_add_part_textview);
-        TextView cost_textview = findViewById(R.id.cost_add_part_textview)
-        TextView compwith_textview = findViewById(R.id.compwith_add_parts_textview);
-        TextView add_existing_textview = findViewById(R.id.add_existing_add_part_textview);
-        */
-
         //edittexts
         final EditText name_edittext = findViewById(R.id.name_add_part_edittext);
         final EditText sn_edittext = findViewById(R.id.sn_add_part_edittext);
         final EditText cost_edittext = findViewById(R.id.cost_add_part_edittext);
 
-        //compwith objects
-        Spinner compwith_spin = findViewById(R.id.compwith_add_part_dropdown);
-        RecyclerView compwith_rview = findViewById(R.id.compwith_add_part_rview);
 
         //buttons
         Button ok_button = findViewById(R.id.ok_add_part_button);
         Button cancel_button = findViewById(R.id.cancel_add_part_button);
-        Button add_cat_button = findViewById(R.id.add_cat_add_part_button);
 
         //Add existing dropdown
-        Spinner add_existing_spin = findViewById(R.id.add_existing_add_part_dropdown);
+        final Spinner add_existing_spin = findViewById(R.id.add_existing_add_part_dropdown);
+        final ArrayList<String> partlist = new ArrayList<>();
+        final ArrayList<Part> temp = (ArrayList<Part>) getIntent().getSerializableExtra("partlist");
+        if (temp != null) {
+            for (Part part : temp) {
 
-        //wasnt sure exactly what this does
-        compwith_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                partlist.add(part.getName());
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            if (partlist != null) {
+                ArrayAdapter<String> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, partlist);
+                add_existing_spin.setAdapter(memberAdapter);
             }
-        });
+        }
 
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name;
                 String sn;
-                double cost;
-                try {
-                    cost = Double.parseDouble(cost_edittext.getText().toString());
-                } catch (NumberFormatException ex) {
-                    cost = 0;
-                }
-                name = name_edittext.getText().toString();
-                sn = sn_edittext.getText().toString();
-                RentableFactory factory = new RentableFactory();
-                Rentable rentable = factory.buildRentable("Part", "", sn, "", cost, 0);
-                rentable.setName(name);
-                rentable.setCost(cost);
-                Intent intent = new Intent();
-                intent.putExtra("part", intent);
-                setResult(RESULT_OK, intent);
-                finish();
+                double cost = 0;
 
+                if (!name_edittext.getText().toString().isEmpty() && !sn_edittext.getText().toString().isEmpty()
+                        && !cost_edittext.getText().toString().isEmpty()) {
+
+
+                    try {
+                        cost = Double.parseDouble(cost_edittext.getText().toString());
+                        if (cost >= 0) {
+                            name = name_edittext.getText().toString();
+                            sn = sn_edittext.getText().toString();
+                            RentableFactory factory = new RentableFactory();
+                            Part part = (Part) factory.buildRentable("Part");
+                            part.setName(name);
+                            part.setCost(cost);
+                            part.setSerialNumber(sn);
+                            Intent intent = new Intent();
+                            intent.putExtra("part", part);
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        } else {
+                            String invalid = "Please enter a positive number";
+                            Toast incomplete_toast = Toast.makeText(getApplicationContext(), invalid, Toast.LENGTH_LONG);
+                            incomplete_toast.show();
+                        }
+                    } catch (NumberFormatException ex) {
+                        String invalid = "Please enter a real number";
+                        Toast incomplete_toast = Toast.makeText(getApplicationContext(), invalid, Toast.LENGTH_LONG);
+                        incomplete_toast.show();
+                    }
+                    cost_edittext.setText("");
+
+                } else {
+                    String incomplete = "Please fill out ALL forms";
+                    Toast incomplete_toast = Toast.makeText(getApplicationContext(), incomplete, Toast.LENGTH_LONG);
+                    incomplete_toast.show();
+                }
             }
         });
 
@@ -91,6 +101,32 @@ public class add_part extends AppCompatActivity {
                 name_edittext.setText("");
                 sn_edittext.setText("");
                 finish();
+            }
+        });
+
+        add_existing_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(partlist!=null)
+                {
+                    int count = 0;
+
+                    for(String str : partlist)
+                    {
+                        if (str == add_existing_spin.getSelectedItem().toString())
+                        {
+                            name_edittext.setText(temp.get(count).getName());
+                            sn_edittext.setText(temp.get(count).getSerialNumber());
+                            cost_edittext.setText(Double.toString(temp.get(count).getCost()));
+
+                        }
+                        count++;
+                    }
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                return;
             }
         });
     }

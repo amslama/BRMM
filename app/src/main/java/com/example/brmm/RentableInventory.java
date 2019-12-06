@@ -5,8 +5,20 @@ import java.util.ArrayList;
 
 public class RentableInventory implements Serializable {
 
+    public RentableInventory()
+    {
+     instruments = new ArrayList<Instrument>();
+     parts = new ArrayList<Part>();
+    }
+
     private ArrayList<Instrument> instruments;
     private ArrayList<Part> parts;
+
+    public RentableInventory(ArrayList<Instrument> instruments, ArrayList<Part> parts) {
+        this.instruments = instruments;
+        this.parts = parts;
+    }
+
 
 
     public void addInstrument(Instrument newIns) {
@@ -33,7 +45,7 @@ public class RentableInventory implements Serializable {
         //update db
     }
 
-    public void removePart(int sn) {
+    public void removePart(String sn) {
 
         for (Part part : parts) {
             if (sn == part.getSerialNumber()) {

@@ -30,14 +30,14 @@ public class delete_part extends AppCompatActivity {
         Button cancel_button = findViewById(R.id.cancel_delete_part_button);
 
         part = new Part();
-        final ArrayList<Integer> parts = new ArrayList<>();
+        final ArrayList<String> parts = new ArrayList<>();
         final ArrayList<Part> temp = (ArrayList<Part>) getIntent().getSerializableExtra("partlist");
         if (temp != null) {
             for (Part prt : temp) {
                 parts.add(prt.getSerialNumber());
             }
             if (!parts.isEmpty()) {
-                ArrayAdapter<Integer> partAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, parts);
+                ArrayAdapter<String> partAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, parts);
                 pick_spin.setAdapter(partAdapter);
             }
         }

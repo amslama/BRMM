@@ -37,10 +37,6 @@ public class edit_part extends AppCompatActivity {
         final EditText sn_edittext = findViewById(R.id.sn_edit_part_edittext);
         final EditText cost_edittext = findViewById(R.id.cost_edit_part_edittext);
 
-        //compwith objects
-        //Spinner compwith_spin = findViewById(R.id.compwith_edit_part_dropdown);
-        //RecyclerView compwith_rview = findViewById(R.id.compwith_edit_part_rview);
-
         final Spinner pick_spin = findViewById(R.id.pick_edit_part_dropdown);
 
         final ArrayList<String> partlist = new ArrayList<>();
@@ -71,7 +67,7 @@ public class edit_part extends AppCompatActivity {
                         if (str == pick_spin.getSelectedItem().toString())
                         {
                             name_edittext.setText(temp.get(count).getName());
-                            sn_edittext.setText(temp.get(count).getId());
+                            sn_edittext.setText(temp.get(count).getSerialNumber());
                             cost_edittext.setText(Double.toString(temp.get(count).getCost()));
 
                         }
@@ -95,7 +91,7 @@ public class edit_part extends AppCompatActivity {
                     cost = Double.parseDouble(cost_edittext.getText().toString());
                 }  catch (NumberFormatException ex){cost = 0;}
                 return_part.setName(name_edittext.getText().toString());
-                return_part.setSerialNumber(Integer.parseInt(sn_edittext.getText().toString()));
+                return_part.setSerialNumber(sn_edittext.getText().toString());
                 return_part.setCost(Double.parseDouble(cost_edittext.getText().toString()));
                 Intent intent = new Intent();
                 intent.putExtra("part", return_part);
