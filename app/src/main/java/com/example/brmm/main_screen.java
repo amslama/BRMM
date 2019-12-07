@@ -61,6 +61,8 @@ public class main_screen extends AppCompatActivity {
 
         facultyRights = intent.getBooleanExtra("ISFACULTY",false);
 
+        instantiatelists();
+        
         if ((ArrayList<Instrument>) intent.getSerializableExtra("INSTRUMENT") != null) {
             for (Instrument instrument : (ArrayList<Instrument>) intent.getSerializableExtra("INSTRUMENT")) {
                 rent_inv.addInstrument(instrument);
@@ -112,11 +114,15 @@ public class main_screen extends AppCompatActivity {
         delete_section_button.setVisibility(View.INVISIBLE);
     }
 
-    private void instantiateButtons() {
+    private void instantiatelists()
+    {
         member_inv = new BandMemberInventory();
         rent_inv = new RentableInventory();
         ins_concepts = new ArrayList<>();
         part_concepts = new ArrayList<>();
+    }
+
+    private void instantiateButtons() {
         sections = new ArrayList<>(/*IMPORT SECTIONS*/);
         inv_spin = findViewById(R.id.inventory_main_screen_dropdown);
         filter_button = findViewById(R.id.filter_main_screen_button);
