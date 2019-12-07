@@ -51,7 +51,7 @@ public class add_category extends AppCompatActivity {
 
         //review this
         final ArrayList<String> categorylist = new ArrayList<>();
-        final ArrayList<Category> temp = (ArrayList<Category>) getIntent().getSerializableExtra("Categorylist");
+        final ArrayList<Category> temp = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
         if (temp != null) {
             for (Category cat : temp) {
 
