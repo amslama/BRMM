@@ -70,7 +70,7 @@ public class instrument_filters extends AppCompatActivity {
             section_spin.setAdapter(sectionAdapter);
         }
 
-        
+
 
 
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
