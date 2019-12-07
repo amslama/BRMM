@@ -40,6 +40,7 @@ public class DatabaseWrapper extends Thread{
     private double cost = 0;
     private String category = "";
     private int serialNumber = 0;
+    private String newSection = "";
 
 
 
@@ -123,6 +124,10 @@ public class DatabaseWrapper extends Thread{
         this.section = section;
     }
 
+    public void setNewSection(String section){
+        newSection = section;
+    }
+
     /**
      * Read the comments in each method on how to use it
      * there then just call setMethod() with one of the options below then if it takes an argument like
@@ -201,6 +206,11 @@ public class DatabaseWrapper extends Thread{
                 //Call setUlid() with the user you want to update
                 //then setSection() with the section you want to change that user to
                 changeSection(ulid, section);
+                break;
+            case "changeAllOfOneSection":
+                //Set old section by calling SetSection() method
+                //Set new section by calling SetNewSection() method
+                changeAllOfOneSection(section, newSection);
                 break;
             default:
                 System.out.println("Method not found");
@@ -485,6 +495,17 @@ public class DatabaseWrapper extends Thread{
         }
         catch (Exception e){
             System.out.println("Change Section Failed");
+        }
+    }
+
+    private void changeAllOfOneSection(String oldSection, String newSection){
+        try{
+            String query = "update user set section = '"+oldSection+"' where section = '"+newSection+"'";
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        }
+        catch (Exception e){
+            System.out.println("Change all sections failed");
         }
     }
 
