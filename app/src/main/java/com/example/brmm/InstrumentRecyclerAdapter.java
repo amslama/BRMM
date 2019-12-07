@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class InstrumentRecyclerAdapter extends RecyclerView.Adapter<InstrumentRecyclerAdapter.ViewHolder> {
 
@@ -42,8 +43,8 @@ public class InstrumentRecyclerAdapter extends RecyclerView.Adapter<InstrumentRe
 
 
         name_textview.setText(ins.getName());
-        id_textview.setText(ins.getId());
-        cost_textview.setText(Double.toString(ins.getCost()));
+        id_textview.setText(String.format(Locale.US,"%d",ins.getId()));
+        cost_textview.setText("$" + String.format(Locale.US,"%.2f",ins.getCost()));
         section_textview.setText(ins.getSection());
         owner_textview.setText(ins.getCurrentOwner());
     }

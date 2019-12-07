@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class PartRecyclerAdapter extends RecyclerView.Adapter<PartRecyclerAdapter.ViewHolder> {
 
@@ -39,7 +40,7 @@ public class PartRecyclerAdapter extends RecyclerView.Adapter<PartRecyclerAdapte
         TextView sn_textview = holder.sn_textview;
 
         name_textview.setText(part.getName());
-        cost_textview.setText(Double.toString(part.getCost()));
+        cost_textview.setText("$" + String.format(Locale.US,"%.2f",part.getCost()));
         sn_textview.setText(part.getSerialNumber());
 
 
@@ -61,9 +62,9 @@ public class PartRecyclerAdapter extends RecyclerView.Adapter<PartRecyclerAdapte
         private ViewHolder(View itemView) {
             super(itemView);
             view = itemView;
-            name_textview = (TextView) itemView.findViewById(R.id.name_part_rv_textview);
-            cost_textview = (TextView) itemView.findViewById(R.id.cost_part_rv_textview);
-            sn_textview = (TextView) itemView.findViewById(R.id.sn_part_rv_textview);
+            name_textview = itemView.findViewById(R.id.name_part_rv_textview);
+            cost_textview = itemView.findViewById(R.id.cost_part_rv_textview);
+            sn_textview = itemView.findViewById(R.id.sn_part_rv_textview);
         }
     }
 }

@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class edit_instrument extends AppCompatActivity {
     private String section;
     private Category category;
-    private Instrument ins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,23 +73,23 @@ public class edit_instrument extends AppCompatActivity {
         pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(inslist!=null)
-                {
-                    for(String str : inslist)
-                    {
+                if (inslist != null) {
+                    for (String str : inslist) {
                         int count = 0;
-                        if (str == pick_spin.getSelectedItem().toString())
-                        {
+                        if (str == pick_spin.getSelectedItem().toString()) {
                             name_edittext.setText(temp.get(count).getName());
-                            id_display_textview.setText(temp.get(count).getId());
-                            int pos = sections.indexOf(ins.getSection());
-                            section_spin.setSelection(pos);
-                            cost_edittext.setText(Double.toString(temp.get(count).getCost()));
+                            id_display_textview.setText(Double.toString(temp.get(count).getId()));
+                            if (sections != null) {
+                                int pos = sectionCount(str, sections);
+                                section_spin.setSelection(pos);
+                                {
+                                    cost_edittext.setText(Double.toString(temp.get(count).getCost()));
 
 
-
+                                }
+                                count++;
+                            }
                         }
-                        count++;
                     }
                 }
             }
@@ -103,8 +102,9 @@ public class edit_instrument extends AppCompatActivity {
         //section spinner logic
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                section =section_spin.getSelectedItem().toString();
+            public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                       long id) {
+                section = section_spin.getSelectedItem().toString();
             }
 
             @Override
@@ -116,8 +116,9 @@ public class edit_instrument extends AppCompatActivity {
         //Category spinner logic
         cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                category = (Category)section_spin.getSelectedItem();
+            public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                       long id) {
+                category = (Category) section_spin.getSelectedItem();
             }
 
             @Override
@@ -147,18 +148,24 @@ public class edit_instrument extends AppCompatActivity {
                 double cost;
                 name = name_edittext.getText().toString();
 
-             try   {cost = Double.parseDouble(cost_edittext.getText().toString());}
-                 catch (NumberFormatException ex){cost = 0;}
+                try {
+                    cost = Double.parseDouble(cost_edittext.getText().toString());
+                    RentableFactory factory = new RentableFactory();
+                    Instrument ins = (Instrument) factory.buildRentable("Instrument");
+                    ins.setName(name);
+                    ins.setId(Integer.parseInt(id_display_textview.getText().toString()));
+                    ins.setSection(section);
+                    ins.setCost(Double.parseDouble(cost_edittext.getText().toString()));
 
-                ins.setName(name);
-                ins.setId(Integer.parseInt(id_display_textview.getText().toString()));
-                ins.setSection(section);
-                ins.setCost(Double.parseDouble(cost_edittext.getText().toString()));
+                    Intent intent = new Intent();
+                    intent.putExtra("instrument", ins);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } catch (NumberFormatException ex) {
+                    cost = 0;
+                }
 
-                Intent intent = new Intent();
-                intent.putExtra("instrument", ins);
-                setResult(RESULT_OK, intent);
-                finish();
+
             }
 
         });
@@ -166,7 +173,8 @@ public class edit_instrument extends AppCompatActivity {
         //section spinner logic
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                       long id) {
                 section = section_spin.getSelectedItem().toString();
             }
 
@@ -175,5 +183,18 @@ public class edit_instrument extends AppCompatActivity {
                 section = "";
             }
         });
+    }
+
+    private int sectionCount(String str, ArrayList<String> sectionlist)
+    {
+        int count = 0;
+        for(String strin : sectionlist)
+        {
+            if(str.equals(strin))
+            {
+                return count;
+            }
+        }
+        return -1;
     }
 }

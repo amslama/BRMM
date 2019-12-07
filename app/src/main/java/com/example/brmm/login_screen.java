@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class login_screen extends AppCompatActivity {
     private int counter;
     DatabaseConnection connection = null;
@@ -37,8 +39,6 @@ public class login_screen extends AppCompatActivity {
 
         //Buttons
         final Button OK = findViewById(R.id.Login_OK_Button);
-        final Button stdntLogin = findViewById(R.id.Student_Button);
-
         final Toast toast = Toast.makeText(this, "Too many failed attempts", Toast.LENGTH_SHORT);
 
         DatabaseConnection connection = new DatabaseConnection();
@@ -126,6 +126,19 @@ public class login_screen extends AppCompatActivity {
         catch (Exception e){
             System.out.println("get faculty join failed");
         }
+        ArrayList<Faculty> faculty = new ArrayList<Faculty>();
+        faculty = wrapper.getFacultyList();
+        if(faculty!=null) {
+            String answer = "faculty occupied:" + faculty.isEmpty();
+            System.out.println(faculty.size());
+
+        }
+        else
+        {
+            System.out.println("faculty empty");
+        }
+
+
         mainScreen.putExtra("FACULTY", wrapper.getFacultyList());
 
         wrapper.setMethod("getStudents");
@@ -179,8 +192,8 @@ public class login_screen extends AppCompatActivity {
         catch (Exception e){
             System.out.println("Login join failed");
         }
-        return true;
-        //return wrapper.getValidation();
+
+        return wrapper.getValidation();
 
     }
 

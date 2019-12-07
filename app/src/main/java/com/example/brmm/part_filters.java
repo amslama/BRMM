@@ -36,14 +36,7 @@ public class part_filters extends AppCompatActivity {
         final EditText sn_edittext = findViewById(R.id.sn_part_filters_edittext);
         final EditText cost_edittext = findViewById(R.id.cost_part_filters_edittext);
 
-        //Dropdowns
-        final Spinner compwith_spin = findViewById(R.id.compwith_part_filters_dropdown);
-
-        //Recyclerview
-        final RecyclerView compwith_rview = findViewById(R.id.compwith_part_filters_rview);
-
         //Buttons
-        final Button add_button = findViewById(R.id.add_part_filters_button);
         final Button cancel_button = findViewById(R.id.cancel_part_filters_button);
         final Button apply_button = findViewById(R.id.apply_part_filters_button);
 
@@ -53,6 +46,7 @@ public class part_filters extends AppCompatActivity {
                 name_edittext.setText("");
                 sn_edittext.setText("");
                 cost_edittext.setText("");
+                finish();
             }
         });
 
@@ -60,19 +54,24 @@ public class part_filters extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name;
-                int sn;
+                String sn;
                 double cost;
 
                 name = name_edittext.getText().toString();
-                try {sn = Integer.parseInt(sn_edittext.getText().toString());}
-                catch (NumberFormatException ex) {sn = 0;}
+                try {
+                    sn = sn_edittext.getText().toString();
+                }
+                catch (NumberFormatException ex) {sn = "";}
 
                 try {
                     cost = Double.parseDouble(cost_edittext.getText().toString());
                 } catch (NumberFormatException ex) {cost = -1;}
 
-                //  ArrayList<Part> parts = (ArrayList<Part>)data.getSerializableExtra("partlist");
-                ArrayList<Part> parts = filterParts(null, name, sn, cost);
+                Intent thisIntent = new Intent();
+                ArrayList<Part> parts  = (ArrayList<Part>)thisIntent.getSerializableExtra("partslist");
+
+                 parts = filterParts(parts, name, sn, cost);
+
                 Intent intent = new Intent();
                 intent.putExtra("partList", parts);
                 setResult(RESULT_OK,intent);
@@ -82,12 +81,12 @@ public class part_filters extends AppCompatActivity {
 
 
     }
-    public   ArrayList<Part> filterParts(ArrayList<Part> aList, String name, int sn, double cost) {
+    public   ArrayList<Part> filterParts(ArrayList<Part> aList, String name, String sn, double cost) {
         ArrayList<Part> filter = aList;
         if (!name.equals(""))
             filter =  filterByName(filter, name);
 
-        if (sn != 0)
+        if (!sn.isEmpty())
             filter = filterBySn(filter,sn);
 
         if (cost != -1)
@@ -109,7 +108,7 @@ public class part_filters extends AppCompatActivity {
         return filter;
     }
 
-    public ArrayList<Part> filterBySn(ArrayList<Part> parts, int sn) {
+    public ArrayList<Part> filterBySn(ArrayList<Part> parts, String sn) {
         ArrayList<Part> filter = new ArrayList<>();
         for (Part aPart: parts) {
             if (aPart instanceof Part) {

@@ -140,10 +140,12 @@ public class bandmember_filters extends AppCompatActivity {
                     UID = Integer.parseInt(UID_edittext.getText().toString());
                 } catch (NumberFormatException ex){UID = 0;}
 
-                Intent intent = getIntent();
-                ArrayList<BandMember> memberlist = filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
-                intent.putExtra("memberList", memberlist);
-                setResult(RESULT_OK,intent);
+
+                Intent thisIntent = new Intent();
+                ArrayList<BandMember> memberlist  = (ArrayList<BandMember>)thisIntent.getSerializableExtra("bandmemberlist");
+                memberlist = filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
+                thisIntent.putExtra("memberList", memberlist);
+                setResult(RESULT_OK,thisIntent);
                 finish();
             }
         });
@@ -154,7 +156,7 @@ public class bandmember_filters extends AppCompatActivity {
     // main filter method, for ints, 0 = dont filter, 1 = filter by Faculty or is true, 2 = filter by false
     public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument) {
 
-        ArrayList<BandMember> filter = new ArrayList<>();
+        ArrayList<BandMember> filter = members;
 
         if(isFaculty == 1)
             filter = filterByFaculty(filter);

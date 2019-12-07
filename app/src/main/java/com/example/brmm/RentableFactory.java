@@ -1,11 +1,11 @@
 package com.example.brmm;
 
 public class RentableFactory {
-    public static Rentable buildRentable(String type, String co, String st, String na, double price, int idnum) {
+    public static Rentable buildRentable(String type) {
         Rentable rentable = null;
         switch (type) {
             case "Instrument":
-                rentable = new Instrument(co, st, na, price, idnum,null);
+                rentable = new Instrument();
                 break;
 
             case "Part":

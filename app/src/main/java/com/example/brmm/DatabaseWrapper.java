@@ -30,7 +30,7 @@ public class DatabaseWrapper extends Thread{
     private String password = "";
     private String department = "";
     private ArrayList<Instrument> instrumentList = null;
-    private ArrayList<Student> studentList;
+    private ArrayList<Student> listOfStudents = new ArrayList<Student>();
     private ArrayList<Faculty> facultyList = null;
     private ArrayList<Part> partList = null;
     private boolean valid = false;
@@ -59,7 +59,7 @@ public class DatabaseWrapper extends Thread{
     }
 
     public ArrayList<Student> getStudentList(){
-        return studentList;
+        return listOfStudents;
     }
 
     public ArrayList<Faculty> getFacultyList(){
@@ -167,7 +167,14 @@ public class DatabaseWrapper extends Thread{
                 break;
             case "getStudents":
                 //call the getStudentList() method after the run() method (No need for setUlid() method)
-                getStudents();
+                try {
+                    System.out.println(getStudents());
+                    getStudents();
+                    System.out.println(listOfStudents);
+                }
+                catch (Exception e){
+                    System.out.println("Assigning the student list is not working................................................");
+                }
                 break;
             case "getInstruments":
                 //call the getInstrumentList() method after the run() method (No need for setUlid() method)
@@ -364,12 +371,12 @@ public class DatabaseWrapper extends Thread{
         instrumentList = new ArrayList<Instrument>();
         Instrument instrument;
         try{
-            String query = "Select ownership,section,name,cost,id,category from instrument where instrument = 1 order by id asc";
+            String query = "Select ownership,section,name,cost,id,category from item where instrument = 1 order by id asc";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
 
             while(rs.next()){
-                instrument = new Instrument(rs.getString("ownership"),rs.getString("section"),rs.getString("name"),Double.parseDouble(rs.getString("cost")),rs.getInt("id"),rs.getString("category"));
+                instrument = new Instrument(rs.getString("ownership"),rs.getString("section"),rs.getString("name"),rs.getDouble("cost"),rs.getInt("id"),rs.getString("category"));
                 instrumentList.add(instrument);
             }
         }
@@ -407,7 +414,7 @@ public class DatabaseWrapper extends Thread{
     //TODO: INSTRUMENT STUFF
     private void addInstrument(String currentOwner, String section, String name, double cost, String catagory){
         try{
-            String query = "insert into item (ownership, section, name, cost, instrument,category) values ('"+currentOwner+"','"+section+"','"+name+"','"+cost+"',1,'"+catagory+"')";
+            String query = "insert into item (ownership, section, name, cost, instrument,category) values ('"+currentOwner+"','"+section+"','"+name+"',"+cost+",1,'"+catagory+"')";
             Statement st = conn.createStatement();
             st.executeUpdate(query);
         }
@@ -432,14 +439,12 @@ public class DatabaseWrapper extends Thread{
         ArrayList<Part> partList = new ArrayList<Part>();
 
         try{
-            String query = "select (cost, name, category, serialNumber) from item where instrument = 0";
+            String query = "select cost, name, category, serialNumber from item where instrument = 0";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
-            double realCost = 0;
 
             while(rs.next()){
-                    realCost = Double.parseDouble(rs.getString("cost"));
-                part = new Part(realCost, rs.getString("name"), rs.getString("category"), rs.getInt("serialNumber"));
+                part = new Part(rs.getDouble("cost"), rs.getString("name"), rs.getString("category"), rs.getString("serialNumber"));
                 partList.add(part);
             }
         }
@@ -451,8 +456,7 @@ public class DatabaseWrapper extends Thread{
 
     private void addPart(double cost, String name, String category, int serialNumber){
         try{
-            String stringCost = cost + "";
-            String query = "insert into item (cost, name, category, serialNumber) values ('"+stringCost+"','"+name+"','"+category+"',"+serialNumber+")";
+            String query = "insert into item (cost, name, category, serialNumber,instrument) values ("+cost+",'"+name+"','"+category+"',"+serialNumber+","+0+")";
             Statement st = conn.createStatement();
             st.executeUpdate(query);
         }
@@ -470,6 +474,10 @@ public class DatabaseWrapper extends Thread{
         catch (Exception e){
             System.out.println("Failed to remove part");
         }
+    }
+
+    private void changeSection(String ulid){
+
     }
 
 }
