@@ -45,12 +45,15 @@ public class delete_member extends AppCompatActivity {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.putExtra("bandmember", bm);
-                setResult(RESULT_OK, intent);
-                finish();
+                if (pick_spin.getSelectedItem() != null) {
+                    Intent intent = getIntent();
+                    intent.putExtra("member", bm);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
         });
+
 
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,16 +65,17 @@ public class delete_member extends AppCompatActivity {
         pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(pick_spin.getSelectedItem()!=null && temp!= null)
-                {
+                int count = 0;
+                if (pick_spin.getSelectedItem() != null && temp != null) {
                     int memberUID = Integer.parseInt(pick_spin.getSelectedItem().toString());
-                    for( BandMember band : temp)
-                    {
-                        if(band.getUID() == memberUID)
-                        {
+                    for (BandMember band : temp) {
+                        if (band.getUID() == memberUID) {
+                            Intent intent = getIntent();
+                            intent.putExtra("count", count);
                             bm = band;
                             break;
                         }
+                        count++;
                     }
                 }
             }
