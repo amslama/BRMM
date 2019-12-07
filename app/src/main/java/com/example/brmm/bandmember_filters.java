@@ -87,7 +87,7 @@ public class bandmember_filters extends AppCompatActivity {
         insAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         secAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         instrument_spin.setAdapter(insAdapter);
-        section_spin.setAdapter(insAdapter);
+        section_spin.setAdapter(secAdapter);
 
         instrument_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

@@ -14,13 +14,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class instrument_filters extends AppCompatActivity {
-    private String owner;
-    private String section;
-    private String name;
-    private Category category;
-    private double cost;
-    private int id;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,47 +57,54 @@ public class instrument_filters extends AppCompatActivity {
             }
         });
 
+
         final ArrayList<String> sections = getIntent().getStringArrayListExtra("sectionlist");
-        if (sections != null) {
-            ArrayAdapter<String> sectionAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, sections);
-            section_spin.setAdapter(sectionAdapter);
-        }
-
-
-
-
-        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                section = section_spin.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                section = "";
-            }
-        });
+        final ArrayList<Category> catlist = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
+        ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
+        ArrayAdapter<String> secAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sections);
+        catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        secAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cat_spin.setAdapter(catAdapter);
+        section_spin.setAdapter(secAdapter);
 
         cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                category = (Category) cat_spin.getSelectedItem();
+                Category category = (Category) parent.getSelectedItem();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                category = null;
             }
         });
+
+        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String section = parent.getSelectedItem().toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
 
         apply_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                 String owner;
+                 String section;
+                 String name;
+                 Category category;
+                 double cost;
+                 int id;
 
 
                 owner = owner_edittext.getText().toString();
                 name = name_edittext.getText().toString();
                 id = Integer.parseInt(id_edittext.getText().toString());
+
+                section = section_spin.getSelectedItem().toString();
+                category = (Category) cat_spin.getSelectedItem();
 
                 cost = Double.parseDouble(cost_edittext.getText().toString());
                 Intent thisIntent = new Intent();
@@ -166,7 +166,7 @@ public class instrument_filters extends AppCompatActivity {
         }
         return filter;
     }
-/*
+
     public ArrayList<Instrument> filterByCategory(ArrayList<Instrument> Instruments, Category category) {
         ArrayList<Instrument> filter = new ArrayList<>();
         for (Instrument Instrument : Instruments) {
@@ -177,7 +177,7 @@ public class instrument_filters extends AppCompatActivity {
         }
         return filter;
     }
-*/
+
     public ArrayList<Instrument> filterByCost(ArrayList<Instrument> Instruments, double cost) {
         ArrayList<Instrument> filter = new ArrayList<>();
         for (Instrument Instrument : Instruments) {
