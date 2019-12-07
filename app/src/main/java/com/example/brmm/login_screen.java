@@ -53,7 +53,6 @@ public class login_screen extends AppCompatActivity {
 
        wrapper = new DatabaseWrapper(connection.getConnection());
 
-
         //Login for faculty
         OK.setOnClickListener(
                 new View.OnClickListener()
