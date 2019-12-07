@@ -444,7 +444,7 @@ public class DatabaseWrapper extends Thread{
     private void addPart(double cost, String name, String category, int serialNumber){
         try{
             String stringCost = cost + "";
-            String query = "insert into item (cost, name, category, serialNumber) values ('"+stringCost+"','"+name+"','"+category+"',"+serialNumber+")";
+            String query = "insert into item (cost, name, category, serialNumber,instrument) values ('"+stringCost+"','"+name+"','"+category+"',"+serialNumber+","+0+")";
             Statement st = conn.createStatement();
             st.executeUpdate(query);
         }
