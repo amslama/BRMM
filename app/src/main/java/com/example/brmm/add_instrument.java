@@ -72,7 +72,7 @@ public class add_instrument extends AppCompatActivity {
                     for (String str : instrumentlist) {
                         if (str == add_existing_spin.getSelectedItem().toString()) {
                             name_edittext.setText(temp.get(count).getName());
-                            id_textview.setText(String.format(Locale.US, "%d", temp.get(count).getId()+1));
+                            id_textview.setText(String.format(Locale.US, "%d", temp.get(temp.size()-1).getId()+1));
                             cost_edittext.setText(String.format(Locale.US, "%.2f", temp.get(count).getCost()));
                             int sectioncount = sectionCount(sectionlist, temp.get(count).getSection());
                             if (sectioncount >= 0) {

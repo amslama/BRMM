@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class edit_part extends AppCompatActivity {
 
 
-    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +56,7 @@ public class edit_part extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (partlist != null) {
-                    count = 0;
+                    int count = 0;
                     for (String str : partlist) {
                         if (str == pick_spin.getSelectedItem().toString()) {
                             name_edittext.setText(temp.get(count).getName());
@@ -65,6 +64,9 @@ public class edit_part extends AppCompatActivity {
                             cost_edittext.setText(Double.toString(temp.get(count).getCost()));
                             break;
                          }
+                        Intent countintent = new Intent();
+                        countintent.putExtra("count", count);
+                        setResult(RESULT_OK, countintent);
                         count++;
                     }
                 }
@@ -97,10 +99,8 @@ public class edit_part extends AppCompatActivity {
                             part.setSerialNumber(sn);
                             part.setCost(cost);
                             part.setName(name);
-                            temp.remove(count);
-                            temp.add(part);
                             Intent intent = new Intent();
-                            intent.putExtra("part", temp);
+                            intent.putExtra("part", part);
                             setResult(RESULT_OK, intent);
                             finish();
                         }
