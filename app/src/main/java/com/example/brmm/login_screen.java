@@ -174,9 +174,24 @@ public class login_screen extends AppCompatActivity {
             System.out.println("get instuments join failed");
         }
             mainScreen.putExtra("INSTRUMENT", wrapper.getInstrumentList());
-            startActivity(mainScreen);
 
 
+        /*
+        wrapper.setMethod("getCategoriess");
+        Thread getCategoryThread = new Thread(wrapper);
+        getCategoryThread.start();
+        try{
+            getCategoryThread.join();
+        }
+        catch (Exception e){
+            System.out.println("get catefory join failed");
+        }
+        mainScreen.putExtra("CATEGORY", wrapper.getCategoryList());
+
+    */
+        ArrayList<Category> categories = new ArrayList<>();
+        mainScreen.putExtra("CATEGORY", categories);
+        startActivity(mainScreen);
 
     }
 
