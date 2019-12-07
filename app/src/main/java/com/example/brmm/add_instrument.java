@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -63,21 +64,21 @@ public class add_instrument extends AppCompatActivity {
         final ArrayList<String> sectionlist = getIntent().getStringArrayListExtra("sectionlist");
 
         //add existing spinner logic
-        add_existing_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
+        add_existing_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(instrumentlist!=null)
-                {
+                if (instrumentlist != null) {
                     int count = 0;
 
-                    for(String str : instrumentlist)
-                    {
-                        if (str == add_existing_spin.getSelectedItem().toString())
-                        {
+                    for (String str : instrumentlist) {
+                        if (str == add_existing_spin.getSelectedItem().toString()) {
                             name_edittext.setText(temp.get(count).getName());
-                            id_textview.setText("$" + String.format(Locale.US,"%d",temp.get(count).getId()));
-                            cost_edittext.setText("$" + String.format(Locale.US,"%.2f",temp.get(count).getCost()));
-                            section_spin.setSelection(sectionCount(sectionlist,temp.get(count).getSection()));
+                            id_textview.setText(String.format(Locale.US, "%d", temp.get(count).getId()+1));
+                            cost_edittext.setText(String.format(Locale.US, "%.2f", temp.get(count).getCost()));
+                            int sectioncount = sectionCount(sectionlist, temp.get(count).getSection());
+                            if (sectioncount >= 0) {
+                                section_spin.setSelection(sectioncount);
+                            }
+
 
                         }
                         count++;
@@ -89,7 +90,6 @@ public class add_instrument extends AppCompatActivity {
                 return;
             }
         });
-
 
 
         //section spinner logic
@@ -138,30 +138,43 @@ public class add_instrument extends AppCompatActivity {
             public void onClick(View view) {
                 String name;
                 double cost;
-                int id = -1;
-                name = name_edittext.getText().toString();
-                try {
-                    cost = Double.parseDouble(cost_edittext.getText().toString());
-                } catch (NumberFormatException ex) {
-                    cost = 0;
+                if (!name_edittext.getText().toString().isEmpty() && !cost_edittext.getText().toString().isEmpty()) {
+
+                    try {
+                        cost = Double.parseDouble(cost_edittext.getText().toString());
+                        if(cost >=0) {
+                            name = name_edittext.getText().toString();
+                            RentableFactory factory = new RentableFactory();
+                            Rentable instrument = (Instrument) factory.buildRentable("Instrument");
+                            instrument.setCost(cost);
+                            instrument.setName(name);
+                            Intent intent = new Intent();
+                            intent.putExtra("instrument", instrument);
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        }
+                        else{
+                            String invalid = "Please enter a positive number";
+                            Toast incomplete_toast = Toast.makeText(getApplicationContext(), invalid, Toast.LENGTH_LONG);
+                            incomplete_toast.show();
+                        }
+                    }  catch (NumberFormatException ex) {
+                        String invalid = "Please enter a real number";
+                        Toast incomplete_toast = Toast.makeText(getApplicationContext(), invalid, Toast.LENGTH_LONG);
+                        incomplete_toast.show();
+                    }
                 }
-                RentableFactory factory = new RentableFactory();
-                Rentable instrument = factory.buildRentable("Instrument" +
-                        "");
-                Intent intent = new Intent();
-                intent.putExtra("instrument", instrument);
-                setResult(RESULT_OK, intent);
-                finish();
             }
         });
     }
 
-    public int sectionCount(ArrayList<String> sectionlist, String section)
-    {
+    public int sectionCount(ArrayList<String> sectionlist, String section) {
         int count = 0;
-        for(String str : sectionlist)
-        {
-            if(str.equals(section))
+        if (sectionlist == null) {
+            return -1;
+        }
+        for (String str : sectionlist) {
+            if (str.equals(section))
                 return count;
         }
         return 0;

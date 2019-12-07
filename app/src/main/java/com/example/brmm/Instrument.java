@@ -23,7 +23,7 @@ public class Instrument extends Rentable implements Serializable {
     public Instrument (){
         currentOwner = "School";
         section = "no type";
-        name = "no item";
+        name = "instrument";
         cost = 0;
         id = -1;
     }
