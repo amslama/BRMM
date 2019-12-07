@@ -13,8 +13,8 @@ public class Encryption {
         return stringEncoded;
     }
 
-    public String decode(){
-        decoded = new String(Base64.decode(stringEncoded,0));
+    public String decode(String password){
+        decoded = new String(Base64.decode(password,0));
         return decoded;
     }
 
