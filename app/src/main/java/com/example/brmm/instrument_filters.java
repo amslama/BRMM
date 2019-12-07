@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -62,6 +63,14 @@ public class instrument_filters extends AppCompatActivity {
                 finish();
             }
         });
+
+        final ArrayList<String> sections = getIntent().getStringArrayListExtra("sectionlist");
+        if (sections != null) {
+            ArrayAdapter<String> sectionAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, sections);
+            section_spin.setAdapter(sectionAdapter);
+        }
+
+        
 
 
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
