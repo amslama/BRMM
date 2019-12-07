@@ -160,7 +160,9 @@ public class DatabaseWrapper extends Thread{
             case "getStudents":
                 //call the getStudentList() method after the run() method (No need for setUlid() method)
                 try {
+                    System.out.println(getStudents());
                     getStudents();
+                    System.out.println(listOfStudents);
                 }
                 catch (Exception e){
                     System.out.println("Assigning the student list is not working................................................");
@@ -366,7 +368,7 @@ public class DatabaseWrapper extends Thread{
             ResultSet rs = st.executeQuery(query);
 
             while(rs.next()){
-                instrument = new Instrument(rs.getString("ownership"),rs.getString("section"),rs.getString("name"),Double.parseDouble(rs.getString("cost")),rs.getInt("id"),rs.getString("category"));
+                instrument = new Instrument(rs.getString("ownership"),rs.getString("section"),rs.getString("name"),rs.getDouble("cost"),rs.getInt("id"),rs.getString("category"));
                 instrumentList.add(instrument);
             }
         }
@@ -404,7 +406,7 @@ public class DatabaseWrapper extends Thread{
     //TODO: INSTRUMENT STUFF
     private void addInstrument(String currentOwner, String section, String name, double cost, String catagory){
         try{
-            String query = "insert into item (ownership, section, name, cost, instrument,category) values ('"+currentOwner+"','"+section+"','"+name+"','"+cost+"',1,'"+catagory+"')";
+            String query = "insert into item (ownership, section, name, cost, instrument,category) values ('"+currentOwner+"','"+section+"','"+name+"',"+cost+",1,'"+catagory+"')";
             Statement st = conn.createStatement();
             st.executeUpdate(query);
         }
@@ -429,17 +431,12 @@ public class DatabaseWrapper extends Thread{
         ArrayList<Part> partList = new ArrayList<Part>();
 
         try{
-            System.out.println("select is bad");
             String query = "select cost, name, category, serialNumber from item where instrument = 0";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
-            System.out.println("Select isnt bad");
-            double realCost = 0;
 
             while(rs.next()){
-                System.out.println("While loop");
-                    realCost = Double.parseDouble(rs.getString("cost"));
-                part = new Part(realCost, rs.getString("name"), rs.getString("category"), rs.getString("serialNumber"));
+                part = new Part(rs.getDouble("cost"), rs.getString("name"), rs.getString("category"), rs.getString("serialNumber"));
                 partList.add(part);
             }
         }
@@ -451,8 +448,7 @@ public class DatabaseWrapper extends Thread{
 
     private void addPart(double cost, String name, String category, int serialNumber){
         try{
-            String stringCost = cost + "";
-            String query = "insert into item (cost, name, category, serialNumber,instrument) values ('"+stringCost+"','"+name+"','"+category+"',"+serialNumber+","+0+")";
+            String query = "insert into item (cost, name, category, serialNumber,instrument) values ("+cost+",'"+name+"','"+category+"',"+serialNumber+","+0+")";
             Statement st = conn.createStatement();
             st.executeUpdate(query);
         }
