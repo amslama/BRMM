@@ -65,9 +65,11 @@
     <string name="delete_part">Delete Part</string>
     <string name="delete_member">Delete Member</string>
     <string name="delete_instrument">Delete Instrument</string>
+    <string name="delete_category">Delete Category</string>
     <string name="ulid">ULID:</string>
     <string name="login">Login</string>
     <string name="part">Part</string>
+
 
     <string-array name="Entries">
         <item>Parts</item>

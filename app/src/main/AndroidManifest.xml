@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".add_category"></activity>
+        <activity android:name=".delete_category"></activity>
+        <activity android:name=".add_category" />
         <activity android:name=".delete_part" />
         <activity android:name=".delete_instrument" />
         <activity android:name=".delete_member" />
