@@ -74,6 +74,7 @@ public class instrument_filters extends AppCompatActivity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                Category category = null;
             }
         });
 
@@ -84,6 +85,7 @@ public class instrument_filters extends AppCompatActivity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                String section = "";
             }
         });
 
@@ -123,7 +125,7 @@ public class instrument_filters extends AppCompatActivity {
         ArrayList<Instrument> filter = new ArrayList<>();
 
         if(category != null)
-        //   filter = filterByCategory(filter, category);
+           filter = filterByCategory(filter, category);
 
 
         if (id != 0)
@@ -138,8 +140,6 @@ public class instrument_filters extends AppCompatActivity {
             filter = filterByName(filter, name);
         }
 
-        if (category != null)
-         //   filter =filterByCategory(filter, category);
 
         if (!section.equals(""))
             filter = filterBySection(filter, section);
