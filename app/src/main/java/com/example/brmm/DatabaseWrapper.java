@@ -167,14 +167,7 @@ public class DatabaseWrapper extends Thread{
                 break;
             case "getStudents":
                 //call the getStudentList() method after the run() method (No need for setUlid() method)
-                try {
-                    System.out.println(getStudents());
-                    getStudents();
-                    System.out.println(listOfStudents);
-                }
-                catch (Exception e){
-                    System.out.println("Assigning the student list is not working................................................");
-                }
+                listOfStudents = getStudents();
                 break;
             case "getInstruments":
                 //call the getInstrumentList() method after the run() method (No need for setUlid() method)
@@ -401,7 +394,6 @@ public class DatabaseWrapper extends Thread{
                 }
                 student = new Student(rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("section"),leader,rs.getInt("ID"),rs.getString("note"));
                 list.add(student);
-                System.out.println(rs.getString("firstName")+"\n"+rs.getString("lastName")+"\n"+rs.getString("username")+"\n"+rs.getString("section")+"\n"+leader+rs.getInt("ID")+"\n"+rs.getString("note")+"\n");
             }
 
         }
