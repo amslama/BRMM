@@ -73,13 +73,5 @@ public class Instrument extends Rentable implements Serializable {
         return ins.id == id;
     }
 
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
-
-
-    public boolean isSelected() {
-        return isSelected;
-    }
 
 }

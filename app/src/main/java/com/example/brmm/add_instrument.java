@@ -6,9 +6,14 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class add_instrument extends AppCompatActivity {
     private RentableFactory factory = new RentableFactory();
@@ -21,25 +26,15 @@ public class add_instrument extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_instrument);
-
         //Textviews
-        /*
-        TextView header_textview = findViewById(R.id.add_instrument_header);
-        TextView ae_textview = findViewById(R.id.add_existing_add_instrument_textview);
-        TextView name_textview = findViewById(R.id.name_add_instrument_textview);
-        TextView id_textview = findViewById(R.id.id_add_instrument_textview);
-        TextView id_display_textview = findViewById(R.id.id_add_instrument_display_textview);
-        TextView section_textview = findViewById(R.id.section_add_instrument_textview);
-        TextView cost_textview = findViewById(R.id.cost_add_part_textview);
-        TextView cat_textview = findViewById(R.id.categories_add_instrument_textview);
-        */
+        final TextView id_textview = findViewById(R.id.id_add_instrument_display_textview);
 
         //Edittexts
         final EditText name_edittext = findViewById(R.id.name_add_instrument_editText);
         final EditText cost_edittext = findViewById(R.id.cost_add_instrument_edittext);
 
         //Dropdowns
-        final Spinner ae_spin = findViewById(R.id.add_existing_add_instrument_dropdown);
+        final Spinner add_existing_spin = findViewById(R.id.add_existing_add_instrument_dropdown);
         final Spinner section_spin = findViewById(R.id.section_add_instrument_dropdown);
         final Spinner cat_spin = findViewById(R.id.cat_add_instrument_dropdown);
 
@@ -52,19 +47,50 @@ public class add_instrument extends AppCompatActivity {
         RecyclerView cat_rview = findViewById(R.id.cat_add_instrument_rview);
 
 
+        final ArrayList<String> instrumentlist = new ArrayList<>();
+        final ArrayList<Instrument> temp = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
+        if (temp != null) {
+            for (Instrument ins : temp) {
+
+                instrumentlist.add(ins.getName());
+            }
+            if (instrumentlist != null) {
+                ArrayAdapter<String> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, instrumentlist);
+                add_existing_spin.setAdapter(memberAdapter);
+            }
+        }
+
+        final ArrayList<String> sectionlist = getIntent().getStringArrayListExtra("sectionlist");
 
         //add existing spinner logic
-        ae_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                instrument = (Instrument) ae_spin.getSelectedItem();
+        add_existing_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(instrumentlist!=null)
+                {
+                    int count = 0;
+
+                    for(String str : instrumentlist)
+                    {
+                        if (str == add_existing_spin.getSelectedItem().toString())
+                        {
+                            name_edittext.setText(temp.get(count).getName());
+                            id_textview.setText("$" + String.format(Locale.US,"%d",temp.get(count).getId()));
+                            cost_edittext.setText("$" + String.format(Locale.US,"%.2f",temp.get(count).getCost()));
+                            section_spin.setSelection(sectionCount(sectionlist,temp.get(count).getSection()));
+
+                        }
+                        count++;
+                    }
+                }
             }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                section = "";
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                return;
             }
         });
+
+
 
         //section spinner logic
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -98,7 +124,7 @@ public class add_instrument extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 cat_spin.setSelection(0);
-                ae_spin.setSelection(0);
+                add_existing_spin.setSelection(0);
                 section_spin.setSelection(0);
                 name_edittext.setText("");
                 cost_edittext.setText("");
@@ -120,12 +146,24 @@ public class add_instrument extends AppCompatActivity {
                     cost = 0;
                 }
                 RentableFactory factory = new RentableFactory();
-                Rentable instrument = factory.buildRentable("Instrument");
+                Rentable instrument = factory.buildRentable("Instrument" +
+                        "");
                 Intent intent = new Intent();
                 intent.putExtra("instrument", instrument);
                 setResult(RESULT_OK, intent);
                 finish();
             }
         });
+    }
+
+    public int sectionCount(ArrayList<String> sectionlist, String section)
+    {
+        int count = 0;
+        for(String str : sectionlist)
+        {
+            if(str.equals(section))
+                return count;
+        }
+        return 0;
     }
 }
