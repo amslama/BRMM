@@ -34,4 +34,18 @@ public class Category {
     }
 
 
+
+    public ArrayList<Category> getSuperCategories() {
+        ArrayList<Category> superCats = new ArrayList<>();
+        Category cat = this;
+        while (cat.superCategory!= null) {
+            superCats.add(cat);
+            cat = cat.superCategory;
+        }
+        superCats.add(cat);
+        return superCats;
+    }
+
+
+
 }
