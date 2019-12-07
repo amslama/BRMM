@@ -53,9 +53,6 @@ public class login_screen extends AppCompatActivity {
 
        wrapper = new DatabaseWrapper(connection.getConnection());
 
-        Encryption encrypt = new Encryption();
-        System.out.println("Encrypted Password: "+encrypt.encode("testPassword"));
-
 
         //Login for faculty
         OK.setOnClickListener(
