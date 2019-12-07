@@ -27,8 +27,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class add_category extends AppCompatActivity {
-    Category category;
-    Category newCat = new Category();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,29 +48,40 @@ public class add_category extends AppCompatActivity {
         Button cancel_button = findViewById(R.id.cancel_add_category_button);
         Button ok_button = findViewById(R.id.ok_add_category_button);
 
-        //review this
-        final ArrayList<String> categorylist = new ArrayList<>();
-        final ArrayList<Category> temp = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
-        if (temp != null) {
-            for (Category cat : temp) {
+        final ArrayList<Category> catlist = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
+        ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
+        catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cat_spin.setAdapter(catAdapter);
 
-                categorylist.add(cat.getName());
+
+        cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Category category = (Category) parent.getSelectedItem();
             }
-            if (categorylist != null) {
-                ArrayAdapter<String> catAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, categorylist);
-                cat_spin.setAdapter(catAdapter);
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Category category = null;
             }
-        }
+        });
+
 
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name;
+                Category category;
 
+                category = (Category) cat_spin.getSelectedItem();
                 name = name_edittext.getText().toString();
 
+                Category newCategory = new Category(category);
+                newCategory.setName(name);
+
+                catlist.add(newCategory);
+
                 Intent intent = new Intent();
-                //intent.putExtra("category", category);
+                intent.putExtra("category", catlist);
                 setResult(RESULT_OK,intent);
                 finish();
             }
@@ -85,19 +95,7 @@ public class add_category extends AppCompatActivity {
             }
         });
 
-        //Category spinner logic
-        cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                category = (Category) cat_spin.getSelectedItem();
-                newCat.setSuperCategory(category);
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                newCat = null;
-            }
-        });
 
     }
 }

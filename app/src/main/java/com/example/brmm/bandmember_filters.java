@@ -2,6 +2,7 @@
 package com.example.brmm;
 
 import android.content.Intent;
+import android.support.v4.app.INotificationSideChannel;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,11 +20,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class bandmember_filters extends AppCompatActivity {
-    private int isFaculty;
-    private int hasInstrument = 0;
-    private boolean sectionLeaders;
-    private Instrument instrument;
-    private String section;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,60 +81,54 @@ public class bandmember_filters extends AppCompatActivity {
         });
 
         final ArrayList<String> sections = getIntent().getStringArrayListExtra("sectionlist");
-        if (sections != null) {
-            ArrayAdapter<String> sectionAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, sections);
-            section_spin.setAdapter(sectionAdapter);
-        }
+        final ArrayList<Instrument> inslist = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
+        ArrayAdapter<Instrument> insAdapter = new ArrayAdapter<Instrument>(this, android.R.layout.simple_spinner_item, inslist);
+        ArrayAdapter<String> secAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sections);
+        insAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        secAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        instrument_spin.setAdapter(insAdapter);
+        section_spin.setAdapter(secAdapter);
 
-
-        final ArrayList<String> inslist = new ArrayList<>();
-        final ArrayList<Instrument> temp = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
-        if (temp != null) {
-            for (Instrument ins : temp) {
-                inslist.add(ins.getName());
-            }
-            if (inslist != null) {
-                ArrayAdapter<String> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, inslist);
-                instrument_spin.setAdapter(memberAdapter);
-            }
-        }
-
-        //populate section spinner
-        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                section = section_spin.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                section = "";
-            }
-        });
-
-        //populate instrument spinner
         instrument_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                instrument = (Instrument)instrument_spin.getSelectedItem();
+                Instrument instrument = (Instrument) parent.getSelectedItem();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                instrument = null;
             }
         });
+
+        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String section = parent.getSelectedItem().toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
 
 
 
         apply_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String firstName;
+                 String firstName;
                  String lastName;
+                 String section;
+                 int hasInstrument = 0;
                  int UID;
+                 int isFaculty;
+                 boolean sectionLeaders;
+                 Instrument instrument;
 
-                isFaculty = rgroup.getCheckedRadioButtonId();
+                 instrument = (Instrument) instrument_spin.getSelectedItem();
+                 section = section_spin.getSelectedItem().toString();
+
+                 isFaculty = rgroup.getCheckedRadioButtonId();
 
                 if (has_cbox.isChecked())
                     hasInstrument = 1;
@@ -155,7 +145,7 @@ public class bandmember_filters extends AppCompatActivity {
 
                 Intent thisIntent = new Intent();
                 ArrayList<BandMember> memberlist  = (ArrayList<BandMember>)thisIntent.getSerializableExtra("bandmemberlist");
-                memberlist = filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument);
+                memberlist = filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument, section);
                 thisIntent.putExtra("memberList", memberlist);
                 setResult(RESULT_OK,thisIntent);
                 finish();
@@ -166,7 +156,7 @@ public class bandmember_filters extends AppCompatActivity {
 
 
     // main filter method, for ints, 0 = dont filter, 1 = filter by Faculty or is true, 2 = filter by false
-    public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument) {
+    public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument, String section) {
 
         ArrayList<BandMember> filter = members;
 

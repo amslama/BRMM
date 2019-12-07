@@ -8,6 +8,7 @@ public class Instrument extends Rentable implements Serializable {
    // private Category category;
     private String section;
     private boolean isSelected;
+    private Category category;
 
     public String getNote() {
         return note;
@@ -26,15 +27,16 @@ public class Instrument extends Rentable implements Serializable {
         name = "instrument";
         cost = 0;
         id = -1;
+        category = null;
     }
 
-    /*public Category getCategory() {
+    public Category getCategory() {
         return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
-    }*/
+    }
 
     public String getSection() {
         return section;
