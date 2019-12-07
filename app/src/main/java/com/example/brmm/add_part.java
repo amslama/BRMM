@@ -36,6 +36,7 @@ public class add_part extends AppCompatActivity {
 
         //Add existing dropdown
         final Spinner add_existing_spin = findViewById(R.id.add_existing_add_part_dropdown);
+
         final ArrayList<String> partlist = new ArrayList<>();
         final ArrayList<Part> temp = (ArrayList<Part>) getIntent().getSerializableExtra("partlist");
         if (temp != null) {
