@@ -45,10 +45,12 @@ public class delete_instrument extends AppCompatActivity {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.putExtra("instrument", ins);
-                setResult(RESULT_OK, intent);
-                finish();
+                if (pick_spin.getSelectedItem() != null) {
+                    Intent intent = new Intent();
+                    intent.putExtra("instrument", ins);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
         });
 
@@ -61,14 +63,12 @@ public class delete_instrument extends AppCompatActivity {
 
         pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(pick_spin.getSelectedItem()!=null && temp!= null)
-                {
+            public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                       long id) {
+                if (pick_spin.getSelectedItem() != null && temp != null) {
                     int ins_id = Integer.parseInt(pick_spin.getSelectedItem().toString());
-                    for( Instrument instrum : temp)
-                    {
-                        if(instrum.getId() == ins_id)
-                        {
+                    for (Instrument instrum : temp) {
+                        if (instrum.getId() == ins_id) {
                             ins = instrum;
                             break;
                         }

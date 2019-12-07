@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class delete_part extends AppCompatActivity {
 
 
-    int count;
+    Part part;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,11 +28,12 @@ public class delete_part extends AppCompatActivity {
         Button ok_button = findViewById(R.id.ok_delete_part_button);
         Button cancel_button = findViewById(R.id.cancel_delete_part_button);
 
+        part = new Part();
         final ArrayList<String> partlist = new ArrayList<>();
         final ArrayList<Part> temp = (ArrayList<Part>) getIntent().getSerializableExtra("partlist");
         if (temp != null) {
-            for (Part part : temp) {
-                partlist.add(part.getName());
+            for (Part prt : temp) {
+                partlist.add(prt.getName());
             }
             if (partlist != null) {
                 ArrayAdapter<String> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, partlist);
@@ -45,8 +46,7 @@ public class delete_part extends AppCompatActivity {
             public void onClick(View view) {
                 if(pick_spin.getSelectedItem() != null) {
                     Intent intent = new Intent();
-                    temp.remove(count);
-                    intent.putExtra("part", temp);
+                    intent.putExtra("part", part);
                     setResult(RESULT_OK, intent);
                     finish();
                 }
@@ -63,10 +63,15 @@ public class delete_part extends AppCompatActivity {
         pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (partlist != null) {
-                    count = 0;
-                    for (String str : partlist) {
-                        if (str == pick_spin.getSelectedItem().toString()) {
+                int count = 0;
+                if (pick_spin.getSelectedItem() != null && temp != null) {
+                    String part_name = pick_spin.getSelectedItem().toString();
+                    for (Part prt : temp) {
+                        if (prt.getName().equals(part_name)) {
+                            part = prt;
+                            Intent intent = new Intent();
+                            intent.putExtra("count", count);
+                            setResult(RESULT_OK, intent);
                             break;
                         }
                         count++;
@@ -76,7 +81,7 @@ public class delete_part extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-            }
+                            }
         });
     }
 }

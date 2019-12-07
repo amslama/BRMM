@@ -36,4 +36,6 @@ public class Part extends Rentable implements Serializable
         this.serialNumber = serialNumber;
     }
 
+    public boolean equals(Part part) {return this.serialNumber.equals(serialNumber);}
+
 }

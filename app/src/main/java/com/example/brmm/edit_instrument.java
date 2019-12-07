@@ -79,17 +79,13 @@ public class edit_instrument extends AppCompatActivity {
                         if (str == pick_spin.getSelectedItem().toString()) {
                             name_edittext.setText(temp.get(count).getName());
                             id_display_textview.setText(Double.toString(temp.get(count).getId()));
+                            cost_edittext.setText(Double.toString(temp.get(count).getCost()));
                             if (sections != null) {
                                 int pos = sectionCount(str, sections);
                                 section_spin.setSelection(pos);
-                                {
-                                    cost_edittext.setText(Double.toString(temp.get(count).getCost()));
-
-
-                                }
-                                count++;
                             }
                         }
+
                     }
                 }
             }

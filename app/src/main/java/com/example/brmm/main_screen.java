@@ -62,7 +62,7 @@ public class main_screen extends AppCompatActivity {
         facultyRights = intent.getBooleanExtra("ISFACULTY",false);
 
         instantiatelists();
-        
+
         if ((ArrayList<Instrument>) intent.getSerializableExtra("INSTRUMENT") != null) {
             for (Instrument instrument : (ArrayList<Instrument>) intent.getSerializableExtra("INSTRUMENT")) {
                 rent_inv.addInstrument(instrument);
@@ -436,7 +436,7 @@ public class main_screen extends AppCompatActivity {
         if (requestCode == 3) {
             if (resultCode == RESULT_OK) {
                 Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
-                rent_inv.removeInstrument(instrument.getId());
+                rent_inv.removeInstrument(instrument);
                 rent_inv.addInstrument(instrument);
                 BandMember bandmember = (BandMember) data.getSerializableExtra("bandmember");
                 member_inv.removeBandMember(bandmember.getUID());
@@ -467,7 +467,7 @@ public class main_screen extends AppCompatActivity {
         if (requestCode == 6) {
             if (resultCode == RESULT_OK) {
                 Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
-                rent_inv.removeInstrument(instrument.getId());
+                rent_inv.removeInstrument(instrument);
                 rent_inv.addInstrument(instrument);
                 InstrumentRecyclerAdapter adapter = new InstrumentRecyclerAdapter(rent_inv.getInstrumentList());
                 inv_view.setLayoutManager(new LinearLayoutManager(this));
@@ -491,10 +491,18 @@ public class main_screen extends AppCompatActivity {
         if (requestCode == 8) {
             if (resultCode == RESULT_OK) {
 
-                rent_inv.setParts((ArrayList<Part>)data.getSerializableExtra("part"));
-                PartRecyclerAdapter adapter = new PartRecyclerAdapter(rent_inv.getPartList());
-                inv_view.setLayoutManager(new LinearLayoutManager(this));
-                inv_view.setAdapter(adapter);            }
+                Part part = (Part) data.getSerializableExtra("part");
+                int count = data.getIntExtra("count", -651);
+                System.out.println("jaadjioasjoadsjiaodsadijo----------------------"+ count);
+                if(count >= 0) {
+                    rent_inv.changePart(count, part);
+                }
+                inv_view.getAdapter().notifyDataSetChanged();
+
+                // PartRecyclerAdapter adapter = new PartRecyclerAdapter(rent_inv.getPartList());
+             //   inv_view.setLayoutManager(new LinearLayoutManager(this));
+              //  inv_view.setAdapter(adapter);
+            }
         }
 
         //part filters
@@ -531,10 +539,8 @@ public class main_screen extends AppCompatActivity {
         if (requestCode == 12) {
             if (resultCode == RESULT_OK) {
                 Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
-                rent_inv.removeInstrument(instrument.getId());
-                InstrumentRecyclerAdapter adapter = new InstrumentRecyclerAdapter(rent_inv.getInstrumentList());
-                inv_view.setLayoutManager(new LinearLayoutManager(this));
-                inv_view.setAdapter(adapter);
+                rent_inv.removeInstrument(instrument);
+                inv_view.getAdapter().notifyDataSetChanged();
             }
         }
 
@@ -552,10 +558,9 @@ public class main_screen extends AppCompatActivity {
         //delete part
         if (requestCode == 14) {
             if (resultCode == RESULT_OK) {
-                rent_inv.setParts((ArrayList<Part>)data.getSerializableExtra("part"));
-                PartRecyclerAdapter adapter = new PartRecyclerAdapter(rent_inv.getPartList());
-                inv_view.setLayoutManager(new LinearLayoutManager(this));
-                inv_view.setAdapter(adapter);
+                Part part = (Part) data.getSerializableExtra("part");
+                rent_inv.removePart(part);
+                inv_view.getAdapter().notifyDataSetChanged();
             }
 
         }
