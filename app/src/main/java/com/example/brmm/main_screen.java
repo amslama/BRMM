@@ -6,14 +6,18 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Member;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class main_screen extends AppCompatActivity {
 
@@ -52,10 +56,22 @@ public class main_screen extends AppCompatActivity {
     //Recyclerview
     private RecyclerView inv_view;
 
+    //Timer
+    Timer timer;
+    //Time till logout
+    private static final int logoutTime = 5 * 1000 * 2; //5 minutes
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+
+
 
         Intent intent = getIntent();
 
@@ -557,9 +573,54 @@ public class main_screen extends AppCompatActivity {
                 inv_view.setLayoutManager(new LinearLayoutManager(this));
                 inv_view.setAdapter(adapter);
             }
-
         }
 
 
+
     }
+
+    //Starts session timeout timer
+    @Override
+    protected void onStart() {
+        super.onStart();
+        timer = new Timer();
+        TimerTask logoutTimeTask = new TimerTask() {
+            @Override
+            public void run() {
+                Intent intent = new Intent();
+                System.out.println("Timer started at beginning");
+                intent.putExtra("member", member_inv);
+                intent.putExtra("rentable", rent_inv);
+                intent.putExtra("sections", sections);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        };
+        timer.schedule(logoutTimeTask, logoutTime);
+    }
+    //resets session timeout timer
+    @Override
+    public void onUserInteraction()
+    {
+        super.onUserInteraction();
+        TimerTask logoutTimeTask = new TimerTask() {
+            @Override
+            public void run() {
+                Intent intent = new Intent();
+                intent.putExtra("member", member_inv);
+                intent.putExtra("rentable", rent_inv);
+                intent.putExtra("sections", sections);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        };
+            timer.cancel();
+            timer = new Timer();
+            timer.schedule(logoutTimeTask, logoutTime);
+        System.out.println("Timer Restarted");
+    }
+
+
+
 }
+

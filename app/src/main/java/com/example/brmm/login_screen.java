@@ -196,6 +196,7 @@ public class login_screen extends AppCompatActivity {
 
         return wrapper.getValidation();
 
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
