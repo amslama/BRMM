@@ -52,7 +52,6 @@ public class login_screen extends AppCompatActivity {
         }
 
        wrapper = new DatabaseWrapper(connection.getConnection());
-        
 
 
         //Login for faculty
@@ -140,6 +139,8 @@ public class login_screen extends AppCompatActivity {
 
 
         mainScreen.putExtra("FACULTY", wrapper.getFacultyList());
+
+
 
         wrapper.setMethod("getStudents");
         Thread getStudentThread = new Thread(wrapper);

@@ -17,6 +17,7 @@ public class DatabaseWrapper extends Thread{
 
     DatabaseConnection dbconn = new DatabaseConnection();
     Connection conn = null;
+    Encryption encrypt = new Encryption();
 
     private String method = "";
     private int ID = 0;
@@ -291,7 +292,8 @@ public class DatabaseWrapper extends Thread{
             String ulidquery = "Select username,passwrd from user where username = '" + ulid + "'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(ulidquery);
-            if (rs.next() && password.equals(rs.getString("passwrd"))) {
+            System.out.println(encrypt.encode(password));
+            if (rs.next() && password.equals(encrypt.decode(rs.getString("passwrd")))) {
                 login = true;
             }
 
@@ -314,7 +316,7 @@ public class DatabaseWrapper extends Thread{
                 staff = 1;
             }
             String query = "insert into user (ID,firstName,lastName,section,sectionLeader,faculty,note,username,passwrd) values ("+ID+",'"+firstName+"','"+lastName+"','"+section+"',";
-            query = query+leader+","+staff+",'"+note+"','"+ulid+"','"+password+"')";
+            query = query+leader+","+staff+",'"+note+"','"+ulid+"','"+encrypt.encode(password)+"')";
             Statement st = conn.createStatement();
             st.executeUpdate(query);
         }
