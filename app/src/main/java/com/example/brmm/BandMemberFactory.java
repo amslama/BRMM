@@ -1,15 +1,15 @@
 package com.example.brmm;
 
 public class BandMemberFactory {
-    public static BandMember buildBandMember(String type, String firstname, String lastname, String ulid, String section, boolean sectionLeader, int UID, String notes, String department, String role) {
+    public static BandMember buildBandMember(String type) {
         BandMember member = null;
         switch (type) {
             case "Student":
-                member = new Student(firstname,lastname,ulid,section,sectionLeader,UID,notes);
+                member = new Student();
                 break;
 
             case "Faculty":
-                member = new Faculty(firstname,lastname,ulid,role,UID);
+                member = new Faculty();
                 break;
 
             default:

@@ -34,6 +34,7 @@ public class edit_notes extends AppCompatActivity {
         //Buttons
         Button ok_button = findViewById(R.id.ok_edit_notes_button);
         Button cancel_button = findViewById(R.id.cancel_edit_notes_button);
+
         final ArrayList<String> inslist = new ArrayList<>();
         final ArrayList<Instrument> temp = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
         if (temp != null) {
@@ -51,14 +52,20 @@ public class edit_notes extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(inslist!=null)
                 {
+                    int count = 0;
+
                     for(String str : inslist)
                     {
-                        int count = 0;
-                        if (str == pick_spin.getSelectedItem().toString())
+                        if (str.equals(pick_spin.getSelectedItem().toString()))
                         {
                             notes_edittext.setText(temp.get(count).getNote());
                             ins = temp.get(count);
+                            Intent intent = getIntent();
+                            intent.putExtra("count", count);
+                            break;
                         }
+                        notes_edittext.setText("");
+
                         count++;
                     }
                 }
@@ -66,16 +73,16 @@ public class edit_notes extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                return;
             }
         });
 
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String notes;
-                notes = notes_edittext.getText().toString();
+                String notes = notes_edittext.getText().toString();
                 ins.setNote(notes);
-                Intent intent = new Intent();
+                Intent intent = getIntent();
                 intent.putExtra("instrument", ins);
                 setResult(RESULT_OK, intent);
                 finish();

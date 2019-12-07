@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class edit_part extends AppCompatActivity {
 
-
+    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,21 +52,21 @@ public class edit_part extends AppCompatActivity {
         Button cancel_button = findViewById(R.id.cancel_edit_part_button);
 
 
+
         pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (partlist != null) {
-                    int count = 0;
+                    count = 0;
                     for (String str : partlist) {
                         if (str == pick_spin.getSelectedItem().toString()) {
                             name_edittext.setText(temp.get(count).getName());
                             sn_edittext.setText(temp.get(count).getSerialNumber());
                             cost_edittext.setText(Double.toString(temp.get(count).getCost()));
+                            Intent intent = getIntent();
+                            intent.putExtra("count", count);
                             break;
                          }
-                        Intent countintent = new Intent();
-                        countintent.putExtra("count", count);
-                        setResult(RESULT_OK, countintent);
                         count++;
                     }
                 }
@@ -99,7 +99,7 @@ public class edit_part extends AppCompatActivity {
                             part.setSerialNumber(sn);
                             part.setCost(cost);
                             part.setName(name);
-                            Intent intent = new Intent();
+                            Intent intent = getIntent();
                             intent.putExtra("part", part);
                             setResult(RESULT_OK, intent);
                             finish();

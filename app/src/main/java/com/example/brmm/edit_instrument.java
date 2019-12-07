@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class edit_instrument extends AppCompatActivity {
     private String section;
     private Category category;
+    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,17 +76,21 @@ public class edit_instrument extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (inslist != null) {
+                    count = 0;
                     for (String str : inslist) {
-                        int count = 0;
                         if (str == pick_spin.getSelectedItem().toString()) {
                             name_edittext.setText(temp.get(count).getName());
-                            id_display_textview.setText(Double.toString(temp.get(count).getId()));
+                            id_display_textview.setText(Integer.toString(temp.get(count).getId()));
                             cost_edittext.setText(Double.toString(temp.get(count).getCost()));
                             if (sections != null) {
                                 int pos = sectionCount(str, sections);
                                 section_spin.setSelection(pos);
                             }
+                            Intent intent = getIntent();
+                            intent.putExtra("count", count);
+                            break;
                         }
+                        count++;
 
                     }
                 }
@@ -92,6 +98,7 @@ public class edit_instrument extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                return;
             }
         });
 
@@ -140,57 +147,42 @@ public class edit_instrument extends AppCompatActivity {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name;
-                double cost;
-                name = name_edittext.getText().toString();
 
                 try {
-                    cost = Double.parseDouble(cost_edittext.getText().toString());
                     RentableFactory factory = new RentableFactory();
                     Instrument ins = (Instrument) factory.buildRentable("Instrument");
+                    String name = name_edittext.getText().toString();
+                    double cost = Double.parseDouble(cost_edittext.getText().toString());
+                    int id = Integer.parseInt(id_display_textview.getText().toString());
                     ins.setName(name);
-                    ins.setId(Integer.parseInt(id_display_textview.getText().toString()));
                     ins.setSection(section);
-                    ins.setCost(Double.parseDouble(cost_edittext.getText().toString()));
+                    ins.setCost(cost);
+                    ins.setId(id);
 
-                    Intent intent = new Intent();
+                    Intent intent = getIntent();
                     intent.putExtra("instrument", ins);
                     setResult(RESULT_OK, intent);
                     finish();
                 } catch (NumberFormatException ex) {
-                    cost = 0;
+                    String invalid = "Please enter a real number";
+                    Toast incomplete_toast = Toast.makeText(getApplicationContext(), invalid, Toast.LENGTH_LONG);
+                    incomplete_toast.show();
                 }
-
-
             }
 
         });
 
-        //section spinner logic
-        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position,
-                                       long id) {
-                section = section_spin.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                section = "";
-            }
-        });
     }
 
-    private int sectionCount(String str, ArrayList<String> sectionlist)
-    {
+
+    private int sectionCount(String str, ArrayList<String> sectionlist) {
         int count = 0;
-        for(String strin : sectionlist)
-        {
-            if(str.equals(strin))
-            {
+        for (String strin : sectionlist) {
+            if (str.equals(strin)) {
                 return count;
             }
         }
         return -1;
     }
 }
+

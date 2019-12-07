@@ -64,6 +64,11 @@ public class RentableInventory implements Serializable {
         parts.set(pos,part);
     }
 
+    public void changeInstrument(int pos, Instrument instrument)
+    {
+        instruments.set(pos,instrument);
+    }
+
     public void removePart(Part part) {
         for(Part prt : parts)
         {

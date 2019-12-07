@@ -463,15 +463,17 @@ public class main_screen extends AppCompatActivity {
             }
         }
 
-        //edit Instrument
+        //edit Instrument and edit note
         if (requestCode == 6) {
             if (resultCode == RESULT_OK) {
-                Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
-                rent_inv.removeInstrument(instrument);
-                rent_inv.addInstrument(instrument);
-                InstrumentRecyclerAdapter adapter = new InstrumentRecyclerAdapter(rent_inv.getInstrumentList());
-                inv_view.setLayoutManager(new LinearLayoutManager(this));
-                inv_view.setAdapter(adapter);
+                int count = data.getIntExtra("count",-256);
+                System.out.println("jaadjioasjoadsjiaodsadijo----------------------"+ count);
+
+                if(count >= 0) {
+                    Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
+                    rent_inv.changeInstrument(count, instrument);
+                }
+                inv_view.getAdapter().notifyDataSetChanged();
             }
         }
 
@@ -491,10 +493,10 @@ public class main_screen extends AppCompatActivity {
         if (requestCode == 8) {
             if (resultCode == RESULT_OK) {
 
-                Part part = (Part) data.getSerializableExtra("part");
-                int count = data.getIntExtra("count", -651);
-                System.out.println("jaadjioasjoadsjiaodsadijo----------------------"+ count);
+                int count = data.getIntExtra("count",-128);
+
                 if(count >= 0) {
+                    Part part = (Part) data.getSerializableExtra("part");
                     rent_inv.changePart(count, part);
                 }
                 inv_view.getAdapter().notifyDataSetChanged();

@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class add_member extends AppCompatActivity {
     String section;
@@ -20,27 +21,25 @@ public class add_member extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_member);
 
-        //Textviews
-        TextView header_textview = findViewById(R.id.add_member_header);
-        TextView member_type_textview = findViewById(R.id.member_type_textview);
-        TextView fname_textview = findViewById(R.id.fname_add_member_textview);
-        TextView lname_textview = findViewById(R.id.lname_add_member_textview);
-        TextView role_textview = findViewById(R.id.role_add_member_textview);
-        TextView UID_textview = findViewById(R.id.UID_add_member_textview);
-        TextView section_textview = findViewById(R.id.section_add_member_textview);
-        TextView notes_textview = findViewById(R.id.notes_add_member_textview);
-
+        final TextView role_textview = findViewById(R.id.role_add_member_textview);
+        role_textview.setVisibility(View.INVISIBLE);
+        final TextView section_textview = findViewById(R.id.section_add_member_textview);
+        section_textview.setVisibility(View.INVISIBLE);
+        final TextView notes_textview = findViewById(R.id.notes_add_member_textview);
+        notes_textview.setVisibility(View.INVISIBLE);
 
         //Edittexts
         final EditText fname_edittext = findViewById(R.id.fname_add_member_edittext);
-        final EditText lname_edittext = findViewById(R.id.fname_add_member_edittext);
-        final EditText dept_edittext = findViewById(R.id.fname_add_member_edittext);
-        final EditText role_edittext = findViewById(R.id.fname_add_member_edittext);
-        final EditText UID_edittext = findViewById(R.id.fname_add_member_edittext);
+        final EditText lname_edittext = findViewById(R.id.lname_add_member_edittext);
+        final EditText ULID_edittext = findViewById(R.id.ULID_add_member_edittext);
+        final EditText UID_edittext = findViewById(R.id.UID_add_member_edittext);
+        final EditText role_edittext = findViewById(R.id.role_add_member_edittext);
+        role_edittext.setVisibility(View.INVISIBLE);
         final EditText notes_edittext = findViewById(R.id.notes_add_member_edittext);
-
+        notes_edittext.setVisibility(View.INVISIBLE);
         //Dropdowns
         final Spinner section_spin = findViewById(R.id.section_add_member_dropdown);
+        section_spin.setVisibility(View.INVISIBLE);
 
         //Radio
         RadioGroup rgroup = findViewById(R.id.member_type_add_member_radiogroup);
@@ -48,54 +47,67 @@ public class add_member extends AppCompatActivity {
         final RadioButton faculty_rb = findViewById(R.id.faculty_add_member_radiobutton);
 
         //Buttons
-        Button add_member = findViewById(R.id.ok_edit_member_button);
-        Button cancel_member = findViewById(R.id.cancel_add_member_button);
+        Button ok_button = findViewById(R.id.ok_edit_member_button);
+        Button cancel_button = findViewById(R.id.cancel_add_member_button);
 
-        add_member.setOnClickListener(new View.OnClickListener() {
+        ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String firstName;
-                String lastName;
-                String ulid;
-                int UID;
-                String role;
-                String notes;
+                if (faculty_rb.isChecked() || student_rb.isChecked()) {
+                    if (!fname_edittext.getText().toString().isEmpty() && !lname_edittext.getText().toString().isEmpty() &&
+                            !ULID_edittext.getText().toString().isEmpty() && !UID_edittext.getText().toString().isEmpty()) {
 
-                boolean isFaculty = false;
-                firstName = fname_edittext.getText().toString();
-                lastName = lname_edittext.getText().toString();
-                ulid = dept_edittext.getText().toString();
-                try {
-                    UID = Integer.parseInt(UID_edittext.getText().toString());
-                } catch (NumberFormatException ex) {
-                    UID = 0;
+                        try {
+                            String role = "";
+
+                            String firstName = fname_edittext.getText().toString();
+                            String lastName = lname_edittext.getText().toString();
+                            String ulid = ULID_edittext.getText().toString();
+                            String notes = notes_edittext.getText().toString();
+                            int UID = Integer.parseInt(UID_edittext.getText().toString());
+                            BandMemberFactory factory = new BandMemberFactory();
+                            BandMember member;
+                            if (faculty_rb.isChecked()) {
+                                member = (Faculty) factory.buildBandMember("Faculty");
+                                ((Faculty) member).setRole(role);
+                            } else {
+                                member = (Student) factory.buildBandMember("Student");
+                                ((Student) member).setSectionLead("");
+                                member.setSection(section);
+                                ((Student) member).setNotes(notes);
+                            }
+                            member.setUID(UID);
+                            member.setFname(firstName);
+                            member.setLname(lastName);
+                            member.setUlid(ulid);
+                            Intent intent = new Intent();
+                            intent.putExtra("member", member);
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        } catch (NumberFormatException ex) {
+                        }
+
+
+                    }
+                    else
+                    {
+                        String invalid = "Please fill out first name, last name, ulid, and UID";
+                        Toast incomplete_toast = Toast.makeText(getApplicationContext(), invalid, Toast.LENGTH_LONG);
+                        incomplete_toast.show();
+                    }
                 }
-                role = role_edittext.getText().toString();
-                notes = notes_edittext.getText().toString();
-                if (student_rb.isChecked())
-                    isFaculty = false;
-                if (faculty_rb.isChecked())
-                    isFaculty = true;
-                BandMemberFactory factory = new BandMemberFactory();
-                BandMember member;
-
-                boolean sectionLeader = false;
-
-                if (isFaculty)
-                    member = factory.buildBandMember("Faculty", firstName, lastName, ulid, section, sectionLeader, UID, notes, "Music", role);
                 else
-                    member = member = factory.buildBandMember("Student", firstName, lastName, "", section, sectionLeader, UID, notes, "Music", role);
-
-                Intent intent = new Intent();
-                intent.putExtra("member", member);
-                setResult(RESULT_OK,intent);
-                finish();
+                {
+                    String invalid = "Please select a member type";
+                    Toast incomplete_toast = Toast.makeText(getApplicationContext(), invalid, Toast.LENGTH_LONG);
+                    incomplete_toast.show();
+                }
             }
         });
 
         //cancels all fields
-        cancel_member.setOnClickListener(new View.OnClickListener() {
+        cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setResult(RESULT_CANCELED);
@@ -113,6 +125,27 @@ public class add_member extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 section = "";
+            }
+        });
+
+        rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (faculty_rb.isChecked() == true) {
+                    role_textview.setVisibility(View.VISIBLE);
+                    role_edittext.setVisibility(View.VISIBLE);
+                    section_textview.setVisibility(View.INVISIBLE);
+                    section_spin.setVisibility(View.INVISIBLE);
+                    notes_textview.setVisibility(View.INVISIBLE);
+                    notes_edittext.setVisibility(View.INVISIBLE);
+                } else {
+                    role_textview.setVisibility(View.INVISIBLE);
+                    role_edittext.setVisibility(View.INVISIBLE);
+                    section_textview.setVisibility(View.VISIBLE);
+                    section_spin.setVisibility(View.VISIBLE);
+                    notes_textview.setVisibility(View.VISIBLE);
+                    notes_edittext.setVisibility(View.VISIBLE);
+                }
             }
         });
 

@@ -108,6 +108,7 @@
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toStartOf="@+id/fname_add_member_textview"
         app:layout_constraintTop_toBottomOf="@+id/fname_add_member_textview" />
@@ -120,6 +121,7 @@
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toStartOf="@+id/lname_add_member_textview"
         app:layout_constraintTop_toBottomOf="@+id/lname_add_member_textview" />
@@ -132,6 +134,7 @@
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="number"
+        android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toStartOf="@+id/UID_add_member_textview"
         app:layout_constraintTop_toBottomOf="@+id/UID_add_member_textview" />
@@ -193,7 +196,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:labelFor="@id/department_add_member_edittext"
+        android:labelFor="@id/ULID_add_member_edittext"
         android:text="@string/ulid"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
@@ -203,13 +206,14 @@
         app:layout_constraintTop_toBottomOf="@+id/fname_add_member_edittext" />
 
     <EditText
-        android:id="@+id/department_add_member_edittext"
+        android:id="@+id/ULID_add_member_edittext"
         android:layout_width="175dp"
         android:layout_height="40dp"
         android:background="@drawable/border"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toStartOf="@+id/ULID_add_member_textview"
         app:layout_constraintTop_toBottomOf="@+id/ULID_add_member_textview" />
@@ -218,6 +222,7 @@
         android:id="@+id/role_add_member_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:labelFor="@id/role_add_member_edittext"
         android:text="@string/role"
         android:textColor="@android:color/background_dark"
@@ -232,11 +237,12 @@
         android:layout_height="40dp"
         android:background="@drawable/border"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toStartOf="@+id/role_add_member_textview"
-        app:layout_constraintTop_toBottomOf="@+id/role_add_member_textview"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/role_add_member_textview" />
 
     <TextView
         android:id="@+id/member_type_textview"

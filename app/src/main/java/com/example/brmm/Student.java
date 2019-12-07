@@ -4,16 +4,23 @@ import java.io.Serializable;
 
 public class Student extends BandMember implements Serializable {
     private String section;
-    private boolean sectionLeader;
-    private String notes;
-    private Instrument instruments;
 
-    public void setInstruments(Instrument instruments) {
-        this.instruments = instruments;
+
+    private String sectionLead;
+    private String notes;
+    private Instrument instrument;
+
+
+    public String getSectionLead() { return sectionLead;  }
+
+    public void setSectionLead(String sectionLead) {  this.sectionLead = sectionLead;  }
+
+    public void setInstrument(Instrument instrument) {
+        this.instrument = instrument;
     }
 
-    public Rentable getInstruments() {
-        return instruments;
+    public Instrument getInstrument() {
+        return instrument;
     }
 
     public String getSection() {
@@ -24,13 +31,6 @@ public class Student extends BandMember implements Serializable {
         this.section = section;
     }
 
-    public boolean isSectionLeader() {
-        return sectionLeader;
-    }
-
-    public void setSectionLeader(boolean sectionLeader) {
-        this.sectionLeader = sectionLeader;
-    }
 
     public int getUID() {
         return UID;
@@ -57,7 +57,7 @@ public class Student extends BandMember implements Serializable {
         setLname(lastname);
         setUlid(ulid);
         this.section = section;
-        this.sectionLeader = sectionLeader;
+        this.sectionLead = sectionLead;
         setUID(UID);
         this.notes = notes;
     }
