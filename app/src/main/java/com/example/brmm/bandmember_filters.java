@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -66,6 +67,8 @@ public class bandmember_filters extends AppCompatActivity {
         final Button apply_button = findViewById(R.id.apply_filters_button);
         final Button cancel_button = findViewById(R.id.cancel_filters_button);
 
+
+
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +84,26 @@ public class bandmember_filters extends AppCompatActivity {
             }
         });
 
+        final ArrayList<String> sections = getIntent().getStringArrayListExtra("sectionlist");
+        if (sections != null) {
+            ArrayAdapter<String> sectionAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, sections);
+            section_spin.setAdapter(sectionAdapter);
+        }
 
+
+        final ArrayList<String> inslist = new ArrayList<>();
+        final ArrayList<Instrument> temp = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
+        if (temp != null) {
+            for (Instrument ins : temp) {
+                inslist.add(ins.getName());
+            }
+            if (inslist != null) {
+                ArrayAdapter<String> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, inslist);
+                instrument_spin.setAdapter(memberAdapter);
+            }
+        }
+
+        //populate section spinner
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -94,6 +116,7 @@ public class bandmember_filters extends AppCompatActivity {
             }
         });
 
+        //populate instrument spinner
         instrument_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -106,17 +129,6 @@ public class bandmember_filters extends AppCompatActivity {
             }
         });
 
-        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                section = section_spin.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                section = "";
-            }
-        });
 
 
         apply_button.setOnClickListener(new View.OnClickListener() {
