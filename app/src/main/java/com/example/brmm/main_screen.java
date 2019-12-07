@@ -59,7 +59,7 @@ public class main_screen extends AppCompatActivity {
     //Timer
     Timer timer;
     //Time till logout
-    private static final int logoutTime = 5 * 1000 * 2; //5 minutes
+    private static final int logoutTime = 5 * 1000 * 60; //5 minutes
 
 
 
