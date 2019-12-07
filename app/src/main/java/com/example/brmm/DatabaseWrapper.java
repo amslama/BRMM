@@ -119,6 +119,9 @@ public class DatabaseWrapper extends Thread{
         this.serialNumber = serialNumber;
     }
 
+    public void setSection(String section){
+        this.section = section;
+    }
 
     /**
      * Read the comments in each method on how to use it
@@ -193,6 +196,11 @@ public class DatabaseWrapper extends Thread{
             case "removePart":
                 //Call setID before the run method
                 removePart(ID);
+                break;
+            case "changeSection":
+                //Call setUlid() with the user you want to update
+                //then setSection() with the section you want to change that user to
+                changeSection(ulid, section);
                 break;
             default:
                 System.out.println("Method not found");
@@ -292,7 +300,6 @@ public class DatabaseWrapper extends Thread{
             String ulidquery = "Select username,passwrd from user where username = '" + ulid + "'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(ulidquery);
-            System.out.println(encrypt.encode(password));
             if (rs.next() && password.equals(encrypt.decode(rs.getString("passwrd")))) {
                 login = true;
             }
@@ -470,8 +477,15 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
-    private void changeSection(String ulid){
-
+    private void changeSection(String ulid, String section){
+        try{
+            String query = "update user set section = '"+section+"' where username = '"+ulid+"'";
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        }
+        catch (Exception e){
+            System.out.println("Change Section Failed");
+        }
     }
 
 }
