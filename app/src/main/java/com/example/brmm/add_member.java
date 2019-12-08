@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -12,6 +13,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class add_member extends AppCompatActivity {
     String section;
@@ -49,6 +52,12 @@ public class add_member extends AppCompatActivity {
         //Buttons
         Button ok_button = findViewById(R.id.ok_edit_member_button);
         Button cancel_button = findViewById(R.id.cancel_add_member_button);
+
+        ArrayList<String> sectionlist = getIntent().getStringArrayListExtra("sectionlist");
+        if (sectionlist != null) {
+            ArrayAdapter<String> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, sectionlist);
+            section_spin.setAdapter(memberAdapter);
+        }
 
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +123,8 @@ public class add_member extends AppCompatActivity {
                 finish();
             }
         });
+
+
 
         //section spinner logic
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

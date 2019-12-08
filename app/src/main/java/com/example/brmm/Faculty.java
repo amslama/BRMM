@@ -30,6 +30,7 @@ public class Faculty extends BandMember implements Serializable {
     public boolean equals (Object member)
     {
         if(!(member instanceof Faculty)) {
+            if (this.getClass() != member.getClass()) return false;
             return false;
         }
         return equals((Faculty) member);

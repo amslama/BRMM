@@ -45,6 +45,8 @@ public class edit_member extends AppCompatActivity {
     private String section;
     private ArrayList<String> sections;
 
+    private int count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +57,7 @@ public class edit_member extends AppCompatActivity {
         member_type_textview = findViewById(R.id.edit_member_type_textview);
         fname_textview = findViewById(R.id.fname_edit_member_textview);
         lname_textview = findViewById(R.id.lname_edit_member_textview);
-        ULID_textview = findViewById(R.id.dept_edit_member_textview);
+        ULID_textview = findViewById(R.id.ulid_edit_member_textview);
         role_textview = findViewById(R.id.role_edit_member_textview);
         UID_textview = findViewById(R.id.UID_edit_member_textview);
         section_textview = findViewById(R.id.section_edit_member_textview);
@@ -63,10 +65,10 @@ public class edit_member extends AppCompatActivity {
 
         //Edittexts
         fname_edittext = findViewById(R.id.fname_edit_member_edittext);
-        lname_edittext = findViewById(R.id.fname_edit_member_edittext);
-        ULID_edittext = findViewById(R.id.fname_edit_member_edittext);
-        role_edittext = findViewById(R.id.fname_edit_member_edittext);
-        UID_edittext = findViewById(R.id.fname_edit_member_edittext);
+        lname_edittext = findViewById(R.id.lname_edit_member_edittext);
+        ULID_edittext = findViewById(R.id.ulid_edit_member_edittext);
+        role_edittext = findViewById(R.id.role_edit_member_edittext);
+        UID_edittext = findViewById(R.id.UID_edit_member_edittext);
         notes_edittext = findViewById(R.id.notes_edit_member_edittext);
 
         //Dropdowns
@@ -102,6 +104,8 @@ public class edit_member extends AppCompatActivity {
         }
 
 
+
+
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,12 +137,13 @@ public class edit_member extends AppCompatActivity {
                 if (!firstName.equals(""))
                     member.setFname(firstName);
                 if (!lastName.equals(""))
-                    member.setFname(lastName);
+                    member.setLname(lastName);
                 if (!ulid.equals(""))
                     member.setUlid(ulid);
                 if (!role.equals("")) {
                     if (member instanceof Faculty)
                         ((Faculty) member).setRole(role);
+
                 }
                 if (UID != 0)
                     member.setUID(UID);
@@ -147,7 +152,7 @@ public class edit_member extends AppCompatActivity {
                         ((Student) member).setNotes(notes);
                 }
 
-                Intent intent = new Intent();
+                Intent intent = getIntent();
                 intent.putExtra("member", member);
                 setResult(RESULT_OK, intent);
                 finish();
@@ -170,35 +175,35 @@ public class edit_member extends AppCompatActivity {
                 finish();
             }
         });
-
         //pick_spin logic
         pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                for (BandMember bm : temp) {
+                if(members!=null) {
+                    count = 0;
+                    for (BandMember bm : temp) {
 
-                    if (Integer.parseInt(pick_spin.getSelectedItem().toString()) == bm.getUID()) {
-                        fname_edittext.setText(bm.getFname());
-                        lname_edittext.setText(bm.getLname());
-                        ULID_edittext.setText(bm.getUlid());
-                        UID_edittext.setText(bm.getUID());
-                        if (bm instanceof Faculty) {
-                            role_edittext.setText("");
+                        if (Integer.parseInt(pick_spin.getSelectedItem().toString()) == bm.getUID()) {
+                            fname_edittext.setText(temp.get(count).getFname());
+                            lname_edittext.setText(temp.get(count).getLname());
+                            ULID_edittext.setText(temp.get(count).getUlid());
+                            UID_edittext.setText(Integer.toString(temp.get(count).getUID()));
+                            notes_edittext.setText("");
+                            if(sections!=null) {
+                                int pos = sections.indexOf(temp.get(count).getSection());
+                                section_spin.setSelection(pos);
+                            }
+                            if (bm instanceof Student) {
+                                student_rb.setChecked(true);
+
+                            } else {
+                                faculty_rb.setChecked(true);
+                            }
+                            Intent intent = getIntent();
+                            intent.putExtra("count", count);
+                            break;
                         }
-                        notes_edittext.setText("");
-                        student_rb.setChecked(false);
-                        faculty_rb.setChecked(false);
-                        int pos = sections.indexOf(bm.getSection());
-                        if (bm instanceof Student) {
-                            section_spin.setSelection(pos);
-                            role_edittext.setVisibility(View.INVISIBLE);
-                            section_spin.setVisibility(View.VISIBLE);
-
-
-                        } else {
-                            section_spin.setVisibility(View.INVISIBLE);
-                            role_edittext.setVisibility(View.VISIBLE);
-                        }
+                        count++;
                     }
                 }
             }
@@ -222,6 +227,28 @@ public class edit_member extends AppCompatActivity {
                 section = "";
             }
         });
+
+        rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (faculty_rb.isChecked() == true) {
+                    role_textview.setVisibility(View.VISIBLE);
+                    role_edittext.setVisibility(View.VISIBLE);
+                    section_textview.setVisibility(View.INVISIBLE);
+                    section_spin.setVisibility(View.INVISIBLE);
+                    notes_textview.setVisibility(View.INVISIBLE);
+                    notes_edittext.setVisibility(View.INVISIBLE);
+                } else {
+                    role_textview.setVisibility(View.INVISIBLE);
+                    role_edittext.setVisibility(View.INVISIBLE);
+                    section_textview.setVisibility(View.VISIBLE);
+                    section_spin.setVisibility(View.VISIBLE);
+                    notes_textview.setVisibility(View.VISIBLE);
+                    notes_edittext.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
 
 
     }

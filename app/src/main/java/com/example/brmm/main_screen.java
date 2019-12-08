@@ -62,8 +62,6 @@ public class main_screen extends AppCompatActivity {
     private static final int logoutTime = 5 * 1000 * 60; //5 minutes
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -72,10 +70,9 @@ public class main_screen extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
 
 
-
         Intent intent = getIntent();
 
-        facultyRights = intent.getBooleanExtra("ISFACULTY",false);
+        facultyRights = intent.getBooleanExtra("ISFACULTY", false);
 
         instantiatelists();
 
@@ -110,15 +107,13 @@ public class main_screen extends AppCompatActivity {
         oneTimeListeners();
         setPartsButtons();
 
-        if(facultyRights == false)
-        {
+        if (facultyRights == false) {
             hideButtons();
         }
 
     }
 
-    private void hideButtons()
-    {
+    private void hideButtons() {
         add_button.setVisibility(View.INVISIBLE);
         remove_button.setVisibility(View.INVISIBLE);
         edit_rentable_button.setVisibility(View.INVISIBLE);
@@ -130,8 +125,7 @@ public class main_screen extends AppCompatActivity {
         delete_section_button.setVisibility(View.INVISIBLE);
     }
 
-    private void instantiatelists()
-    {
+    private void instantiatelists() {
         member_inv = new BandMemberInventory();
         rent_inv = new RentableInventory();
         ins_concepts = new ArrayList<>();
@@ -297,6 +291,7 @@ public class main_screen extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent openFilter = new Intent(getBaseContext(), add_member.class);
+                    openFilter.putExtra("sectionlist", sections);
                     startActivityForResult(openFilter, 2);
                 }
             });
@@ -354,6 +349,7 @@ public class main_screen extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent openFilter = new Intent(getBaseContext(), add_section.class);
+
                     startActivityForResult(openFilter, 4);
                 }
             });
@@ -363,6 +359,7 @@ public class main_screen extends AppCompatActivity {
 
                     Intent openFilter = new Intent(getBaseContext(), edit_member.class);
                     openFilter.putExtra("memberlist", member_inv.getBandMembers());
+                    openFilter.putExtra("sectionlist", sections);
                     startActivityForResult(openFilter, 7);
                 }
             });
@@ -371,6 +368,7 @@ public class main_screen extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent openFilter = new Intent(getBaseContext(), set_lead.class);
                     openFilter.putExtra("memberlist", member_inv.getBandMembers());
+                    openFilter.putExtra("sectionlist", sections);
                     startActivityForResult(openFilter, 7);
                 }
             });
@@ -451,16 +449,23 @@ public class main_screen extends AppCompatActivity {
         //checkout
         if (requestCode == 3) {
             if (resultCode == RESULT_OK) {
+                int count = data.getIntExtra("count_instrument", -2056);
+                BandMember member = (BandMember) data.getSerializableExtra("member");
                 Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
-                rent_inv.removeInstrument(instrument);
-                rent_inv.addInstrument(instrument);
-                BandMember bandmember = (BandMember) data.getSerializableExtra("bandmember");
-                member_inv.removeBandMember(bandmember);
-                member_inv.addBandMember(bandmember);
-                InstrumentRecyclerAdapter adapter = new InstrumentRecyclerAdapter(rent_inv.getInstrumentList());
-                inv_view.setLayoutManager(new LinearLayoutManager(this));
-                inv_view.setAdapter(adapter);
+                instrument.setCurrentOwner(member.getUlid());
+                ((Student)member).setInstrument(instrument);
+
+
+                if (count >= 0) {
+                    rent_inv.changeInstrument(count, instrument);
+                }
+                count = data.getIntExtra("count_member", -256);
+
+                if (count >= 0) {
+                    member_inv.changeMember(count, member);
+                }
             }
+
         }
 
         //add section
@@ -468,6 +473,7 @@ public class main_screen extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 String section = data.getStringExtra("section");
                 sections.add(section);
+                System.out.println("=============================================================================" + sections.size());
             }
         }
 
@@ -482,10 +488,9 @@ public class main_screen extends AppCompatActivity {
         //edit Instrument and edit note
         if (requestCode == 6) {
             if (resultCode == RESULT_OK) {
-                int count = data.getIntExtra("count",-256);
-                System.out.println("jaadjioasjoadsjiaodsadijo----------------------"+ count);
+                int count = data.getIntExtra("count", -2056);
 
-                if(count >= 0) {
+                if (count >= 0) {
                     Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
                     rent_inv.changeInstrument(count, instrument);
                 }
@@ -496,17 +501,14 @@ public class main_screen extends AppCompatActivity {
         //edit member and set lead
         if (requestCode == 7) {
             if (resultCode == RESULT_OK) {
-                if (resultCode == RESULT_OK) {
-                    int count = data.getIntExtra("count",-256);
-                    System.out.println("jaadjioasjoadsjiaodsadijo----------------------"+ count);
+                int count = data.getIntExtra("count", -256);
+                System.out.println("jaadjioasjoadsjiaodsadijo----------------------" + count);
 
-                    if(count >= 0) {
-                        BandMember member = (BandMember) data.getSerializableExtra("member");
-                        member_inv.changeMember(count, member);
-                    }
-                    inv_view.getAdapter().notifyDataSetChanged();
+                if (count >= 0) {
+                    BandMember member = (BandMember) data.getSerializableExtra("member");
+                    member_inv.changeMember(count, member);
                 }
-
+                inv_view.getAdapter().notifyDataSetChanged();
             }
         }
 
@@ -514,17 +516,17 @@ public class main_screen extends AppCompatActivity {
         if (requestCode == 8) {
             if (resultCode == RESULT_OK) {
 
-                int count = data.getIntExtra("count",-128);
+                int count = data.getIntExtra("count", -128);
 
-                if(count >= 0) {
+                if (count >= 0) {
                     Part part = (Part) data.getSerializableExtra("part");
                     rent_inv.changePart(count, part);
                 }
                 inv_view.getAdapter().notifyDataSetChanged();
 
                 // PartRecyclerAdapter adapter = new PartRecyclerAdapter(rent_inv.getPartList());
-             //   inv_view.setLayoutManager(new LinearLayoutManager(this));
-              //  inv_view.setAdapter(adapter);
+                //   inv_view.setLayoutManager(new LinearLayoutManager(this));
+                //  inv_view.setAdapter(adapter);
             }
         }
 
@@ -586,7 +588,6 @@ public class main_screen extends AppCompatActivity {
         }
 
 
-
     }
 
     //Starts session timeout timer
@@ -608,10 +609,10 @@ public class main_screen extends AppCompatActivity {
         };
         timer.schedule(logoutTimeTask, logoutTime);
     }
+
     //resets session timeout timer
     @Override
-    public void onUserInteraction()
-    {
+    public void onUserInteraction() {
         super.onUserInteraction();
         TimerTask logoutTimeTask = new TimerTask() {
             @Override
@@ -624,12 +625,11 @@ public class main_screen extends AppCompatActivity {
                 finish();
             }
         };
-            timer.cancel();
-            timer = new Timer();
-            timer.schedule(logoutTimeTask, logoutTime);
+        timer.cancel();
+        timer = new Timer();
+        timer.schedule(logoutTimeTask, logoutTime);
         System.out.println("Timer Restarted");
     }
-
 
 
 }

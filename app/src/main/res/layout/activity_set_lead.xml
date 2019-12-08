@@ -83,10 +83,21 @@
         android:id="@+id/set_lead_set_lead_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="116dp"
         android:background="@drawable/button_border"
         android:text="@string/set_lead"
         android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/section_set_lead_textview"
+        app:layout_constraintTop_toBottomOf="@+id/member_set_lead_dropdown" />
+
+    <TextView
+        android:id="@+id/current_set_lead_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/done"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/member_set_lead_dropdown"
@@ -94,17 +105,15 @@
         app:layout_constraintTop_toBottomOf="@+id/member_set_lead_dropdown" />
 
     <Button
-        android:id="@+id/done_set_lead_button"
+        android:id="@+id/cancel_set_lead_button"
         android:layout_width="125dp"
         android:layout_height="40dp"
-        android:layout_marginTop="80dp"
         android:background="@drawable/button_border"
-        android:text="@string/done"
+        android:text="@android:string/cancel"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/set_lead_set_lead_button"
-        app:layout_constraintStart_toStartOf="@+id/set_lead_set_lead_button"
-        app:layout_constraintTop_toBottomOf="@+id/set_lead_set_lead_button" />
+        app:layout_constraintEnd_toStartOf="@+id/member_set_lead_textview"
+        app:layout_constraintTop_toTopOf="@+id/set_lead_set_lead_button" />
 
 </android.support.constraint.ConstraintLayout>

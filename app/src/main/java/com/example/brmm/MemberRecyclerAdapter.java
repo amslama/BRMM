@@ -42,6 +42,7 @@ public class MemberRecyclerAdapter extends RecyclerView.Adapter<MemberRecyclerAd
         TextView lname_textview = holder.lname_textview;
         TextView type_textview = holder.type_textview;
         TextView UID_textview = holder.UID_textview;
+
         fname_textview.setText(member.getFname());
         lname_textview.setText(member.getLname());
         UID_textview.setText(String.format(Locale.US, "%d", member.getUID()));

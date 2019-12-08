@@ -4,22 +4,23 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class checkout_instrument extends AppCompatActivity {
 
     //Dropdowns
     private Spinner instrument_spin;
-    private Spinner owner_spin;
+    private Spinner member_spin;
     //Buttons
     private Button cancel_button;
     private Button ok_button;
+    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,43 +34,92 @@ public class checkout_instrument extends AppCompatActivity {
 
         //Dropdowns
         instrument_spin = findViewById(R.id.instrument_checkout_dropdown);
-        owner_spin = findViewById(R.id.owner_checkout_dropdown);
+        member_spin = findViewById(R.id.owner_checkout_dropdown);
 
         //Buttons
         cancel_button = findViewById(R.id.cancel_checkout_button);
         ok_button = findViewById(R.id.checkout_checkout_button);
 
-        initializeSpinners();
-    }
 
-    private void initializeSpinners() {
-        Intent intent = new Intent();
-        ArrayList<Instrument> ins_list = (ArrayList<Instrument>) intent.getSerializableExtra("INSTRUMENT");
-        List<String> ins_tostring = new ArrayList<String>();
-        for (Instrument instrument : ins_list) {
-            ins_tostring.add(instrument.getName());
+        final ArrayList<String> instrumentlist = new ArrayList<>();
+        final ArrayList<Instrument> temp = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
+        if (temp != null) {
+            for (Instrument ins : temp) {
+
+                instrumentlist.add(ins.getName());
+            }
+            if (instrumentlist != null) {
+                ArrayAdapter<String> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, instrumentlist);
+                instrument_spin.setAdapter(memberAdapter);
+            }
         }
-        ArrayAdapter<String> ins_adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, ins_tostring);
-        instrument_spin.setAdapter(ins_adapter);
 
 
-        ArrayList<Instrument> owner_list = (ArrayList<Instrument>) intent.getSerializableExtra("INSTRUMENT");
-        List<String> owner_tostring = new ArrayList<String>();
-        for (Instrument instrument : ins_list) {
-            owner_tostring.add(instrument.getCurrentOwner());
+        final ArrayList<Integer> members = new ArrayList<>();
+        final ArrayList<BandMember> temp_bm = (ArrayList<BandMember>) getIntent().getSerializableExtra("memberlist");
+        if (temp_bm != null) {
+            for (BandMember bm : temp_bm) {
+                if (bm instanceof Student) {
+                    members.add(bm.getUID());
+                }
+            }
+            if (!members.isEmpty()) {
+                ArrayAdapter<Integer> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, members);
+                member_spin.setAdapter(memberAdapter);
+            }
         }
-        ArrayAdapter<String> owner_adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, owner_tostring);
-        instrument_spin.setAdapter(owner_adapter);
-    }
 
-    private void init_buttons() {
+        instrument_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                count = 0;
+                if (member_spin.getSelectedItem() != null && temp != null) {
+                    for (String str : instrumentlist) {
+                        if (str == instrument_spin.getSelectedItem().toString()) {
+                            Intent intent = getIntent();
+                            intent.putExtra("instrument", temp.get(count));
+                            intent.putExtra("count_instrument", count);
+                            break;
+                        }
+                        count++;
+
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
+        member_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                count = 0;
+                if (member_spin.getSelectedItem() != null && temp != null) {
+                    int memberUID = Integer.parseInt(member_spin.getSelectedItem().toString());
+                    for (BandMember band : temp_bm) {
+                        if (band.getUID() == memberUID) {
+                            Intent intent = getIntent();
+                            intent.putExtra("member",temp_bm.get(count));
+                            intent.putExtra("count_member", count);
+                            break;
+                        }
+                        count++;
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.putExtra("instrument", instrument_spin.getSelectedItem().toString());
-                intent.putExtra("owner", owner_spin.getSelectedItem().toString());
+                Intent intent = getIntent();
                 setResult(RESULT_OK, intent);
                 finish();
             }

@@ -66,6 +66,7 @@ public class Student extends BandMember implements Serializable {
     public boolean equals (Object member)
     {
         if(!(member instanceof Student)) {
+            if (this.getClass() != member.getClass()) return false;
             return false;
         }
         return equals((Student) member);

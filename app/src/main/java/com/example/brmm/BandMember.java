@@ -65,6 +65,7 @@ public class BandMember implements Serializable
     public boolean equals (Object member)
     {
         if(!(member instanceof BandMember)) {
+            if (this.getClass() != member.getClass()) return false;
             return false;
         }
         return equals((BandMember) member);

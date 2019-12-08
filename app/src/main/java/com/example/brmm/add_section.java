@@ -32,10 +32,9 @@ public class add_section extends AppCompatActivity {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name;
-                name = name_edittext.getText().toString();
+                String name = name_edittext.getText().toString();
                 Intent intent = new Intent();
-                intent.putExtra("section", intent);
+                intent.putExtra("section", name);
                 setResult(RESULT_OK,intent);
                 finish();
             }
