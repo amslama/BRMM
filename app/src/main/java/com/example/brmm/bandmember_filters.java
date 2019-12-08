@@ -68,14 +68,6 @@ public class bandmember_filters extends AppCompatActivity {
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firstNameTxt.setText("");
-                lastNameTxt.setText("");
-                UID_edittext.setText("");
-                rgroup.clearCheck();
-                has_cbox.setChecked(false);
-                no_has_cbox.setChecked(false);
-                section_spin.setSelection(0);
-                instrument_spin.setSelection(0);
                 finish();
             }
         });
@@ -145,7 +137,7 @@ public class bandmember_filters extends AppCompatActivity {
 
                 Intent thisIntent = new Intent();
                 ArrayList<BandMember> memberlist  = (ArrayList<BandMember>)thisIntent.getSerializableExtra("bandmemberlist");
-                memberlist = filterMemberInv(null,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument, section);
+                memberlist = filterMemberInv(memberlist,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument, section);
                 thisIntent.putExtra("memberList", memberlist);
                 setResult(RESULT_OK,thisIntent);
                 finish();
@@ -254,21 +246,21 @@ public class bandmember_filters extends AppCompatActivity {
     //returns list of students who are section leaders
     public ArrayList<BandMember> filterBySectionLeaders(ArrayList<BandMember> members) {
         ArrayList<BandMember> filter = new ArrayList<>();
-        for (BandMember member : members) {
-            if ( member instanceof Student) {
-          //      if(((Student) member).isSectionLeader())
-           //         filter.add(member);
-            }
+      //  for (BandMember member : members) {
+            //if ( member instanceof Student) {
+                //if(((Student) member).)
+                  // filter.add(member);
 
-        }
-        return filter;
+       // }
+        return members;
     }
 
     //returns a list of members with given name
     public ArrayList<BandMember> filterByName(ArrayList<BandMember> members, String fName, String lName) {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
-
+                if (member.getFname().equals(fName) && member.getLname().equals(lName));
+                    filter.add(member);
         }
         return filter;
     }

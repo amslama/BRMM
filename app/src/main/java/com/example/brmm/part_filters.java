@@ -43,9 +43,6 @@ public class part_filters extends AppCompatActivity {
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                name_edittext.setText("");
-                sn_edittext.setText("");
-                cost_edittext.setText("");
                 finish();
             }
         });
@@ -69,9 +66,7 @@ public class part_filters extends AppCompatActivity {
 
                 Intent thisIntent = new Intent();
                 ArrayList<Part> parts  = (ArrayList<Part>)thisIntent.getSerializableExtra("partslist");
-
                  parts = filterParts(parts, name, sn, cost);
-
                 Intent intent = new Intent();
                 intent.putExtra("partList", parts);
                 setResult(RESULT_OK,intent);

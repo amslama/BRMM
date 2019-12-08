@@ -34,6 +34,10 @@ public class Instrument extends Rentable implements Serializable {
         return category;
     }
 
+    public String toString() {
+        return name;
+    }
+
     public void setCategory(Category category) {
         this.category = category;
     }

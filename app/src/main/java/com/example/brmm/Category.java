@@ -1,9 +1,10 @@
 package com.example.brmm;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Category {
+public class Category implements Serializable {
     private Category superCategory;
     private String name;
 

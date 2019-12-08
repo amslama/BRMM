@@ -19,7 +19,7 @@ import java.util.Locale;
 public class add_instrument extends AppCompatActivity {
     private RentableFactory factory = new RentableFactory();
     private String section;
-    private Category category;
+
     private Instrument instrument;
 
 
@@ -61,7 +61,12 @@ public class add_instrument extends AppCompatActivity {
             }
         }
 
-        final ArrayList<String> sectionlist = getIntent().getStringArrayListExtra("sectionlist");
+         ArrayList<String> secInput= getIntent().getStringArrayListExtra("sectionlist");
+        if (secInput == null) {
+            secInput = new ArrayList<>();
+            secInput.add("No Existing Sections");
+        }
+        final ArrayList<String> sectionlist = secInput;
 
         //add existing spinner logic
         add_existing_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -92,7 +97,15 @@ public class add_instrument extends AppCompatActivity {
         });
 
 
+
+        final ArrayAdapter<String> secAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sectionlist);
+        System.out.println("here we are");
+        System.out.println(sectionlist);
+
+        secAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        section_spin.setAdapter(secAdapter);
         //section spinner logic
+
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -100,21 +113,32 @@ public class add_instrument extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                section = "";
+            public void onNothingSelected(AdapterView<?> parent) { ;
             }
         });
+
+
+        ArrayList<Category> input = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
+        if (input == null) {
+            input = new ArrayList<>();
+            Category category = new Category(null);
+            category.setName("No Categories");
+            input.add(category);
+        }
+        final ArrayList<Category> catlist = input;
+        ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
+        catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cat_spin.setAdapter(catAdapter);
 
         //Category spinner logic
         cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                category = (Category) section_spin.getSelectedItem();
+                Category category = (Category) cat_spin.getSelectedItem();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                section = "";
             }
         });
 
@@ -123,11 +147,7 @@ public class add_instrument extends AppCompatActivity {
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cat_spin.setSelection(0);
-                add_existing_spin.setSelection(0);
-                section_spin.setSelection(0);
-                name_edittext.setText("");
-                cost_edittext.setText("");
+
                 finish();
             }
         });
@@ -143,11 +163,17 @@ public class add_instrument extends AppCompatActivity {
                     try {
                         cost = Double.parseDouble(cost_edittext.getText().toString());
                         if(cost >=0) {
+                            Category category = (Category) cat_spin.getSelectedItem();
+                            String section = section_spin.getSelectedItem().toString();
+                            if (section.equals("No Existing Sections"))
+                                section = "";
                             name = name_edittext.getText().toString();
                             RentableFactory factory = new RentableFactory();
                             Rentable instrument = (Instrument) factory.buildRentable("Instrument");
                             instrument.setCost(cost);
                             instrument.setName(name);
+                            ((Instrument) instrument).setCategory(category);
+                            ((Instrument) instrument).setSection(section);
                             Intent intent = new Intent();
                             intent.putExtra("instrument", instrument);
                             setResult(RESULT_OK, intent);

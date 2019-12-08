@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -110,11 +111,15 @@ public class main_screen extends AppCompatActivity {
         }
 
 
-        if ((ArrayList<Faculty>) intent.getSerializableExtra("CATEGORY") != null) {
+        if ((ArrayList<Category>) intent.getSerializableExtra("CATEGORY") != null) {
+            System.out.println("Made it this far");
             for (Category cat : (ArrayList<Category>) intent.getSerializableExtra("CATEGORY")) {
                 categories.add(cat);
+
             }
         }
+
+
 
         instantiateButtons();
         oneTimeListeners();
@@ -148,6 +153,7 @@ public class main_screen extends AppCompatActivity {
         rent_inv = new RentableInventory();
         ins_concepts = new ArrayList<>();
         part_concepts = new ArrayList<>();
+        categories = new ArrayList<>();
     }
 
     private void instantiateButtons() {
@@ -240,6 +246,7 @@ public class main_screen extends AppCompatActivity {
     }
 
     private void setInstrumentButtons() {
+
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -303,7 +310,7 @@ public class main_screen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), bandmember_filters.class);
                 openFilter.putExtra("sectionlist", sections);
-                openFilter.putExtra("instrumentlist", ins_concepts);
+                openFilter.putExtra("instrumentlist", rent_inv.getInstrumentList());
                 openFilter.putExtra("bandmemberlist", member_inv.getBandMembers());
                 startActivityForResult(openFilter, 11);
             }
@@ -638,8 +645,9 @@ public class main_screen extends AppCompatActivity {
         //delete section
         if (requestCode == 16) {
             if (resultCode == RESULT_OK) {
-                Category cat = (Category) data.getSerializableExtra("category");
-                categories.remove(cat);
+                ArrayList<Category> cat = new ArrayList<>();
+                cat = (ArrayList<Category>) data.getSerializableExtra("category");
+                categories = cat;
             }
         }
 
