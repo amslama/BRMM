@@ -45,8 +45,9 @@ public class checkout_instrument extends AppCompatActivity {
         final ArrayList<Instrument> temp = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
         if (temp != null) {
             for (Instrument ins : temp) {
-
-                instrumentlist.add(ins.getName());
+                if(!ins.getCurrentOwner().equals("school") || !ins.getCurrentOwner().equals("School") || !ins.getCurrentOwner().equals("") || !ins.getCurrentOwner().equals("none")) {
+                    instrumentlist.add(ins.getName());
+                }
             }
             if (instrumentlist != null) {
                 ArrayAdapter<String> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, instrumentlist);

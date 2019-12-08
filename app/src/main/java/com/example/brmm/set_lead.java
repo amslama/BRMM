@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -31,6 +32,7 @@ public class set_lead extends AppCompatActivity {
     //Buttons
     private Button set_lead_button;
     private Button cancel_button;
+    private Button remove_lead_button;
 
 
     @Override
@@ -51,6 +53,7 @@ public class set_lead extends AppCompatActivity {
         //Buttons
         set_lead_button = findViewById(R.id.set_lead_set_lead_button);
         cancel_button = findViewById(R.id.cancel_set_lead_button);
+        remove_lead_button = findViewById(R.id.delete_set_lead_button);
 
 
         ArrayList<String> sectionlist = getIntent().getStringArrayListExtra("sectionlist");
@@ -85,6 +88,11 @@ public class set_lead extends AppCompatActivity {
                                 System.out.println(band.getSection());
                                 current_textview.setText(band.getSection());
                             }
+                            else
+                            {
+                                current_textview.setText("");
+
+                            }
                             Intent intent = getIntent();
                             intent.putExtra("count", count);
                             break;
@@ -112,7 +120,28 @@ public class set_lead extends AppCompatActivity {
                 }
             }
         });
-
+        remove_lead_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(section_spin.getSelectedItem()!=null && member_spin.getSelectedItem()!=null) {
+                    BandMember member = temp.get(count);
+                    if(!member.getSection().equals(""))
+                    {
+                        member.setSection("");
+                    }
+                    else
+                    {
+                        String invalid = "Member is not a section lead";
+                        Toast incomplete_toast = Toast.makeText(getApplicationContext(), invalid, Toast.LENGTH_LONG);
+                        incomplete_toast.show();
+                    }
+                    Intent intent = getIntent();
+                    intent.putExtra("member", member);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+            }
+        });
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

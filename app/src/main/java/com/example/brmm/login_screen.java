@@ -229,9 +229,12 @@ public class login_screen extends AppCompatActivity {
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
 
-                /*
-                NEED TO PUSH DATA BACK
-                 */
+                ArrayList<Faculty> faculty = (ArrayList<Faculty>) data.getSerializableExtra("Faculty");
+                ArrayList<Student> students = (ArrayList<Student>) data.getSerializableExtra("Students");
+                ArrayList<Part> parts = (ArrayList<Part>) data.getSerializableExtra("Parts");
+                ArrayList<Instrument> instruments = (ArrayList<Instrument>) data.getSerializableExtra("Instruments");
+                ArrayList<String> sections = data.getStringArrayListExtra("Sections");
+                ArrayList<Category> categories = (ArrayList<Category>)data.getSerializableExtra("Categories");
 
             }
         }

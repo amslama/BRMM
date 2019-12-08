@@ -106,13 +106,10 @@ public class main_screen extends AppCompatActivity {
                 sections.add(sect);
             }
         }
-
-
         if ((ArrayList<Category>) intent.getSerializableExtra("CATEGORY") != null) {
             System.out.println("Made it this far");
             for (Category cat : (ArrayList<Category>) intent.getSerializableExtra("CATEGORY")) {
                 categories.add(cat);
-
             }
         }
 
@@ -448,10 +445,16 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.putExtra("member", member_inv);
-                intent.putExtra("rentable", rent_inv);
-                intent.putExtra("sections", sections);
-                intent.putExtra("categories", categories);
+                ArrayList<Faculty> fac = member_inv.getFaculty();
+                ArrayList<Student> stu = member_inv.getStudents();
+                ArrayList<Part> parts = rent_inv.getPartList();
+                ArrayList<Instrument> instruments = rent_inv.getInstrumentList();
+                intent.putExtra("Faculty", fac);
+                intent.putExtra("Students", stu);
+                intent.putExtra("Parts", parts);
+                intent.putExtra("Instruments", instruments);
+                intent.putExtra("Sections", sections);
+                intent.putExtra("Categories", categories);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -529,7 +532,15 @@ public class main_screen extends AppCompatActivity {
         if (requestCode == 5) {
             if (resultCode == RESULT_OK) {
                 String section = data.getStringExtra("section");
+                for (BandMember member : member_inv.getBandMembers())
+                {
+                    if(member.getSection().equals(section))
+                    {
+                        member.setSection("");
+                    }
+                }
                 sections.remove(section);
+                inv_view.getAdapter().notifyDataSetChanged();
             }
         }
 

@@ -32,6 +32,28 @@ public class BandMemberInventory implements Serializable {
         //update db
     }
 
+    public ArrayList<Faculty> getFaculty() {
+
+        ArrayList<Faculty> faculty = new ArrayList<>();
+        for (BandMember member : bandMembers) {
+            if (member instanceof Faculty) {
+                faculty.add((Faculty) member);
+            }
+        }
+        return faculty;
+    }
+
+    public ArrayList<Student> getStudents() {
+
+        ArrayList<Student> students = new ArrayList<>();
+        for (BandMember member : bandMembers) {
+            if (member instanceof Student) {
+                students.add((Student) member);
+            }
+        }
+        return students;
+    }
+
     public void changeMember(int pos, BandMember member) {
         bandMembers.set(pos, member);
     }

@@ -116,4 +116,18 @@
         app:layout_constraintEnd_toStartOf="@+id/member_set_lead_textview"
         app:layout_constraintTop_toTopOf="@+id/set_lead_set_lead_button" />
 
+    <Button
+        android:id="@+id/delete_set_lead_button"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_border"
+        android:text="@string/remove_lead"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/set_lead_set_lead_button"
+        app:layout_constraintStart_toStartOf="@+id/set_lead_set_lead_button"
+        app:layout_constraintTop_toBottomOf="@+id/set_lead_set_lead_button" />
+
 </android.support.constraint.ConstraintLayout>

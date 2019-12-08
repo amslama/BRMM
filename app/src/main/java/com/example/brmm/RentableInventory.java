@@ -56,7 +56,6 @@ public class RentableInventory implements Serializable {
                 break;
             }
         }
-        //update db
     }
 
     public void changePart(int pos, Part part)

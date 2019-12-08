@@ -10,7 +10,7 @@
     <string name="add">Add</string>
     <string name="edit_rentable">Edit Item</string>
     <string name="delete_section">Delete Section</string>
-    <string name="add_section_lead">Add Section Lead</string>
+    <string name="add_section_lead">Section Lead</string>
     <string name="remove">Remove</string>
     <string name="edit_note">Edit Note</string>
     <string name="edit_member">Edit Member</string>
@@ -69,6 +69,7 @@
     <string name="ulid">ULID:</string>
     <string name="login">Login</string>
     <string name="part">Part</string>
+    <string name="remove_lead">Remove Lead</string>
 
 
     <string-array name="Entries">

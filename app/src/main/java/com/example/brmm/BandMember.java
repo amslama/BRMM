@@ -61,6 +61,8 @@ public class BandMember implements Serializable
 
     public  void setUID(int UID){this.UID = UID; }
 
+
+
     @Override
     public boolean equals (Object member)
     {
