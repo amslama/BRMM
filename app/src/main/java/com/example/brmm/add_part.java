@@ -37,6 +37,7 @@ public class add_part extends AppCompatActivity {
         //Add existing dropdown
         final Spinner add_existing_spin = findViewById(R.id.add_existing_add_part_dropdown);
 
+        //sets up part spinner
         final ArrayList<String> partlist = new ArrayList<>();
         final ArrayList<Part> temp = (ArrayList<Part>) getIntent().getSerializableExtra("partlist");
         if (temp != null) {
@@ -50,6 +51,7 @@ public class add_part extends AppCompatActivity {
             }
         }
 
+        //adds a part
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,16 +97,17 @@ public class add_part extends AppCompatActivity {
             }
         });
 
+
+        //returns to main screen
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cost_edittext.setText("");
-                name_edittext.setText("");
-                sn_edittext.setText("");
                 finish();
             }
         });
 
+
+        //logic for add_existing_spin
         add_existing_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

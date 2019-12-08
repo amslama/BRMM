@@ -28,6 +28,8 @@ public class delete_part extends AppCompatActivity {
         Button ok_button = findViewById(R.id.ok_delete_part_button);
         Button cancel_button = findViewById(R.id.cancel_delete_part_button);
 
+
+        //sets up spinner containing Parts
         part = new Part();
         final ArrayList<String> partlist = new ArrayList<>();
         final ArrayList<Part> temp = (ArrayList<Part>) getIntent().getSerializableExtra("partlist");
@@ -41,25 +43,7 @@ public class delete_part extends AppCompatActivity {
             }
         }
 
-        ok_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(pick_spin.getSelectedItem() != null) {
-                    Intent intent = new Intent();
-                    intent.putExtra("part", part);
-                    setResult(RESULT_OK, intent);
-                    finish();
-                }
-            }
-        });
-
-        cancel_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
+        //logic for getting Part from spinner
         pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -81,8 +65,31 @@ public class delete_part extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                            }
+            }
         });
+
+        //deletes the part
+        ok_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(pick_spin.getSelectedItem() != null) {
+                    Intent intent = new Intent();
+                    intent.putExtra("part", part);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+            }
+        });
+
+        //returns to main screen
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
     }
 }
 

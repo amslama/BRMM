@@ -41,6 +41,7 @@ public class checkout_instrument extends AppCompatActivity {
         ok_button = findViewById(R.id.checkout_checkout_button);
 
 
+        //sets up instrument spinner
         final ArrayList<String> instrumentlist = new ArrayList<>();
         final ArrayList<Instrument> temp = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
         if (temp != null) {
@@ -55,7 +56,7 @@ public class checkout_instrument extends AppCompatActivity {
             }
         }
 
-
+        //sets up BandMember spinner
         final ArrayList<Integer> members = new ArrayList<>();
         final ArrayList<BandMember> temp_bm = (ArrayList<BandMember>) getIntent().getSerializableExtra("memberlist");
         if (temp_bm != null) {
@@ -70,6 +71,7 @@ public class checkout_instrument extends AppCompatActivity {
             }
         }
 
+        //logic for instrument spinner
         instrument_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -94,6 +96,7 @@ public class checkout_instrument extends AppCompatActivity {
         });
 
 
+        //logic for band member spinner
         member_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -117,6 +120,7 @@ public class checkout_instrument extends AppCompatActivity {
             }
         });
 
+        //checksout an instrument
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

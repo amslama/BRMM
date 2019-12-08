@@ -29,6 +29,7 @@ public class add_section extends AppCompatActivity {
         Button cancel_button = findViewById(R.id.cancel_add_section_button);
         Button ok_button = findViewById(R.id.ok_add_section_button);
 
+        //adds a new section
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,10 +41,10 @@ public class add_section extends AppCompatActivity {
             }
         });
 
+        //returns to main screen
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                name_edittext.setText("");
                 finish();
             }
         });

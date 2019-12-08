@@ -32,6 +32,7 @@ public class DatabaseConnection extends Thread {
     private Session session = null;
     private Connection conn = null;
 
+    //gets connection
     public void run() {
         conn = dbGetConnection();
 

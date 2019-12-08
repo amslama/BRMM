@@ -34,8 +34,7 @@ public class Category implements Serializable {
         this.superCategory = superCategory;
     }
 
-
-
+    //returns all supercategories belong to a base category
     public ArrayList<Category> getSuperCategories() {
         ArrayList<Category> superCats = new ArrayList<>();
         Category cat = this;

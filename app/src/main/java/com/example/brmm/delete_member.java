@@ -30,6 +30,8 @@ public class delete_member extends AppCompatActivity {
         Button cancel_button = findViewById(R.id.cancel_delete_member_button);
 
         bm = new BandMember();
+
+        //sets up spinner containing bandmembers
         final ArrayList<Integer> members = new ArrayList<>();
         final ArrayList<BandMember> temp = (ArrayList<BandMember>) getIntent().getSerializableExtra("memberlist");
         if (temp != null) {
@@ -42,26 +44,7 @@ public class delete_member extends AppCompatActivity {
             }
         }
 
-        ok_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (pick_spin.getSelectedItem() != null) {
-                    Intent intent = getIntent();
-                    intent.putExtra("member", bm);
-                    setResult(RESULT_OK, intent);
-                    finish();
-                }
-            }
-        });
-
-
-        cancel_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
+        //logic for selecting BandMember from spinner
         pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -84,5 +67,29 @@ public class delete_member extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+        //deletes bandmember
+        ok_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (pick_spin.getSelectedItem() != null) {
+                    Intent intent = getIntent();
+                    intent.putExtra("member", bm);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+            }
+        });
+
+
+        //returns to main_screen
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
     }
 }

@@ -1,6 +1,7 @@
 package com.example.brmm;
 
 public class BandMemberFactory {
+    //returns a BandMember of specific type
     public static BandMember buildBandMember(String type) {
         BandMember member = null;
         switch (type) {

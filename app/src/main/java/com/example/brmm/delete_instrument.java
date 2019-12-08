@@ -64,7 +64,7 @@ public class delete_instrument extends AppCompatActivity {
         });
 
 
-        //logic for pick_spin
+        //logic for spinner containing instruments
         pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position,
