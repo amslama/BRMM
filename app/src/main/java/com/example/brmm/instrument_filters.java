@@ -47,25 +47,42 @@ public class instrument_filters extends AppCompatActivity {
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                id_edittext.setText("");
-                cost_edittext.setText("");
-                owner_edittext.setText("");
-                name_edittext.setText("");
-                section_spin.setSelection(0);
-                cat_spin.setSelection(0);
                 finish();
             }
         });
 
 
         final ArrayList<String> sections = getIntent().getStringArrayListExtra("sectionlist");
-        final ArrayList<Category> catlist = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
-        ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
         ArrayAdapter<String> secAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sections);
-        catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         secAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        cat_spin.setAdapter(catAdapter);
         section_spin.setAdapter(secAdapter);
+
+        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String section = parent.getSelectedItem().toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                String section = "";
+            }
+        });
+
+
+
+
+        ArrayList<Category> input = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
+        if (input == null) {
+            input = new ArrayList<>();
+            Category category = new Category(null);
+            category.setName("No Categories");
+            input.add(category);
+        }
+        final ArrayList<Category> catlist = input;
+
+        ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
+        catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cat_spin.setAdapter(catAdapter);
 
         cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -78,16 +95,6 @@ public class instrument_filters extends AppCompatActivity {
             }
         });
 
-        section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String section = parent.getSelectedItem().toString();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                String section = "";
-            }
-        });
 
 
         apply_button.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +118,9 @@ public class instrument_filters extends AppCompatActivity {
                 cost = Double.parseDouble(cost_edittext.getText().toString());
                 Intent thisIntent = new Intent();
                 ArrayList<Instrument> instruments = (ArrayList<Instrument>)thisIntent.getSerializableExtra("instrumentlist");
+                if (instruments == null) {
+                    finish();
+                }
                 instruments = filterInstrumentInv(null, owner, section, name, category, id, cost);
                 thisIntent = new Intent();
                 thisIntent.putExtra("instrumentList", instruments);

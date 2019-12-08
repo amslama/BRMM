@@ -20,9 +20,11 @@ public class login_screen extends AppCompatActivity {
     DatabaseWrapper wrapper = null;
     Thread thread2;
 
+
     public login_screen() {
         counter = 0;
     }
+
 
     @Override
     protected void  onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,13 @@ public class login_screen extends AppCompatActivity {
 
     private void login(String ulid){
         boolean isFaculty = false;
+        Category category = new Category(null);
+        category.setName("You son of a bitch, Im in");
+        ArrayList<Category> categories = new ArrayList<>();
+        categories.add(category);
+        System.out.println(categories);
+
+
         wrapper.setMethod("getFacultyRights");
         wrapper.setUlid(ulid);
         thread2 = new Thread(wrapper);
@@ -174,9 +183,25 @@ public class login_screen extends AppCompatActivity {
             System.out.println("get instuments join failed");
         }
             mainScreen.putExtra("INSTRUMENT", wrapper.getInstrumentList());
-            startActivity(mainScreen);
 
 
+        /*
+        wrapper.setMethod("getCategoriess");
+        Thread getCategoryThread = new Thread(wrapper);
+        getCategoryThread.start();
+        try{
+            getCategoryThread.join();
+        }
+        catch (Exception e){
+            System.out.println("get category join failed");
+        }
+        mainScreen.putExtra("CATEGORY", wrapper.getCategoryList());
+
+    */
+
+
+        mainScreen.putExtra("CATEGORY", categories);
+        startActivity(mainScreen);
 
     }
 

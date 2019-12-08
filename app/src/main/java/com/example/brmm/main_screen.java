@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -25,6 +26,7 @@ public class main_screen extends AppCompatActivity {
     private RentableInventory rent_inv;
     private BandMemberInventory member_inv;
     private ArrayList<String> sections;
+    private ArrayList<Category> categories;
     private ArrayList<String> ins_concepts;
     private ArrayList<String> part_concepts;
     private BandMember temp_bm;
@@ -52,6 +54,8 @@ public class main_screen extends AppCompatActivity {
     private Button set_lead_button;
     private Button add_section_button;
     private Button delete_section_button;
+    private Button add_category_button;
+    private Button delete_category_button;
 
     //Recyclerview
     private RecyclerView inv_view;
@@ -93,15 +97,26 @@ public class main_screen extends AppCompatActivity {
             }
         }
         if ((ArrayList<Faculty>) intent.getSerializableExtra("MEMBER") != null) {
-            for (Faculty faculty : (ArrayList<Faculty>) intent.getSerializableExtra("INSTRUMENT")) {
+            for (Faculty faculty : (ArrayList<Faculty>) intent.getSerializableExtra("MEMBER")) {
                 member_inv.addBandMember(faculty);
             }
         }
         if (intent.getStringArrayListExtra("SECTION") != null) {
-            for (String sect : intent.getStringArrayListExtra("INSTRUMENT")) {
+            for (String sect : intent.getStringArrayListExtra("SECTION")) {
                 sections.add(sect);
             }
         }
+
+
+        if ((ArrayList<Category>) intent.getSerializableExtra("CATEGORY") != null) {
+            System.out.println("Made it this far");
+            for (Category cat : (ArrayList<Category>) intent.getSerializableExtra("CATEGORY")) {
+                categories.add(cat);
+
+            }
+        }
+
+
 
         instantiateButtons();
         oneTimeListeners();
@@ -123,6 +138,8 @@ public class main_screen extends AppCompatActivity {
         set_lead_button.setVisibility(View.INVISIBLE);
         add_section_button.setVisibility(View.INVISIBLE);
         delete_section_button.setVisibility(View.INVISIBLE);
+        add_category_button.setVisibility(View.INVISIBLE);
+        delete_category_button.setVisibility(View.INVISIBLE);
     }
 
     private void instantiatelists() {
@@ -130,6 +147,7 @@ public class main_screen extends AppCompatActivity {
         rent_inv = new RentableInventory();
         ins_concepts = new ArrayList<>();
         part_concepts = new ArrayList<>();
+        categories = new ArrayList<>();
     }
 
     private void instantiateButtons() {
@@ -146,6 +164,8 @@ public class main_screen extends AppCompatActivity {
         set_lead_button = findViewById(R.id.add_section_lead_main_screen_button);
         add_section_button = findViewById(R.id.add_section_main_screen_button);
         delete_section_button = findViewById(R.id.delete_section_main_screen_button);
+        add_category_button = findViewById(R.id.add_category_main_screen_button);
+        delete_category_button =findViewById(R.id.delete_category_main_screen_button);
         inv_view = findViewById(R.id.item_list_main_screen_rview);
 
         if (rent_inv.getInstrumentList() != null) {
@@ -212,17 +232,21 @@ public class main_screen extends AppCompatActivity {
             notes_button.setVisibility(View.INVISIBLE);
             delete_section_button.setVisibility(View.INVISIBLE);
             add_section_button.setVisibility(View.INVISIBLE);
+            delete_category_button.setVisibility(View.INVISIBLE);
+            add_category_button.setVisibility(View.INVISIBLE);
         }
 
 
     }
 
     private void setInstrumentButtons() {
+
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), instrument_filters.class);
                 openFilter.putExtra("sectionlist", sections);
+                openFilter.putExtra("categorylist", categories);
                 openFilter.putExtra("instrumentlist", rent_inv.getInstrumentList());
                 startActivityForResult(openFilter, 10);
             }
@@ -238,6 +262,7 @@ public class main_screen extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent openFilter = new Intent(getBaseContext(), add_instrument.class);
                     openFilter.putExtra("instrumentlist", rent_inv.getInstrumentList());
+                    openFilter.putExtra("categorylist", categories);
                     startActivityForResult(openFilter, 1);
                 }
             });
@@ -247,6 +272,7 @@ public class main_screen extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent openFilter = new Intent(getBaseContext(), edit_instrument.class);
                     openFilter.putExtra("instrumentlist", rent_inv.getInstrumentList());
+                    openFilter.putExtra("categorylist", categories);
                     startActivityForResult(openFilter, 6);
                 }
             });
@@ -264,6 +290,8 @@ public class main_screen extends AppCompatActivity {
             set_lead_button.setVisibility(View.INVISIBLE);
             checkout_button.setVisibility(View.VISIBLE);
             notes_button.setVisibility(View.VISIBLE);
+            delete_category_button.setVisibility(View.VISIBLE);
+            add_category_button.setVisibility(View.VISIBLE);
             delete_section_button.setVisibility(View.INVISIBLE);
             add_section_button.setVisibility(View.INVISIBLE);
         }
@@ -276,7 +304,7 @@ public class main_screen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), bandmember_filters.class);
                 openFilter.putExtra("sectionlist", sections);
-                openFilter.putExtra("instrumentlist", ins_concepts);
+                openFilter.putExtra("instrumentlist", rent_inv.getInstrumentList());
                 openFilter.putExtra("bandmemberlist", member_inv.getBandMembers());
                 startActivityForResult(openFilter, 11);
             }
@@ -372,6 +400,25 @@ public class main_screen extends AppCompatActivity {
                     startActivityForResult(openFilter, 7);
                 }
             });
+
+            add_category_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent openFilter = new Intent(getBaseContext(), add_category.class);
+                    openFilter.putExtra("categorylist", categories);
+                    startActivityForResult(openFilter, 15);
+                }
+            });
+
+            delete_category_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent openFilter = new Intent(getBaseContext(), delete_category.class);
+                    openFilter.putExtra("categorylist", categories);
+                    startActivityForResult(openFilter, 16);
+                }
+            });
+
         }
 
         inv_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -404,6 +451,7 @@ public class main_screen extends AppCompatActivity {
                 intent.putExtra("member", member_inv);
                 intent.putExtra("rentable", rent_inv);
                 intent.putExtra("sections", sections);
+                intent.putExtra("categories", categories);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -584,6 +632,25 @@ public class main_screen extends AppCompatActivity {
                 Part part = (Part) data.getSerializableExtra("part");
                 rent_inv.removePart(part);
                 inv_view.getAdapter().notifyDataSetChanged();
+            }
+        }
+
+
+
+        //add category
+        if (requestCode == 15) {
+            if (resultCode == RESULT_OK) {
+                Category cat = (Category) data.getSerializableExtra("category");
+                categories.add(cat);
+            }
+        }
+
+        //delete category
+        if (requestCode == 16) {
+            if (resultCode == RESULT_OK) {
+                ArrayList<Category> cat = new ArrayList<>();
+                cat = (ArrayList<Category>) data.getSerializableExtra("category");
+                categories = cat;
             }
         }
 

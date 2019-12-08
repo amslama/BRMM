@@ -48,7 +48,15 @@ public class add_category extends AppCompatActivity {
         Button cancel_button = findViewById(R.id.cancel_add_category_button);
         Button ok_button = findViewById(R.id.ok_add_category_button);
 
-        final ArrayList<Category> catlist = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
+        ArrayList<Category> input = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
+        if (input == null) {
+            input = new ArrayList<>();
+            Category category = new Category(null);
+            category.setName("No Categories");
+            input.add(category);
+        }
+        final ArrayList<Category> catlist = input;
+
         ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
         catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cat_spin.setAdapter(catAdapter);
@@ -78,10 +86,10 @@ public class add_category extends AppCompatActivity {
                 Category newCategory = new Category(category);
                 newCategory.setName(name);
 
-                catlist.add(newCategory);
+
 
                 Intent intent = new Intent();
-                intent.putExtra("category", catlist);
+                intent.putExtra("category", newCategory);
                 setResult(RESULT_OK,intent);
                 finish();
             }
