@@ -41,6 +41,7 @@ public class DatabaseWrapper extends Thread{
     private String category = "";
     private int serialNumber = 0;
     private String newSection = "";
+    private ArrayList<String> sectionList;
 
 
 
@@ -128,6 +129,10 @@ public class DatabaseWrapper extends Thread{
         newSection = section;
     }
 
+    public ArrayList<String> getSectionList(){
+        return sectionList;
+    }
+
     /**
      * Read the comments in each method on how to use it
      * there then just call setMethod() with one of the options below then if it takes an argument like
@@ -211,6 +216,22 @@ public class DatabaseWrapper extends Thread{
                 //Set old section by calling SetSection() method
                 //Set new section by calling SetNewSection() method
                 changeAllOfOneSectionUsers(section, newSection);
+                break;
+            case "getUniqueSectionUsers":
+                //Just call getSectionList() method after this
+                sectionList = getUniqueSectionUsers();
+                break;
+            case "changeSectionItem":
+                //Call setID() then setSection() then run this method
+                changeSectionItem(ID, section);
+                break;
+            case "changeAllOfOneSectionItem":
+                //Set old section by calling SetSection() method
+                //Set new section by calling SetNewSection() method
+                changeAllOfOneSectionItem(section, newSection);
+                break;
+            case "getUniqueSectionItem":
+                sectionList = getUniqueSectionItem();
                 break;
             default:
                 System.out.println("Method not found");
@@ -494,7 +515,7 @@ public class DatabaseWrapper extends Thread{
             st.executeUpdate(query);
         }
         catch (Exception e){
-            System.out.println("Change Section Failed");
+            System.out.println("Change Section Failed (USER)");
         }
     }
 
@@ -505,9 +526,66 @@ public class DatabaseWrapper extends Thread{
             st.executeUpdate(query);
         }
         catch (Exception e){
-            System.out.println("Change all sections failed");
+            System.out.println("Change all sections failed (USER)");
         }
     }
+
+    private ArrayList<String> getUniqueSectionUsers(){
+        ArrayList<String> list = new ArrayList<String>();
+        try{
+            String query = "select distinct section from user";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            while(rs.next()){
+                list.add(rs.getString("section"));
+            }
+        }
+        catch (Exception e){
+            System.out.println("Get all sections failed (USER)");
+        }
+        return list;
+    }
+
+    private void changeSectionItem(int ID, String section){
+        try{
+            String query = "update item set section = '"+section+"' where ID = '"+ID+"'";
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        }
+        catch (Exception e){
+            System.out.println("Change Section Failed (ITEM)");
+        }
+    }
+
+    private void changeAllOfOneSectionItem(String oldSection, String newSection){
+        try{
+            String query = "update item set section = '"+oldSection+"' where section = '"+newSection+"'";
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+        }
+        catch (Exception e){
+            System.out.println("Change all sections failed (ITEM)");
+        }
+    }
+    private ArrayList<String> getUniqueSectionItem(){
+        ArrayList<String> list = new ArrayList<String>();
+        try{
+            String query = "select distinct section from item";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                list.add(rs.getString("section"));
+            }
+        }
+        catch (Exception e){
+            System.out.println("Get all sections failed (ITEM)");
+        }
+        return list;
+    }
+
+
+
 
 }
 
