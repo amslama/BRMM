@@ -48,6 +48,7 @@ public class add_instrument extends AppCompatActivity {
         RecyclerView cat_rview = findViewById(R.id.cat_add_instrument_rview);
 
 
+        //sets instrument spinner
         final ArrayList<String> instrumentlist = new ArrayList<>();
         final ArrayList<Instrument> temp = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
         if (temp != null) {
@@ -61,6 +62,7 @@ public class add_instrument extends AppCompatActivity {
             }
         }
 
+        //adds no section option if no sections exist
          ArrayList<String> secInput= getIntent().getStringArrayListExtra("sectionlist");
         if (secInput == null) {
             secInput = new ArrayList<>();
@@ -97,15 +99,12 @@ public class add_instrument extends AppCompatActivity {
         });
 
 
-
+        //section adapter
         final ArrayAdapter<String> secAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sectionlist);
-        System.out.println("here we are");
-        System.out.println(sectionlist);
-
         secAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         section_spin.setAdapter(secAdapter);
-        //section spinner logic
 
+        //section spinner logic
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -113,18 +112,21 @@ public class add_instrument extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) { ;
+            public void onNothingSelected(AdapterView<?> parent) {
+                return;
             }
         });
 
-
+        //If no categories, make sure instrument cannot have a category
         ArrayList<Category> input = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
         if (input == null) {
             input = new ArrayList<>();
             Category category = new Category(null);
-            category.setName("No Categories");
+            category.setName("No Existing Categories");
             input.add(category);
         }
+
+        //sets up category spinner
         final ArrayList<Category> catlist = input;
         ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
         catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -139,20 +141,14 @@ public class add_instrument extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                return;
             }
         });
 
 
-        //cancel button logic
-        cancel_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                finish();
-            }
-        });
 
-        //ok button
+        //adds an instrument
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,16 +160,23 @@ public class add_instrument extends AppCompatActivity {
                         cost = Double.parseDouble(cost_edittext.getText().toString());
                         if(cost >=0) {
                             Category category = (Category) cat_spin.getSelectedItem();
+                            if (!category.getName().equals("No Existing Categories"))
+                                category = null;
+
                             String section = section_spin.getSelectedItem().toString();
                             if (section.equals("No Existing Sections"))
                                 section = "";
+
                             name = name_edittext.getText().toString();
+
                             RentableFactory factory = new RentableFactory();
                             Rentable instrument = (Instrument) factory.buildRentable("Instrument");
+
                             instrument.setCost(cost);
                             instrument.setName(name);
                             ((Instrument) instrument).setCategory(category);
                             ((Instrument) instrument).setSection(section);
+
                             Intent intent = new Intent();
                             intent.putExtra("instrument", instrument);
                             setResult(RESULT_OK, intent);
@@ -190,6 +193,14 @@ public class add_instrument extends AppCompatActivity {
                         incomplete_toast.show();
                     }
                 }
+            }
+        });
+
+        //returns to main screen
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
