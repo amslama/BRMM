@@ -6,14 +6,14 @@ public class Student extends BandMember implements Serializable {
     private String section;
 
 
-    private String sectionLead;
+    private boolean sectionLead;
     private String notes;
     private Instrument instrument;
 
 
-    public String getSectionLead() { return sectionLead;  }
+    public boolean getSectionLead() { return sectionLead;  }
 
-    public void setSectionLead(String sectionLead) {  this.sectionLead = sectionLead;  }
+    public void setSectionLead(boolean sectionLead) {  this.sectionLead = sectionLead;  }
 
     public void setInstrument(Instrument instrument) {
         this.instrument = instrument;
@@ -70,6 +70,10 @@ public class Student extends BandMember implements Serializable {
             return false;
         }
         return equals((Student) member);
+    }
+
+    public boolean getSectionLeader(){
+        return sectionLead;
     }
 
     private boolean equals(Student member)

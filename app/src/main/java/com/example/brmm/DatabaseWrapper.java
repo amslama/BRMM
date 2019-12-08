@@ -42,6 +42,8 @@ public class DatabaseWrapper extends Thread{
     private int serialNumber = 0;
     private String newSection = "";
     private ArrayList<String> sectionList;
+    private ArrayList<Student> studentArrayList = null;
+    private ArrayList<Faculty> facultyArrayList = null;
 
 
 
@@ -131,6 +133,14 @@ public class DatabaseWrapper extends Thread{
 
     public ArrayList<String> getSectionList(){
         return sectionList;
+    }
+
+    public void setStudentArrayList(ArrayList<Student> studentArrayList){
+        this.studentArrayList = studentArrayList;
+    }
+
+    public void setFacultyArrayList(ArrayList<Faculty> facultyArrayList){
+        this.facultyArrayList = facultyArrayList;
     }
 
     /**
@@ -233,6 +243,9 @@ public class DatabaseWrapper extends Thread{
             case "getUniqueSectionItem":
                 sectionList = getUniqueSectionItem();
                 break;
+            case "superUpdateUser":
+                //Call the setStudentArrayList() method then the setFacultyArrayList() method before running this
+                superUpdateUser(studentArrayList, facultyArrayList);
             default:
                 System.out.println("Method not found");
                 break;
@@ -584,7 +597,77 @@ public class DatabaseWrapper extends Thread{
         return list;
     }
 
+    private void superUpdateUser(ArrayList<Student> studentsArrayList, ArrayList<Faculty> facultyArrayList){
+        //Student Portion
+        String firstName = "";
+        String lastName = "";
+        String ulid = "";
+        String section = "";
+        int sectionLeader = 0;
+        String role = "";
+        int UID = 0;
+        String notes = "";
+        for(int i = 0; studentsArrayList.get(i) != null; i++) {
+            firstName = studentsArrayList.get(i).fname;
+            lastName = studentsArrayList.get(i).lname;
+            ulid = studentsArrayList.get(i).ulid;
+            section = studentsArrayList.get(i).getSection();
 
+            if(studentsArrayList.get(i).getSectionLead()){
+                sectionLeader = 1;
+            }
+            else{
+                sectionLeader = 0;
+            }
+
+            notes = studentsArrayList.get(i).getNotes();
+
+            try {
+                //Student Portion
+                //String firstName, String lastName, String ulid, String section, boolean sectionLeader, int UID, String notes
+                String query1 = "update user set firstName = '" + firstName + "' where ID = " + ID + ";";
+                String query2 = "update user set lastName = '" + lastName + "' where ID = " + ID + ";";
+                String query3 = "update user set username = '" + ulid + "' where ID = " + ID + ";";
+                String query4 = "update user set section = '" + section + "' where ID = " + ID + ";";
+                String query5 = "update user set sectionLeader = " + sectionLeader + " where ID = " + ID + ";";
+                String query6 = "update user set notes = '" + notes + "' where ID = " + ID + ";";
+                Statement st = conn.createStatement();
+                st.executeUpdate(query1);
+                st.executeUpdate(query2);
+                st.executeUpdate(query3);
+                st.executeUpdate(query4);
+                st.executeUpdate(query5);
+                st.executeUpdate(query6);
+            } catch (Exception e) {
+                System.out.println("Student part failed");
+            }
+        }
+
+        //Faculty Part
+        //String firstname, String lastname, String ulid, String role, int UID
+        for(int i = 0; studentsArrayList.get(i) != null; i++){
+            try {
+                String query1 = "update user set firstName = '" + firstName + "' where ID = " + ID + ";";
+                String query2 = "update user set lastName = '" + lastName + "' where ID = " + ID + ";";
+                String query3 = "update user set username = '" + ulid + "' where ID = " + ID + ";";
+                String query4 = "update user set role = '" + role + "' where ID = " + ID + ";";
+                String query5 = "update user set ID = '" + UID + "' where ID = " + ID + ";";
+                Statement st = conn.createStatement();
+                st.executeUpdate(query1);
+                st.executeUpdate(query2);
+                st.executeUpdate(query3);
+                st.executeUpdate(query4);
+                st.executeUpdate(query5);
+            }
+            catch (Exception e){
+                System.out.println("Faculty part failed");
+            }
+        }
+
+
+
+
+    }
 
 
 }
