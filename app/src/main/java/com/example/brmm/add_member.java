@@ -24,6 +24,7 @@ public class add_member extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_member);
 
+        //TextViews
         final TextView role_textview = findViewById(R.id.role_add_member_textview);
         role_textview.setVisibility(View.INVISIBLE);
         final TextView section_textview = findViewById(R.id.section_add_member_textview);
@@ -59,6 +60,7 @@ public class add_member extends AppCompatActivity {
             section_spin.setAdapter(memberAdapter);
         }
 
+        //add members
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
