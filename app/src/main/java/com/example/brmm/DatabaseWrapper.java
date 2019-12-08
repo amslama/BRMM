@@ -202,15 +202,15 @@ public class DatabaseWrapper extends Thread{
                 //Call setID before the run method
                 removePart(ID);
                 break;
-            case "changeSection":
+            case "changeSectionUsers":
                 //Call setUlid() with the user you want to update
                 //then setSection() with the section you want to change that user to
-                changeSection(ulid, section);
+                changeSectionUsers(ulid, section);
                 break;
-            case "changeAllOfOneSection":
+            case "changeAllOfOneSectionUsers":
                 //Set old section by calling SetSection() method
                 //Set new section by calling SetNewSection() method
-                changeAllOfOneSection(section, newSection);
+                changeAllOfOneSectionUsers(section, newSection);
                 break;
             default:
                 System.out.println("Method not found");
@@ -487,7 +487,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
-    private void changeSection(String ulid, String section){
+    private void changeSectionUsers(String ulid, String section){
         try{
             String query = "update user set section = '"+section+"' where username = '"+ulid+"'";
             Statement st = conn.createStatement();
@@ -498,7 +498,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
-    private void changeAllOfOneSection(String oldSection, String newSection){
+    private void changeAllOfOneSectionUsers(String oldSection, String newSection){
         try{
             String query = "update user set section = '"+oldSection+"' where section = '"+newSection+"'";
             Statement st = conn.createStatement();
