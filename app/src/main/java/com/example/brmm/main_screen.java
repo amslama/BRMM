@@ -515,6 +515,7 @@ public class main_screen extends AppCompatActivity {
                 if (count >= 0) {
                     member_inv.changeMember(count, member);
                 }
+                inv_view.getAdapter().notifyDataSetChanged();
             }
 
         }
