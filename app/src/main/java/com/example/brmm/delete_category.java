@@ -27,7 +27,7 @@ public class delete_category extends AppCompatActivity {
         TextView name_textview = findViewById(R.id.category_delete_category_textview);
 
         //dropdowns
-        final Spinner category_spin = findViewById(R.id.category_delete_category_dropdown);
+        final Spinner cat_spin = findViewById(R.id.category_delete_category_dropdown);
 
         //Buttons
         Button cancel_button = findViewById(R.id.cancel_delete_category_button);
@@ -35,13 +35,17 @@ public class delete_category extends AppCompatActivity {
 
         Intent intent = new Intent();
 
+        //sets up category spinner
         final ArrayList<Category> catlist = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
-        ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
-        catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        category_spin.setAdapter(catAdapter);
+        if (catlist != null) {
+            ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
+            catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            cat_spin.setAdapter(catAdapter);
 
+        }
 
-        category_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        //logic for category spinner
+        cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Category category = (Category) parent.getSelectedItem();
@@ -52,11 +56,14 @@ public class delete_category extends AppCompatActivity {
         });
 
 
+        //removes the category
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Category removeCat = (Category) category_spin.getSelectedItem();
-                removeCategory(removeCat,catlist);
+
+                final Category removeCat = (Category) cat_spin.getSelectedItem();
+
+                //displays dialog to make sure user is sure of decision
                 AlertDialog.Builder builder = new AlertDialog.Builder(delete_category.this);
                 builder.setMessage("Warning, Deleting a Category will uncategorize all instruments with that category. Do you still wish to continue?")
                         .setCancelable(false)
@@ -69,10 +76,10 @@ public class delete_category extends AppCompatActivity {
                         .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
                                 dialog.cancel();
                             }
                         }) ;
+
                 AlertDialog alert = builder.create();
                 alert.setTitle("Alert");
                 alert.show();
@@ -80,6 +87,7 @@ public class delete_category extends AppCompatActivity {
             }
         });
 
+        //returns to main screen
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,6 +97,7 @@ public class delete_category extends AppCompatActivity {
 
     };
 
+    //removes the category
     public void removeCategory(Category removeCat, ArrayList<Category> catlist) {
 
         Intent intent = new Intent();

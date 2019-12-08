@@ -44,19 +44,17 @@ public class instrument_filters extends AppCompatActivity {
         final Button apply_button = findViewById(R.id.ok_instrument_filters_button);
         final Button cancel_button = findViewById(R.id.cancel_instrument_filters_button);
 
-        cancel_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-
+        //sets up section spinner
         final ArrayList<String> sections = getIntent().getStringArrayListExtra("sectionlist");
-        ArrayAdapter<String> secAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sections);
-        secAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        section_spin.setAdapter(secAdapter);
+        if (sections != null) {
+            String section = "Don't filter by Section";
+            sections.add(0,section);
+            ArrayAdapter<String> secAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sections);
+            secAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            section_spin.setAdapter(secAdapter);
+        }
 
+        //logic for section spinner selection
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -70,20 +68,20 @@ public class instrument_filters extends AppCompatActivity {
 
 
 
+        //sets up category spinner
+        ArrayList<Category> catlist = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
+        if (catlist != null) {
+            Category cat = new Category(null);
+            cat.setName("Don't filter by Category");
+            catlist.add(0,cat);
+            ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
+            catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            cat_spin.setAdapter(catAdapter);
 
-        ArrayList<Category> input = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
-        if (input == null) {
-            input = new ArrayList<>();
-            Category category = new Category(null);
-            category.setName("No Categories");
-            input.add(category);
         }
-        final ArrayList<Category> catlist = input;
 
-        ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
-        catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        cat_spin.setAdapter(catAdapter);
 
+        //logic for category spinner selection
         cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -91,12 +89,11 @@ public class instrument_filters extends AppCompatActivity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Category category = null;
             }
         });
 
 
-
+        //applies filters
         apply_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,17 +107,25 @@ public class instrument_filters extends AppCompatActivity {
 
                 owner = owner_edittext.getText().toString();
                 name = name_edittext.getText().toString();
-                id = Integer.parseInt(id_edittext.getText().toString());
+
 
                 section = section_spin.getSelectedItem().toString();
                 category = (Category) cat_spin.getSelectedItem();
 
-                cost = Double.parseDouble(cost_edittext.getText().toString());
+                try {
+                    id = Integer.parseInt(id_edittext.getText().toString());
+                } catch (NumberFormatException ex) {id = -1;}
+
+                try {
+                    cost = Double.parseDouble(cost_edittext.getText().toString());
+                } catch (NumberFormatException ex) {cost = -1;}
+
                 Intent thisIntent = new Intent();
                 ArrayList<Instrument> instruments = (ArrayList<Instrument>)thisIntent.getSerializableExtra("instrumentlist");
-                if (instruments == null) {
+
+                if (instruments == null)
                     finish();
-                }
+
                 instruments = filterInstrumentInv(null, owner, section, name, category, id, cost);
                 thisIntent = new Intent();
                 thisIntent.putExtra("instrumentList", instruments);
@@ -129,16 +134,26 @@ public class instrument_filters extends AppCompatActivity {
             }
         });
 
+        //goes back to main activity
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
 
+
+    //main method for filtering
     public ArrayList<Instrument> filterInstrumentInv(ArrayList<Instrument> Instruments, String owner, String section, String name, Category category, int id, double cost) {
         ArrayList<Instrument> filter = new ArrayList<>();
 
-        if(category != null)
+        if(!category.getName().equals("Don't filter by Category"))
            filter = filterByCategory(filter, category);
 
 
-        if (id != 0)
+        if (id != -1)
             filter = filterByID(filter, id);
 
 
@@ -151,13 +166,11 @@ public class instrument_filters extends AppCompatActivity {
         }
 
 
-        if (!section.equals(""))
+        if (!section.equals("Don't filter by Section"))
             filter = filterBySection(filter, section);
 
-        if (cost != 0)
+        if (cost != -1)
             filter = filterByCost(filter, cost);
-
-
 
 
         return filter;
@@ -165,7 +178,7 @@ public class instrument_filters extends AppCompatActivity {
     }
 
 
-
+    //filters by a specific section
     public ArrayList<Instrument> filterBySection(ArrayList<Instrument> Instruments, String section) {
         ArrayList<Instrument> filter = new ArrayList<>();
         for (Instrument Instrument : Instruments) {
@@ -177,6 +190,7 @@ public class instrument_filters extends AppCompatActivity {
         return filter;
     }
 
+    //filters by a specific category
     public ArrayList<Instrument> filterByCategory(ArrayList<Instrument> Instruments, Category category) {
         ArrayList<Instrument> filter = new ArrayList<>();
         for (Instrument Instrument : Instruments) {
@@ -188,6 +202,7 @@ public class instrument_filters extends AppCompatActivity {
         return filter;
     }
 
+    //filters by a specific cost
     public ArrayList<Instrument> filterByCost(ArrayList<Instrument> Instruments, double cost) {
         ArrayList<Instrument> filter = new ArrayList<>();
         for (Instrument Instrument : Instruments) {
@@ -197,6 +212,7 @@ public class instrument_filters extends AppCompatActivity {
         return filter;
     }
 
+    //filters by a specific ID
     public ArrayList<Instrument> filterByID(ArrayList<Instrument> Instruments, int id) {
         ArrayList<Instrument> filter = new ArrayList<>();
         for (Instrument Instrument : Instruments) {
@@ -208,6 +224,7 @@ public class instrument_filters extends AppCompatActivity {
         return filter;
     }
 
+    //filters by a specific name
     public ArrayList<Instrument> filterByName(ArrayList<Instrument> Instruments, String name) {
         ArrayList<Instrument> filter = new ArrayList<>();
         for (Instrument Instrument : Instruments) {
@@ -220,6 +237,7 @@ public class instrument_filters extends AppCompatActivity {
     }
 
 
+    //filters by a owner
     public ArrayList<Instrument> filterByOwner(ArrayList<Instrument> Instruments, String owner) {
         ArrayList<Instrument> filter = new ArrayList<>();
         for (Instrument Instrument : Instruments) {

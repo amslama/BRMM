@@ -48,20 +48,15 @@ public class add_category extends AppCompatActivity {
         Button cancel_button = findViewById(R.id.cancel_add_category_button);
         Button ok_button = findViewById(R.id.ok_add_category_button);
 
-        ArrayList<Category> input = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
-        if (input == null) {
-            input = new ArrayList<>();
-            Category category = new Category(null);
-            category.setName("No Categories");
-            input.add(category);
+        //sets up category spinner
+        ArrayList<Category> catlist = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
+        if (catlist != null) {
+            ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
+            catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            cat_spin.setAdapter(catAdapter);
         }
-        final ArrayList<Category> catlist = input;
 
-        ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
-        catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        cat_spin.setAdapter(catAdapter);
-
-
+        //logic for category spinner
         cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -73,7 +68,7 @@ public class add_category extends AppCompatActivity {
             }
         });
 
-
+        //add the new category
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,8 +81,6 @@ public class add_category extends AppCompatActivity {
                 Category newCategory = new Category(category);
                 newCategory.setName(name);
 
-
-
                 Intent intent = new Intent();
                 intent.putExtra("category", newCategory);
                 setResult(RESULT_OK,intent);
@@ -95,15 +88,13 @@ public class add_category extends AppCompatActivity {
             }
         });
 
+        //goes back to main activity
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                name_edittext.setText("");
                 finish();
             }
         });
-
-
 
     }
 }

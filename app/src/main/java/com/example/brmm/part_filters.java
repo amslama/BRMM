@@ -40,13 +40,8 @@ public class part_filters extends AppCompatActivity {
         final Button cancel_button = findViewById(R.id.cancel_part_filters_button);
         final Button apply_button = findViewById(R.id.apply_part_filters_button);
 
-        cancel_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
+        //applies filter
         apply_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,10 +50,7 @@ public class part_filters extends AppCompatActivity {
                 double cost;
 
                 name = name_edittext.getText().toString();
-                try {
-                    sn = sn_edittext.getText().toString();
-                }
-                catch (NumberFormatException ex) {sn = "";}
+                sn = sn_edittext.getText().toString();
 
                 try {
                     cost = Double.parseDouble(cost_edittext.getText().toString());
@@ -66,16 +58,29 @@ public class part_filters extends AppCompatActivity {
 
                 Intent thisIntent = new Intent();
                 ArrayList<Part> parts  = (ArrayList<Part>)thisIntent.getSerializableExtra("partslist");
+                if (parts == null)
+                    finish();
+
                  parts = filterParts(parts, name, sn, cost);
                 Intent intent = new Intent();
                 intent.putExtra("partList", parts);
+
                 setResult(RESULT_OK,intent);
                 finish();
             }
         });
 
+        //goes back to main activity
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
+
+    //main method for filtering the parts
     public   ArrayList<Part> filterParts(ArrayList<Part> aList, String name, String sn, double cost) {
         ArrayList<Part> filter = aList;
         if (!name.equals(""))
@@ -87,11 +92,10 @@ public class part_filters extends AppCompatActivity {
         if (cost != -1)
             filter = filterByCost(filter,cost);
 
-
-
         return  filter;
     }
 
+    //filters parts by name
     public ArrayList<Part> filterByName(ArrayList<Part> parts, String name) {
         ArrayList<Part> filter = new ArrayList<>();
         for (Part aPart: parts) {
@@ -103,6 +107,7 @@ public class part_filters extends AppCompatActivity {
         return filter;
     }
 
+    //filters parts by serial number
     public ArrayList<Part> filterBySn(ArrayList<Part> parts, String sn) {
         ArrayList<Part> filter = new ArrayList<>();
         for (Part aPart: parts) {
@@ -117,6 +122,7 @@ public class part_filters extends AppCompatActivity {
         return filter;
     }
 
+    //filters parts by cost
     public ArrayList<Part> filterByCost(ArrayList<Part> parts, double cost) {
         ArrayList<Part> filter = new ArrayList<>();
         for (Part aPart: parts) {

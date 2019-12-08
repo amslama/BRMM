@@ -72,14 +72,14 @@ public class bandmember_filters extends AppCompatActivity {
             }
         });
 
-        final ArrayList<String> sections = getIntent().getStringArrayListExtra("sectionlist");
+
         final ArrayList<Instrument> inslist = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
-        ArrayAdapter<Instrument> insAdapter = new ArrayAdapter<Instrument>(this, android.R.layout.simple_spinner_item, inslist);
-        ArrayAdapter<String> secAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sections);
-        insAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        secAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        instrument_spin.setAdapter(insAdapter);
-        section_spin.setAdapter(secAdapter);
+        if (inslist != null) {
+            ArrayAdapter<Instrument> insAdapter = new ArrayAdapter<Instrument>(this, android.R.layout.simple_spinner_item, inslist);
+            insAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            instrument_spin.setAdapter(insAdapter);
+        }
+
 
         instrument_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -91,6 +91,13 @@ public class bandmember_filters extends AppCompatActivity {
             }
         });
 
+
+        final ArrayList<String> sections = getIntent().getStringArrayListExtra("sectionlist");
+        if (sections != null) {
+            ArrayAdapter<String> secAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sections);
+            secAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            section_spin.setAdapter(secAdapter);
+        }
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -137,6 +144,8 @@ public class bandmember_filters extends AppCompatActivity {
 
                 Intent thisIntent = new Intent();
                 ArrayList<BandMember> memberlist  = (ArrayList<BandMember>)thisIntent.getSerializableExtra("bandmemberlist");
+                if (memberlist == null)
+                    finish();
                 memberlist = filterMemberInv(memberlist,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument, section);
                 thisIntent.putExtra("memberList", memberlist);
                 setResult(RESULT_OK,thisIntent);
@@ -246,21 +255,24 @@ public class bandmember_filters extends AppCompatActivity {
     //returns list of students who are section leaders
     public ArrayList<BandMember> filterBySectionLeaders(ArrayList<BandMember> members) {
         ArrayList<BandMember> filter = new ArrayList<>();
-      //  for (BandMember member : members) {
-            //if ( member instanceof Student) {
-                //if(((Student) member).)
-                  // filter.add(member);
+        for (BandMember member : members) {
+            if ( member instanceof Student) {
+                if (!((Student) member).getSectionLead().equals(""))
+                    filter.add(member);
+            }
 
-       // }
-        return members;
+        }
+        return filter;
     }
 
-    //returns a list of members with given name
+
+    //returns a list of members with given name, does not break immediately after finding since two people could have the same name
     public ArrayList<BandMember> filterByName(ArrayList<BandMember> members, String fName, String lName) {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
-                if (member.getFname().equals(fName) && member.getLname().equals(lName));
+                if (member.getFname().equals(fName) && member.getLname().equals(lName)) {
                     filter.add(member);
+                }
         }
         return filter;
     }
@@ -282,7 +294,6 @@ public class bandmember_filters extends AppCompatActivity {
     public ArrayList<BandMember> filterByspecInstrument(ArrayList<BandMember> members, Instrument instrument) {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
-
             if ( member instanceof Student) {
                 if (((Student) member).getInstrument() == instrument) {
                     filter.add(member);
@@ -295,7 +306,6 @@ public class bandmember_filters extends AppCompatActivity {
     }
 
     //Returns a list of members in a specific section
-
     public ArrayList<BandMember> filterBySection(ArrayList<BandMember> members, String section) {
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
