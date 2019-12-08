@@ -35,13 +35,15 @@ public class InstrumentRecyclerAdapter extends RecyclerView.Adapter<InstrumentRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Instrument ins = ins_List.get(position);
+
+        //TextViews
         TextView name_textview = holder.name_textview;
         TextView id_textview = holder.id_textview;
         TextView cost_textview = holder.cost_textview;
         TextView section_textview= holder.section_textview;
         TextView owner_textview = holder.owner_textview;
 
-
+        //set up textviews
         name_textview.setText(ins.getName());
         id_textview.setText(String.format(Locale.US,"%d",ins.getId()));
         cost_textview.setText("$" + String.format(Locale.US,"%.2f",ins.getCost()));
@@ -50,6 +52,7 @@ public class InstrumentRecyclerAdapter extends RecyclerView.Adapter<InstrumentRe
     }
 
     @Override
+    //gets count of instruments
     public int getItemCount() {
         return ins_List == null ? 0 : ins_List.size();
     }
@@ -57,6 +60,7 @@ public class InstrumentRecyclerAdapter extends RecyclerView.Adapter<InstrumentRe
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private View view;
+
         TextView name_textview;
         TextView id_textview;
         TextView cost_textview;

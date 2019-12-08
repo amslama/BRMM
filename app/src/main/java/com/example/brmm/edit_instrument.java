@@ -54,13 +54,15 @@ public class edit_instrument extends AppCompatActivity {
         //Recyclerview
         RecyclerView cat_rview = findViewById(R.id.cat_edit_instrument_rview);
 
-        final ArrayList<String> inslist = new ArrayList<>();
+        //sets up sectionlist spinner
         final ArrayList<String> sections = getIntent().getStringArrayListExtra("sectionlist");
         if (sections != null) {
             ArrayAdapter<String> sectionAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, sections);
             section_spin.setAdapter(sectionAdapter);
         }
 
+        //sets up instrument list spinner
+        final ArrayList<String> inslist = new ArrayList<>();
         final ArrayList<Instrument> temp = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
         if (temp != null) {
             for (Instrument ins : temp) {
@@ -71,6 +73,7 @@ public class edit_instrument extends AppCompatActivity {
                 pick_spin.setAdapter(memberAdapter);
             }
         }
+
         //pick spin logic
         pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -131,18 +134,6 @@ public class edit_instrument extends AppCompatActivity {
         });
 
 
-        //cancel button logic
-        cancel_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cat_spin.setSelection(0);
-                section_spin.setSelection(0);
-                name_edittext.setText("");
-                cost_edittext.setText("");
-                finish();
-            }
-        });
-
         //ok button
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +161,14 @@ public class edit_instrument extends AppCompatActivity {
                 }
             }
 
+        });
+
+        //returns to main screen
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
         });
 
     }

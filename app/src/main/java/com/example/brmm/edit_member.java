@@ -27,6 +27,7 @@ public class edit_member extends AppCompatActivity {
     private TextView UID_textview;
     private TextView section_textview;
     private TextView notes_textview;
+
     //Edittexts
     private EditText fname_edittext;
     private EditText lname_edittext;
@@ -34,6 +35,7 @@ public class edit_member extends AppCompatActivity {
     private EditText role_edittext;
     private EditText UID_edittext;
     private EditText notes_edittext;
+
     //Dropdowns
     private Spinner section_spin;
 
@@ -42,9 +44,11 @@ public class edit_member extends AppCompatActivity {
     private RadioButton student_rb;
     private RadioButton faculty_rb;
 
+    //Strings and String Lists
     private String section;
     private ArrayList<String> sections;
 
+    //integers
     private int count;
 
     @Override
@@ -85,12 +89,14 @@ public class edit_member extends AppCompatActivity {
         Button cancel_member = findViewById(R.id.cancel_edit_member_button);
         Button ok_button = findViewById(R.id.ok_edit_member_button);
 
+        //sets up section list spinner
         sections = getIntent().getStringArrayListExtra("sectionlist");
         if (sections != null) {
             ArrayAdapter<String> sectionAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, sections);
             section_spin.setAdapter(sectionAdapter);
         }
 
+        //sets up BandMember spinner
         final ArrayList<Integer> members = new ArrayList<>();
         final ArrayList<BandMember> temp = (ArrayList<BandMember>) getIntent().getSerializableExtra("memberlist");
         if (temp != null) {
@@ -105,7 +111,7 @@ public class edit_member extends AppCompatActivity {
 
 
 
-
+        //edits the member
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,6 +134,7 @@ public class edit_member extends AppCompatActivity {
                 } catch (NumberFormatException ex) {
                     UID = 0;
                 }
+
                 notes = notes_edittext.getText().toString();
                 if (student_rb.isChecked())
                     isFaculty = false;
@@ -228,6 +235,7 @@ public class edit_member extends AppCompatActivity {
             }
         });
 
+        //sets visibility
         rgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

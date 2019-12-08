@@ -35,6 +35,7 @@ public class edit_notes extends AppCompatActivity {
         Button ok_button = findViewById(R.id.ok_edit_notes_button);
         Button cancel_button = findViewById(R.id.cancel_edit_notes_button);
 
+        //sets ups spinner of instruments
         final ArrayList<String> inslist = new ArrayList<>();
         final ArrayList<Instrument> temp = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
         if (temp != null) {
@@ -47,6 +48,7 @@ public class edit_notes extends AppCompatActivity {
             }
         }
 
+        //logic for selecting instrument
         pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -77,6 +79,8 @@ public class edit_notes extends AppCompatActivity {
             }
         });
 
+
+        //edits the notes of the instrument
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,10 +93,10 @@ public class edit_notes extends AppCompatActivity {
             }
         });
 
+        //returns to main screen
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                notes_edittext.setText("");
                 finish();
             }
         });

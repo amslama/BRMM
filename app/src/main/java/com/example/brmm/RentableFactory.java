@@ -1,6 +1,8 @@
 package com.example.brmm;
 
 public class RentableFactory {
+
+    //returns a Rentable of specific type
     public static Rentable buildRentable(String type) {
         Rentable rentable = null;
         switch (type) {
@@ -13,7 +15,6 @@ public class RentableFactory {
                 break;
 
             default:
-                // throw some exception
                 break;
         }
         return rentable;

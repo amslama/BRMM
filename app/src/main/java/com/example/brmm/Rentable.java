@@ -7,7 +7,6 @@ public class Rentable implements Serializable
 {
     protected String name;
     protected double cost;
-  //  protected String category;
     protected String currentOwner;
     protected int id;
 

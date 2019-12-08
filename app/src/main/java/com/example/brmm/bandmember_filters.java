@@ -143,6 +143,7 @@ public class bandmember_filters extends AppCompatActivity {
 
                 Intent thisIntent = new Intent();
                 ArrayList<BandMember> memberlist  = (ArrayList<BandMember>)thisIntent.getSerializableExtra("bandmemberlist");
+                //If there are no band members to filter, return to main screen
                 if (memberlist == null)
                     finish();
 
@@ -192,7 +193,7 @@ public class bandmember_filters extends AppCompatActivity {
         if (!firstName.equals("") && !lastName.equals(""))
             filter = filterByName(filter, firstName, lastName);
 
-        
+
         if (UID != 0)
             filter = filterByUID(filter, UID);
 

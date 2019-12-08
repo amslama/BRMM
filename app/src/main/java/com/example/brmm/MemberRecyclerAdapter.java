@@ -38,14 +38,17 @@ public class MemberRecyclerAdapter extends RecyclerView.Adapter<MemberRecyclerAd
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final BandMember member = memberList.get(position);
 
+        //TextViews
         TextView fname_textview = holder.fname_textview;
         TextView lname_textview = holder.lname_textview;
         TextView type_textview = holder.type_textview;
         TextView UID_textview = holder.UID_textview;
 
+        //set up TextViews
         fname_textview.setText(member.getFname());
         lname_textview.setText(member.getLname());
         UID_textview.setText(String.format(Locale.US, "%d", member.getUID()));
+
         if (member instanceof Student) {
 
             TextView section_textview = holder.section_textview;
@@ -64,6 +67,7 @@ public class MemberRecyclerAdapter extends RecyclerView.Adapter<MemberRecyclerAd
     }
 
     @Override
+    //gets count of members
     public int getItemCount() {
         return memberList == null ? 0 : memberList.size();
     }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.function.ToDoubleBiFunction;
 
 public class login_screen extends AppCompatActivity {
     private int counter;
@@ -43,6 +44,7 @@ public class login_screen extends AppCompatActivity {
         final Button OK = findViewById(R.id.Login_OK_Button);
         final Toast toast = Toast.makeText(this, "Too many failed attempts", Toast.LENGTH_SHORT);
 
+        //DataBase Connection
         DatabaseConnection connection = new DatabaseConnection();
         Thread thread = new Thread(connection);
         thread.start();
@@ -52,10 +54,9 @@ public class login_screen extends AppCompatActivity {
         catch (Exception e){
             System.out.println("Connection join failed");
         }
-
        wrapper = new DatabaseWrapper(connection.getConnection());
 
-        //Login for faculty
+        //Login for BandMembers
         OK.setOnClickListener(
                 new View.OnClickListener()
                 {
@@ -66,12 +67,12 @@ public class login_screen extends AppCompatActivity {
                     {
                         String ULID_retrieved = ULID.getText().toString();
                         String password_retrieved = password.getText().toString();
+
                         //Authenticate(ULID_retrieved,password_retrieved);
                         if(checkCredentials(ULID_retrieved,password_retrieved))
                             login(ULID_retrieved);
                         else {
                             counter++;
-
                             //disables login button for 60 seconds after 5 failed attempts
                             if (counter == 5) {
                                 counter = 0;
@@ -95,18 +96,19 @@ public class login_screen extends AppCompatActivity {
 
     }
 
-
+    //logs in to app
     private void login(String ulid){
         boolean isFaculty = false;
+        //TODO: REMOVE FAKE CATEGORY
         Category category = new Category(null);
         category.setName("You son of a bitch, Im in");
         ArrayList<Category> categories = new ArrayList<>();
         categories.add(category);
-        System.out.println(categories);
 
-
+        //Obtains whether user is a faculty or student
         wrapper.setMethod("getFacultyRights");
         wrapper.setUlid(ulid);
+        //start validation attempt
         thread2 = new Thread(wrapper);
         thread2.start();
         try{
@@ -116,14 +118,21 @@ public class login_screen extends AppCompatActivity {
             System.out.println("Validation Failed");
         }
 
+        //retrieve the faculty rights
         isFaculty = wrapper.getFacultyRights();
         if (isFaculty)
             System.out.println("Is a faculty");
         else
             System.out.println("Is NOT a faculty");
-            Intent mainScreen = new Intent(this, main_screen.class);
-            mainScreen.putExtra("ISFACULTY", isFaculty);
 
+
+        Intent mainScreen = new Intent(this, main_screen.class);
+
+        //sends faculty boolean to main screen
+        mainScreen.putExtra("ISFACULTY", isFaculty);
+
+
+        //gets list of faculty from database
         wrapper.setMethod("getFaculty");
         Thread getFacultyThread = new Thread(wrapper);
         getFacultyThread.start();
@@ -145,11 +154,12 @@ public class login_screen extends AppCompatActivity {
             System.out.println("faculty empty");
         }
 
-
+        //sends faculty list to main screen
         mainScreen.putExtra("FACULTY", wrapper.getFacultyList());
 
 
 
+        //attempts to get student list from data base
         wrapper.setMethod("getStudents");
         Thread getStudentThread = new Thread(wrapper);
         getStudentThread.start();
@@ -159,8 +169,11 @@ public class login_screen extends AppCompatActivity {
         catch (Exception e){
             System.out.println("get students join failed");
         }
+
+        //sends list of students to main screen
         mainScreen.putExtra("STUDENT", wrapper.getStudentList());
 
+        ////attempts to get parts list from data base
         wrapper.setMethod("getParts");
         Thread getPartThread = new Thread(wrapper);
         getPartThread.start();
@@ -170,9 +183,12 @@ public class login_screen extends AppCompatActivity {
         catch (Exception e){
             System.out.println("get part join failed");
         }
+
+        //sends list of parts to main screen
         mainScreen.putExtra("PART", wrapper.getPartList());
 
 
+        //attempts to get instrument list from data base
         wrapper.setMethod("getInstruments");
         Thread getInstrumentThread = new Thread(wrapper);
         getInstrumentThread.start();
@@ -182,10 +198,14 @@ public class login_screen extends AppCompatActivity {
         catch (Exception e){
             System.out.println("get instuments join failed");
         }
-            mainScreen.putExtra("INSTRUMENT", wrapper.getInstrumentList());
+
+        //sends list of instruments to main screen
+        mainScreen.putExtra("INSTRUMENT", wrapper.getInstrumentList());
 
 
-        /*
+        /* TODO Figure out Categoreis in database
+
+        //attempts to get categories from database
         wrapper.setMethod("getCategoriess");
         Thread getCategoryThread = new Thread(wrapper);
         getCategoryThread.start();
@@ -195,16 +215,21 @@ public class login_screen extends AppCompatActivity {
         catch (Exception e){
             System.out.println("get category join failed");
         }
+
+        //sends list of categories to main screen
         mainScreen.putExtra("CATEGORY", wrapper.getCategoryList());
 
     */
 
-
+        //TODO Remove this once categories DB stuff is figured out
         mainScreen.putExtra("CATEGORY", categories);
+
+        //go to main screen
         startActivity(mainScreen);
 
     }
 
+    //checks whether user has valid login information
     private boolean checkCredentials(String ulid, String password) {
         wrapper.setMethod("checkLogin");
         wrapper.setUlid(ulid);
@@ -218,11 +243,13 @@ public class login_screen extends AppCompatActivity {
             System.out.println("Login join failed");
         }
 
+        //returns true if username and password exist in the database
         return wrapper.getValidation();
 
 
     }
 
+    //sends data back to database on logout
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 

@@ -43,7 +43,6 @@ public class PartRecyclerAdapter extends RecyclerView.Adapter<PartRecyclerAdapte
         cost_textview.setText("$" + String.format(Locale.US,"%.2f",part.getCost()));
         sn_textview.setText(part.getSerialNumber());
 
-
     }
 
     @Override

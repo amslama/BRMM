@@ -22,13 +22,20 @@ import java.util.TimerTask;
 
 public class main_screen extends AppCompatActivity {
 
+    //boolean for visibility
     private boolean facultyRights = false;
+
+    //Inventories
     private RentableInventory rent_inv;
     private BandMemberInventory member_inv;
+
+    //Lists
     private ArrayList<String> sections;
     private ArrayList<Category> categories;
     private ArrayList<String> ins_concepts;
     private ArrayList<String> part_concepts;
+
+    //BandMember
     private BandMember temp_bm;
 
     //Dropdown
@@ -78,6 +85,7 @@ public class main_screen extends AppCompatActivity {
 
         facultyRights = intent.getBooleanExtra("ISFACULTY", false);
 
+        //Gets information needed to run application from Login Screen
         instantiatelists();
 
         if ((ArrayList<Instrument>) intent.getSerializableExtra("INSTRUMENT") != null) {
@@ -107,7 +115,6 @@ public class main_screen extends AppCompatActivity {
             }
         }
         if ((ArrayList<Category>) intent.getSerializableExtra("CATEGORY") != null) {
-            System.out.println("Made it this far");
             for (Category cat : (ArrayList<Category>) intent.getSerializableExtra("CATEGORY")) {
                 categories.add(cat);
             }
@@ -119,12 +126,14 @@ public class main_screen extends AppCompatActivity {
         oneTimeListeners();
         setPartsButtons();
 
+        //hide buttons for BandMembers who are not Faculty
         if (facultyRights == false) {
             hideButtons();
         }
 
     }
 
+    //hides buttons
     private void hideButtons() {
         add_button.setVisibility(View.INVISIBLE);
         remove_button.setVisibility(View.INVISIBLE);
@@ -139,6 +148,7 @@ public class main_screen extends AppCompatActivity {
         delete_category_button.setVisibility(View.INVISIBLE);
     }
 
+    //instantiates all lists
     private void instantiatelists() {
         member_inv = new BandMemberInventory();
         rent_inv = new RentableInventory();
@@ -147,6 +157,7 @@ public class main_screen extends AppCompatActivity {
         categories = new ArrayList<>();
     }
 
+    //instantiates all buttons
     private void instantiateButtons() {
         sections = new ArrayList<>(/*IMPORT SECTIONS*/);
         inv_spin = findViewById(R.id.inventory_main_screen_dropdown);
@@ -181,7 +192,10 @@ public class main_screen extends AppCompatActivity {
         }
     }
 
+    //sets Buttons for when user has parts selected from dropdown
     private void setPartsButtons() {
+
+        //prepares filter button for Parts
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,12 +204,14 @@ public class main_screen extends AppCompatActivity {
                 startActivityForResult(openFilter, 9);
             }
         });
+
         PartRecyclerAdapter adapter = new PartRecyclerAdapter((rent_inv.getPartList()));
         inv_view.setLayoutManager(new LinearLayoutManager(this));
         inv_view.setAdapter(adapter);
 
 
         if (facultyRights == true) {
+            //prepares add Parts button
             add_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -204,6 +220,7 @@ public class main_screen extends AppCompatActivity {
                     startActivityForResult(openFilter, 0);
                 }
             });
+            //prepares edit Part button
             edit_rentable_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -212,6 +229,7 @@ public class main_screen extends AppCompatActivity {
                     startActivityForResult(openFilter, 8);
                 }
             });
+            //prepares remove Part button
             remove_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -222,6 +240,7 @@ public class main_screen extends AppCompatActivity {
             });
 
 
+            //sets visibility
             edit_rentable_button.setVisibility(View.VISIBLE);
             edit_member_button.setVisibility(View.INVISIBLE);
             set_lead_button.setVisibility(View.INVISIBLE);
@@ -236,8 +255,10 @@ public class main_screen extends AppCompatActivity {
 
     }
 
+    //sets Buttons for when user has Instruments selected from dropdown
     private void setInstrumentButtons() {
 
+        //Prepares filter button for Instruments
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -254,6 +275,7 @@ public class main_screen extends AppCompatActivity {
         inv_view.setAdapter(adapter);
 
         if (facultyRights == true) {
+            //Prepares add button for Instruments
             add_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -263,7 +285,7 @@ public class main_screen extends AppCompatActivity {
                     startActivityForResult(openFilter, 1);
                 }
             });
-
+            //Prepares edit button for Instruments
             edit_rentable_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -273,6 +295,7 @@ public class main_screen extends AppCompatActivity {
                     startActivityForResult(openFilter, 6);
                 }
             });
+            //Prepares remove button for Instruments
             remove_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -282,6 +305,7 @@ public class main_screen extends AppCompatActivity {
                 }
             });
 
+            //sets visibility of buttons for dropdown selection
             edit_rentable_button.setVisibility(View.VISIBLE);
             edit_member_button.setVisibility(View.INVISIBLE);
             set_lead_button.setVisibility(View.INVISIBLE);
@@ -296,6 +320,7 @@ public class main_screen extends AppCompatActivity {
     }
 
     private void setBandmemberButtons() {
+        //Prepares filter button for BandMembers
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -312,6 +337,7 @@ public class main_screen extends AppCompatActivity {
         inv_view.setAdapter(adapter);
 
         if (facultyRights == true) {
+            //Prepares add button for BandMembers
             add_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -320,6 +346,7 @@ public class main_screen extends AppCompatActivity {
                     startActivityForResult(openFilter, 2);
                 }
             });
+            //Prepares remove button for BandMembers
             remove_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -329,7 +356,7 @@ public class main_screen extends AppCompatActivity {
                 }
             });
 
-
+            //Sets visibility for when dropdown is BandMembers
             edit_rentable_button.setVisibility(View.INVISIBLE);
             edit_member_button.setVisibility(View.VISIBLE);
             set_lead_button.setVisibility(View.VISIBLE);
@@ -345,6 +372,7 @@ public class main_screen extends AppCompatActivity {
     private void oneTimeListeners() {
 
         if (facultyRights == true) {
+            //sets checkout button
             checkout_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -354,6 +382,7 @@ public class main_screen extends AppCompatActivity {
                     startActivityForResult(openFilter, 3);
                 }
             });
+            //sets notes button
             notes_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -362,6 +391,7 @@ public class main_screen extends AppCompatActivity {
                     startActivityForResult(openFilter, 6);
                 }
             });
+            //sets delete section button
             delete_section_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -370,6 +400,7 @@ public class main_screen extends AppCompatActivity {
                     startActivityForResult(openFilter, 5);
                 }
             });
+            //sets add section button
             add_section_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -378,6 +409,7 @@ public class main_screen extends AppCompatActivity {
                     startActivityForResult(openFilter, 4);
                 }
             });
+            //sets edit member button
             edit_member_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -388,6 +420,7 @@ public class main_screen extends AppCompatActivity {
                     startActivityForResult(openFilter, 7);
                 }
             });
+            //sets set lead button
             set_lead_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -397,7 +430,7 @@ public class main_screen extends AppCompatActivity {
                     startActivityForResult(openFilter, 7);
                 }
             });
-
+            //sets add category button
             add_category_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -406,7 +439,7 @@ public class main_screen extends AppCompatActivity {
                     startActivityForResult(openFilter, 15);
                 }
             });
-
+            //sets delete category button
             delete_category_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -418,6 +451,7 @@ public class main_screen extends AppCompatActivity {
 
         }
 
+        //logic for picking what the user currently wants to look at (Parts, Instruments, or BandMembers)
         inv_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -436,7 +470,6 @@ public class main_screen extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -462,6 +495,7 @@ public class main_screen extends AppCompatActivity {
 
     }
 
+    //request codes for all activity operations
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -646,7 +680,6 @@ public class main_screen extends AppCompatActivity {
                 inv_view.getAdapter().notifyDataSetChanged();
             }
         }
-
 
 
         //add category

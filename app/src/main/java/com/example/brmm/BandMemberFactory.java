@@ -14,7 +14,6 @@ public class BandMemberFactory {
                 break;
 
             default:
-                // throw some exception
                 break;
         }
         return member;

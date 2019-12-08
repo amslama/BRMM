@@ -55,12 +55,14 @@ public class set_lead extends AppCompatActivity {
         cancel_button = findViewById(R.id.cancel_set_lead_button);
         remove_lead_button = findViewById(R.id.delete_set_lead_button);
 
-
+        //Sets up section list Spinner
         ArrayList<String> sectionlist = getIntent().getStringArrayListExtra("sectionlist");
         if (sectionlist != null) {
             ArrayAdapter<String> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, sectionlist);
             section_spin.setAdapter(memberAdapter);
         }
+
+        //sets up member list spinner
         final ArrayList<Integer> members = new ArrayList<>();
         final ArrayList<BandMember> temp = (ArrayList<BandMember>) getIntent().getSerializableExtra("memberlist");
         if (temp != null) {
@@ -75,6 +77,7 @@ public class set_lead extends AppCompatActivity {
             }
         }
 
+        //logic for getting member from member spinner
         member_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -107,6 +110,7 @@ public class set_lead extends AppCompatActivity {
             }
         });
 
+        //sets a new section lead
         set_lead_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,6 +124,8 @@ public class set_lead extends AppCompatActivity {
                 }
             }
         });
+
+        //removes section leader from bandmember
         remove_lead_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,6 +148,8 @@ public class set_lead extends AppCompatActivity {
                 }
             }
         });
+
+        //returns to main screen
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

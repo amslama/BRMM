@@ -30,8 +30,10 @@ public class edit_part extends AppCompatActivity {
         final EditText sn_edittext = findViewById(R.id.sn_edit_part_edittext);
         final EditText cost_edittext = findViewById(R.id.cost_edit_part_edittext);
 
+        //spinners
         final Spinner pick_spin = findViewById(R.id.pick_edit_part_dropdown);
 
+        //sets up parts spinner
         final ArrayList<String> partlist = new ArrayList<>();
         final ArrayList<Part> temp = (ArrayList<Part>) getIntent().getSerializableExtra("partlist");
         if (temp != null) {
@@ -51,8 +53,7 @@ public class edit_part extends AppCompatActivity {
         Button ok_button = findViewById(R.id.ok_edit_part_button);
         Button cancel_button = findViewById(R.id.cancel_edit_part_button);
 
-
-
+        //logic for picking a part
         pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -78,6 +79,7 @@ public class edit_part extends AppCompatActivity {
             }
         });
 
+        //edits the part
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,12 +122,10 @@ public class edit_part extends AppCompatActivity {
             }
         });
 
+        //returns to mainscreen
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cost_edittext.setText("");
-                name_edittext.setText("");
-                sn_edittext.setText("");
                 finish();
             }
         });

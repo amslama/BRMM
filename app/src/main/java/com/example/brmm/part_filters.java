@@ -57,6 +57,8 @@ public class part_filters extends AppCompatActivity {
                 } catch (NumberFormatException ex) {cost = -1;}
 
                 Intent thisIntent = new Intent();
+
+                //If there are no parts to filter, return to main screen
                 ArrayList<Part> parts  = (ArrayList<Part>)thisIntent.getSerializableExtra("partslist");
                 if (parts == null)
                     finish();

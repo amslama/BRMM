@@ -123,6 +123,7 @@ public class instrument_filters extends AppCompatActivity {
                 Intent thisIntent = new Intent();
                 ArrayList<Instrument> instruments = (ArrayList<Instrument>)thisIntent.getSerializableExtra("instrumentlist");
 
+                //If there are no instruments to filter, return to main screen
                 if (instruments == null)
                     finish();
 
@@ -143,7 +144,6 @@ public class instrument_filters extends AppCompatActivity {
         });
 
     }
-
 
     //main method for filtering
     public ArrayList<Instrument> filterInstrumentInv(ArrayList<Instrument> Instruments, String owner, String section, String name, Category category, int id, double cost) {
