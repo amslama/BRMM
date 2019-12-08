@@ -44,7 +44,6 @@ public class edit_member extends AppCompatActivity {
 
     private String section;
     private ArrayList<String> sections;
-    private ArrayList<Integer> members;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +89,7 @@ public class edit_member extends AppCompatActivity {
             section_spin.setAdapter(sectionAdapter);
         }
 
+        final ArrayList<Integer> members = new ArrayList<>();
         final ArrayList<BandMember> temp = (ArrayList<BandMember>) getIntent().getSerializableExtra("memberlist");
         if (temp != null) {
             for (BandMember bm : temp) {

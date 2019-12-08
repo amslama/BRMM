@@ -25,4 +25,18 @@ public class Faculty extends BandMember implements Serializable {
         setUID(UID);
         this.role = role;
     }
+
+    @Override
+    public boolean equals (Object member)
+    {
+        if(!(member instanceof Faculty)) {
+            return false;
+        }
+        return equals((Faculty) member);
+    }
+
+    private boolean equals(Faculty member)
+    {
+        return member.UID == UID;
+    }
 }

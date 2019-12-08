@@ -6,8 +6,7 @@ import java.util.ArrayList;
 public class BandMemberInventory implements Serializable {
     private ArrayList<BandMember> bandMembers;
 
-    public BandMemberInventory()
-    {
+    public BandMemberInventory() {
         bandMembers = new ArrayList<BandMember>();
     }
 
@@ -15,28 +14,29 @@ public class BandMemberInventory implements Serializable {
         return bandMembers;
     }
 
-    public void clearInventory()
-    {
+    public void clearInventory() {
         bandMembers.clear();
     }
 
-    public void removeBandMember(int uid)
-    {
-        for(BandMember member : bandMembers)
-        if(uid == member.getUID())
-        {
-            bandMembers.remove(member);
-            break;
-        }
+    public void removeBandMember(BandMember member) {
+        for (BandMember bm : bandMembers)
+            if (member.getUID() == bm.getUID()) {
+                bandMembers.remove(member);
+                break;
+            }
         //update db
     }
-    public void addBandMember(BandMember newBM)
-    {
+
+    public void addBandMember(BandMember newBM) {
         bandMembers.add(newBM);
         //update db
     }
-    public int size()
-    {
+
+    public void changeMember(int pos, BandMember member) {
+        bandMembers.set(pos, member);
+    }
+
+    public int size() {
         return bandMembers.size();
     }
 

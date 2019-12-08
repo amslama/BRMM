@@ -496,7 +496,7 @@ public class main_screen extends AppCompatActivity {
                 rent_inv.removeInstrument(instrument);
                 rent_inv.addInstrument(instrument);
                 BandMember bandmember = (BandMember) data.getSerializableExtra("bandmember");
-                member_inv.removeBandMember(bandmember.getUID());
+                member_inv.removeBandMember(bandmember);
                 member_inv.addBandMember(bandmember);
                 InstrumentRecyclerAdapter adapter = new InstrumentRecyclerAdapter(rent_inv.getInstrumentList());
                 inv_view.setLayoutManager(new LinearLayoutManager(this));
@@ -537,12 +537,17 @@ public class main_screen extends AppCompatActivity {
         //edit member and set lead
         if (requestCode == 7) {
             if (resultCode == RESULT_OK) {
-                BandMember bandmember = (BandMember) data.getSerializableExtra("member");
-                member_inv.removeBandMember(bandmember.getUID());
-                member_inv.addBandMember(bandmember);
-                MemberRecyclerAdapter adapter = new MemberRecyclerAdapter(member_inv.getBandMembers());
-                inv_view.setLayoutManager(new LinearLayoutManager(this));
-                inv_view.setAdapter(adapter);
+                if (resultCode == RESULT_OK) {
+                    int count = data.getIntExtra("count",-256);
+                    System.out.println("jaadjioasjoadsjiaodsadijo----------------------"+ count);
+
+                    if(count >= 0) {
+                        BandMember member = (BandMember) data.getSerializableExtra("member");
+                        member_inv.changeMember(count, member);
+                    }
+                    inv_view.getAdapter().notifyDataSetChanged();
+                }
+
             }
         }
 
@@ -606,11 +611,9 @@ public class main_screen extends AppCompatActivity {
         //delete member
         if (requestCode == 13) {
             if (resultCode == RESULT_OK) {
-                BandMember bandmember = (BandMember) data.getSerializableExtra("member");
-                member_inv.removeBandMember(bandmember.getUID());
-                MemberRecyclerAdapter adapter = new MemberRecyclerAdapter(member_inv.getBandMembers());
-                inv_view.setLayoutManager(new LinearLayoutManager(this));
-                inv_view.setAdapter(adapter);
+                BandMember member = (BandMember) data.getSerializableExtra("member");
+                member_inv.removeBandMember(member);
+                inv_view.getAdapter().notifyDataSetChanged();
             }
         }
 

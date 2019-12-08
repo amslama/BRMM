@@ -62,4 +62,17 @@ public class Student extends BandMember implements Serializable {
         this.notes = notes;
     }
 
+    @Override
+    public boolean equals (Object member)
+    {
+        if(!(member instanceof Student)) {
+            return false;
+        }
+        return equals((Student) member);
+    }
+
+    private boolean equals(Student member)
+    {
+        return member.UID == UID;
+    }
 }
