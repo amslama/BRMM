@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,11 +33,26 @@ public class delete_section extends AppCompatActivity {
         Button cancel_button = findViewById(R.id.cancel_delete_section_button);
         Button ok_button = findViewById(R.id.ok_delete_section_button);
 
+        //sets up spinner containing section list
         ArrayList<String> sectionlist = getIntent().getStringArrayListExtra("sectionlist");
         if (sectionlist != null) {
             ArrayAdapter<String> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, sectionlist);
             pick_spin.setAdapter(memberAdapter);
         }
+
+
+        //logic for selecting a section
+        pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String section = parent.getSelectedItem().toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        //deletes the section
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,7 +65,7 @@ public class delete_section extends AppCompatActivity {
             }
         });
 
-
+        //returns to mainscreen
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

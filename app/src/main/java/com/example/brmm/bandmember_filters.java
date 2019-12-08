@@ -64,23 +64,18 @@ public class bandmember_filters extends AppCompatActivity {
         final Button cancel_button = findViewById(R.id.cancel_filters_button);
 
 
-
-        cancel_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-
+        //sets up spinner containing the list of Instruments
         final ArrayList<Instrument> inslist = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
         if (inslist != null) {
+            Instrument instrument = new Instrument();
+            instrument.setName("Don't filter by Instrument");
             ArrayAdapter<Instrument> insAdapter = new ArrayAdapter<Instrument>(this, android.R.layout.simple_spinner_item, inslist);
             insAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             instrument_spin.setAdapter(insAdapter);
         }
 
 
+        //logic for selecting instrument from spinner
         instrument_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -92,12 +87,17 @@ public class bandmember_filters extends AppCompatActivity {
         });
 
 
+        //sets up spinner containing Sections
         final ArrayList<String> sections = getIntent().getStringArrayListExtra("sectionlist");
         if (sections != null) {
+            String section = "Don't filter by Section";
+            sections.add(0,section);
             ArrayAdapter<String> secAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sections);
             secAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             section_spin.setAdapter(secAdapter);
         }
+
+        //logic for selecting a section
         section_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -109,9 +109,7 @@ public class bandmember_filters extends AppCompatActivity {
         });
 
 
-
-
-
+        //applies the filters
         apply_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,26 +135,38 @@ public class bandmember_filters extends AppCompatActivity {
                 sectionLeaders = secLeadersSwitch.isChecked();
                 firstName = firstNameTxt.getText().toString();
                 lastName = lastNameTxt.getText().toString();
+
                 try {
                     UID = Integer.parseInt(UID_edittext.getText().toString());
-                } catch (NumberFormatException ex){UID = 0;}
+                } catch (NumberFormatException ex){UID = -1;}
 
 
                 Intent thisIntent = new Intent();
                 ArrayList<BandMember> memberlist  = (ArrayList<BandMember>)thisIntent.getSerializableExtra("bandmemberlist");
                 if (memberlist == null)
                     finish();
+
+
                 memberlist = filterMemberInv(memberlist,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument, section);
                 thisIntent.putExtra("memberList", memberlist);
                 setResult(RESULT_OK,thisIntent);
                 finish();
             }
         });
+
+        //returns to main screen
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
 
 
 
-    // main filter method, for ints, 0 = dont filter, 1 = filter by Faculty or is true, 2 = filter by false
+    //filters the bandmembers
     public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument, String section) {
 
         ArrayList<BandMember> filter = members;
@@ -179,20 +189,19 @@ public class bandmember_filters extends AppCompatActivity {
             filter = filterBySectionLeaders(filter);
 
 
-        if (!firstName.equals("") && !lastName.equals("")) {
+        if (!firstName.equals("") && !lastName.equals(""))
             filter = filterByName(filter, firstName, lastName);
-        }
 
-
+        
         if (UID != 0)
             filter = filterByUID(filter, UID);
 
 
-        if (instrument != null){}
+        if (!instrument.getName().equals("Don't filter by Instrument"))
             filter = filterByspecInstrument(filter, instrument);
 
 
-        if (section != null)
+        if (!section.equals("Don't filter by Section"))
            filter = filterBySection(filter, section);
 
 
