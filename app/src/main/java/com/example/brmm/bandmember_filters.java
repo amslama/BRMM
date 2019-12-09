@@ -151,6 +151,8 @@ public class bandmember_filters extends AppCompatActivity {
                  Instrument instrument;
 
                  instrument = (Instrument) instrument_spin.getSelectedItem();
+                 System.out.println("SELECTED NAME");
+                 System.out.println(instrument.getName());
                  section = section_spin.getSelectedItem().toString();
 
                  int radioId;
@@ -186,7 +188,8 @@ public class bandmember_filters extends AppCompatActivity {
 
                 Intent thisIntent = new Intent();
                  ArrayList<BandMember> memberlist = (ArrayList<BandMember>) getIntent().getSerializableExtra("memberlist");
-
+                 System.out.println("MEMBER LIST");
+                 System.out.println(memberlist);
                 //If there are no band members to filter, return to main screen
                 if (memberlist == null)
                     finish();
@@ -217,12 +220,40 @@ public class bandmember_filters extends AppCompatActivity {
     public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, String memberType, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument, String section) {
 
         ArrayList<BandMember> filter = members;
+        System.out.println("MEMBERS");
+        System.out.println(members);
+        System.out.println();
+        System.out.println("MEMBERTYPE");
+        System.out.println(memberType);
+        System.out.println();
+        System.out.println("HASINSTRUMENT");
+        System.out.println(hasInstrument);
+        System.out.println();
+        System.out.println("SECTIONLEADERS");
+        System.out.println(sectionLeaders);
+        System.out.println();
+        System.out.println("NAME");
+        System.out.println(firstName);
+        System.out.println(lastName);
+        System.out.println();
+        System.out.println("UID");
+        System.out.println(UID);
+        System.out.println();
+        System.out.println("INSTRUMENT");
+        System.out.println(instrument);
+        System.out.println();
+        System.out.println("SECTION");
+        System.out.println(section);
+        System.out.println();
+
+
 
         if(memberType.equals("Student"))
             filter = filterByStudent(filter);
         else if (memberType.equals("Teacher"))
             filter = filterByFaculty(filter);
         else {}
+
 
 
         if (hasInstrument == 1)
@@ -232,24 +263,32 @@ public class bandmember_filters extends AppCompatActivity {
         else {}
 
 
-        if (sectionLeaders)
+        if (sectionLeaders == true)
             filter = filterBySectionLeaders(filter);
 
 
-        if (!firstName.equals("") && !lastName.equals(""))
+
+
+        if (!firstName.equals("") || !lastName.equals(""))
             filter = filterByName(filter, firstName, lastName);
 
 
-        if (UID != 0)
+
+        if (UID != -1)
             filter = filterByUID(filter, UID);
 
 
-        if (!instrument.getName().equals("No Filter"))
+
+        if (!(instrument.getName().equals("No Filter"))) {
             filter = filterByspecInstrument(filter, instrument);
+        }
+
+
 
 
         if (!section.equals("No Filter"))
            filter = filterBySection(filter, section);
+
 
 
         return filter;
@@ -324,6 +363,7 @@ public class bandmember_filters extends AppCompatActivity {
 
     //returns a list of members with given name, does not break immediately after finding since two people could have the same name
     public ArrayList<BandMember> filterByName(ArrayList<BandMember> members, String fName, String lName) {
+        System.out.println("Filtering by name");
         ArrayList<BandMember> filter = new ArrayList<>();
         for (BandMember member : members) {
                 if (member.getFname().equals(fName) && member.getLname().equals(lName)) {
