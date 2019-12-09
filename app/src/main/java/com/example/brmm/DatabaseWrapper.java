@@ -672,9 +672,10 @@ public class DatabaseWrapper extends Thread{
 
             try {
                 //Student Portion
-
+                System.out.println("SSSSSSSSSSSSSSSSSSSSs");
                 //String firstName, String lastName, String ulid, String section, boolean sectionLeader, int UID, String notes
-                String newQuery = "insert into user (firstName, lastName, username, section, sectionLeader,notes) values ('"+firstName+"','"+ lastName + "','"+ ulid + "','"+ section + "','"+ sectionLeader + "','"+ notes + "';";
+                String newQuery = "insert into user (firstName, lastName, username, section, sectionLeader,notes) values ('"+firstName+"','"+ lastName + "','"+ ulid + "','"+ section + "','"+ sectionLeader + "','"+ notes+"');";
+                System.out.println("mmmmmmmmmmmmmmmmmmmmmmmm");
                 //String query1 = "update user set firstName = '" + firstName + "' where ID = " + ID + ";";
                 //String query2 = "update user set lastName = '" + lastName + "' where ID = " + ID + ";";
                 //String query3 = "update user set username = '" + ulid + "' where ID = " + ID + ";";
@@ -682,6 +683,7 @@ public class DatabaseWrapper extends Thread{
                 //String query5 = "update user set sectionLeader = '" + sectionLeader + "' where ID = " + ID + ";";
                 //String query6 = "update user set notes = '" + notes + "' where ID = " + ID + ";";
                 Statement st = conn.createStatement();
+                System.out.println("llllllllllllllllllllllllllllllll");
                 //st.executeUpdate(query1);
                 //st.executeUpdate(query2);
                 //st.executeUpdate(query3);
@@ -689,6 +691,7 @@ public class DatabaseWrapper extends Thread{
                 //st.executeUpdate(query5);
                 //st.executeUpdate(query6);
                 st.executeUpdate(newQuery);
+                System.out.println("xxxxxxxxxxxxxxxxxxxxxxx");
             } catch (Exception e) {
                 System.out.println("Student part failed");
             }
@@ -763,7 +766,7 @@ public class DatabaseWrapper extends Thread{
                 ID = instrumentArrayList.get(i).id;
                 category = instrumentArrayList.get(i).getCategory().toString();
 
-                String newQuery = "insert into item (name, ownership,section,cost,category) values ('"+name+"','"+currentOwner+"','"+section+"',"+price+",'"+category+"';";
+                String newQuery = "insert into item (name, ownership,section,cost,category) values ('"+name+"','"+currentOwner+"','"+section+"',"+price+",'"+category+"');";
 
                 //String query1 = "update user set name = '" + name + "' where ID = " + ID + ";";
                 //String query2 = "update user set ownership = '" + currentOwner + "' where ID = " + ID + ";";
@@ -792,9 +795,9 @@ public class DatabaseWrapper extends Thread{
                 name = partArrayList.get(i).name;
                 category = partArrayList.get(i).category;
                 serialNumber = partArrayList.get(i).getSerialNumber();
-
-                String newQuery = "insert into item (category, name, cost, serialNumber) values ('"+category+"','"+name+"',"+price+",'"+serialNumber+"';";
-
+                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                String newQuery = "insert into item (category, name, cost, serialNumber) values ('"+category+"','"+name+"',"+price+",'"+serialNumber+"');";
+                System.out.println("fffffffffffffffffffffffffffffffffff");
                 //String query1 = "update user set category = '" + category + "' where ID = " + ID + ";";
                 //String query2 = "update user set name = '" + name + "' where ID = " + ID + ";";
                 //String query3 = "update user set cost = '" + price + "' where ID = " + ID + ";";
