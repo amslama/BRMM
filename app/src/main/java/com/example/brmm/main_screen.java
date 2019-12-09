@@ -328,7 +328,7 @@ public class main_screen extends AppCompatActivity {
                 Intent openFilter = new Intent(getBaseContext(), bandmember_filters.class);
                 openFilter.putExtra("sectionlist", sections);
                 openFilter.putExtra("instrumentlist", rent_inv.getInstrumentList());
-                openFilter.putExtra("bandmemberlist", member_inv.getBandMembers());
+                openFilter.putExtra("memberlist", member_inv.getBandMembers());
                 startActivityForResult(openFilter, 11);
             }
         });
@@ -446,6 +446,7 @@ public class main_screen extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent openFilter = new Intent(getBaseContext(), delete_category.class);
                     openFilter.putExtra("categorylist", categories);
+                    openFilter.putExtra("instrumentlist", rent_inv.getInstrumentList());
                     startActivityForResult(openFilter, 16);
                 }
             });

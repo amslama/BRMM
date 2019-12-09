@@ -124,10 +124,8 @@ public class instrument_filters extends AppCompatActivity {
 
                 Intent thisIntent = new Intent();
                  ArrayList<Instrument> instruments = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
-                System.out.println(instruments);
                 if (instruments == null)
                     finish();
-
 
                 instruments = filterInstrumentInv(instruments, owner, section, name, category, id, cost);
                 thisIntent = new Intent();

@@ -185,7 +185,8 @@ public class bandmember_filters extends AppCompatActivity {
 
 
                 Intent thisIntent = new Intent();
-                ArrayList<BandMember> memberlist  = (ArrayList<BandMember>)thisIntent.getSerializableExtra("bandmemberlist");
+                 ArrayList<BandMember> memberlist = (ArrayList<BandMember>) getIntent().getSerializableExtra("memberlist");
+
                 //If there are no band members to filter, return to main screen
                 if (memberlist == null)
                     finish();
