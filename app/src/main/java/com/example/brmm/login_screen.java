@@ -227,7 +227,7 @@ public class login_screen extends AppCompatActivity {
 
 
         //attempts to get instrument list from data base
-        wrapper.setMethod("getSectionList");
+        wrapper.setMethod("getUniqueSectionUsers");
         Thread getSectionsThread = new Thread(wrapper);
         getSectionsThread.start();
         try{
