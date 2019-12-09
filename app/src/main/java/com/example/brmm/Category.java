@@ -60,7 +60,7 @@ public class Category implements Serializable {
         ArrayList<String> relationshipList = new ArrayList<>();
         for (Category cat : catList)
             relationshipList.add(cat.getRelationshipPair())
-          
+
     }
      */
 
