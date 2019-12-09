@@ -52,7 +52,7 @@ public class Student extends BandMember implements Serializable {
 
     }
 
-    public Student(String firstname, String lastname, String ulid, String section, boolean sectionLeader, int UID, String notes){
+    public Student(String firstname, String lastname, String ulid, String section, String sectionLeader, int UID, String notes){
         setFname(firstname);
         setLname(lastname);
         setUlid(ulid);
@@ -70,6 +70,10 @@ public class Student extends BandMember implements Serializable {
             return false;
         }
         return equals((Student) member);
+    }
+
+    public String getSectionLeader(){
+        return sectionLead;
     }
 
     private boolean equals(Student member)

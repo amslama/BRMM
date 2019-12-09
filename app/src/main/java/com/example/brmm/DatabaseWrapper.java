@@ -24,7 +24,7 @@ public class DatabaseWrapper extends Thread{
     private String firstName = "";
     private String lastName = "";
     private String section = "";
-    private boolean sectionLeader = false;
+    private String sectionLeader = "";
     private boolean faculty = false;
     private String note = "";
     private String ulid = "";
@@ -42,6 +42,8 @@ public class DatabaseWrapper extends Thread{
     private int serialNumber = 0;
     private String newSection = "";
     private ArrayList<String> sectionList;
+    private ArrayList<Student> studentArrayList = null;
+    private ArrayList<Faculty> facultyArrayList = null;
 
 
 
@@ -77,7 +79,7 @@ public class DatabaseWrapper extends Thread{
         return valid;
     }
 
-    public void setUserArguments(int ID,String firstName, String lastName, String section, boolean sectionLeader, boolean faculty, String note, String ulid, String password,String department){
+    public void setUserArguments(int ID,String firstName, String lastName, String section, String sectionLeader, boolean faculty, String note, String ulid, String password,String department){
             this.ID = ID;
             this.firstName=firstName;
             this.lastName = lastName;
@@ -90,7 +92,7 @@ public class DatabaseWrapper extends Thread{
             this.department=department;
     }
 
-    public boolean getSectionLeaderRights(){
+    public String getSectionLeaderRights(){
         return sectionLeader;
     }
 
@@ -133,6 +135,14 @@ public class DatabaseWrapper extends Thread{
         return sectionList;
     }
 
+    public void setStudentArrayList(ArrayList<Student> studentArrayList){
+        this.studentArrayList = studentArrayList;
+    }
+
+    public void setFacultyArrayList(ArrayList<Faculty> facultyArrayList){
+        this.facultyArrayList = facultyArrayList;
+    }
+
     /**
      * Read the comments in each method on how to use it
      * there then just call setMethod() with one of the options below then if it takes an argument like
@@ -146,10 +156,6 @@ public class DatabaseWrapper extends Thread{
                 break;
             case "removeSectionLeaderRights":
                 removeSectionLeaderRights(ulid);
-                break;
-            case "getSectionLeaderRights":
-                //Call getSectionLeaderRights after you call run to get true or false
-                sectionLeader = getSectionLeaderRights(ulid);
                 break;
             case "removeFacultyRights":
                 removeFacultyRights(ulid);
@@ -233,6 +239,9 @@ public class DatabaseWrapper extends Thread{
             case "getUniqueSectionItem":
                 sectionList = getUniqueSectionItem();
                 break;
+            case "superUpdateUser":
+                //Call the setStudentArrayList() method then the setFacultyArrayList() method before running this
+                superUpdateUser(studentArrayList, facultyArrayList);
             default:
                 System.out.println("Method not found");
                 break;
@@ -343,18 +352,15 @@ public class DatabaseWrapper extends Thread{
     }
 
     //Adds a user to the database
-    private void addUser(int ID,String firstName, String lastName, String section, boolean sectionLeader, boolean faculty, String note, String ulid, String password){
+    private void addUser(int ID,String firstName, String lastName, String section, String sectionLeader, boolean faculty, String note, String ulid, String password){
         try{
-            int leader = 0;
             int staff = 0;
-            if(sectionLeader){
-                leader = 1;
-            }
+
             if(faculty){
                 staff = 1;
             }
             String query = "insert into user (ID,firstName,lastName,section,sectionLeader,faculty,note,username,passwrd) values ("+ID+",'"+firstName+"','"+lastName+"','"+section+"',";
-            query = query+leader+","+staff+",'"+note+"','"+ulid+"','"+encrypt.encode(password)+"')";
+            query = query+sectionLeader+","+staff+",'"+note+"','"+ulid+"','"+encrypt.encode(password)+"')";
             Statement st = conn.createStatement();
             st.executeUpdate(query);
         }
@@ -427,12 +433,8 @@ public class DatabaseWrapper extends Thread{
             String query = "select firstName,lastName,section,sectionLeader,note,username,ID from user where faculty = 0 order by username asc";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
-            boolean leader = false;
             while(rs.next()){
-                if(rs.getInt("sectionLeader")==1){
-                    leader = true;
-                }
-                student = new Student(rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("section"),leader,rs.getInt("ID"),rs.getString("note"));
+                student = new Student(rs.getString("firstName"),rs.getString("lastName"),rs.getString("username"),rs.getString("section"),rs.getString("sectionLeader"),rs.getInt("ID"),rs.getString("note"));
                 list.add(student);
             }
 
@@ -584,7 +586,70 @@ public class DatabaseWrapper extends Thread{
         return list;
     }
 
+    private void superUpdateUser(ArrayList<Student> studentsArrayList, ArrayList<Faculty> facultyArrayList){
+        //Student Portion
+        String firstName = "";
+        String lastName = "";
+        String ulid = "";
+        String section = "";
+        String sectionLeader = "";
+        String role = "";
+        int UID = 0;
+        String notes = "";
+        for(int i = 0; studentsArrayList.get(i) != null; i++) {
+            firstName = studentsArrayList.get(i).fname;
+            lastName = studentsArrayList.get(i).lname;
+            ulid = studentsArrayList.get(i).ulid;
+            section = studentsArrayList.get(i).getSection();
+            sectionLeader = studentsArrayList.get(i).getSectionLeader();
+            notes = studentsArrayList.get(i).getNotes();
 
+            try {
+                //Student Portion
+                //String firstName, String lastName, String ulid, String section, boolean sectionLeader, int UID, String notes
+                String query1 = "update user set firstName = '" + firstName + "' where ID = " + ID + ";";
+                String query2 = "update user set lastName = '" + lastName + "' where ID = " + ID + ";";
+                String query3 = "update user set username = '" + ulid + "' where ID = " + ID + ";";
+                String query4 = "update user set section = '" + section + "' where ID = " + ID + ";";
+                String query5 = "update user set sectionLeader = " + sectionLeader + " where ID = " + ID + ";";
+                String query6 = "update user set notes = '" + notes + "' where ID = " + ID + ";";
+                Statement st = conn.createStatement();
+                st.executeUpdate(query1);
+                st.executeUpdate(query2);
+                st.executeUpdate(query3);
+                st.executeUpdate(query4);
+                st.executeUpdate(query5);
+                st.executeUpdate(query6);
+            } catch (Exception e) {
+                System.out.println("Student part failed");
+            }
+        }
+
+        //Faculty Part
+        //String firstname, String lastname, String ulid, String role, int UID
+        for(int i = 0; studentsArrayList.get(i) != null; i++){
+            try {
+                String query1 = "update user set firstName = '" + firstName + "' where ID = " + ID + ";";
+                String query2 = "update user set lastName = '" + lastName + "' where ID = " + ID + ";";
+                String query3 = "update user set username = '" + ulid + "' where ID = " + ID + ";";
+                String query4 = "update user set role = '" + role + "' where ID = " + ID + ";";
+                String query5 = "update user set ID = '" + UID + "' where ID = " + ID + ";";
+                Statement st = conn.createStatement();
+                st.executeUpdate(query1);
+                st.executeUpdate(query2);
+                st.executeUpdate(query3);
+                st.executeUpdate(query4);
+                st.executeUpdate(query5);
+            }
+            catch (Exception e){
+                System.out.println("Faculty part failed");
+            }
+        }
+
+
+
+
+    }
 
 
 }
