@@ -60,6 +60,7 @@ public class Student extends BandMember implements Serializable {
         this.sectionLead = sectionLead;
         setUID(UID);
         this.notes = notes;
+        instrument = null;
     }
 
     @Override

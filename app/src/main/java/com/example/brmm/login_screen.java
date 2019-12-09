@@ -19,6 +19,9 @@ public class login_screen extends AppCompatActivity {
     private int counter;
     private int multiplier;
     private int time;
+    private ArrayList<Faculty> faculty;
+    private ArrayList<Student> students;
+
     DatabaseConnection connection = null;
     DatabaseWrapper wrapper = null;
     Thread thread2;
@@ -158,10 +161,10 @@ public class login_screen extends AppCompatActivity {
         try{
             getFacultyThread.join();
         }
-        catch (Exception e){
+        catch (Exception e) {
             System.out.println("get faculty join failed");
         }
-        ArrayList<Faculty> faculty = new ArrayList<Faculty>();
+        faculty = new ArrayList<Faculty>();
         faculty = wrapper.getFacultyList();
         if(faculty!=null) {
             String answer = "faculty occupied:" + faculty.isEmpty();
@@ -182,6 +185,7 @@ public class login_screen extends AppCompatActivity {
         wrapper.setMethod("getStudents");
         Thread getStudentThread = new Thread(wrapper);
         getStudentThread.start();
+        students = new ArrayList<>();
         try{
             getStudentThread.join();
         }
@@ -190,7 +194,7 @@ public class login_screen extends AppCompatActivity {
         }
 
         //sends list of students to main screen
-        mainScreen.putExtra("STUDENT", wrapper.getStudentList());
+        mainScreen.putExtra("STUDENT", (students = wrapper.getStudentList()));
 
         ////attempts to get parts list from data base
         wrapper.setMethod("getParts");
@@ -220,6 +224,20 @@ public class login_screen extends AppCompatActivity {
 
         //sends list of instruments to main screen
         mainScreen.putExtra("INSTRUMENT", wrapper.getInstrumentList());
+
+
+        //attempts to get instrument list from data base
+        wrapper.setMethod("getSectionList");
+        Thread getSectionsThread = new Thread(wrapper);
+        getSectionsThread.start();
+        try{
+            getSectionsThread.join();
+        }
+        catch (Exception e){
+            System.out.println("get sections join failed");
+        }
+
+        mainScreen.putExtra("SECTION", wrapper.getSectionList());
 
         //        attempts to get categories from database
         wrapper.setMethod("getSuperCategory");
@@ -277,12 +295,37 @@ public class login_screen extends AppCompatActivity {
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
 
-                ArrayList<Faculty> faculty = (ArrayList<Faculty>) data.getSerializableExtra("Faculty");
-                ArrayList<Student> students = (ArrayList<Student>) data.getSerializableExtra("Students");
-                ArrayList<Part> parts = (ArrayList<Part>) data.getSerializableExtra("Parts");
-                ArrayList<Instrument> instruments = (ArrayList<Instrument>) data.getSerializableExtra("Instruments");
-                ArrayList<String> sections = data.getStringArrayListExtra("Sections");
-                ArrayList<Category> categories = (ArrayList<Category>)data.getSerializableExtra("Categories");
+                ArrayList<Faculty> faculty_return = (ArrayList<Faculty>) data.getSerializableExtra("Faculty");
+                ArrayList<Student> students_return = (ArrayList<Student>) data.getSerializableExtra("Students");
+
+                //attempts to get instrument list from data base
+                wrapper.setStudentArrayList(students_return);
+                wrapper.setFacultyArrayList(faculty_return);
+                wrapper.setInstrumentArrayList((ArrayList<Instrument>) data.getSerializableExtra("Instruments"));
+                wrapper.setPartArrayList((ArrayList<Part>) data.getSerializableExtra("Parts"));
+                wrapper.setSuperCategoryArrayList((ArrayList<Category>)data.getSerializableExtra("Categories"));
+
+
+                wrapper.setMethod("superUpdateUser");
+                Thread setMembersThread = new Thread(wrapper);
+                setMembersThread.start();
+                try{
+                    setMembersThread.join();
+                }
+                catch (Exception e){
+                    System.out.println("set members join failed");
+                }
+
+                wrapper.setMethod("superUpdateItem");
+                Thread setInstrumentThread = new Thread(wrapper);
+                setInstrumentThread.start();
+                try{
+                    setInstrumentThread.join();
+                }
+                catch (Exception e){
+                    System.out.println("set insturments join failed");
+                }
+
 
             }
         }

@@ -38,7 +38,15 @@ public class delete_member extends AppCompatActivity {
         final ArrayList<BandMember> temp = (ArrayList<BandMember>) getIntent().getSerializableExtra("memberlist");
         if (temp != null) {
             for (BandMember bm : temp) {
-                members.add(bm.getUID());
+                if (bm instanceof Student) {
+                    if (((Student) bm).getInstrument() == null) {
+                        members.add(bm.getUID());
+                    }
+                }
+                else
+                {
+                    members.add(bm.getUID());
+                }
             }
             if (!members.isEmpty()) {
                 ArrayAdapter<Integer> memberAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, members);
