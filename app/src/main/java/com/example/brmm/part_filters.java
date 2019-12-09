@@ -61,7 +61,7 @@ public class part_filters extends AppCompatActivity {
                 Intent thisIntent = new Intent();
 
                 //If there are no parts to filter, return to main screen
-                ArrayList<Part> parts  = (ArrayList<Part>)thisIntent.getSerializableExtra("partslist");
+                ArrayList<Part> parts  = (ArrayList<Part>)thisIntent.getSerializableExtra("partlist");
                 if (parts == null)
                     finish();
 
@@ -115,13 +115,10 @@ public class part_filters extends AppCompatActivity {
     public ArrayList<Part> filterBySn(ArrayList<Part> parts, String sn) {
         ArrayList<Part> filter = new ArrayList<>();
         for (Part aPart: parts) {
-            if (aPart instanceof Part) {
-                if (((Part) aPart).getSerialNumber() == sn) {
+                if ( aPart.getSerialNumber().equals(sn)) {
                     filter.add(aPart);
                     break;
                 }
-
-            }
         }
         return filter;
     }
@@ -135,6 +132,7 @@ public class part_filters extends AppCompatActivity {
         }
         return filter;
     }
+
     //Timeout Timer
     private Timer timer;
 

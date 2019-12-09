@@ -124,7 +124,6 @@ public class instrument_filters extends AppCompatActivity {
 
                 Intent thisIntent = new Intent();
                 ArrayList<Instrument> instruments = (ArrayList<Instrument>)thisIntent.getSerializableExtra("instrumentlist");
-
                 //If there are no instruments to filter, return to main screen
                 if (instruments == null)
                     finish();

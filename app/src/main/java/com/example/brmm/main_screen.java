@@ -202,7 +202,7 @@ public class main_screen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openFilter = new Intent(getBaseContext(), part_filters.class);
-                openFilter.putExtra("instrumentlist", rent_inv.getPartList());
+                openFilter.putExtra("partlist", rent_inv.getPartList());
                 startActivityForResult(openFilter, 9);
             }
         });

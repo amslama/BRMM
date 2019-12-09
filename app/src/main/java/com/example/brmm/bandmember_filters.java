@@ -24,10 +24,14 @@ import java.util.TimerTask;
 
 public class bandmember_filters extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bandmember_filters);
+
+       final RadioGroup rgroup = findViewById(R.id.bm_type_bandmember_filters_rgroup);
+       final RadioButton rbutton;
 
         //Textviews
         final TextView header = findViewById(R.id.bandmember_filters_header);
@@ -53,9 +57,7 @@ public class bandmember_filters extends AppCompatActivity {
         final Switch secLeadersSwitch = findViewById(R.id.section_leader_switch);
 
         //Radio stuffs
-        final RadioGroup rgroup = findViewById(R.id.bm_type_bandmember_filters_rgroup);
-        final RadioButton student_rbutton = findViewById(R.id.student_bandmember_filters_rbutton);
-        final RadioButton faculty_rbutton = findViewById(R.id.faculty_bandmember_filters_rbutton);
+
 
         //checkboxes
         final CheckBox has_cbox = findViewById(R.id.has_bandmember_filters_cbox);
@@ -143,16 +145,22 @@ public class bandmember_filters extends AppCompatActivity {
                  String firstName;
                  String lastName;
                  String section;
+                 String memberType;
                  int hasInstrument = 0;
                  int UID;
-                 int isFaculty;
                  boolean sectionLeaders;
                  Instrument instrument;
 
                  instrument = (Instrument) instrument_spin.getSelectedItem();
                  section = section_spin.getSelectedItem().toString();
 
-                 isFaculty = rgroup.getCheckedRadioButtonId();
+                 int radioId;
+                try {
+                    radioId = rgroup.getCheckedRadioButtonId();
+                }
+                catch(Exception ex){radioId = -1;}
+
+                System.out.println("\t\t\t" + radioId);
 
                 if (has_cbox.isChecked())
                     hasInstrument = 1;
@@ -169,16 +177,16 @@ public class bandmember_filters extends AppCompatActivity {
 
 
                 Intent thisIntent = new Intent();
-                ArrayList<BandMember> memberlist  = (ArrayList<BandMember>)thisIntent.getSerializableExtra("memberlist");
+                ArrayList<BandMember> memberlist  = (ArrayList<BandMember>)thisIntent.getSerializableExtra("bandmemberlist");
                 //If there are no band members to filter, return to main screen
                 if (memberlist == null)
                     finish();
 
 
-                memberlist = filterMemberInv(memberlist,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument, section);
-                thisIntent.putExtra("memberlist", memberlist);
-                setResult(RESULT_OK,thisIntent);
-                finish();
+              //  memberlist = filterMemberInv(memberlist,memberType,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument, section);
+               // thisIntent.putExtra("memberlist", memberlist);
+                //setResult(RESULT_OK,thisIntent);
+                //finish();
             }
         });
 
@@ -195,14 +203,14 @@ public class bandmember_filters extends AppCompatActivity {
 
 
     //filters the bandmembers
-    public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, int isFaculty, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument, String section) {
+    public ArrayList<BandMember> filterMemberInv(ArrayList<BandMember> members, String memberType, int hasInstrument, boolean sectionLeaders, String firstName, String lastName, int UID, Instrument instrument, String section) {
 
         ArrayList<BandMember> filter = members;
 
-        if(isFaculty == 1)
-            filter = filterByFaculty(filter);
-        else if (isFaculty == 2)
+        if(memberType.equals("Student"))
             filter = filterByStudent(filter);
+        else if (memberType.equals("Teacher"))
+            filter = filterByFaculty(filter);
         else {}
 
 

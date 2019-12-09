@@ -26,12 +26,15 @@ public class Category implements Serializable {
     }
 
 
+
     public Category getSuperCategory() {
         return superCategory;
     }
 
     public void setSuperCategory(Category superCategory) {
         this.superCategory = superCategory;
+        if (superCategory == null);
+        name = "null";
     }
 
     //returns all supercategories belong to a base category
@@ -45,6 +48,21 @@ public class Category implements Serializable {
         superCats.add(cat);
         return superCats;
     }
+
+    public String getRelationshipPair() {
+        return name + "," + superCategory;
+    }
+
+    /*
+    Algorithm for putting all relationships in an arrayList
+
+    public ArrayList<String> getRelationshipList(ArrayList<Category> catList) {
+        ArrayList<String> relationshipList = new ArrayList<>();
+        for (Category cat : catList)
+            relationshipList.add(cat.getRelationshipPair())
+          
+    }
+     */
 
 
 
