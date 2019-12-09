@@ -137,7 +137,6 @@ public class bandmember_filters extends AppCompatActivity {
         );
 
 
-
         //applies the filters
         apply_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +158,15 @@ public class bandmember_filters extends AppCompatActivity {
                     radioId = rgroup.getCheckedRadioButtonId();
                 }
                 catch(Exception ex){radioId = -1;}
+
+
+                if (radioId == 2131296678)
+                   memberType = "Student";
+                else if (radioId == 2131296445)
+                   memberType = "Teacher";
+                else
+                    memberType = "Everyone";
+
 
                 System.out.println("\t\t\t" + radioId);
 
@@ -183,12 +191,14 @@ public class bandmember_filters extends AppCompatActivity {
                     finish();
 
 
-              //  memberlist = filterMemberInv(memberlist,memberType,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument, section);
-               // thisIntent.putExtra("memberlist", memberlist);
-                //setResult(RESULT_OK,thisIntent);
-                //finish();
+                memberlist = filterMemberInv(memberlist,memberType,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument, section);
+                thisIntent.putExtra("memberlist", memberlist);
+                setResult(RESULT_OK,thisIntent);
+                finish();
             }
         });
+
+
 
         //returns to main screen
         cancel_button.setOnClickListener(new View.OnClickListener() {

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.app.AlertDialog;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -65,29 +66,34 @@ public class delete_category extends AppCompatActivity {
 
                 final Category removeCat = (Category) cat_spin.getSelectedItem();
 
-                //displays dialog to make sure user is sure of decision
-                AlertDialog.Builder builder = new AlertDialog.Builder(delete_category.this);
-                builder.setMessage("Warning, Deleting a Category will uncategorize all instruments with that category. Do you still wish to continue?")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                removeCategory(removeCat, catlist);
-                            }
-                        })
-                        .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        }) ;
+                if (removeCat.getSuperCategory() == null) {
+                    makeToast();
+                } else {
+                    //displays dialog to make sure user is sure of decision
+                    AlertDialog.Builder builder = new AlertDialog.Builder(delete_category.this);
+                    builder.setMessage("Warning, Deleting a Category will uncategorize all instruments with that category. Do you still wish to continue?")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    removeCategory(removeCat, catlist);
+                                }
+                            })
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
 
-                AlertDialog alert = builder.create();
-                alert.setTitle("Alert");
-                alert.show();
+                    AlertDialog alert = builder.create();
+                    alert.setTitle("Alert");
+                    alert.show();
 
+                }
             }
         });
+
 
         //returns to main screen
         cancel_button.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +113,6 @@ public class delete_category extends AppCompatActivity {
             catlist.remove(removeCat);
         }
         if (removeCat.getSuperCategory() == null) {
-            System.out.println("You cannot remove the top Category");
         }
         else {
             for (Category cat : catlist) {
@@ -119,8 +124,14 @@ public class delete_category extends AppCompatActivity {
             finish();
         }
 
-
     }
+
+    public void makeToast(){
+        Toast toast = Toast.makeText(this, "You cannot delete the top category", Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+
     //Timeout Timer
     private Timer timer;
 
