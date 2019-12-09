@@ -36,7 +36,9 @@ public class delete_instrument extends AppCompatActivity {
         final ArrayList<Instrument> temp = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
         if (temp != null) {
             for (Instrument instrument : temp) {
-                instruments.add(instrument.getId());
+                if(instrument.getCurrentOwner().equals("School")) {
+                    instruments.add(instrument.getId());
+                }
             }
             if (!instruments.isEmpty()) {
                 ArrayAdapter<Integer> instrumentAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, instruments);

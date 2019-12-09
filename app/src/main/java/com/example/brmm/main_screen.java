@@ -542,8 +542,10 @@ public class main_screen extends AppCompatActivity {
                     int count = data.getIntExtra("count_instrument", -2056);
                     BandMember member = (BandMember) data.getSerializableExtra("member");
                     Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
-                    instrument.setCurrentOwner(member.getUlid());
-                    ((Student) member).setInstrument(instrument);
+                    if(instrument.getCurrentOwner() != "School") {
+                        instrument.setCurrentOwner(member.getUlid());
+                        ((Student) member).setInstrument(instrument);
+                    }
 
 
                     if (count >= 0) {
@@ -553,6 +555,7 @@ public class main_screen extends AppCompatActivity {
 
                     if (count >= 0) {
                         member_inv.changeMember(count, member);
+
                     }
                     inv_view.getAdapter().notifyDataSetChanged();
                 }
@@ -780,7 +783,6 @@ public class main_screen extends AppCompatActivity {
         intent.putExtra("Students", stu);
         intent.putExtra("Parts", parts);
         intent.putExtra("Instruments", instruments);
-        intent.putExtra("Sections", sections);
         intent.putExtra("Categories", categories);
         setResult(RESULT_OK, intent);
         finish();

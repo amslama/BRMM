@@ -19,6 +19,9 @@ public class login_screen extends AppCompatActivity {
     private int counter;
     private int multiplier;
     private int time;
+    private ArrayList<Faculty> faculty;
+    private ArrayList<Student> students;
+
     DatabaseConnection connection = null;
     DatabaseWrapper wrapper = null;
     Thread thread2;
@@ -163,10 +166,10 @@ public class login_screen extends AppCompatActivity {
         try{
             getFacultyThread.join();
         }
-        catch (Exception e){
+        catch (Exception e) {
             System.out.println("get faculty join failed");
         }
-        ArrayList<Faculty> faculty = new ArrayList<Faculty>();
+        faculty = new ArrayList<Faculty>();
         faculty = wrapper.getFacultyList();
         if(faculty!=null) {
             String answer = "faculty occupied:" + faculty.isEmpty();
@@ -187,6 +190,7 @@ public class login_screen extends AppCompatActivity {
         wrapper.setMethod("getStudents");
         Thread getStudentThread = new Thread(wrapper);
         getStudentThread.start();
+        students = new ArrayList<>();
         try{
             getStudentThread.join();
         }
@@ -195,7 +199,7 @@ public class login_screen extends AppCompatActivity {
         }
 
         //sends list of students to main screen
-        mainScreen.putExtra("STUDENT", wrapper.getStudentList());
+        mainScreen.putExtra("STUDENT", (students = wrapper.getStudentList()));
 
         ////attempts to get parts list from data base
         wrapper.setMethod("getParts");
@@ -280,12 +284,43 @@ public class login_screen extends AppCompatActivity {
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
 
-                ArrayList<Faculty> faculty = (ArrayList<Faculty>) data.getSerializableExtra("Faculty");
-                ArrayList<Student> students = (ArrayList<Student>) data.getSerializableExtra("Students");
+                ArrayList<Faculty> faculty_return = (ArrayList<Faculty>) data.getSerializableExtra("Faculty");
+                for(Faculty fa: faculty_return)
+                {
+                    if(faculty.contains(fa))
+                    {
+                        if(fa == faculty.get(faculty.indexOf(fa)))
+                        {
+                            //edit fac in db
+                        }
+                    }
+                    else {
+                        //add new faculty
+                    }
+                }
+
+
+                ArrayList<Student> students_return = (ArrayList<Student>) data.getSerializableExtra("Students");
+                for(Student stu: students_return)
+                {
+                    if(students.contains(stu))
+                    {
+                        if(stu == students.get(students.indexOf(stu)))
+                        {
+                            //edit student in db
+                        }
+                    }
+                    //add new student
+                }
+
                 ArrayList<Part> parts = (ArrayList<Part>) data.getSerializableExtra("Parts");
                 ArrayList<Instrument> instruments = (ArrayList<Instrument>) data.getSerializableExtra("Instruments");
-                ArrayList<String> sections = data.getStringArrayListExtra("Sections");
                 ArrayList<Category> categories = (ArrayList<Category>)data.getSerializableExtra("Categories");
+           //     wrapper.setFacultyArrayList(faculty);
+         //       wrapper.setStudentArrayList(students);
+                wrapper.setPartArrayList(parts);
+                wrapper.setInstrumentArrayList(instruments);
+                wrapper.setSuperCategoryArrayList(categories);
 
             }
         }
