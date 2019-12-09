@@ -38,6 +38,15 @@ public class delete_category extends AppCompatActivity {
 
         Intent intent = new Intent();
 
+        //Instruments
+        final ArrayList<Instrument> instruments = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
+        for (Instrument ins : instruments){
+            System.out.println(ins.getName());
+            System.out.println(ins.getCategory());
+        }
+
+
+
         //sets up category spinner
         final ArrayList<Category> catlist = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
         if (catlist != null) {
@@ -63,34 +72,23 @@ public class delete_category extends AppCompatActivity {
         ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean deletable = true;
 
                 final Category removeCat = (Category) cat_spin.getSelectedItem();
-
-                if (removeCat.getSuperCategory() == null) {
-                    makeToast();
-                } else {
-                    //displays dialog to make sure user is sure of decision
-                    AlertDialog.Builder builder = new AlertDialog.Builder(delete_category.this);
-                    builder.setMessage("Warning, Deleting a Category will uncategorize all instruments with that category. Do you still wish to continue?")
-                            .setCancelable(false)
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    removeCategory(removeCat, catlist);
-                                }
-                            })
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-
-                    AlertDialog alert = builder.create();
-                    alert.setTitle("Alert");
-                    alert.show();
-
+                for (Instrument ins: instruments) {
+                    if (ins.getCategory().getName().equals(removeCat.getName()))
+                        deletable = false;
+                        break;
                 }
+
+                System.out.println(deletable);
+                if (removeCat.getSuperCategory() == null) {
+                    makeToast1();
+                } else if (deletable == false) {
+                    makeToast2();
+                }
+                else
+                    removeCategory(removeCat,catlist);
             }
         });
 
@@ -126,8 +124,13 @@ public class delete_category extends AppCompatActivity {
 
     }
 
-    public void makeToast(){
+    public void makeToast1(){
         Toast toast = Toast.makeText(this, "You cannot delete the top category", Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    public void makeToast2(){
+        Toast toast = Toast.makeText(this, "You cannot delete a Category that currently contains instuments", Toast.LENGTH_SHORT);
         toast.show();
     }
 

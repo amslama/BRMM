@@ -174,8 +174,9 @@ public class edit_instrument extends AppCompatActivity {
                     ins.setSection(section);
                     ins.setCost(cost);
                     ins.setId(id);
-                    if (addCat == true)
-                         ins.setCategory(category);
+                   // if (deleteCat == true)
+                        ins.setCategory(category);
+
 
                     Intent intent = getIntent();
                     intent.putExtra("instrument", ins);
@@ -207,7 +208,6 @@ public class edit_instrument extends AppCompatActivity {
         });
 
     }
-
 
     private int sectionCount(String str, ArrayList<String> sectionlist) {
         int count = 0;

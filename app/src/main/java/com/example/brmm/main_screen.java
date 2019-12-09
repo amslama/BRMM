@@ -123,16 +123,6 @@ public class main_screen extends AppCompatActivity {
         }
 
 
-        ArrayList<Instrument> insList = rent_inv.getInstrumentList();
-        for (Instrument ins: insList){
-            System.out.println(ins.getName());
-            System.out.println(ins.getCategory());
-            System.out.println();
-            System.out.println();
-            System.out.println();
-        }
-
-
         instantiateButtons();
         oneTimeListeners();
         setPartsButtons();
@@ -273,14 +263,6 @@ public class main_screen extends AppCompatActivity {
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<Instrument> insList = rent_inv.getInstrumentList();
-                for (Instrument ins: insList){
-                    System.out.println(ins.getName());
-                    System.out.println(ins.getCategory());
-                    System.out.println();
-                    System.out.println();
-                    System.out.println();
-                }
                 Intent openFilter = new Intent(getBaseContext(), instrument_filters.class);
                 openFilter.putExtra("sectionlist", sections);
                 openFilter.putExtra("categorylist", categories);
@@ -350,7 +332,7 @@ public class main_screen extends AppCompatActivity {
                 Intent openFilter = new Intent(getBaseContext(), bandmember_filters.class);
                 openFilter.putExtra("sectionlist", sections);
                 openFilter.putExtra("instrumentlist", rent_inv.getInstrumentList());
-                openFilter.putExtra("bandmemberlist", member_inv.getBandMembers());
+                openFilter.putExtra("memberlist", member_inv.getBandMembers());
                 startActivityForResult(openFilter, 11);
             }
         });
@@ -468,6 +450,7 @@ public class main_screen extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent openFilter = new Intent(getBaseContext(), delete_category.class);
                     openFilter.putExtra("categorylist", categories);
+                    openFilter.putExtra("instrumentlist", rent_inv.getInstrumentList());
                     startActivityForResult(openFilter, 16);
                 }
             });
@@ -629,6 +612,7 @@ public class main_screen extends AppCompatActivity {
                     if (count >= 0) {
                         Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
                         rent_inv.changeInstrument(count, instrument);
+
                     }
                     inv_view.getAdapter().notifyDataSetChanged();
                 }
@@ -788,6 +772,11 @@ public class main_screen extends AppCompatActivity {
                     ArrayList<Category> cat = new ArrayList<>();
                     cat = (ArrayList<Category>) data.getSerializableExtra("category");
                     categories = cat;
+                    ArrayList<Instrument> instruments = rent_inv.getInstrumentList();
+                    for (Instrument ins: instruments) {
+                        System.out.println("My name: " + ins.getName());
+                        System.out.println("My Category: " + ins.getCategory());
+                    }
                 }
             }
         }

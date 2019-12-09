@@ -21,7 +21,7 @@ import java.util.TimerTask;
 public class add_instrument extends AppCompatActivity {
     private RentableFactory factory = new RentableFactory();
     private String section;
-    private boolean addCat;
+    private boolean deleteCat;
 
     private Instrument instrument;
 
@@ -51,7 +51,7 @@ public class add_instrument extends AppCompatActivity {
         RecyclerView cat_rview = findViewById(R.id.cat_add_instrument_rview);
 
         //don't add category
-        addCat = false;
+        deleteCat = false;
 
         //sets instrument spinner
         final ArrayList<String> instrumentlist = new ArrayList<>();
@@ -179,8 +179,11 @@ public class add_instrument extends AppCompatActivity {
 
                             instrument.setCost(cost);
                             instrument.setName(name);
-                            if (addCat = true)
+                            if (deleteCat = true)
+                                ((Instrument) instrument).setCategory(null);
+                            else
                                 ((Instrument) instrument).setCategory(category);
+
                             ((Instrument) instrument).setSection(section);
 
                             Intent intent = new Intent();
@@ -206,7 +209,7 @@ public class add_instrument extends AppCompatActivity {
         add_cat_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addCat = true;
+                deleteCat = true;
             }
         });
 

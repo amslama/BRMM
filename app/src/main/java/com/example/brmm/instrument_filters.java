@@ -123,14 +123,14 @@ public class instrument_filters extends AppCompatActivity {
                 } catch (NumberFormatException ex) {cost = -1;}
 
                 Intent thisIntent = new Intent();
-                ArrayList<Instrument> instruments = (ArrayList<Instrument>)thisIntent.getSerializableExtra("instrumentlist");
-                //If there are no instruments to filter, return to main screen
+                 ArrayList<Instrument> instruments = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
                 if (instruments == null)
                     finish();
 
-                instruments = filterInstrumentInv(null, owner, section, name, category, id, cost);
+                instruments = filterInstrumentInv(instruments, owner, section, name, category, id, cost);
                 thisIntent = new Intent();
                 thisIntent.putExtra("inslist", instruments);
+                System.out.println(instruments);
                 setResult(RESULT_OK,thisIntent);
                 finish();
             }
@@ -147,31 +147,37 @@ public class instrument_filters extends AppCompatActivity {
     }
 
     //main method for filtering
-    public ArrayList<Instrument> filterInstrumentInv(ArrayList<Instrument> Instruments, String owner, String section, String name, Category category, int id, double cost) {
-        ArrayList<Instrument> filter = new ArrayList<>();
+    public ArrayList<Instrument> filterInstrumentInv(ArrayList<Instrument> instruments, String owner, String section, String name, Category category, int id, double cost) {
+        ArrayList<Instrument> filter = instruments;
 
+        System.out.println(filter);
         if(!category.getName().equals("No Filter"))
            filter = filterByCategory(filter, category);
+        System.out.println(filter);
 
 
         if (id != -1)
             filter = filterByID(filter, id);
+        System.out.println(filter);
 
 
         if (!owner.equals(""))
             filter = filterByOwner(filter, owner);
+        System.out.println(filter);
 
 
-        if (!name.equals("")) {
+        if (!name.equals(""))
             filter = filterByName(filter, name);
-        }
+        System.out.println(filter);
 
 
         if (!section.equals("No Filter"))
             filter = filterBySection(filter, section);
+        System.out.println(filter);
 
         if (cost != -1)
             filter = filterByCost(filter, cost);
+        System.out.println(filter);
 
 
         return filter;

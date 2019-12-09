@@ -61,7 +61,7 @@ public class part_filters extends AppCompatActivity {
                 Intent thisIntent = new Intent();
 
                 //If there are no parts to filter, return to main screen
-                ArrayList<Part> parts  = (ArrayList<Part>)thisIntent.getSerializableExtra("partlist");
+                ArrayList<Part> parts  = (ArrayList<Part>)getIntent().getSerializableExtra("partlist");
                 if (parts == null)
                     finish();
 
@@ -87,6 +87,7 @@ public class part_filters extends AppCompatActivity {
     //main method for filtering the parts
     public   ArrayList<Part> filterParts(ArrayList<Part> aList, String name, String sn, double cost) {
         ArrayList<Part> filter = aList;
+
         if (!name.equals(""))
             filter =  filterByName(filter, name);
 
