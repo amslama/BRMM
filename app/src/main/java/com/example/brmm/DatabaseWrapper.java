@@ -46,7 +46,8 @@ public class DatabaseWrapper extends Thread{
     private ArrayList<Faculty> facultyArrayList = null;
     private ArrayList<Instrument> instrumentArrayList = null;
     private ArrayList<Part> partArrayList = null;
-
+    private ArrayList<Category> superCategoryArrayList = null;
+    private ArrayList<String> superCategoryPairsArrayList = null;
 
 
     public DatabaseWrapper(Connection connection){
@@ -153,6 +154,14 @@ public class DatabaseWrapper extends Thread{
         this.partArrayList = partArrayList;
     }
 
+    public void setSuperCategoryArrayList(ArrayList<Category> superCategoryArrayList){
+        this.superCategoryArrayList = superCategoryArrayList;
+    }
+
+    public ArrayList<String> getSuperCategoryPairsArrayList(){
+        return superCategoryPairsArrayList;
+    }
+
     /**
      * Read the comments in each method on how to use it
      * there then just call setMethod() with one of the options below then if it takes an argument like
@@ -252,9 +261,19 @@ public class DatabaseWrapper extends Thread{
             case "superUpdateUser":
                 //Call the setStudentArrayList() method then the setFacultyArrayList() method before running this
                 superUpdateUser(studentArrayList, facultyArrayList);
+                break;
             case "superUpdateItem":
                 //Call the setInstrumentArrayList() method then the setPartArrayList() method
                 superUpdateItem(instrumentArrayList, partArrayList);
+                break;
+            case "updateSuperCategory":
+                //Call the setSuperCategoryArrayList() method before this
+                updateSuperCategory(superCategoryArrayList);
+                break;
+            case "getSuperCategory":
+                //Call the getSuperCategoryPairsArrayList() method after this
+                superCategoryPairsArrayList = getSuperCategory();
+                break;
             default:
                 System.out.println("Method not found");
                 break;
@@ -706,6 +725,7 @@ public class DatabaseWrapper extends Thread{
 
         for(int i = 0; partArrayList.get(i) != null; i++){
             try{
+                //Part Portion
                 //double cost, String name, String category, String serialNumber
                 price = partArrayList.get(i).cost;
                 name = partArrayList.get(i).name;
@@ -728,6 +748,44 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
+    private void updateSuperCategory(ArrayList<Category> superCategoryArrayList){
+        String temp = "";
+        try{
+            String delete = "delete from superCategory;";
+            Statement st = conn.createStatement();
+            st.executeUpdate(delete);
+        }
+        catch (Exception e){
+            System.out.println("Delete part failed");
+        }
+        for(int i = 0; superCategoryArrayList.get(i) != null; i++){
+            try {
+                temp = superCategoryArrayList.get(i).getRelationshipPair();
+                String query = "insert into superCategory (superCategory) values ('" + temp + "');";
+                Statement st = conn.createStatement();
+                st.executeUpdate(query);
+            }
+            catch (Exception r){
+                System.out.println("Updating superCategory pairs failed");
+            }
+        }
+    }
+
+    private ArrayList<String> getSuperCategory(){
+        ArrayList<String> str = new ArrayList<>();
+        try{
+            String query = "select * from superCategory";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+               str.add(rs.getString("superCategory"));
+            }
+        }
+        catch (Exception e){
+            System.out.println("Getting superCategory pairs failed");
+        }
+        return str;
+    }
 
 }
 
