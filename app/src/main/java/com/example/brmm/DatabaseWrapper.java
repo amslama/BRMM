@@ -745,6 +745,14 @@ public class DatabaseWrapper extends Thread{
         catch (Exception e){
             System.out.println("Deleting items failed");
         }
+        try{
+            String reset = "ALTER TABLE item AUTO_INCREMENT = 1;";
+            Statement resetStatement = conn.createStatement();
+            resetStatement.executeUpdate(reset);
+        }
+        catch (Exception e){
+            System.out.println("Failed to reset auto increment");
+        }
 
         for(int i = 0; instrumentArrayList.get(i) != null; i++){
             try {
