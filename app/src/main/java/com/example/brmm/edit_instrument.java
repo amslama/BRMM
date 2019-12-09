@@ -174,7 +174,7 @@ public class edit_instrument extends AppCompatActivity {
                     ins.setSection(section);
                     ins.setCost(cost);
                     ins.setId(id);
-                    if (addCat == true)
+                   // if (deleteCat == true)
                         ins.setCategory(category);
 
 
