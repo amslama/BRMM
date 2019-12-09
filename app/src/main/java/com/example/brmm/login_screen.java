@@ -282,6 +282,7 @@ public class login_screen extends AppCompatActivity {
             System.out.println("Login join failed");
         }
 
+
         //returns true if username and password exist in the database
         return wrapper.getValidation();
 

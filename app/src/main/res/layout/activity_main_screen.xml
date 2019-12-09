@@ -12,7 +12,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/item_list_main_screen_rview"
         android:layout_width="0dp"
-        android:layout_height="657dp"
+        android:layout_height="598dp"
         android:layout_marginTop="48dp"
         android:background="#40EEE8E8"
         android:verticalScrollbarPosition="right"
@@ -150,15 +150,17 @@
         android:id="@+id/delete_category_main_screen_button"
         android:layout_width="195dp"
         android:layout_height="65dp"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/button_border"
         android:text="@string/delete_category"
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/edit_note_main_screen_button"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/checkout_main_screen_button"
-        app:layout_constraintTop_toBottomOf="@+id/remove_main_screen_button" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_note_main_screen_button" />
+
 
     <Button
         android:id="@+id/add_category_main_screen_button"
@@ -172,8 +174,7 @@
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/edit_note_main_screen_button"
-        app:layout_constraintTop_toBottomOf="@+id/edit_rentable_main_screen_button" />
-
+        app:layout_constraintTop_toBottomOf="@+id/add_section_main_screen_button" />
 
     <Button
         android:id="@+id/edit_member_main_screen_button"

@@ -121,6 +121,7 @@ public class main_screen extends AppCompatActivity {
                 categories.add(cat);
             }
         }
+        System.out.println("--------------------------------------------------------Is section null" + sections.size());
 
 
         instantiateButtons();
@@ -136,6 +137,8 @@ public class main_screen extends AppCompatActivity {
 
     //hides buttons
     private void hideButtons() {
+        add_category_button.setVisibility(View.INVISIBLE);
+        delete_category_button.setVisibility(View.INVISIBLE);
         add_button.setVisibility(View.INVISIBLE);
         remove_button.setVisibility(View.INVISIBLE);
         edit_rentable_button.setVisibility(View.INVISIBLE);
@@ -156,6 +159,7 @@ public class main_screen extends AppCompatActivity {
         ins_concepts = new ArrayList<>();
         part_concepts = new ArrayList<>();
         categories = new ArrayList<>();
+        sections = new ArrayList<>();
     }
 
     //instantiates all buttons
@@ -242,6 +246,8 @@ public class main_screen extends AppCompatActivity {
 
 
             //sets visibility
+            add_category_button.setVisibility(View.INVISIBLE);
+            delete_category_button.setVisibility(View.INVISIBLE);
             edit_rentable_button.setVisibility(View.VISIBLE);
             edit_member_button.setVisibility(View.INVISIBLE);
             set_lead_button.setVisibility(View.INVISIBLE);
@@ -311,6 +317,8 @@ public class main_screen extends AppCompatActivity {
             });
 
             //sets visibility of buttons for dropdown selection
+            add_category_button.setVisibility(View.VISIBLE);
+            delete_category_button.setVisibility(View.VISIBLE);
             edit_rentable_button.setVisibility(View.VISIBLE);
             edit_member_button.setVisibility(View.INVISIBLE);
             set_lead_button.setVisibility(View.INVISIBLE);
@@ -362,6 +370,8 @@ public class main_screen extends AppCompatActivity {
             });
 
             //Sets visibility for when dropdown is BandMembers
+            add_category_button.setVisibility(View.INVISIBLE);
+            delete_category_button.setVisibility(View.INVISIBLE);
             edit_rentable_button.setVisibility(View.INVISIBLE);
             edit_member_button.setVisibility(View.VISIBLE);
             set_lead_button.setVisibility(View.VISIBLE);
@@ -483,6 +493,8 @@ public class main_screen extends AppCompatActivity {
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent =  getIntent();
+                setResult(RESULT_OK, intent);
                 logout();
             }
         });
@@ -627,7 +639,6 @@ public class main_screen extends AppCompatActivity {
                     logout();
                 else {
                     int count = data.getIntExtra("count", -256);
-                    System.out.println("jaadjioasjoadsjiaodsadijo----------------------" + count);
 
                     if (count >= 0) {
                         BandMember member = (BandMember) data.getSerializableExtra("member");
