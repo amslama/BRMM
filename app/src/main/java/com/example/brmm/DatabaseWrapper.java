@@ -44,6 +44,8 @@ public class DatabaseWrapper extends Thread{
     private ArrayList<String> sectionList;
     private ArrayList<Student> studentArrayList = null;
     private ArrayList<Faculty> facultyArrayList = null;
+    private ArrayList<Instrument> instrumentArrayList = null;
+    private ArrayList<Part> partArrayList = null;
 
 
 
@@ -141,6 +143,14 @@ public class DatabaseWrapper extends Thread{
 
     public void setFacultyArrayList(ArrayList<Faculty> facultyArrayList){
         this.facultyArrayList = facultyArrayList;
+    }
+
+    public void setInstrumentArrayList(ArrayList<Instrument> instrumentArrayList){
+        this.instrumentArrayList = instrumentArrayList;
+    }
+
+    public void setPartArrayList(ArrayList<Part> partArrayList){
+        this.partArrayList = partArrayList;
     }
 
     /**
@@ -242,6 +252,9 @@ public class DatabaseWrapper extends Thread{
             case "superUpdateUser":
                 //Call the setStudentArrayList() method then the setFacultyArrayList() method before running this
                 superUpdateUser(studentArrayList, facultyArrayList);
+            case "superUpdateItem":
+                //Call the setInstrumentArrayList() method then the setPartArrayList() method
+                superUpdateItem(instrumentArrayList, partArrayList);
             default:
                 System.out.println("Method not found");
                 break;
@@ -629,6 +642,12 @@ public class DatabaseWrapper extends Thread{
         //String firstname, String lastname, String ulid, String role, int UID
         for(int i = 0; studentsArrayList.get(i) != null; i++){
             try {
+                firstName = facultyArrayList.get(i).fname;
+                lastName = facultyArrayList.get(i).lname;
+                ulid = facultyArrayList.get(i).ulid;
+                role = facultyArrayList.get(i).getRole();
+                UID = facultyArrayList.get(i).getUID();
+
                 String query1 = "update user set firstName = '" + firstName + "' where ID = " + ID + ";";
                 String query2 = "update user set lastName = '" + lastName + "' where ID = " + ID + ";";
                 String query3 = "update user set username = '" + ulid + "' where ID = " + ID + ";";
@@ -645,10 +664,68 @@ public class DatabaseWrapper extends Thread{
                 System.out.println("Faculty part failed");
             }
         }
+    }
 
+    private void superUpdateItem(ArrayList<Instrument> instrumentArrayList, ArrayList<Part> partArrayList){
+        //Instrument Section
+        //String co, String st, String na, double price, int idnum, String category
+        String currentOwner = "";
+        String section = "";
+        String name = "";
+        double price = 0;
+        int ID = 0;
+        String category = "";
+        String serialNumber = "";
 
+        for(int i = 0; instrumentArrayList.get(i) != null; i++){
+            try {
+                currentOwner = instrumentArrayList.get(i).currentOwner;
+                section = instrumentArrayList.get(i).getSection();
+                name = instrumentArrayList.get(i).getName();
+                price = instrumentArrayList.get(i).cost;
+                ID = instrumentArrayList.get(i).id;
+                category = instrumentArrayList.get(i).getCategory().toString();
 
+                String query1 = "update user set name = '" + name + "' where ID = " + ID + ";";
+                String query2 = "update user set ownership = '" + currentOwner + "' where ID = " + ID + ";";
+                String query3 = "update user set section = '" + section + "' where ID = " + ID + ";";
+                String query4 = "update user set price = '" + price + "' where ID = " + ID + ";";
+                String query5 = "update user set category = '" + category + "' where ID = " + ID + ";";
+                Statement st = conn.createStatement();
+                st.executeUpdate(query1);
+                st.executeUpdate(query2);
+                st.executeUpdate(query3);
+                st.executeUpdate(query4);
+                st.executeUpdate(query5);
+            }
+            catch (Exception e){
+                System.out.println("Instrument portion failed");
+            }
 
+        }
+
+        for(int i = 0; partArrayList.get(i) != null; i++){
+            try{
+                //double cost, String name, String category, String serialNumber
+                price = partArrayList.get(i).cost;
+                name = partArrayList.get(i).name;
+                category = partArrayList.get(i).category;
+                serialNumber = partArrayList.get(i).getSerialNumber();
+
+                String query1 = "update user set category = '" + category + "' where ID = " + ID + ";";
+                String query2 = "update user set name = '" + name + "' where ID = " + ID + ";";
+                String query3 = "update user set cost = '" + price + "' where ID = " + ID + ";";
+                String query4 = "update user set serialNumber = '" + serialNumber + "' where ID = " + ID + ";";
+                Statement st = conn.createStatement();
+                st.executeUpdate(query1);
+                st.executeUpdate(query2);
+                st.executeUpdate(query3);
+                st.executeUpdate(query4);
+            }
+            catch (Exception e){
+                System.out.println("Part portion failed");
+            }
+        }
     }
 
 
