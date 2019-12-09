@@ -44,6 +44,8 @@ public class DatabaseWrapper extends Thread{
     private ArrayList<String> sectionList;
     private ArrayList<Student> studentArrayList = null;
     private ArrayList<Faculty> facultyArrayList = null;
+    private ArrayList<Instrument> instrumentArrayList = null;
+    private ArrayList<Part> partArrayList = null;
 
 
 
@@ -141,6 +143,14 @@ public class DatabaseWrapper extends Thread{
 
     public void setFacultyArrayList(ArrayList<Faculty> facultyArrayList){
         this.facultyArrayList = facultyArrayList;
+    }
+
+    public void setInstrumentArrayList(ArrayList<Instrument> instrumentArrayList){
+        this.instrumentArrayList = instrumentArrayList;
+    }
+
+    public void setPartArrayList(ArrayList<Part> partArrayList){
+        this.partArrayList = partArrayList;
     }
 
     /**
@@ -242,6 +252,9 @@ public class DatabaseWrapper extends Thread{
             case "superUpdateUser":
                 //Call the setStudentArrayList() method then the setFacultyArrayList() method before running this
                 superUpdateUser(studentArrayList, facultyArrayList);
+            case "superUpdateItem":
+                //Call the setInstrumentArrayList() method then the setPartArrayList() method
+                superUpdateItem(instrumentArrayList, partArrayList);
             default:
                 System.out.println("Method not found");
                 break;
