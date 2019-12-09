@@ -117,7 +117,7 @@
         android:background="@drawable/border"
         android:ems="10"
         android:importantForAutofill="no"
-        android:inputType="number"
+        android:inputType="number|textPersonName|numberDecimal"
         android:labelFor="@id/cost_edit_instrument_textview"
         android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toStartOf="@+id/cost_edit_instrument_textview"
