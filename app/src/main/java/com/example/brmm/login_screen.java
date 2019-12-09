@@ -123,11 +123,6 @@ public class login_screen extends AppCompatActivity {
     //logs in to app
     private void login(String ulid){
         boolean isFaculty = false;
-        //TODO: REMOVE FAKE CATEGORY
-        Category category = new Category(null);
-        category.setName("You son of a bitch, Im in");
-        ArrayList<Category> categories = new ArrayList<>();
-        categories.add(category);
 
         //Obtains whether user is a faculty or student
         wrapper.setMethod("getFacultyRights");
@@ -226,12 +221,10 @@ public class login_screen extends AppCompatActivity {
         //sends list of instruments to main screen
         mainScreen.putExtra("INSTRUMENT", wrapper.getInstrumentList());
 
-
-        /* TODO Figure out Categoreis in database
-
-        //attempts to get categories from database
-        wrapper.setMethod("getCategoriess");
+        //        attempts to get categories from database
+        wrapper.setMethod("getSuperCategory");
         Thread getCategoryThread = new Thread(wrapper);
+
         getCategoryThread.start();
         try{
             getCategoryThread.join();
@@ -241,12 +234,19 @@ public class login_screen extends AppCompatActivity {
         }
 
         //sends list of categories to main screen
-        mainScreen.putExtra("CATEGORY", wrapper.getCategoryList());
+        ArrayList<String> categoryString = wrapper.getSuperCategoryPairsArrayList();
+        System.out.println(categoryString);
+        ArrayList<Category> categoryList;
+        TreeBuilder buildCategories = new TreeBuilder();
+        categoryList = buildCategories.buildTree(categoryString);
+        System.out.println("Categories After");
+        System.out.println(categoryList);
+        mainScreen.putExtra("CATEGORY", categoryList);
 
-    */
 
         //TODO Remove this once categories DB stuff is figured out
-        mainScreen.putExtra("CATEGORY", categories);
+        mainScreen.putExtra("CATEGORY", categoryList);
+
 
         //go to main screen
         startActivity(mainScreen);

@@ -123,6 +123,15 @@ public class main_screen extends AppCompatActivity {
         }
 
 
+        ArrayList<Instrument> insList = rent_inv.getInstrumentList();
+        for (Instrument ins: insList){
+            System.out.println(ins.getName());
+            System.out.println(ins.getCategory());
+            System.out.println();
+            System.out.println();
+            System.out.println();
+        }
+
 
         instantiateButtons();
         oneTimeListeners();
@@ -264,6 +273,14 @@ public class main_screen extends AppCompatActivity {
         filter_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ArrayList<Instrument> insList = rent_inv.getInstrumentList();
+                for (Instrument ins: insList){
+                    System.out.println(ins.getName());
+                    System.out.println(ins.getCategory());
+                    System.out.println();
+                    System.out.println();
+                    System.out.println();
+                }
                 Intent openFilter = new Intent(getBaseContext(), instrument_filters.class);
                 openFilter.putExtra("sectionlist", sections);
                 openFilter.putExtra("categorylist", categories);
@@ -520,16 +537,18 @@ public class main_screen extends AppCompatActivity {
 
         //add Member
         if (requestCode == 2) {
-            if (data.getBooleanExtra("timeOut", false))
-                logout();
-            else {
-                if (resultCode == RESULT_OK) {
-                    BandMember member = (BandMember) data.getSerializableExtra("member");
-                    member_inv.addBandMember(member);
-                    MemberRecyclerAdapter adapter = new MemberRecyclerAdapter(member_inv.getBandMembers());
-                    inv_view.setLayoutManager(new LinearLayoutManager(this));
-                    inv_view.setAdapter(adapter);
+
+            if (resultCode == RESULT_OK) {
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                BandMember member = (BandMember) data.getSerializableExtra("member");
+                member_inv.addBandMember(member);
+                MemberRecyclerAdapter adapter = new MemberRecyclerAdapter(member_inv.getBandMembers());
+                inv_view.setLayoutManager(new LinearLayoutManager(this));
+                inv_view.setAdapter(adapter);
                 }
+
             }
         }
 

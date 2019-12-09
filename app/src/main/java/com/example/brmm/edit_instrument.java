@@ -20,8 +20,8 @@ import java.util.TimerTask;
 
 public class edit_instrument extends AppCompatActivity {
     private String section;
-    private Category category;
     private int count;
+    private boolean addCat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,9 @@ public class edit_instrument extends AppCompatActivity {
         //Recyclerview
         RecyclerView cat_rview = findViewById(R.id.cat_edit_instrument_rview);
 
+        //don't add category
+        addCat = false;
+
         //sets up sectionlist spinner
         final ArrayList<String> sections = getIntent().getStringArrayListExtra("sectionlist");
         if (sections != null) {
@@ -75,6 +78,26 @@ public class edit_instrument extends AppCompatActivity {
                 pick_spin.setAdapter(memberAdapter);
             }
         }
+
+        //sets up category spinner
+        ArrayList<Category> catlist = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
+        if (catlist != null) {
+            ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
+            catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            cat_spin.setAdapter(catAdapter);
+        }
+
+        //logic for category spinner
+        cat_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Category category = (Category) parent.getSelectedItem();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Category category = null;
+            }
+        });
 
         //pick spin logic
         pick_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -126,12 +149,11 @@ public class edit_instrument extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position,
                                        long id) {
-                category = (Category) section_spin.getSelectedItem();
+               Category category = (Category) section_spin.getSelectedItem();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                section = "";
             }
         });
 
@@ -147,10 +169,13 @@ public class edit_instrument extends AppCompatActivity {
                     String name = name_edittext.getText().toString();
                     double cost = Double.parseDouble(cost_edittext.getText().toString());
                     int id = Integer.parseInt(id_display_textview.getText().toString());
+                    Category category = (Category) cat_spin.getSelectedItem();
                     ins.setName(name);
                     ins.setSection(section);
                     ins.setCost(cost);
                     ins.setId(id);
+                    if (addCat == true)
+                         ins.setCategory(category);
 
                     Intent intent = getIntent();
                     intent.putExtra("instrument", ins);
@@ -163,6 +188,14 @@ public class edit_instrument extends AppCompatActivity {
                 }
             }
 
+        });
+
+        //adds category to instrument
+        add_cat_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addCat = true;
+            }
         });
 
         //returns to main screen

@@ -123,7 +123,8 @@ public class add_member extends AppCompatActivity {
         cancel_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(RESULT_CANCELED);
+                Intent intent = new Intent();
+                intent.putExtra("timeOut", false);
                 finish();
             }
         });
