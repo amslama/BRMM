@@ -20,7 +20,7 @@ public class TreeBuilder {
         return relationshipList;
     }
 
-    
+
     //Builds a tree of categories from simple relationships
     public ArrayList<Category> buildTree(ArrayList<String> commaString) {
         buildRelationShips(commaString);
