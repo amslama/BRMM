@@ -244,9 +244,6 @@ public class login_screen extends AppCompatActivity {
         mainScreen.putExtra("CATEGORY", categoryList);
 
 
-        //TODO Remove this once categories DB stuff is figured out
-        mainScreen.putExtra("CATEGORY", categoryList);
-
 
         //go to main screen
         startActivity(mainScreen);
