@@ -7,13 +7,6 @@ import java.util.ArrayList;
 
 public class DatabaseWrapper extends Thread{
 
-    /**
-     *
-     *
-     * ADD A SECTION METHOD (EDIT A USER)
-     *
-     */
-
 
     DatabaseConnection dbconn = new DatabaseConnection();
     Connection conn = null;
@@ -82,6 +75,7 @@ public class DatabaseWrapper extends Thread{
         return valid;
     }
 
+    //Sets the variables to be used with the AddUser() method
     public void setUserArguments(int ID,String firstName, String lastName, String section, String sectionLeader, boolean faculty, String note, String ulid, String password,String department){
             this.ID = ID;
             this.firstName=firstName;
@@ -95,14 +89,17 @@ public class DatabaseWrapper extends Thread{
             this.department=department;
     }
 
+    //Returns the section leader's Rights
     public String getSectionLeaderRights(){
         return sectionLeader;
     }
 
+    //Returns the faculty rights
     public boolean getFacultyRights(){
         return faculty;
     }
 
+    //Sets the variables used in the addInstrument() method
     public void setInstrumentVariables(String currentOwner, String section, String name, double cost, String catagory){
         this.currentOwner = currentOwner;
         this.section = section;
@@ -111,14 +108,17 @@ public class DatabaseWrapper extends Thread{
         this.category = catagory;
     }
 
+    //Sets the ID for use in many getter methods
     public void setID(int ID){
         this.ID = ID;
     }
 
+    //Returns the partList ArrayList
     public ArrayList<Part> getPartList(){
         return partList;
     }
 
+    //Sets the variables that addPart() method uses
     public void setPart(double cost, String name, String category, int serialNumber){
         this.cost = cost;
         this.name = name;
@@ -126,38 +126,47 @@ public class DatabaseWrapper extends Thread{
         this.serialNumber = serialNumber;
     }
 
+    //Sets the section to be used in the addSection() method
     public void setSection(String section){
         this.section = section;
     }
 
+    //Sets newSection to be used in the changeSection() method
     public void setNewSection(String section){
         newSection = section;
     }
 
+    //Gets the sectionList returned from the database method
     public ArrayList<String> getSectionList(){
         return sectionList;
     }
 
+    //Supplies the studentArrayList to be used in the super user update method
     public void setStudentArrayList(ArrayList<Student> studentArrayList){
         this.studentArrayList = studentArrayList;
     }
 
+    //Supplies the studentArrayList variable to be used in the user update method
     public void setFacultyArrayList(ArrayList<Faculty> facultyArrayList){
         this.facultyArrayList = facultyArrayList;
     }
 
+    //Supplies the instrumentArrayList variable to be used in the user update method
     public void setInstrumentArrayList(ArrayList<Instrument> instrumentArrayList){
         this.instrumentArrayList = instrumentArrayList;
     }
 
+    //Supplies the partArrayList variable to be used in the item update method
     public void setPartArrayList(ArrayList<Part> partArrayList){
         this.partArrayList = partArrayList;
     }
 
+    //Supplies the supperCategoryArrayList variable to be used push the category relationship pairs
     public void setSuperCategoryArrayList(ArrayList<Category> superCategoryArrayList){
         this.superCategoryArrayList = superCategoryArrayList;
     }
 
+    //Returns the relationship pairs from the superCategoryPairArraylist variable
     public ArrayList<String> getSuperCategoryPairsArrayList(){
         return superCategoryPairsArrayList;
     }
@@ -335,6 +344,7 @@ public class DatabaseWrapper extends Thread{
             System.out.println("Error on remove Faculty rights");
         }
     }
+
     //Adds user's rights as a faculty member
     private void addFacultyRights(String ulid) {
         try {
@@ -365,7 +375,6 @@ public class DatabaseWrapper extends Thread{
     }
 
     //Login authentication
-    //TODO: ADD ENCRYPTION
     private boolean checklogin(String ulid, String password) {
         boolean login = false;
         try {
@@ -413,6 +422,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
+    //gets all the faculty rows/objects from the database
     private ArrayList<Faculty> getFaculty(){
         Faculty faculty;
         ArrayList<Faculty> list = new ArrayList<Faculty>();
@@ -438,6 +448,7 @@ public class DatabaseWrapper extends Thread{
     ITEM TABLE SECTION
      */
 
+    //Gets the instruments from the database
     private ArrayList<Instrument> getInstruments(){
         instrumentList = new ArrayList<Instrument>();
         Instrument instrument;
@@ -458,6 +469,7 @@ public class DatabaseWrapper extends Thread{
         return instrumentList;
     }
 
+    //Gets each student rows/objects from the database
     private ArrayList<Student> getStudents(){
         Student student;
         ArrayList<Student> list = new ArrayList<Student>();
@@ -477,7 +489,7 @@ public class DatabaseWrapper extends Thread{
         return list;
     }
 
-    //TODO: INSTRUMENT STUFF
+    //Adds an instrument row to the database
     private void addInstrument(String currentOwner, String section, String name, double cost, String catagory){
         try{
             String query = "insert into item (ownership, section, name, cost, instrument,category) values ('"+currentOwner+"','"+section+"','"+name+"',"+cost+",1,'"+catagory+"')";
@@ -489,6 +501,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
+    //removes an instrument row from the database
     private void removeInstrument(int id){
         try{
             String query = "delete from item where ID="+id;
@@ -500,6 +513,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
+    //gets all the part rows/objects from the database
     private ArrayList<Part> getParts(){
         Part part;
         ArrayList<Part> partList = new ArrayList<Part>();
@@ -520,6 +534,7 @@ public class DatabaseWrapper extends Thread{
         return partList;
     }
 
+    //Adds a part object/row to the database
     private void addPart(double cost, String name, String category, int serialNumber){
         try{
             String query = "insert into item (cost, name, category, serialNumber,instrument) values ("+cost+",'"+name+"','"+category+"',"+serialNumber+","+0+")";
@@ -531,6 +546,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
+    //removes a part row from the database
     private void removePart(int ID){
         try{
             String query = "remove item where ID = "+ID;
@@ -542,6 +558,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
+    //Changes the section value of a user row in the database
     private void changeSectionUsers(String ulid, String section){
         try{
             String query = "update user set section = '"+section+"' where username = '"+ulid+"'";
@@ -553,6 +570,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
+    //Changes all of one section in the database to something else
     private void changeAllOfOneSectionUsers(String oldSection, String newSection){
         try{
             String query = "update user set section = '"+oldSection+"' where section = '"+newSection+"'";
@@ -564,6 +582,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
+    //Returns the unique sections from the user table
     private ArrayList<String> getUniqueSectionUsers(){
         ArrayList<String> list = new ArrayList<String>();
         try{
@@ -581,6 +600,7 @@ public class DatabaseWrapper extends Thread{
         return list;
     }
 
+    //Changes the section of one item row/object in the database
     private void changeSectionItem(int ID, String section){
         try{
             String query = "update item set section = '"+section+"' where ID = '"+ID+"'";
@@ -592,6 +612,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
+    //Changes all of one section for all items in the database
     private void changeAllOfOneSectionItem(String oldSection, String newSection){
         try{
             String query = "update item set section = '"+oldSection+"' where section = '"+newSection+"'";
@@ -602,6 +623,8 @@ public class DatabaseWrapper extends Thread{
             System.out.println("Change all sections failed (ITEM)");
         }
     }
+
+    //Gets the unique sections from the item table in the database
     private ArrayList<String> getUniqueSectionItem(){
         ArrayList<String> list = new ArrayList<String>();
         try{
@@ -618,6 +641,7 @@ public class DatabaseWrapper extends Thread{
         return list;
     }
 
+    //Updates the user table in the database (Will not remove or add to the database)
     private void superUpdateUser(ArrayList<Student> studentsArrayList, ArrayList<Faculty> facultyArrayList){
         //Student Portion
         String firstName = "";
@@ -685,6 +709,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
+    //Updates the item table in the database (Will not add or remove)
     private void superUpdateItem(ArrayList<Instrument> instrumentArrayList, ArrayList<Part> partArrayList){
         //Instrument Section
         //String co, String st, String na, double price, int idnum, String category
@@ -748,6 +773,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
+    //Deletes then rewrites the whole superCategory table in the database
     private void updateSuperCategory(ArrayList<Category> superCategoryArrayList){
         String temp = "";
         try{
@@ -771,6 +797,7 @@ public class DatabaseWrapper extends Thread{
         }
     }
 
+    //Gets the superCategory table from the database
     private ArrayList<String> getSuperCategory(){
         ArrayList<String> str = new ArrayList<>();
         try{

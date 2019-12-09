@@ -38,6 +38,7 @@ public class DatabaseConnection extends Thread {
 
     }
 
+    //Adusts ports and attempts to get a connection to the vm
     private Session getServerConnection() {
         //Session serverSession = null;
         Session serverSession = null;
@@ -65,7 +66,7 @@ public class DatabaseConnection extends Thread {
         return serverSession;
     }
 
-
+    //Gets a connection to the database
     public Connection dbGetConnection() {
         Session ses = null;
         try {
@@ -87,50 +88,30 @@ public class DatabaseConnection extends Thread {
         return conn;
     }
 
+    //Returns the connection so other classes can use it
     public Connection getConnection(){
         return conn;
     }
 
-    //TODO: INSTRUMENT STUFF
-    //TODO: ADD BAND SECTION
+    //Returns the SSH Host string
+    //public String getSSH_Host() {
+     //   return SSH_Host;
+    //}
 
+    //public String getMySQL_Host() {
+      //  return MySQL_Host;
+    //}
 
-    //TODO: EDIT & RECEIVES NOTES FOR USERS
+    //public String getMySQL_User() {
+     //   return MySQL_User;
+    //}
 
-    //TODO: SORT USERS
+    //public int getPortNum() {
+     //   return portNum;
+    //}
 
-    //TODO: Get and SORT INSTRUMENTS BY ID ASC
-
-    //TODO: WHEN ADDING INSTRUMENT, AUTO INCREMENT ID
-
-
-    public String getSSH_Host() {
-        return SSH_Host;
-    }
-
-    public String getSSH_Pass() {
-        return SSH_Pass;
-    }
-
-    public String getMySQL_Host() {
-        return MySQL_Host;
-    }
-
-    public String getMySQL_User() {
-        return MySQL_User;
-    }
-
-
-    public String getMySQL_Pass() {
-        return MySQL_Pass;
-    }
-
-    public int getPortNum() {
-        return portNum;
-    }
-
-    public void setPortNum(int portNum) {
-        this.portNum = portNum;
-    }
+    //public void setPortNum(int portNum) {
+     //   this.portNum = portNum;
+    //}
 }
 
