@@ -21,6 +21,7 @@ import java.util.TimerTask;
 public class add_instrument extends AppCompatActivity {
     private RentableFactory factory = new RentableFactory();
     private String section;
+    private boolean addCat;
 
     private Instrument instrument;
 
@@ -49,6 +50,8 @@ public class add_instrument extends AppCompatActivity {
         //Recyclerview
         RecyclerView cat_rview = findViewById(R.id.cat_add_instrument_rview);
 
+        //don't add category
+        addCat = false;
 
         //sets instrument spinner
         final ArrayList<String> instrumentlist = new ArrayList<>();
@@ -176,7 +179,8 @@ public class add_instrument extends AppCompatActivity {
 
                             instrument.setCost(cost);
                             instrument.setName(name);
-                            ((Instrument) instrument).setCategory(category);
+                            if (addCat = true)
+                                ((Instrument) instrument).setCategory(category);
                             ((Instrument) instrument).setSection(section);
 
                             Intent intent = new Intent();
@@ -195,6 +199,14 @@ public class add_instrument extends AppCompatActivity {
                         incomplete_toast.show();
                     }
                 }
+            }
+        });
+
+        //adds category to instrument
+        add_cat_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addCat = true;
             }
         });
 
@@ -230,7 +242,6 @@ public class add_instrument extends AppCompatActivity {
         TimerTask timeOutTask = new TimerTask() {
             @Override
             public void run() {
-
                 timeOut(); }
         };
         timer.schedule(timeOutTask, main_screen.logoutTime);
