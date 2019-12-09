@@ -225,6 +225,20 @@ public class login_screen extends AppCompatActivity {
         //sends list of instruments to main screen
         mainScreen.putExtra("INSTRUMENT", wrapper.getInstrumentList());
 
+
+        //attempts to get instrument list from data base
+        wrapper.setMethod("getSectionList");
+        Thread getSectionsThread = new Thread(wrapper);
+        getSectionsThread.start();
+        try{
+            getSectionsThread.join();
+        }
+        catch (Exception e){
+            System.out.println("get sections join failed");
+        }
+
+        mainScreen.putExtra("SECTION", wrapper.getSectionList());
+
         //        attempts to get categories from database
         wrapper.setMethod("getSuperCategory");
         Thread getCategoryThread = new Thread(wrapper);
@@ -285,42 +299,36 @@ public class login_screen extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
 
                 ArrayList<Faculty> faculty_return = (ArrayList<Faculty>) data.getSerializableExtra("Faculty");
-                for(Faculty fa: faculty_return)
-                {
-                    if(faculty.contains(fa))
-                    {
-                        if(fa == faculty.get(faculty.indexOf(fa)))
-                        {
-                            //edit fac in db
-                        }
-                    }
-                    else {
-                        //add new faculty
-                    }
-                }
-
-
                 ArrayList<Student> students_return = (ArrayList<Student>) data.getSerializableExtra("Students");
-                for(Student stu: students_return)
-                {
-                    if(students.contains(stu))
-                    {
-                        if(stu == students.get(students.indexOf(stu)))
-                        {
-                            //edit student in db
-                        }
-                    }
-                    //add new student
+
+                //attempts to get instrument list from data base
+                wrapper.setStudentArrayList(students_return);
+                wrapper.setFacultyArrayList(faculty_return);
+                wrapper.setInstrumentArrayList((ArrayList<Instrument>) data.getSerializableExtra("Instruments"));
+                wrapper.setPartArrayList((ArrayList<Part>) data.getSerializableExtra("Parts"));
+                wrapper.setSuperCategoryArrayList((ArrayList<Category>)data.getSerializableExtra("Categories"));
+
+
+                wrapper.setMethod("superUpdateUser");
+                Thread setMembersThread = new Thread(wrapper);
+                setMembersThread.start();
+                try{
+                    setMembersThread.join();
+                }
+                catch (Exception e){
+                    System.out.println("set members join failed");
                 }
 
-                ArrayList<Part> parts = (ArrayList<Part>) data.getSerializableExtra("Parts");
-                ArrayList<Instrument> instruments = (ArrayList<Instrument>) data.getSerializableExtra("Instruments");
-                ArrayList<Category> categories = (ArrayList<Category>)data.getSerializableExtra("Categories");
-           //     wrapper.setFacultyArrayList(faculty);
-         //       wrapper.setStudentArrayList(students);
-                wrapper.setPartArrayList(parts);
-                wrapper.setInstrumentArrayList(instruments);
-                wrapper.setSuperCategoryArrayList(categories);
+                wrapper.setMethod("superUpdateItem");
+                Thread setInstrumentThread = new Thread(wrapper);
+                setInstrumentThread.start();
+                try{
+                    setInstrumentThread.join();
+                }
+                catch (Exception e){
+                    System.out.println("set insturments join failed");
+                }
+
 
             }
         }

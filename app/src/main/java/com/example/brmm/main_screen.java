@@ -112,7 +112,7 @@ public class main_screen extends AppCompatActivity {
             }
         }
         if (intent.getStringArrayListExtra("SECTION") != null) {
-            for (String sect : intent.getStringArrayListExtra("SECTION")) {
+            for (String sect :intent.getStringArrayListExtra("SECTION")) {
                 sections.add(sect);
             }
         }
@@ -301,6 +301,8 @@ public class main_screen extends AppCompatActivity {
                     Intent openFilter = new Intent(getBaseContext(), add_instrument.class);
                     openFilter.putExtra("instrumentlist", rent_inv.getInstrumentList());
                     openFilter.putExtra("categorylist", categories);
+                    openFilter.putExtra("sectionlist", sections);
+
                     startActivityForResult(openFilter, 1);
                 }
             });
@@ -311,6 +313,8 @@ public class main_screen extends AppCompatActivity {
                     Intent openFilter = new Intent(getBaseContext(), edit_instrument.class);
                     openFilter.putExtra("instrumentlist", rent_inv.getInstrumentList());
                     openFilter.putExtra("categorylist", categories);
+                    openFilter.putExtra("sectionlist", sections);
+
                     startActivityForResult(openFilter, 6);
                 }
             });
