@@ -68,9 +68,9 @@ public class main_screen extends AppCompatActivity {
     private RecyclerView inv_view;
 
     //Timer
-    Timer timer;
+    private Timer timer;
     //Time till logout
-    private static final int logoutTime = 5 * 1000 * 60; //5 minutes
+    public static final int logoutTime = 600000; //10 minutes
 
 
     @Override
@@ -79,6 +79,8 @@ public class main_screen extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+        timer = new Timer();
+        System.out.println("Main Activity Created");
 
 
         Intent intent = getIntent();
@@ -477,19 +479,7 @@ public class main_screen extends AppCompatActivity {
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                ArrayList<Faculty> fac = member_inv.getFaculty();
-                ArrayList<Student> stu = member_inv.getStudents();
-                ArrayList<Part> parts = rent_inv.getPartList();
-                ArrayList<Instrument> instruments = rent_inv.getInstrumentList();
-                intent.putExtra("Faculty", fac);
-                intent.putExtra("Students", stu);
-                intent.putExtra("Parts", parts);
-                intent.putExtra("Instruments", instruments);
-                intent.putExtra("Sections", sections);
-                intent.putExtra("Categories", categories);
-                setResult(RESULT_OK, intent);
-                finish();
+                logout();
             }
         });
 
@@ -503,246 +493,330 @@ public class main_screen extends AppCompatActivity {
         //add part
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
-                Part part = (Part) data.getSerializableExtra("part");
-                rent_inv.addPart(part);
-                inv_view.getAdapter().notifyDataSetChanged();
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    Part part = (Part) data.getSerializableExtra("part");
+                    rent_inv.addPart(part);
+                    inv_view.getAdapter().notifyDataSetChanged();
+                }
             }
         }
 
         //add instrument
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
-                rent_inv.addInstrument(instrument);
-                InstrumentRecyclerAdapter adapter = new InstrumentRecyclerAdapter(rent_inv.getInstrumentList());
-                inv_view.setLayoutManager(new LinearLayoutManager(this));
-                inv_view.setAdapter(adapter);
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
+                    rent_inv.addInstrument(instrument);
+                    InstrumentRecyclerAdapter adapter = new InstrumentRecyclerAdapter(rent_inv.getInstrumentList());
+                    inv_view.setLayoutManager(new LinearLayoutManager(this));
+                    inv_view.setAdapter(adapter);
+                }
             }
         }
 
         //add Member
         if (requestCode == 2) {
-            if (resultCode == RESULT_OK) {
-                BandMember member = (BandMember) data.getSerializableExtra("member");
-                member_inv.addBandMember(member);
-                MemberRecyclerAdapter adapter = new MemberRecyclerAdapter(member_inv.getBandMembers());
-                inv_view.setLayoutManager(new LinearLayoutManager(this));
-                inv_view.setAdapter(adapter);
+            if (data.getBooleanExtra("timeOut", false))
+                logout();
+            else {
+                if (resultCode == RESULT_OK) {
+                    BandMember member = (BandMember) data.getSerializableExtra("member");
+                    member_inv.addBandMember(member);
+                    MemberRecyclerAdapter adapter = new MemberRecyclerAdapter(member_inv.getBandMembers());
+                    inv_view.setLayoutManager(new LinearLayoutManager(this));
+                    inv_view.setAdapter(adapter);
+                }
             }
         }
 
         //checkout
         if (requestCode == 3) {
             if (resultCode == RESULT_OK) {
-                int count = data.getIntExtra("count_instrument", -2056);
-                BandMember member = (BandMember) data.getSerializableExtra("member");
-                Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
-                instrument.setCurrentOwner(member.getUlid());
-                ((Student)member).setInstrument(instrument);
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    int count = data.getIntExtra("count_instrument", -2056);
+                    BandMember member = (BandMember) data.getSerializableExtra("member");
+                    Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
+                    instrument.setCurrentOwner(member.getUlid());
+                    ((Student) member).setInstrument(instrument);
 
 
-                if (count >= 0) {
-                    rent_inv.changeInstrument(count, instrument);
+                    if (count >= 0) {
+                        rent_inv.changeInstrument(count, instrument);
+                    }
+                    count = data.getIntExtra("count_member", -256);
+
+                    if (count >= 0) {
+                        member_inv.changeMember(count, member);
+                    }
+                    inv_view.getAdapter().notifyDataSetChanged();
                 }
-                count = data.getIntExtra("count_member", -256);
-
-                if (count >= 0) {
-                    member_inv.changeMember(count, member);
-                }
-                inv_view.getAdapter().notifyDataSetChanged();
             }
+
 
         }
 
         //add section
         if (requestCode == 4) {
             if (resultCode == RESULT_OK) {
-                String section = data.getStringExtra("section");
-                sections.add(section);
-                System.out.println("=============================================================================" + sections.size());
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    String section = data.getStringExtra("section");
+                    sections.add(section);
+                    System.out.println("=============================================================================" + sections.size());
+                }
             }
         }
 
         //delete section
         if (requestCode == 5) {
             if (resultCode == RESULT_OK) {
-                String section = data.getStringExtra("section");
-                for (BandMember member : member_inv.getBandMembers())
-                {
-                    if(member.getSection().equals(section))
-                    {
-                        member.setSection("");
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    String section = data.getStringExtra("section");
+                    for (BandMember member : member_inv.getBandMembers()) {
+                        if (member.getSection().equals(section)) {
+                            member.setSection("");
+                        }
                     }
+                    sections.remove(section);
+                    inv_view.getAdapter().notifyDataSetChanged();
                 }
-                sections.remove(section);
-                inv_view.getAdapter().notifyDataSetChanged();
             }
         }
 
         //edit Instrument and edit note
         if (requestCode == 6) {
             if (resultCode == RESULT_OK) {
-                int count = data.getIntExtra("count", -2056);
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    int count = data.getIntExtra("count", -2056);
 
-                if (count >= 0) {
-                    Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
-                    rent_inv.changeInstrument(count, instrument);
+                    if (count >= 0) {
+                        Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
+                        rent_inv.changeInstrument(count, instrument);
+                    }
+                    inv_view.getAdapter().notifyDataSetChanged();
                 }
-                inv_view.getAdapter().notifyDataSetChanged();
             }
+
         }
 
         //edit member and set lead
         if (requestCode == 7) {
             if (resultCode == RESULT_OK) {
-                int count = data.getIntExtra("count", -256);
-                System.out.println("jaadjioasjoadsjiaodsadijo----------------------" + count);
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    int count = data.getIntExtra("count", -256);
+                    System.out.println("jaadjioasjoadsjiaodsadijo----------------------" + count);
 
-                if (count >= 0) {
-                    BandMember member = (BandMember) data.getSerializableExtra("member");
-                    member_inv.changeMember(count, member);
+                    if (count >= 0) {
+                        BandMember member = (BandMember) data.getSerializableExtra("member");
+                        member_inv.changeMember(count, member);
+                    }
+                    inv_view.getAdapter().notifyDataSetChanged();
                 }
-                inv_view.getAdapter().notifyDataSetChanged();
             }
+
         }
 
         //edit part
         if (requestCode == 8) {
             if (resultCode == RESULT_OK) {
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
 
-                int count = data.getIntExtra("count", -128);
+                    int count = data.getIntExtra("count", -128);
 
-                if (count >= 0) {
-                    Part part = (Part) data.getSerializableExtra("part");
-                    rent_inv.changePart(count, part);
+                    if (count >= 0) {
+                        Part part = (Part) data.getSerializableExtra("part");
+                        rent_inv.changePart(count, part);
+                    }
+                    inv_view.getAdapter().notifyDataSetChanged();
+
+                    // PartRecyclerAdapter adapter = new PartRecyclerAdapter(rent_inv.getPartList());
+                    //   inv_view.setLayoutManager(new LinearLayoutManager(this));
+                    //  inv_view.setAdapter(adapter);
                 }
-                inv_view.getAdapter().notifyDataSetChanged();
-
-                // PartRecyclerAdapter adapter = new PartRecyclerAdapter(rent_inv.getPartList());
-                //   inv_view.setLayoutManager(new LinearLayoutManager(this));
-                //  inv_view.setAdapter(adapter);
             }
+
         }
 
         //part filters
         if (requestCode == 9) {
             if (resultCode == RESULT_OK) {
-                ArrayList<Part> partlist = (ArrayList<Part>) data.getSerializableExtra("partlist");
-                PartRecyclerAdapter adapter = new PartRecyclerAdapter(partlist);
-                inv_view.setLayoutManager(new LinearLayoutManager(this));
-                inv_view.setAdapter(adapter);
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    ArrayList<Part> partlist = (ArrayList<Part>) data.getSerializableExtra("partlist");
+                    PartRecyclerAdapter adapter = new PartRecyclerAdapter(partlist);
+                    inv_view.setLayoutManager(new LinearLayoutManager(this));
+                    inv_view.setAdapter(adapter);
+                }
             }
         }
 
         //instrument filters
         if (requestCode == 10) {
             if (resultCode == RESULT_OK) {
-                ArrayList<Instrument> inslist = (ArrayList<Instrument>) data.getSerializableExtra("inslist");
-                InstrumentRecyclerAdapter adapter = new InstrumentRecyclerAdapter(inslist);
-                inv_view.setLayoutManager(new LinearLayoutManager(this));
-                inv_view.setAdapter(adapter);
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    ArrayList<Instrument> inslist = (ArrayList<Instrument>) data.getSerializableExtra("inslist");
+                    InstrumentRecyclerAdapter adapter = new InstrumentRecyclerAdapter(inslist);
+                    inv_view.setLayoutManager(new LinearLayoutManager(this));
+                    inv_view.setAdapter(adapter);
+                }
             }
+
         }
 
         //Bandmember filters
         if (requestCode == 11) {
             if (resultCode == RESULT_OK) {
-                ArrayList<BandMember> memberlist = (ArrayList<BandMember>) data.getSerializableExtra("memberlist");
-                MemberRecyclerAdapter adapter = new MemberRecyclerAdapter(memberlist);
-                inv_view.setLayoutManager(new LinearLayoutManager(this));
-                inv_view.setAdapter(adapter);
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    ArrayList<BandMember> memberlist = (ArrayList<BandMember>) data.getSerializableExtra("memberlist");
+                    MemberRecyclerAdapter adapter = new MemberRecyclerAdapter(memberlist);
+                    inv_view.setLayoutManager(new LinearLayoutManager(this));
+                    inv_view.setAdapter(adapter);
+                }
             }
+
         }
 
         //delete Instrument
         if (requestCode == 12) {
             if (resultCode == RESULT_OK) {
-                Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
-                rent_inv.removeInstrument(instrument);
-                inv_view.getAdapter().notifyDataSetChanged();
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    Instrument instrument = (Instrument) data.getSerializableExtra("instrument");
+                    rent_inv.removeInstrument(instrument);
+                    inv_view.getAdapter().notifyDataSetChanged();
+                }
             }
+
         }
 
         //delete member
         if (requestCode == 13) {
             if (resultCode == RESULT_OK) {
-                BandMember member = (BandMember) data.getSerializableExtra("member");
-                member_inv.removeBandMember(member);
-                inv_view.getAdapter().notifyDataSetChanged();
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    BandMember member = (BandMember) data.getSerializableExtra("member");
+                    member_inv.removeBandMember(member);
+                    inv_view.getAdapter().notifyDataSetChanged();
+                }
             }
+
         }
 
         //delete part
         if (requestCode == 14) {
             if (resultCode == RESULT_OK) {
-                Part part = (Part) data.getSerializableExtra("part");
-                rent_inv.removePart(part);
-                inv_view.getAdapter().notifyDataSetChanged();
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    Part part = (Part) data.getSerializableExtra("part");
+                    rent_inv.removePart(part);
+                    inv_view.getAdapter().notifyDataSetChanged();
+                }
             }
+
         }
 
 
         //add category
         if (requestCode == 15) {
             if (resultCode == RESULT_OK) {
-                Category cat = (Category) data.getSerializableExtra("category");
-                categories.add(cat);
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    Category cat = (Category) data.getSerializableExtra("category");
+                    categories.add(cat);
+                }
             }
+
+
         }
 
         //delete category
         if (requestCode == 16) {
             if (resultCode == RESULT_OK) {
-                ArrayList<Category> cat = new ArrayList<>();
-                cat = (ArrayList<Category>) data.getSerializableExtra("category");
-                categories = cat;
+                if (data.getBooleanExtra("timeOut", false))
+                    logout();
+                else {
+                    ArrayList<Category> cat = new ArrayList<>();
+                    cat = (ArrayList<Category>) data.getSerializableExtra("category");
+                    categories = cat;
+                }
             }
         }
 
 
     }
 
-    //Starts session timeout timer
-    @Override
-    protected void onStart() {
-        super.onStart();
-        timer = new Timer();
-        TimerTask logoutTimeTask = new TimerTask() {
-            @Override
-            public void run() {
-                Intent intent = new Intent();
-                System.out.println("Timer started at beginning");
-                intent.putExtra("member", member_inv);
-                intent.putExtra("rentable", rent_inv);
-                intent.putExtra("sections", sections);
-                setResult(RESULT_OK, intent);
-                finish();
-            }
-        };
-        timer.schedule(logoutTimeTask, logoutTime);
+    //logs out of application
+    private void logout() {
+        Intent intent = new Intent();
+        ArrayList<Faculty> fac = member_inv.getFaculty();
+        ArrayList<Student> stu = member_inv.getStudents();
+        ArrayList<Part> parts = rent_inv.getPartList();
+        ArrayList<Instrument> instruments = rent_inv.getInstrumentList();
+        intent.putExtra("Faculty", fac);
+        intent.putExtra("Students", stu);
+        intent.putExtra("Parts", parts);
+        intent.putExtra("Instruments", instruments);
+        intent.putExtra("Sections", sections);
+        intent.putExtra("Categories", categories);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
-    //resets session timeout timer
+    //resets session timeout timer when user interacts
     @Override
     public void onUserInteraction() {
         super.onUserInteraction();
         TimerTask logoutTimeTask = new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent();
-                intent.putExtra("member", member_inv);
-                intent.putExtra("rentable", rent_inv);
-                intent.putExtra("sections", sections);
-                setResult(RESULT_OK, intent);
-                finish();
-            }
-        };
+                logout(); }};
         timer.cancel();
+        timer.purge();
         timer = new Timer();
         timer.schedule(logoutTimeTask, logoutTime);
-        System.out.println("Timer Restarted");
     }
-
-
+    //disables timer when leaving activity
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timer.cancel();
+        timer.purge();
+    }
+    //resets timer when resuming activity
+    @Override
+    protected void onResume() {
+        super.onResume();
+        timer = new Timer();
+        TimerTask logoutTimeTask = new TimerTask() {
+            @Override
+            public void run() {
+                logout(); }
+        };
+        timer.schedule(logoutTimeTask, logoutTime);
+    }
 }
 

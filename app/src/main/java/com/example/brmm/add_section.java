@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class add_section extends AppCompatActivity {
 
 
@@ -49,5 +52,48 @@ public class add_section extends AppCompatActivity {
             }
         });
 
+    }
+    //Timeout Timer
+    private Timer timer;
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        timer.cancel();
+        timer.purge();
+        timer = new Timer();
+        TimerTask timeOutTask = new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("Timeout from Category Interaction");
+                timeOut(); }
+        };
+        timer.schedule(timeOutTask, main_screen.logoutTime);
+    }
+    //sets timer to null when no longer on screen
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timer.cancel();
+        timer.purge();
+    }
+    //resets timer when resuming activity
+    @Override
+    protected void onResume() {
+        super.onResume();
+        timer = new Timer();
+        TimerTask timeOutTask = new TimerTask() {
+            @Override
+            public void run() {
+                timeOut(); }
+        };
+        timer.schedule(timeOutTask, main_screen.logoutTime);
+    }
+    //return to main screen
+    private void timeOut(){
+        Intent intent = new Intent();
+        intent.putExtra("timeOut", true);
+        setResult(RESULT_OK,intent);
+        finish();
     }
 }
