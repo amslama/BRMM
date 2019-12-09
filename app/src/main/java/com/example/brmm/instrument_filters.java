@@ -49,7 +49,7 @@ public class instrument_filters extends AppCompatActivity {
         //sets up section spinner
         final ArrayList<String> sections = getIntent().getStringArrayListExtra("sectionlist");
         if (sections != null) {
-            String section = "Don't filter by Section";
+            String section = "No Filter";
             sections.add(0,section);
             ArrayAdapter<String> secAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sections);
             secAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -74,7 +74,7 @@ public class instrument_filters extends AppCompatActivity {
         ArrayList<Category> catlist = (ArrayList<Category>) getIntent().getSerializableExtra("categorylist");
         if (catlist != null) {
             Category cat = new Category(null);
-            cat.setName("Don't filter by Category");
+            cat.setName("No Filter");
             catlist.add(0,cat);
             ArrayAdapter<Category> catAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_spinner_item, catlist);
             catAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -131,7 +131,7 @@ public class instrument_filters extends AppCompatActivity {
 
                 instruments = filterInstrumentInv(null, owner, section, name, category, id, cost);
                 thisIntent = new Intent();
-                thisIntent.putExtra("instrumentList", instruments);
+                thisIntent.putExtra("inslist", instruments);
                 setResult(RESULT_OK,thisIntent);
                 finish();
             }
@@ -151,7 +151,7 @@ public class instrument_filters extends AppCompatActivity {
     public ArrayList<Instrument> filterInstrumentInv(ArrayList<Instrument> Instruments, String owner, String section, String name, Category category, int id, double cost) {
         ArrayList<Instrument> filter = new ArrayList<>();
 
-        if(!category.getName().equals("Don't filter by Category"))
+        if(!category.getName().equals("No Filter"))
            filter = filterByCategory(filter, category);
 
 
@@ -168,7 +168,7 @@ public class instrument_filters extends AppCompatActivity {
         }
 
 
-        if (!section.equals("Don't filter by Section"))
+        if (!section.equals("No Filter"))
             filter = filterBySection(filter, section);
 
         if (cost != -1)
@@ -261,7 +261,7 @@ public class instrument_filters extends AppCompatActivity {
         TimerTask timeOutTask = new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Timeout from Category Interaction");
+
                 timeOut(); }
         };
         timer.schedule(timeOutTask, main_screen.logoutTime);

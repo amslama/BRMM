@@ -67,7 +67,7 @@ public class part_filters extends AppCompatActivity {
 
                  parts = filterParts(parts, name, sn, cost);
                 Intent intent = new Intent();
-                intent.putExtra("partList", parts);
+                intent.putExtra("partlist", parts);
 
                 setResult(RESULT_OK,intent);
                 finish();
@@ -147,7 +147,6 @@ public class part_filters extends AppCompatActivity {
         TimerTask timeOutTask = new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Timeout from Category Interaction");
                 timeOut(); }
         };
         timer.schedule(timeOutTask, main_screen.logoutTime);

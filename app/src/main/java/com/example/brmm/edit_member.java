@@ -274,7 +274,7 @@ public class edit_member extends AppCompatActivity {
         TimerTask timeOutTask = new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Timeout from Category Interaction");
+
                 timeOut(); }
         };
         timer.schedule(timeOutTask, main_screen.logoutTime);

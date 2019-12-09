@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -60,7 +61,6 @@ public class bandmember_filters extends AppCompatActivity {
         final CheckBox has_cbox = findViewById(R.id.has_bandmember_filters_cbox);
         final CheckBox no_has_cbox = findViewById(R.id.no_has_bandmember_filters_cbox);
 
-
         //buttons
         final Button apply_button = findViewById(R.id.apply_filters_button);
         final Button cancel_button = findViewById(R.id.cancel_filters_button);
@@ -70,12 +70,12 @@ public class bandmember_filters extends AppCompatActivity {
         final ArrayList<Instrument> inslist = (ArrayList<Instrument>) getIntent().getSerializableExtra("instrumentlist");
         if (inslist != null) {
             Instrument instrument = new Instrument();
-            instrument.setName("Don't filter by Instrument");
+            instrument.setName("No Filter");
+            inslist.add(0,instrument);
             ArrayAdapter<Instrument> insAdapter = new ArrayAdapter<Instrument>(this, android.R.layout.simple_spinner_item, inslist);
             insAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             instrument_spin.setAdapter(insAdapter);
         }
-
 
         //logic for selecting instrument from spinner
         instrument_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -92,7 +92,7 @@ public class bandmember_filters extends AppCompatActivity {
         //sets up spinner containing Sections
         final ArrayList<String> sections = getIntent().getStringArrayListExtra("sectionlist");
         if (sections != null) {
-            String section = "Don't filter by Section";
+            String section = "No Filter";
             sections.add(0,section);
             ArrayAdapter<String> secAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sections);
             secAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -109,6 +109,31 @@ public class bandmember_filters extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+        //Makes sure other checkbox is unchecked on click
+        has_cbox.setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(((CheckBox)v).isChecked()) {
+                        no_has_cbox.setChecked(false);
+                    }
+                }
+            }
+        );
+
+        //Makes sure other checkbox is unchecked on click
+        no_has_cbox.setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(((CheckBox)v).isChecked()) {
+                        has_cbox.setChecked(false);
+                    }
+                }
+            }
+        );
+
 
 
         //applies the filters
@@ -144,14 +169,14 @@ public class bandmember_filters extends AppCompatActivity {
 
 
                 Intent thisIntent = new Intent();
-                ArrayList<BandMember> memberlist  = (ArrayList<BandMember>)thisIntent.getSerializableExtra("bandmemberlist");
+                ArrayList<BandMember> memberlist  = (ArrayList<BandMember>)thisIntent.getSerializableExtra("memberlist");
                 //If there are no band members to filter, return to main screen
                 if (memberlist == null)
                     finish();
 
 
                 memberlist = filterMemberInv(memberlist,isFaculty,hasInstrument,sectionLeaders,firstName,lastName,UID,instrument, section);
-                thisIntent.putExtra("memberList", memberlist);
+                thisIntent.putExtra("memberlist", memberlist);
                 setResult(RESULT_OK,thisIntent);
                 finish();
             }
@@ -200,11 +225,11 @@ public class bandmember_filters extends AppCompatActivity {
             filter = filterByUID(filter, UID);
 
 
-        if (!instrument.getName().equals("Don't filter by Instrument"))
+        if (!instrument.getName().equals("No Filter"))
             filter = filterByspecInstrument(filter, instrument);
 
 
-        if (!section.equals("Don't filter by Section"))
+        if (!section.equals("No Filter"))
            filter = filterBySection(filter, section);
 
 
@@ -341,7 +366,7 @@ public class bandmember_filters extends AppCompatActivity {
         TimerTask timeOutTask = new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Timeout from Category Interaction");
+
                 timeOut(); }
         };
         timer.schedule(timeOutTask, main_screen.logoutTime);
