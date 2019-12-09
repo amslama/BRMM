@@ -264,7 +264,7 @@ public class login_screen extends AppCompatActivity {
 
 
         //go to main screen
-        startActivity(mainScreen);
+        startActivityForResult(mainScreen,0);
 
     }
 
