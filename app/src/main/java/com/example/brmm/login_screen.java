@@ -17,13 +17,17 @@ import java.util.function.ToDoubleBiFunction;
 
 public class login_screen extends AppCompatActivity {
     private int counter;
+    private int multiplier;
+    private int time;
     DatabaseConnection connection = null;
     DatabaseWrapper wrapper = null;
     Thread thread2;
 
 
     public login_screen() {
+        time = 60000; //1 minute
         counter = 0;
+        multiplier = 1;
     }
 
 
@@ -42,6 +46,8 @@ public class login_screen extends AppCompatActivity {
 
         //Buttons
         final Button OK = findViewById(R.id.Login_OK_Button);
+
+        //Toasts
         final Toast toast = Toast.makeText(this, "Too many failed attempts", Toast.LENGTH_SHORT);
 
         //DataBase Connection
@@ -76,15 +82,19 @@ public class login_screen extends AppCompatActivity {
                             //disables login button for 60 seconds after 5 failed attempts
                             if (counter == 5) {
                                 counter = 0;
-                                toast.show();
+                                makeToast(time);
                                 OK.setEnabled(false);
                                 OK.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
                                         OK.setEnabled(true);
                                     }
-                                }, 60000);
+                                }, time * multiplier);
+
+                                multiplier *=2;
+                                time *= multiplier;
                             }
+
                         }
 
 
@@ -92,8 +102,22 @@ public class login_screen extends AppCompatActivity {
 
 
                 }
+
         );
 
+
+    }
+
+
+    //Displays disable time till next login
+    public void makeToast(int time){
+        Toast toast;
+        time = time / 60000;
+        if (time == 1)
+        toast = Toast.makeText(this, "Login disabled for "+ time + " minute", Toast.LENGTH_SHORT);
+        else
+            toast = Toast.makeText(this, "Login disabled for "+ time + " minutes", Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     //logs in to app
